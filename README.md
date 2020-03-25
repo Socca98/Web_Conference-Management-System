@@ -9,12 +9,12 @@ ISS 2020, group 925
 * The app will run on the address http://localhost:4200/  -> the default port (4200) for angular projects 
 
 # Steps to setup Backend 
-###MySQL Database setup
+<h3>MySQL Database setup<h3/>
 * Download MySQL Server from google. 
 https://dev.mysql.com/downloads/windows/installer/8.0.html
 <br/>
 Windows (x86, 32-bit), MSI Installer<br/>
-(mysql-installer-web-community-8.0.19.0.msi)
+    * (mysql-installer-web-community-8.0.19.0.msi)
     * Choose 'Server only'
     * Click 'Next' until you can choose password
     * Put password 'iss2020'
@@ -28,11 +28,11 @@ Windows (x86, 32-bit), MSI Installer<br/>
     * create DB called 'cms'
 
 #Steps for the rest of the project setup
-####Already done for this project. Written in case you want to replicate in the future.
-###Connect backend to MySQL database
+<h5>Already done for this project. Written in case you want to replicate in the future.
+<h3>Connect backend to MySQL database<h3/>
 * Open Java Spring project in IDE (IntelliJ, Eclipse)
 * Paste the bellow code in 'resources/application.properties'. 
-Configures it to know the connection string, DB name, port of the DB and others.
+Configures backend to know the connection string, DB name, port of the DB and others.
 ```spring:
      jpa:
        show-sql: true
