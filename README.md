@@ -9,7 +9,7 @@ ISS 2020, group 925
 * The app will run on the address http://localhost:4200/  -> the default port (4200) for angular projects 
 
 # Steps to setup Backend 
-<h3>MySQL Database setup</h3>
+### MySQL Database setup
 
 * Download MySQL Server from google. Windows (x86, 32-bit), MSI Installer.
 https://dev.mysql.com/downloads/windows/installer/8.0.html
@@ -27,7 +27,7 @@ https://dev.mysql.com/downloads/windows/installer/8.0.html
     here you can create a DB with 'Create Schema' from Toolbar
     * create DB called 'cms'
 
-# Steps for the rest of the project setup
+## Backend setup
 ##### Already done for this project. Written in case you want to replicate in the future.
 ### Connect backend to MySQL database
 
