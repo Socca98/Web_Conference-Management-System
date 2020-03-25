@@ -10,6 +10,7 @@ ISS 2020, group 925
 
 # Steps to setup Backend 
 <h3>MySQL Database setup</h3>
+
 * Download MySQL Server from google. 
 https://dev.mysql.com/downloads/windows/installer/8.0.html
 <br/>
@@ -19,7 +20,6 @@ Windows (x86, 32-bit), MSI Installer
     * Click 'Next' until you can choose password
     * Put password 'iss2020'
     * Click 'Next' all the way
-
 * Download MySQL Workbench from google (same functionality as SSMS-Sql Server Management Studio)
     * (mysql-workbench-community-8.0.19-winx64.msi)
     * Click 'Local Instance MySQL80' or smth like that
@@ -30,9 +30,11 @@ Windows (x86, 32-bit), MSI Installer
 # Steps for the rest of the project setup
 <h5>Already done for this project. Written in case you want to replicate in the future.</h5>
 <h3>Connect backend to MySQL database</h3>
+
 * Open Java Spring project in IDE (IntelliJ, Eclipse)
 * Paste the bellow code in 'resources/application.properties'. 
 Configures backend to know the connection string, DB name, port of the DB and others.
+
 ```spring:
      jpa:
        show-sql: true
@@ -50,6 +52,7 @@ Configures backend to know the connection string, DB name, port of the DB and ot
      servlet:
        context-path: /cms/api/
 ```
+
 * Change 'application.properties' to 'application.yml'. Its just a simpler form of
 text format.
 * Add this in 'build.gradle' -> dependencies{..}.
