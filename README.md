@@ -28,8 +28,8 @@ https://dev.mysql.com/downloads/windows/installer/8.0.html
     * create DB called 'cms'
 
 # Steps for the rest of the project setup
-<h5>Already done for this project. Written in case you want to replicate in the future.</h5>
-<h3>Connect backend to MySQL database</h3>
+##### Already done for this project. Written in case you want to replicate in the future.
+### Connect backend to MySQL database
 
 * Open Java Spring project in IDE (IntelliJ, Eclipse)
 * Paste the bellow code in 'resources/application.properties'. 
