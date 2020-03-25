@@ -1,0 +1,21 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/cms
+    username: root
+    password: ghindatv2
+    driverClassName: com.mysql.cj.jdbc.Driver
+server:
+  servlet:
+    context-path: /cms/api/
+
+
+#swagger.oauth.endpoint: http://localhost:8080/studyit/api/v1/users/token
+#password.token.live.time.hours: 48
+#authorization.server.signing.key: studyit
