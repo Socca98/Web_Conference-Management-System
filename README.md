@@ -29,11 +29,11 @@ https://dev.mysql.com/downloads/windows/installer/8.0.html
 
 ## Backend setup
 ##### Already done for this project. Written in case you want to replicate in the future.
-### Connect backend to MySQL database
 
-* Open Java Spring project in IDE (IntelliJ, Eclipse)
-* Paste the bellow code in 'resources/application.properties'. 
-Configures backend to know the connection string, DB name, port of the DB and others.
+* Create project on the internet with Spring Initializr, add dependencies: Web, JPA. Choose Gradle, Java 11.
+* Open project in IDE (IntelliJ, Eclipse)
+* Paste the bellow code in 'resources/application.properties'. It connects the project with MySQL.
+Configures it to know the connection string, DB name, port of the DB and others.
 
 ```spring:
      jpa:
