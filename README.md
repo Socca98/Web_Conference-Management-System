@@ -20,6 +20,7 @@ Windows (x86, 32-bit), MSI Installer
     * Click 'Next' until you can choose password
     * Put password 'iss2020'
     * Click 'Next' all the way
+    
 * Download MySQL Workbench from google (same functionality as SSMS-Sql Server Management Studio)
     * (mysql-workbench-community-8.0.19-winx64.msi)
     * Click 'Local Instance MySQL80' or smth like that
