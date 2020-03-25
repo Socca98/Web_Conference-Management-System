@@ -28,7 +28,7 @@ Windows (x86, 32-bit), MSI Installer<br/>
     * create DB called 'cms'
 
 #Steps for the rest of the project setup
-<h5>Already done for this project. Written in case you want to replicate in the future.
+<h5>Already done for this project. Written in case you want to replicate in the future.<h5/>
 <h3>Connect backend to MySQL database<h3/>
 * Open Java Spring project in IDE (IntelliJ, Eclipse)
 * Paste the bellow code in 'resources/application.properties'. 
