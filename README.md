@@ -14,7 +14,7 @@ ISS 2020, group 925
 * Download MySQL Server from google. 
 https://dev.mysql.com/downloads/windows/installer/8.0.html
 <br/>
-Windows (x86, 32-bit), MSI Installer
+Windows (x86, 32-bit), MSI Installer.
     * (mysql-installer-web-community-8.0.19.0.msi)
     * Choose 'Server only'
     * Click 'Next' until you can choose password
