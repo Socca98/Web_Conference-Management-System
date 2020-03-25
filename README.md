@@ -11,10 +11,9 @@ ISS 2020, group 925
 # Steps to setup Backend 
 <h3>MySQL Database setup</h3>
 
-* Download MySQL Server from google. 
+* Download MySQL Server from google. Windows (x86, 32-bit), MSI Installer.
 https://dev.mysql.com/downloads/windows/installer/8.0.html
-<br/>
-Windows (x86, 32-bit), MSI Installer.
+
     * (mysql-installer-web-community-8.0.19.0.msi)
     * Choose 'Server only'
     * Click 'Next' until you can choose password
