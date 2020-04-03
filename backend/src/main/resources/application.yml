@@ -7,9 +7,9 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5Dialect
   datasource:
-    url: jdbc:mysql://localhost:3306/cms
+    url: jdbc:mysql://
     username: root
-    password: ghindatv2
+    password: iss2020
     driverClassName: com.mysql.cj.jdbc.Driver
 server:
   servlet:
