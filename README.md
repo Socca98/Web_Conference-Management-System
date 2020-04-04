@@ -2,6 +2,8 @@
 ISS 2020, group 925
 
 # Steps to setup Frontend
+* Install nodejs https://nodejs.org/en/, LTS
+* Hope that WebStorm recognizes 'npm install' command
 * Open project in IDE (WebStorm, VS Code)
 * Go inside folder 'frontend' with the terminal (the IDE may have 'open folder in terminal' on right click).
 * Run the command npm install_ to install folder 'node_modules'.
