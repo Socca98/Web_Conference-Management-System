@@ -1,7 +1,14 @@
 package com.cms.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class User {
 
+    @Id
+    @Column(length = 30)
     private String username;
 
     private String password;
