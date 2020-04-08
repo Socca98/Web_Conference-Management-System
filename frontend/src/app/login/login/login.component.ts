@@ -9,6 +9,10 @@ import {User} from '../../shared/interfaces/user';
   providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
+  user: User = {
+    username: null,
+    password: null
+  };
   users: User[] = [];
 
   constructor(private loginService: LoginService) {
@@ -18,6 +22,23 @@ export class LoginComponent implements OnInit {
     this.loginService.getUsers().subscribe((result: User[]) =>
       this.users = result
     );
+  }
+
+  /**
+   * Sends 'this.user' to LoginService.
+   * Login button's click calls this function.
+   * [(ngModel)] changes automatically the object 'this.user' if its fields change.
+   */
+  login() {
+    this.loginService.postUser(this.user).subscribe({
+      next: (response: string) => {
+        alert(response);
+      },
+      error: err => {
+        console.error('Error! ' + err);
+        alert('Invalid user or password.');
+      }
+    });
   }
 
 }

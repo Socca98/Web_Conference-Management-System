@@ -1,0 +1,14 @@
+.welcome-title {
+  font-size: xx-large;
+  margin-top: 30px;
+  margin-bottom: 200px;
+}
+
+mat-form-field {
+  display: block;
+  font-size: 170%;
+}
+
+button {
+  width: 20%;
+}

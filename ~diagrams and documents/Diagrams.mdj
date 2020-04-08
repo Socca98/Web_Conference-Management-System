@@ -4857,7 +4857,7 @@
 									"font": "Arial;13;1",
 									"left": 672,
 									"top": 317,
-									"width": 233,
+									"width": 242.1259765625,
 									"height": 13,
 									"text": "Users"
 								},
@@ -4883,7 +4883,7 @@
 											"font": "Arial;13;0",
 											"left": 677,
 											"top": 340,
-											"width": 223,
+											"width": 232.1259765625,
 											"height": 13
 										},
 										{
@@ -4898,7 +4898,7 @@
 											"font": "Arial;13;0",
 											"left": 677,
 											"top": 355,
-											"width": 223,
+											"width": 232.1259765625,
 											"height": 13
 										},
 										{
@@ -4913,7 +4913,7 @@
 											"font": "Arial;13;0",
 											"left": 677,
 											"top": 370,
-											"width": 223,
+											"width": 232.1259765625,
 											"height": 13
 										},
 										{
@@ -4928,7 +4928,7 @@
 											"font": "Arial;13;0",
 											"left": 677,
 											"top": 385,
-											"width": 223,
+											"width": 232.1259765625,
 											"height": 13
 										},
 										{
@@ -4943,7 +4943,7 @@
 											"font": "Arial;13;0",
 											"left": 677,
 											"top": 400,
-											"width": 223,
+											"width": 232.1259765625,
 											"height": 13
 										},
 										{
@@ -4958,21 +4958,36 @@
 											"font": "Arial;13;0",
 											"left": 677,
 											"top": 415,
-											"width": 223,
+											"width": 232.1259765625,
+											"height": 13
+										},
+										{
+											"_type": "ERDColumnView",
+											"_id": "AAAAAAFxWeVSL6T2s/s=",
+											"_parent": {
+												"$ref": "AAAAAAFxPVfTl4iRa7s="
+											},
+											"model": {
+												"$ref": "AAAAAAFxWeVSG6TzMHA="
+											},
+											"font": "Arial;13;0",
+											"left": 677,
+											"top": 430,
+											"width": 232.1259765625,
 											"height": 13
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 672,
 									"top": 335,
-									"width": 233,
-									"height": 98
+									"width": 242.1259765625,
+									"height": 113
 								}
 							],
 							"font": "Arial;13;0",
 							"left": 672,
 							"top": 312,
-							"width": 233,
+							"width": 242.1259765625,
 							"height": 145,
 							"nameLabel": {
 								"$ref": "AAAAAAFxPVfTl4iQPYA="
@@ -5308,7 +5323,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 1058,
+									"left": 1062,
 									"top": 348,
 									"width": 36.1435546875,
 									"height": 13,
@@ -5326,7 +5341,7 @@
 										"$ref": "AAAAAAFxPVfTl4isfbI="
 									},
 									"font": "Arial;13;0",
-									"left": 929,
+									"left": 938,
 									"top": 348,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -5361,7 +5376,7 @@
 								"$ref": "AAAAAAFxPVfTl4iPY/M="
 							},
 							"lineStyle": 2,
-							"points": "904:369;1248:369",
+							"points": "913:369;1248:369",
 							"nameLabel": {
 								"$ref": "AAAAAAFxPVfTl4itPwo="
 							},
@@ -5484,7 +5499,7 @@
 								"$ref": "AAAAAAFxPVfTl4iw2RY="
 							},
 							"lineStyle": 1,
-							"points": "1083:447;1076:369"
+							"points": "1085:447;1080:369"
 						},
 						{
 							"_type": "ERDEntityView",
@@ -6427,6 +6442,16 @@
 							},
 							"name": "PersonalWebpage",
 							"type": "VARCHAR",
+							"length": 0
+						},
+						{
+							"_type": "ERDColumn",
+							"_id": "AAAAAAFxWeVSG6TzMHA=",
+							"_parent": {
+								"$ref": "AAAAAAFxPVfTl4jWKNs="
+							},
+							"name": "IsSteeringCommittee",
+							"type": "BIT",
 							"length": 0
 						}
 					]
@@ -14640,7 +14665,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFxRok6ojnVSXI="
 									},
-									"name": "string"
+									"name": "string",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -14648,7 +14674,8 @@
 									"_parent": {
 										"$ref": "AAAAAAFxRok6ojnVSXI="
 									},
-									"name": "int"
+									"name": "int",
+									"type": ""
 								}
 							]
 						},

@@ -6,20 +6,18 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-
     @Id
     @Column(length = 30)
     private String username;
-
     private String password;
-
     private String realName;
-
     private String email;
-
     private String affiliation;
-
     private String personalWebpage;
+    private boolean isSteeringCommittee;
+
+    public User() {
+    }
 
     public User(String username, String password, String realName, String email, String affiliation, String personalWebpage) {
         this.username = username;

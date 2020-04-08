@@ -8,11 +8,13 @@ import java.util.List;
 
 @Service
 public class UsersService {
-
     private final UsersRepository usersRepository = new UsersRepository();
-
 
     public List<User> get() {
         return usersRepository.get();
+    }
+
+    public void login(User user) {
+        usersRepository.login(user);
     }
 }

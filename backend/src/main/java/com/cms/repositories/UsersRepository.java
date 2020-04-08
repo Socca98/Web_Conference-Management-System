@@ -33,4 +33,9 @@ public class UsersRepository {
 
 
     }
+
+    public void login(User user) {
+        if(user.getPassword().equals("naspa"))
+            throw new RuntimeException("Invalid password!");
+    }
 }
