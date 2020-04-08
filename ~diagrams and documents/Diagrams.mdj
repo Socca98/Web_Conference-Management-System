@@ -5808,7 +5808,7 @@
 									"top": 573,
 									"width": 257,
 									"height": 13,
-									"text": "UsersProposals"
+									"text": "Reviews"
 								},
 								{
 									"_type": "ERDColumnCompartmentView",
@@ -6822,7 +6822,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFxPVfTl4iNPL4="
 					},
-					"name": "UsersProposals",
+					"name": "Reviews",
 					"columns": [
 						{
 							"_type": "ERDColumn",
