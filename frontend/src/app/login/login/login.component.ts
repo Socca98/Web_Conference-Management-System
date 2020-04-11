@@ -11,7 +11,11 @@ import {User} from '../../shared/interfaces/user';
 export class LoginComponent implements OnInit {
   user: User = {
     username: null,
-    password: null
+    password: null,
+    affiliation: null,
+    email: null,
+    name: null,
+  webpage: null
   };
   users: User[] = [];
 

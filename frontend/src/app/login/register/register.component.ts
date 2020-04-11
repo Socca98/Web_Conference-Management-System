@@ -11,7 +11,11 @@ import {LoginService} from '../../shared/services/login.service';
 export class RegisterComponent implements OnInit {
   user: User = {
     username: null,
-    password: null
+    password: null,
+    affiliation: null,
+    email: null,
+    name: null,
+  webpage: null,
   };
   users: User[] = [];
   
