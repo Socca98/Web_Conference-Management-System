@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Conference} from '../../interfaces/conference';
 import {ConferencesService} from '../../services/conferences.service';
 
@@ -10,9 +10,10 @@ import {ConferencesService} from '../../services/conferences.service';
 })
 
 export class TabDetailsComponent implements OnInit {
+  conference: Conference = {startDate: null, endDate: null, submissionDeadline: null, abstractSubmissionDeadline: null};
 
-  private conference: Conference = {startDate: null, endDate: null, submissionDeadline: null, abstractSubmissionDeadline: null};
-  constructor(private conferenceService: ConferencesService) { }
+  constructor(private conferenceService: ConferencesService) {
+  }
 
   ngOnInit(): void {
     this.conferenceService.getConference('1').subscribe((response: Conference) => this.conference = response);

@@ -16,7 +16,7 @@ public class ConferencesController {
     private final ConferencesService conferenceService = new ConferencesService();
 
 
-    @GetMapping(value = "/users/{conferenceId}")
+    @GetMapping(value = "/conferences/{conferenceId}")
     public ResponseEntity<Conference> getById(@PathVariable String conferenceId) {
         return ResponseEntity.ok(conferenceService.getById(conferenceId));
     }
