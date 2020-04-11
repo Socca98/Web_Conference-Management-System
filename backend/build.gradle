@@ -1,12 +1,23 @@
+buildscript {
+	dependencies {
+		classpath 'com.h2database:h2:1.4.197'
+	}
+}
 plugins {
 	id 'org.springframework.boot' version '2.2.5.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
+	id "org.flywaydb.flyway" version "6.3.3"
 }
 
 group = 'backend'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+
+flyway {
+	url = 'jdbc:h2:file:./target/foobar'
+	user = 'sa'
+}
 
 repositories {
 	mavenCentral()
@@ -21,7 +32,6 @@ dependencies {
 
 	implementation 'mysql:mysql-connector-java'
 }
-
 test {
 	useJUnitPlatform()
 }
