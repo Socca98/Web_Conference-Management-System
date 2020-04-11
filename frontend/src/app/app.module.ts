@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {TabDetailsComponent} from './shared/components/tab-details/tab-details.component';
 import {ConferencesListComponent} from './pages/conferences-list/conferences-list.component';
 import { RegisterComponent } from './login/register/register.component';
+import { AppRoutingModule } from './app-routing-module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { RegisterComponent } from './login/register/register.component';
     HttpClientModule,
     AppAngularMaterialModule,
     FormsModule,
+    AppRoutingModule,
 
   ],
   providers: [],
