@@ -14,8 +14,34 @@
       <input matInput [(ngModel)]="user.password" placeholder="" value="admin" type="password" name="password" required>
     </label>
   </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Full Name</mat-label>
+    <label>
+      <input matInput [(ngModel)]="user.name" placeholder="" value=""  required>
+    </label>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Affiliation</mat-label>
+    <label>
+      <input matInput [(ngModel)]="user.affiliation" placeholder="" value=""  required>
+    </label>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Email Address</mat-label>
+    <label>
+      <input matInput [(ngModel)]="user.email" placeholder="" value=""  required>
+    </label>
+  </mat-form-field>
   
-  
+  <mat-form-field>
+    <mat-label>Personal webpage</mat-label>
+    <label>
+      <input matInput [(ngModel)]="user.webpage" placeholder="" value=""  required>
+    </label>
+  </mat-form-field>
 
 <button mat-raised-button color="primary" >REGISTER</button>
 
