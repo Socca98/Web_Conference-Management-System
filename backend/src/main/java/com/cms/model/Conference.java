@@ -38,5 +38,69 @@ public class Conference {
         this.abstractDeadline = abstractDeadline;
         this.proposalDeadline = proposalDeadline;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public Date getProposalDeadline() {
+        return proposalDeadline;
+    }
+
+    public Date getAbstractDeadline() {
+        return abstractDeadline;
+    }
+
+    public Date getBiddingDeadline() {
+        return biddingDeadline;
+    }
+
+    public Date getEvaluationDeadline() {
+        return evaluationDeadline;
+    }
+
+    public boolean isProposalPeriod() {
+        return isProposalPeriod;
+    }
+
+    public boolean isAbstractPeriod() {
+        return isAbstractPeriod;
+    }
+
+    public boolean isBiddingPeriod() {
+        return isBiddingPeriod;
+    }
+
+    public boolean isEvaluationPeriod() {
+        return isEvaluationPeriod;
+    }
+
+    public boolean isConferencePeriod() {
+        return isConferencePeriod;
+    }
+
+    public boolean isAllowFullPaper() {
+        return allowFullPaper;
+    }
+
+    public List<Section> getItems() {
+        return items;
+    }
 }
 
