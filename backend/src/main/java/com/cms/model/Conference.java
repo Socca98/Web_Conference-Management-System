@@ -31,4 +31,12 @@ public class Conference {
 
     public Conference() {
     }
+
+    public Conference(Date startDate, Date endDate, Date abstractDeadline, Date proposalDeadline) {
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.abstractDeadline = abstractDeadline;
+        this.proposalDeadline = proposalDeadline;
+    }
 }
+
