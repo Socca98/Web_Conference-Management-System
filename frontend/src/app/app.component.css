@@ -95,6 +95,12 @@ footer a {
   border-bottom-color: white;
 }
 
+/*.login {*/
+/*  display: block;*/
+/*  position: absolute;*/
+/*  right: 60px;*/
+/*}*/
+
 .logout-button {
   position: absolute;
   right: 20px;

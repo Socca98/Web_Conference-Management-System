@@ -9,4 +9,5 @@ export interface Conference {
   evaluationDeadline: string;
   nrOfReviewers: number;
   taxFee: number;
+  emails: string[];
 }

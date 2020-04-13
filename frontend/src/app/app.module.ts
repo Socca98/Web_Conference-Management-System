@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import {RegisterDialogComponent} from './login/register/register-dialog.component';
 import {AppRoutingModule} from './app-routing-module';
 import {HomePageComponent} from './pages/home-page/home-page.component';
+import {ConferenceComponent} from './shared/components/conference/conference.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {HomePageComponent} from './pages/home-page/home-page.component';
     LoginDialogComponent,
     RegisterDialogComponent,
     HomePageComponent,
+    ConferenceComponent,
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,6 @@ import {HomePageComponent} from './pages/home-page/home-page.component';
     AppAngularMaterialModule,
     FormsModule,
     AppRoutingModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
