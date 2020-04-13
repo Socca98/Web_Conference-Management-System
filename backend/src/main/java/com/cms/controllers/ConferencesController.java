@@ -20,4 +20,9 @@ public class ConferencesController {
     public ResponseEntity<Conference> getById(@PathVariable String conferenceId) {
         return ResponseEntity.ok(conferenceService.getById(conferenceId));
     }
+
+    @GetMapping(value = "/conferences")
+    public ResponseEntity<List<Conference>> getConferences() {
+        return ResponseEntity.ok(conferenceService.getConferences());
+    }
 }

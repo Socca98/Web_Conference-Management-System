@@ -34,7 +34,7 @@ public class UsersController {
             System.out.println(user);
             usersService.login(user);
 
-            String stringAsResponse = "\"This is a String response\"";
+            String stringAsResponse = "\"Login function from backend called.\"";
             return ResponseEntity.ok(stringAsResponse);
         }
         catch(RuntimeException e) {

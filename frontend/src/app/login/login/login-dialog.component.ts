@@ -33,7 +33,7 @@ export class LoginDialogComponent implements OnInit {
    * [(ngModel)] changes automatically the object 'this.user' if input fields change.
    */
   onLoginClick() {
-    this.loginService.postUser(this.user).subscribe({
+    this.loginService.loginUser(this.user).subscribe({
       next: (response: string) => {
         alert(response);
       },

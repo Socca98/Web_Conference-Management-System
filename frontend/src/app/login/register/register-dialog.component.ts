@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../shared/interfaces/user';
 import {LoginService} from '../../shared/services/login.service';
 
@@ -15,16 +15,13 @@ export class RegisterDialogComponent implements OnInit {
     affiliation: null,
     email: null,
     name: null,
-  webpage: null,
+    webpage: null,
   };
-  users: User[] = [];
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService) {
+  }
 
   ngOnInit(): void {
-    this.loginService.getUsers().subscribe((result: User[]) =>
-      this.users = result
-    );
   }
 
 }

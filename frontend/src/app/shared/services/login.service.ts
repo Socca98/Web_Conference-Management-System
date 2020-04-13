@@ -9,14 +9,11 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  getUsers() {
-    return this.http.get(
-      'http://localhost:8080/cms/api/users'
-    );
+  loginUser(user: User): Observable<string> {
+    return this.http.post<string>('http://localhost:8080/cms/api/users/session', user);
   }
 
-
-  postUser(user: User): Observable<string> {
-    return this.http.post<string>('http://localhost:8080/cms/api/users/session', user);
+  registerUser(user: User): Observable<string> {
+    return this.http.post<string>('http://localhost:8080/cms/api/users', user);
   }
 }

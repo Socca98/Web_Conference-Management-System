@@ -6,8 +6,8 @@
       <input matInput [(ngModel)]="user.username" placeholder="ex. nsie2455" value="admin" required>
     </label>
   </mat-form-field>
-  
-  
+
+
   <mat-form-field>
     <mat-label>Password</mat-label>
     <label>
@@ -35,7 +35,7 @@
       <input matInput [(ngModel)]="user.email" placeholder="" value=""  required>
     </label>
   </mat-form-field>
-  
+
   <mat-form-field>
     <mat-label>Personal webpage</mat-label>
     <label>
@@ -46,11 +46,3 @@
 <button mat-raised-button color="primary" >REGISTER</button>
 
 {{user | json}}
-
-<br/>
-<br/>
-<br/>
-<br/>
-<ng-container *ngFor="let user of users;let i = index;">
-  {{user | json}} <br/>
-</ng-container>

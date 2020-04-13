@@ -9,10 +9,18 @@ import java.util.List;
 
 @Repository
 public class ConferencesRepository {
-
     Date firstDate = new Date(2000, 12, 24);
 
-    public List<Conference> get() {
+    public Conference getById(String id) {
+        return new Conference(
+                firstDate,
+                firstDate,
+                firstDate,
+                firstDate
+        );
+    }
+
+    public List<Conference> getConferences() {
         Conference conf1 = new Conference(
                 firstDate,
                 firstDate,
@@ -27,14 +35,5 @@ public class ConferencesRepository {
         );
 
         return Arrays.asList(conf1, conf2);
-    }
-
-    public Conference getById(String id) {
-        return new Conference(
-                firstDate,
-                firstDate,
-                firstDate,
-                firstDate
-        );
     }
 }
