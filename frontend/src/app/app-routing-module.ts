@@ -1,19 +1,20 @@
 import {NgModule} from '@angular/core';
-import {RouterModule , Routes } from '@angular/router';
-import {LoginComponent} from './login/login/login.component';
-import { RegisterComponent } from './login/register/register.component';
+import {RouterModule, Routes} from '@angular/router';
+import {LoginDialogComponent} from './login/login/login-dialog.component';
+import {RegisterDialogComponent} from './login/register/register-dialog.component';
+import {HomePageComponent} from './pages/home-page/home-page.component';
 
 
 const routes: Routes = [
+  {path: '', component: HomePageComponent},
 
-    { path:'' , redirectTo : '/login', pathMatch : 'full'},
-    {path:"login" , component:LoginComponent},
-    {path:"register" , component: RegisterComponent}
+  {path: 'register', component: RegisterDialogComponent}
 ];
 
 @NgModule({
-    imports : [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

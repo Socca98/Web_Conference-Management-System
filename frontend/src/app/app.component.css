@@ -78,4 +78,34 @@ footer a {
   align-items: center;
 }
 
+.mat-raised-button {
+  background-color: dodgerblue;
+  color: white;
+}
+
+.lnk {
+  color: black;
+  margin-right: 20px;
+  border: 2px solid black;
+}
+
+.lnk:hover {
+  border-bottom-width: 3px;
+  border-bottom-style: solid;
+  border-bottom-color: white;
+}
+
+.logout-button {
+  position: absolute;
+  right: 20px;
+}
+
+
+
+
+
+
+
+
+
 

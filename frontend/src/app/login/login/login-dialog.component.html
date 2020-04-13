@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>Login</h1>
+
+<form>
+  <div mat-dialog-content class="field-container">
+    <mat-form-field class="field">
+      <mat-label>Username</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.username" name="username" placeholder="ex. pop.andrei" value="admin" required>
+      </label>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Password</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.password" name="password" value="admin" type="password" required>
+      </label>
+    </mat-form-field>
+  </div>
+
+  {{user | json}}
+
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onLoginClick()">LOGIN</button>
+    <button mat-raised-button color="primary" (click)="onCancelClick()">CANCEL</button>
+  </div>
+</form>
+
+

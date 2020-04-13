@@ -1,39 +1,38 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../shared/services/login.service';
 import {User} from '../../shared/interfaces/user';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  templateUrl: './login-dialog.component.html',
+  styleUrls: ['./login-dialog.component.css'],
   providers: [LoginService]
 })
-export class LoginComponent implements OnInit {
+export class LoginDialogComponent implements OnInit {
   user: User = {
     username: null,
     password: null,
     affiliation: null,
     email: null,
     name: null,
-  webpage: null
+    webpage: null
   };
-  users: User[] = [];
 
-  constructor(private loginService: LoginService) {
+  constructor(
+    public dialogRef: MatDialogRef<LoginDialogComponent>,
+    private loginService: LoginService) {
   }
 
   ngOnInit(): void {
-    this.loginService.getUsers().subscribe((result: User[]) =>
-      this.users = result
-    );
   }
 
   /**
    * Sends 'this.user' to LoginService.
    * Login button's click calls this function.
-   * [(ngModel)] changes automatically the object 'this.user' if its fields change.
+   * [(ngModel)] changes automatically the object 'this.user' if input fields change.
    */
-  login() {
+  onLoginClick() {
     this.loginService.postUser(this.user).subscribe({
       next: (response: string) => {
         alert(response);
@@ -45,4 +44,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  /**
+   * Close login dialog.
+   */
+  onCancelClick() {
+    this.dialogRef.close();
+  }
 }

@@ -4,11 +4,11 @@ import {LoginService} from '../../shared/services/login.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  templateUrl: './register-dialog.component.html',
+  styleUrls: ['./register-dialog.component.css'],
   providers: [LoginService]
 })
-export class RegisterComponent implements OnInit {
+export class RegisterDialogComponent implements OnInit {
   user: User = {
     username: null,
     password: null,
@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
   webpage: null,
   };
   users: User[] = [];
-  
+
   constructor(private loginService: LoginService) { }
 
   ngOnInit(): void {
