@@ -16,6 +16,7 @@ export class RegisterDialogComponent implements OnInit {
     email: null,
     name: null,
     webpage: null,
+    role: null,
   };
 
   constructor(private loginService: LoginService) {

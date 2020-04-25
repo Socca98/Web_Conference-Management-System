@@ -1,14 +1,12 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {LoginDialogComponent} from './login/login/login-dialog.component';
-import {RegisterDialogComponent} from './login/register/register-dialog.component';
 import {HomePageComponent} from './pages/home-page/home-page.component';
+import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
 
 
 const routes: Routes = [
   {path: '', component: HomePageComponent},
-
-  {path: 'register', component: RegisterDialogComponent}
+  {path: 'conference', component: TabDetailsComponent}
 ];
 
 @NgModule({

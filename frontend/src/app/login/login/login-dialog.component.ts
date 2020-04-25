@@ -16,7 +16,8 @@ export class LoginDialogComponent implements OnInit {
     affiliation: null,
     email: null,
     name: null,
-    webpage: null
+    webpage: null,
+    role: null,
   };
 
   constructor(

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Conference} from '../../interfaces/conference';
 
 @Component({
   selector: 'app-conference',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./conference.component.css']
 })
 export class ConferenceComponent implements OnInit {
+  @Input()
+  conference: Conference;
 
   constructor() { }
 

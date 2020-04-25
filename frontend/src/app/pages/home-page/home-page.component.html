@@ -1,6 +1,18 @@
-<p>home-page works!</p>
 
 
-<div *ngFor="let conference of conferences">
-  {{conference | json}} <br/>
-</div>
+<mat-tab-group dynamicHeight>
+  <mat-tab *ngFor="let conference of conferences" label="{{conference.name}}">
+    <app-conference [conference]="conference"></app-conference>
+  </mat-tab>
+</mat-tab-group>
+
+
+
+
+
+
+
+
+
+
+

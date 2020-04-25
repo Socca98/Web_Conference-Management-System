@@ -12,6 +12,7 @@ import {RegisterDialogComponent} from './login/register/register-dialog.componen
 import {AppRoutingModule} from './app-routing-module';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {ConferenceComponent} from './shared/components/conference/conference.component';
+import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {ConferenceComponent} from './shared/components/conference/conference.com
     RegisterDialogComponent,
     HomePageComponent,
     ConferenceComponent,
+    TabDetailsComponent,
   ],
   imports: [
     BrowserModule,
