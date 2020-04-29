@@ -6417,7 +6417,8 @@
 								},
 								"reference": {
 									"$ref": "AAAAAAFxPVfTmIjjFq4="
-								}
+								},
+								"cardinality": "1..*"
 							},
 							"end2": {
 								"_type": "ERDRelationshipEnd",
