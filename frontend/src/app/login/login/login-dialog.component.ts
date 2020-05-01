@@ -1,42 +1,51 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from '../../shared/services/login.service';
+import {AuthService} from '../auth.service';
 import {User} from '../../shared/interfaces/user';
 import {MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.css'],
-  providers: [LoginService]
+  providers: [AuthService]
 })
 export class LoginDialogComponent implements OnInit {
   user: User = {
     username: null,
     password: null,
+    fullName: null,
     affiliation: null,
     email: null,
-    name: null,
     webpage: null,
+    isChair: null,
     role: null,
   };
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private loginService: LoginService) {
+    private loginService: AuthService,
+    private snackBar: MatSnackBar,
+    ) {
   }
 
   ngOnInit(): void {
   }
 
   /**
-   * Sends 'this.user' to LoginService.
+   * Sends 'this.user' to AuthService for login.
    * Login button's click calls this function.
-   * [(ngModel)] changes automatically the object 'this.user' if input fields change.
+   * In HTML, [(ngModel)] changes automatically object 'this.user' if input fields change.
    */
   onLoginClick() {
     this.loginService.loginUser(this.user).subscribe({
       next: (response: string) => {
         alert(response);
+        localStorage.setItem('token', response);
+        this.dialogRef.close();
+        this.snackBar.open('Login successfully.', '', {
+          duration: 1000
+        });
       },
       error: err => {
         console.error('Error! ' + err);

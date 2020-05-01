@@ -50,12 +50,16 @@ p {
 a,
 a:visited,
 a:hover {
-  color: #1976d2;
+  color: antiquewhite;
   text-decoration: none;
+  text-shadow: 2px 2px grey;
+  font-size: 20px;
+  width: 100px;
+  text-align: center;
 }
 
 a:hover {
-  color: #125699;
+  color: black;
 }
 
 
@@ -78,32 +82,19 @@ footer a {
   align-items: center;
 }
 
-.mat-raised-button {
-  background-color: dodgerblue;
-  color: white;
+
+.login {
+  position: absolute;
+  right: 10px;
 }
 
-.lnk {
-  color: black;
-  margin-right: 20px;
-  border: 2px solid black;
+.login a {
+  cursor: pointer;
 }
-
-.lnk:hover {
-  border-bottom-width: 3px;
-  border-bottom-style: solid;
-  border-bottom-color: white;
-}
-
-/*.login {*/
-/*  display: block;*/
-/*  position: absolute;*/
-/*  right: 60px;*/
-/*}*/
 
 .logout-button {
   position: absolute;
-  right: 20px;
+  right: 10px;
 }
 
 

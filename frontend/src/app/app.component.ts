@@ -2,26 +2,30 @@ import {Component} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from './login/login/login-dialog.component';
 import {Router} from '@angular/router';
+import {RegisterDialogComponent} from './login/register/register-dialog.component';
+import {AuthService} from './login/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [AuthService]
 })
 export class AppComponent {
-  isLoggedIn = true;
 
   constructor(
     private router: Router,
-    public dialog: MatDialog) {
+    private dialog: MatDialog,
+    public authService: AuthService,
+  ) {
   }
 
   openLoginDialog() {
     this.dialog.open(LoginDialogComponent);
   }
 
-  logout() {
-    this.isLoggedIn = false;
-    this.router.navigate(['']).then(_ => true);
+  openRegisterDialog() {
+    this.dialog.open(RegisterDialogComponent);
   }
+
 }

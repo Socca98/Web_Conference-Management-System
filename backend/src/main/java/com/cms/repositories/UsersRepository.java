@@ -38,4 +38,8 @@ public class UsersRepository {
         if(user.getPassword().equals("naspa"))
             throw new RuntimeException("Invalid password!");
     }
+
+    public void register(User user) {
+
+    }
 }

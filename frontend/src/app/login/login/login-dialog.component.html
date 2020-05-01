@@ -1,11 +1,11 @@
-<h1 mat-dialog-title>Login</h1>
+<h1 mat-dialog-title>Sign In</h1>
 
 <form>
   <div mat-dialog-content class="field-container">
     <mat-form-field class="field">
       <mat-label>Username</mat-label>
       <label>
-        <input matInput [(ngModel)]="user.username" name="username" placeholder="ex. pop.andrei" value="admin" required>
+        <input matInput [(ngModel)]="user.username" name="username" placeholder="ex. pop.andrei" value="adminQQQ" required>
       </label>
     </mat-form-field>
 
@@ -20,8 +20,8 @@
   {{user | json}}
 
   <div mat-dialog-actions>
-    <button mat-raised-button color="primary" (click)="onLoginClick()">LOGIN</button>
-    <button mat-raised-button color="primary" (click)="onCancelClick()">CANCEL</button>
+    <button mat-button (click)="onLoginClick()">LOGIN</button>
+    <button mat-button (click)="onCancelClick()">CANCEL</button>
   </div>
 </form>
 

@@ -28,11 +28,11 @@ public class UsersController {
      * @param user body of HTTP request POST
      * @return TO BE IMPLEMENTED (should return a security check string ~ guid)
      */
-    @PostMapping(value = "/users/session")
+    @PostMapping(value = "/users/login")
     public ResponseEntity<String> login(@RequestBody User user) {
         try {
             System.out.println(user);
-            usersService.login(user);
+//            User foundUser = usersService.login(user);
 
             String stringAsResponse = "\"Login function from backend called.\"";
             return ResponseEntity.ok(stringAsResponse);
@@ -42,5 +42,17 @@ public class UsersController {
         }
     }
 
+    @PostMapping(value = "users/register")
+    public ResponseEntity<String> register(@RequestBody User user) {
+        try {
+            usersService.register(user);
+
+            String stringAsResponse = "\"Register function called in backend.\"";
+            return ResponseEntity.ok(stringAsResponse);
+        }
+        catch(RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
 }

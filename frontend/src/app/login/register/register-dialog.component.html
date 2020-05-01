@@ -1,48 +1,59 @@
-<p class="welcome-title">Get started on our website!</p>
+<h1 mat-dialog-title>Create your account</h1>
 
-<mat-form-field>
-    <mat-label>Username</mat-label>
-    <label>
-      <input matInput [(ngModel)]="user.username" placeholder="ex. nsie2455" value="admin" required>
-    </label>
-  </mat-form-field>
+<form>
+  <div mat-dialog-content class="field-container">
+    <mat-form-field class="field">
+      <mat-label>Username</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.username" placeholder="ex. paie2455" value="admin" name="username"
+               required>
+      </label>
+    </mat-form-field>
 
+    <mat-form-field class="field">
+      <mat-label>Password</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.password" placeholder="" value="admin" name="password" type="password"
+               required>
+      </label>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <label>
-      <input matInput [(ngModel)]="user.password" placeholder="" value="admin" type="password" name="password" required>
-    </label>
-  </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Full Name</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.fullName" placeholder="" value="Pop Andrei" name="fullName" required>
+      </label>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Full Name</mat-label>
-    <label>
-      <input matInput [(ngModel)]="user.name" placeholder="" value=""  required>
-    </label>
-  </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Affiliation</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.affiliation" placeholder="" value="University of Colorado Bug"
+               name="affiliation" required>
+      </label>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Affiliation</mat-label>
-    <label>
-      <input matInput [(ngModel)]="user.affiliation" placeholder="" value=""  required>
-    </label>
-  </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Email Address</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.email" placeholder="" value="pop.andrei@yahoo.com" name="email" required>
+      </label>
+    </mat-form-field>
 
-  <mat-form-field>
-    <mat-label>Email Address</mat-label>
-    <label>
-      <input matInput [(ngModel)]="user.email" placeholder="" value=""  required>
-    </label>
-  </mat-form-field>
+    <mat-form-field class="field">
+      <mat-label>Personal webpage</mat-label>
+      <label>
+        <input matInput [(ngModel)]="user.webpage" placeholder="" value="www.popandrei.com" name="webpage" required>
+      </label>
+    </mat-form-field>
+  </div>
 
-  <mat-form-field>
-    <mat-label>Personal webpage</mat-label>
-    <label>
-      <input matInput [(ngModel)]="user.webpage" placeholder="" value=""  required>
-    </label>
-  </mat-form-field>
+  {{user | json}}
 
-<button mat-raised-button color="primary" >REGISTER</button>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onRegisterClick()">REGISTER</button>
+    <button mat-button (click)="onCancelClick()">CANCEL</button>
+  </div>
 
-{{user | json}}
+</form>
+
