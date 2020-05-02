@@ -29,8 +29,9 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
-
 	implementation 'mysql:mysql-connector-java'
+	compile group: 'com.auth0', name: 'java-jwt', version: '2.0.1'
+
 }
 test {
 	useJUnitPlatform()
