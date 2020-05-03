@@ -15,7 +15,15 @@ server:
   servlet:
     context-path: /cms/api/
 
+logging:
+  level:
+    com:
+      cms:
+        interceptor:
+          DEBUG
+    root: INFO
 
-#swagger.oauth.endpoint: http://localhost:8080/studyit/api/v1/users/token
-#password.token.live.time.hours: 48
-#authorization.server.signing.key: studyit
+predefined:
+  admin:
+    username: admin
+

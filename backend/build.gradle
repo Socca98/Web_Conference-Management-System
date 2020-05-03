@@ -30,8 +30,9 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	implementation 'mysql:mysql-connector-java'
-	compile group: 'com.auth0', name: 'java-jwt', version: '2.0.1'
-
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.2'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
 }
 test {
 	useJUnitPlatform()

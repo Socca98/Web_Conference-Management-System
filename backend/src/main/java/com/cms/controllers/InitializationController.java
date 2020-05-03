@@ -1,15 +1,12 @@
 package com.cms.controllers;
 
-import com.cms.dto.RegisterUserDto;
-import com.cms.dto.UserDto;
+import com.cms.dto.*;
 import com.cms.services.InitializationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping
@@ -24,5 +21,22 @@ public class InitializationController {
         UserDto userDto = initializationService.register(registerUserDto);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenDto> login(@RequestBody LoginUserDto loginUserDto) {
+        TokenDto login = initializationService.login(loginUserDto);
+        return ResponseEntity.ok(login);
+    }
+
+    @GetMapping("/user-information")
+    public ResponseEntity<UserInformationDto> getUserInformation(@RequestParam(required = false) String conferenceId) {
+        return ResponseEntity.ok(initializationService.getUserInformation(conferenceId));
+    }
+
+    @GetMapping("/token-information")
+    public ResponseEntity<TokenInformation> getTokenInformation() {
+        return ResponseEntity.ok(initializationService.getTokenInformation());
+    }
+
 
 }

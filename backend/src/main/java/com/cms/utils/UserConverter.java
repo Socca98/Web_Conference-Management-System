@@ -4,6 +4,9 @@ import com.cms.dto.RegisterUserDto;
 import com.cms.dto.UserDto;
 import com.cms.model.User;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class UserConverter {
 
     public static User registerUserToUser(RegisterUserDto registerUserDto) {
@@ -17,6 +20,10 @@ public class UserConverter {
                 .email(user.getEmail())
                 .affiliation(user.getAffiliation())
                 .webpage(user.getWebpage());
+    }
+
+    public static List<UserDto> userToUserDto(List<User> users) {
+        return users.stream().map(UserConverter::userToUserDto).collect(Collectors.toList());
     }
 
 }

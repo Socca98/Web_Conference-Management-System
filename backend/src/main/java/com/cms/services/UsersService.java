@@ -1,7 +1,9 @@
 package com.cms.services;
 
+import com.cms.dto.UserDto;
 import com.cms.model.User;
 import com.cms.repositories.UserJpaRepository;
+import com.cms.utils.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +15,13 @@ public class UsersService {
     @Autowired
     private UserJpaRepository usersRepository;
 
-    public List<User> get() {
-        return usersRepository.findAll();
+    public List<UserDto> getUsers() {
+        return UserConverter.userToUserDto(usersRepository.findAll());
     }
 
-    public User login(User user) {
-        return usersRepository.getUserByUsernameAndPassword(user.getUsername(), user.getPassword());
+
+    public UserDto getUser(String username) {
+        return UserConverter.userToUserDto(usersRepository.getOne(username));
     }
 
-    public void register(User user) {
-        usersRepository.save(user);
-    }
 }
