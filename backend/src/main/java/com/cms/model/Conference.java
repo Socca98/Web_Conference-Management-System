@@ -1,6 +1,7 @@
 package com.cms.model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.Date;
@@ -9,22 +10,22 @@ import java.util.Set;
 
 @Entity
 public class Conference {
+
     @Id
-    private Long id;
+    @GeneratedValue
+    private int id;
     private String name;
     private String website;
-    private Date startDate;
-    private Date endDate;
-    private Date proposalDeadline;
-    private Date abstractDeadline;
-    private Date biddingDeadline;
-    private Date evaluationDeadline;
-    private boolean isProposalPeriod;
-    private boolean isAbstractPeriod;
-    private boolean isBiddingPeriod;
-    private boolean isEvaluationPeriod;
-    private boolean isConferencePeriod;
+    private int startDate;
+    private int endDate;
+    private int proposalDeadline;
+    private int abstractDeadline;
+    private int biddingDeadline;
+    private int evaluationDeadline;
     private boolean allowFullPaper;
+    private int taxFee;
+
+
 
     @OneToMany(mappedBy = "conference")
     private List<Section> items;
@@ -32,8 +33,7 @@ public class Conference {
     public Conference() {
     }
 
-    public Conference(Long id, String name, Date startDate, Date endDate, Date abstractDeadline, Date proposalDeadline) {
-        this.id = id;
+    public Conference(String name, int startDate, int endDate, int abstractDeadline, int proposalDeadline) {
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,7 +41,15 @@ public class Conference {
         this.proposalDeadline = proposalDeadline;
     }
 
-    public Long getId() {
+    public int getTaxFee() {
+        return taxFee;
+    }
+
+    public void setTaxFee(int taxFee) {
+        this.taxFee = taxFee;
+    }
+
+    public int getId() {
         return id;
     }
 
@@ -53,48 +61,28 @@ public class Conference {
         return website;
     }
 
-    public Date getStartDate() {
+    public int getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public int getEndDate() {
         return endDate;
     }
 
-    public Date getProposalDeadline() {
+    public int getProposalDeadline() {
         return proposalDeadline;
     }
 
-    public Date getAbstractDeadline() {
+    public int getAbstractDeadline() {
         return abstractDeadline;
     }
 
-    public Date getBiddingDeadline() {
+    public int getBiddingDeadline() {
         return biddingDeadline;
     }
 
-    public Date getEvaluationDeadline() {
+    public int getEvaluationDeadline() {
         return evaluationDeadline;
-    }
-
-    public boolean isProposalPeriod() {
-        return isProposalPeriod;
-    }
-
-    public boolean isAbstractPeriod() {
-        return isAbstractPeriod;
-    }
-
-    public boolean isBiddingPeriod() {
-        return isBiddingPeriod;
-    }
-
-    public boolean isEvaluationPeriod() {
-        return isEvaluationPeriod;
-    }
-
-    public boolean isConferencePeriod() {
-        return isConferencePeriod;
     }
 
     public boolean isAllowFullPaper() {
