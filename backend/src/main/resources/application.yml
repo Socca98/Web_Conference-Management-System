@@ -7,7 +7,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://localhost/cms
+    url: jdbc:mysql://localhost/cms?serverTimezone=UTC
     username: root
     password: iss2020
     driverClassName: com.mysql.cj.jdbc.Driver
