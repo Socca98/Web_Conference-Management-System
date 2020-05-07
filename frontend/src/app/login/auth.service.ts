@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {User} from '../shared/interfaces/user';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
+import {environment} from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -34,5 +35,10 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     this.router.navigate(['']);
+  }
+
+  getUserRole(conferenceId) {
+    const params = new HttpParams().set('conferenceId', conferenceId);
+    this.http.get(environment.apiEndpoint + 'user-information', {params});
   }
 }
