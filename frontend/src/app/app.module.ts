@@ -13,6 +13,8 @@ import {AppRoutingModule} from './app-routing-module';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {ConferenceComponent} from './shared/components/conference/conference.component';
 import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
+import {AuthGuard} from './login/auth.guard';
+import {AuthService} from './login/auth.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
     FormsModule,
     AppRoutingModule,
   ],
-  providers: [],
+
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

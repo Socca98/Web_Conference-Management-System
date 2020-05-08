@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {User} from '../shared/interfaces/user';
+import {User} from '../shared/models/user';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
@@ -8,8 +8,9 @@ import {environment} from '../../environments/environment';
 @Injectable()
 export class AuthService {
 
-  constructor(private http: HttpClient,
-              private router: Router,
+  constructor(
+    private http: HttpClient,
+    private router: Router,
   ) {
   }
 
@@ -37,8 +38,16 @@ export class AuthService {
     this.router.navigate(['']);
   }
 
-  getUserRole(conferenceId) {
+  getUserInformation(conferenceId) {
+    if (conferenceId === null) {
+      throw new Error('Conference Id is null!');
+    }
+
     const params = new HttpParams().set('conferenceId', conferenceId);
-    this.http.get(environment.apiEndpoint + 'user-information', {params});
+    return this.http.get(environment.apiEndpoint + '/user-information', {params});
+  }
+
+  getUserRole() {
+    return localStorage.getItem('role');
   }
 }
