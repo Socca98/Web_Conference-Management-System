@@ -1,7 +1,7 @@
 package com.cms.utils;
 
-import com.cms.dto.RegisterUserDto;
-import com.cms.dto.UserDto;
+import com.cms.dto.user.RegisterUserDto;
+import com.cms.dto.user.UserDto;
 import com.cms.model.User;
 
 import java.util.List;

@@ -1,8 +1,7 @@
 package com.cms.services;
 
 
-import com.cms.dto.ConferenceDetailDto;
-import com.cms.dto.ConferenceDto;
+import com.cms.dto.conference.ConferenceDto;
 import com.cms.model.Conference;
 import com.cms.repositories.ConferenceJpaRepository;
 import com.cms.utils.ConferenceConverter;

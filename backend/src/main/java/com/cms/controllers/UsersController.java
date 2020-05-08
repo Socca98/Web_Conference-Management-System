@@ -1,7 +1,6 @@
 package com.cms.controllers;
 
-import com.cms.dto.UserDto;
-import com.cms.model.User;
+import com.cms.dto.user.UserDto;
 import com.cms.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

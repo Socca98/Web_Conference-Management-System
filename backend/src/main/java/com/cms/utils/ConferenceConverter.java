@@ -1,7 +1,7 @@
 package com.cms.utils;
 
-import com.cms.dto.ConferenceDetailDto;
-import com.cms.dto.ConferenceDto;
+import com.cms.dto.conference.ConferenceDetailDto;
+import com.cms.dto.conference.ConferenceDto;
 import com.cms.model.Conference;
 
 public class ConferenceConverter {

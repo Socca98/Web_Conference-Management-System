@@ -1,4 +1,4 @@
-package com.cms.dto;
+package com.cms.dto.conference;
 
 public class ConferenceDetailDto {
 

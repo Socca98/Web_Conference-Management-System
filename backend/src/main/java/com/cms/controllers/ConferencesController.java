@@ -1,7 +1,6 @@
 package com.cms.controllers;
 
-import com.cms.dto.ConferenceDetailDto;
-import com.cms.dto.ConferenceDto;
+import com.cms.dto.conference.ConferenceDto;
 import com.cms.services.ConferencesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

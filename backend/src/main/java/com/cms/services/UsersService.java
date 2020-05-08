@@ -1,7 +1,6 @@
 package com.cms.services;
 
-import com.cms.dto.UserDto;
-import com.cms.model.User;
+import com.cms.dto.user.UserDto;
 import com.cms.repositories.UserJpaRepository;
 import com.cms.utils.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
