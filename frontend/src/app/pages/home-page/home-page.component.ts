@@ -30,14 +30,26 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  /**
+   * Retrieve user role for specific conference into LocalStorage
+   */
   goToConferenceSite() {
-    // Retrieve user data into LocalStorage
-    this.authService.getUserInformation(this.conferences[this.selectedTabIndex].id).subscribe({
+    const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
+
+    this.authService.getUserInformation(selectedConferenceId).subscribe({
       next: (response) => {
-        let responseData: { user: string; role: string };
+        // custom response json, if you dont want to make an interface again
+        let responseData: {
+          user: string;
+          affiliation: string;
+          role: string;
+          isChair: boolean;
+        };
         responseData = (response as any);
+
         localStorage.setItem('user', responseData.user);
         localStorage.setItem('role', responseData.role);
+        localStorage.setItem('conference', selectedConferenceId);
 
         // Open tab-details component
         this.router.navigate(['/conference/details']);

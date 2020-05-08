@@ -30,11 +30,9 @@ export class AuthGuard implements CanActivate {
         this.snackBar.open('You are not authorized!', 'Ok:(', {
           duration: 2000,
         });
-
         return false;
       }
-
-      // authorised so return true
+      // authorized so return true
       return true;
     }
 
