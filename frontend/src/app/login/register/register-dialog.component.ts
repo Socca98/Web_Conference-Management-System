@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../shared/interfaces/user';
+import {User} from '../../shared/models/user';
 import {AuthService} from '../auth.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -8,7 +8,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   selector: 'app-register',
   templateUrl: './register-dialog.component.html',
   styleUrls: ['./register-dialog.component.css'],
-  providers: [AuthService]
 })
 export class RegisterDialogComponent implements OnInit {
   user: User = {

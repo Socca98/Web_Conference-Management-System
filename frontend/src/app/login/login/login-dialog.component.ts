@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth.service';
-import {User} from '../../shared/interfaces/user';
+import {User} from '../../shared/models/user';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -8,7 +8,6 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   selector: 'app-login',
   templateUrl: './login-dialog.component.html',
   styleUrls: ['./login-dialog.component.css'],
-  providers: [AuthService]
 })
 export class LoginDialogComponent implements OnInit {
   user: User = {

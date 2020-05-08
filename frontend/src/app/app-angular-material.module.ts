@@ -5,6 +5,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 const MD_COMPONENT_MODULES = [
   MatButtonModule,
@@ -13,6 +14,7 @@ const MD_COMPONENT_MODULES = [
   MatDialogModule,
   MatTabsModule,
   MatSnackBarModule,
+  MatToolbarModule,
 ];
 
 @NgModule({

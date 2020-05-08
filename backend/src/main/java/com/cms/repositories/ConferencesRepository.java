@@ -14,6 +14,7 @@ public class ConferencesRepository {
 
     public Conference getById(String id) {
         return new Conference(
+                11111111L,
                 "Conference 1",
                 firstDate,
                 firstDate,
@@ -24,6 +25,7 @@ public class ConferencesRepository {
 
     public List<Conference> getConferences() {
         Conference conf1 = new Conference(
+                222222L,
                 "Conference 1",
                 firstDate,
                 firstDate,
@@ -31,6 +33,7 @@ public class ConferencesRepository {
                 firstDate
         );
         Conference conf2 = new Conference(
+                333333L,
                 "Conference 2",
                 firstDate,
                 firstDate,
