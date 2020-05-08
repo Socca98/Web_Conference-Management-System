@@ -3,6 +3,7 @@ import {Conference} from '../../shared/models/conference';
 import {ConferencesService} from '../../shared/services/conferences.service';
 import {AuthService} from '../../login/auth.service';
 import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-home-page',
@@ -20,6 +21,7 @@ export class HomePageComponent implements OnInit {
     private authService: AuthService,
     private conferencesService: ConferencesService,
     private router: Router,
+    private snackBar: MatSnackBar,
   ) {
 
   }
@@ -35,6 +37,12 @@ export class HomePageComponent implements OnInit {
    */
   goToConferenceSite() {
     const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
+
+    if (!this.authService.isLogged()) {
+      this.snackBar.open('Please sign in!', '', {
+        duration: 2000
+      });
+    }
 
     this.authService.getUserInformation(selectedConferenceId).subscribe({
       next: (response) => {
