@@ -55,8 +55,7 @@ export class HomePageComponent implements OnInit {
         this.router.navigate(['/conference/details']);
       },
       error: err => {
-        console.error('Error! ' + err);
-        alert('Could not retrieve user information!');
+        alert('Error! Could not retrieve user information!');
       }
     });
 

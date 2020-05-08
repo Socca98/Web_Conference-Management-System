@@ -40,7 +40,6 @@ export class LoginDialogComponent implements OnInit {
   onLoginClick() {
     this.loginService.loginUser(this.user).subscribe({
       next: (response: Token) => {
-        alert(response);
         localStorage.setItem('token', response.token);
         this.dialogRef.close();
         this.snackBar.open('Login successfully.', '', {
