@@ -4,6 +4,7 @@ import {User} from '../shared/models/user';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
+import {Token} from '../shared/models/token';
 
 @Injectable()
 export class AuthService {
@@ -14,17 +15,17 @@ export class AuthService {
   ) {
   }
 
-  loginUser(user: User): Observable<string> {
-    return this.http.post<string>('http://localhost:8080/cms/api/users/login', user);
+  loginUser(user: User): Observable<Token> {
+    return this.http.post<Token>('http://localhost:8080/cms/api/login', user);
   }
 
-  registerUser(user: User): Observable<string> {
-    return this.http.post<string>('http://localhost:8080/cms/api/users/register', user);
+  registerUser(user: User): Observable<User> {
+    return this.http.post<User>('http://localhost:8080/cms/api/register', user);
   }
 
   /**
    * Checks if the token exists in the Local Storage.
-   * !! - returns true if object exists, false if its null
+   * !! - returns true if object exists, false if its null (when we are not interested in the value)
    */
   isLogged() {
     return !!localStorage.getItem('token');

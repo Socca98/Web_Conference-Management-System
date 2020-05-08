@@ -37,7 +37,7 @@ export class RegisterDialogComponent implements OnInit {
    */
   onRegisterClick() {
     this.authService.registerUser(this.user).subscribe({
-      next: (response: string) => {
+      next: (response: User) => {
         alert(response);
         this.dialogRef.close();
         this.snackBar.open('User created.', 'Ok', {

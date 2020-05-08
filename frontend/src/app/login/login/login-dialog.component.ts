@@ -3,6 +3,7 @@ import {AuthService} from '../auth.service';
 import {User} from '../../shared/models/user';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Token} from '../../shared/models/token';
 
 @Component({
   selector: 'app-login',
@@ -38,9 +39,9 @@ export class LoginDialogComponent implements OnInit {
    */
   onLoginClick() {
     this.loginService.loginUser(this.user).subscribe({
-      next: (response: string) => {
+      next: (response: Token) => {
         alert(response);
-        localStorage.setItem('token', response);
+        localStorage.setItem('token', response.token);
         this.dialogRef.close();
         this.snackBar.open('Login successfully.', '', {
           duration: 1000
