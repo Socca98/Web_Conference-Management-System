@@ -1,6 +1,7 @@
 package com.cms.repositories;
 
 
+import com.cms.exception.LoginException;
 import com.cms.model.User;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +37,10 @@ public class UsersRepository {
 
     public void login(User user) {
         if(user.getPassword().equals("naspa"))
-            throw new RuntimeException("Invalid password!");
+            throw new LoginException("Invalid password!");
+    }
+
+    public void register(User user) {
+
     }
 }

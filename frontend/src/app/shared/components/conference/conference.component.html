@@ -1,0 +1,13 @@
+<br/><br/>
+
+<h1>{{conference.name}}</h1>
+<p>Start date: {{conference.startDate}}</p>
+<p>End date: {{conference.endDate}}</p>
+<p>Website: {{conference.website}}</p>
+<h3><u>Call for papers</u></h3>
+<p>Submissions deadline{{conference.abstractDeadline}}</p>
+<p *ngIf="conference.fullPaperDeadline">Proposal deadline: {{conference.fullPaperDeadline}}</p>
+<p>{{conference.biddingDeadline}}</p>
+<p>{{conference.evaluationDeadline}}</p>
+<p>Tax fee: {{conference.taxFee}} Euro</p>
+

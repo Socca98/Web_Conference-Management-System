@@ -1,0 +1,268 @@
+localhost:8080/cms/api/ - the base path
+
+The base adds in front of each of the following API's
+
+If a field is not required and it's empty, null should be passed to the BE
+
+------------------------------------------
+{RequestType} {PATH}
+{params}
+{headers}
+{body}
+##########################
+{ResponseCode}
+{ResponseObject}
+------------------------------------------
+POST /register
+[]
+{}
+{
+	"username": "pop.andrei",
+	"password": "1234",
+	"fullName": "Pop Andrei Alexandru",
+	"affiliation": "UBB - FMI",
+	"email": "pop.andrei@gmail.com",
+	"webpage": "popandrei.ro"
+}
+########################
+201
+{
+	"username": "pop.andrei",
+	"password": "1234",
+	"fullName": "Pop Andrei Alexandru",
+	"affiliation": "UBB - FMI",
+	"email": "pop.andrei@gmail.com",
+	"webpage": "popandrei.ro"	
+}
+#######################
+400
+{
+	"message": "The username is already in use!"
+}
+------------------------------------------
+
+POST /login
+[]
+{}
+{
+	"username": "batman",
+	"password": "root"
+}
+#######################
+200
+{
+	"token": "aFDASJFasfaSFsdglhsdlgawsGsdalvjhsdavSADvdwsa"
+}
+#######################
+401
+{
+	"message": "Wrong username/password!"
+}
+
+-------------------------------------------
+
+GET /home-page
+[]
+{ token }
+{}
+#######################
+200
+{
+	"conferences": [
+		{
+			"id": "141",
+			"role": "chair",
+			"name": "ConferenceOne",
+			"startDate": 1588326245,
+			"endDate" : 1588326245,
+			"website" : "domain.com"
+			"abstractDeadline" : 1588326245,
+			"proposalDeadline" : 1588326245,
+			"taxFee" : 200
+		},
+		{
+			"id": "513",
+			"role": "author",
+			"name": "ConferenceTwo",
+			"startDate": 1588326245,
+			"endDate" : 1588326245,
+			"website" : "domain2.com"
+			"abstractDeadline" : 1588326245,
+			"proposalDeadline" : 1588326245,
+			"taxFee" : 250
+		}
+	]
+	"isChair" : True
+}
+
+------------------------------------------
+GET /user-information?conferenceId=1
+[ "conferenceId" ]
+{ token }
+{}
+#######################
+200
+{
+	"username": "Batman ala negru",
+	"affiliation": "UBB",
+	"role": "author"
+}
+
+-------------------------------------------
+GET /conference/{id}/details -- only one of the above
+[
+]
+{ token }
+{}
+#######################
+200
+{
+			"id": "141",
+			"name": "ConferenceOne",
+			"startDate": 1588326245,
+			"endDate" : 1588326245,
+			"website" : "domain.com"
+			"abstractDeadline" : 1588326245,
+			"proposalDeadline" : 1588326245,
+			"taxFee" : 200
+}
+
+------------------------------------------
+PUT /conference/{id}/details -- only one of the above
+[]
+{ token }
+{
+			"abstractDeadline" : 1588326245,
+			"proposalDeadline" : 1588326245
+}
+#######################
+200
+{
+			"id": "141",
+			"name": "ConferenceOne",
+			"startDate": 1588326245,
+			"endDate" : 1588326245,
+			"website" : "domain.com"
+			"abstractDeadline" : 1588326245,
+			"proposalDeadline" : 1588326245,
+			"taxFee" : 200
+}
+
+---------------------------------------------
+
+GET /conference/{id}/submissions
+[]
+{ token }
+{}
+#######################
+200
+{
+			{
+				"deadline": 1588326245,
+				"submissions": [ 
+						{
+							"id" : "ASfasfasfas",
+							"title": "Title1",
+							"abstract": "randomurl1",
+							"abstractName": "filename1",
+							"authors": [
+								{"name" : "Author1",
+								 "affiliation" : "UBB" 
+								},
+							 	{
+								 "name":"Author2",  
+								 "affiliation" : "UTCN"
+								 }
+							 ]
+							"keywords": ["tag1", "tag2", "tag3"],
+							"topics": ["topic1", "topic2", "topic3"],
+							"fullPaper": "randomurl2",
+							"fullPaperName": "filename2",
+						},
+						{
+							"id": "asljfhgask",
+							"title": "Title2",
+							"abstract": "randomurl3",
+							"abstractName": "filename3",
+							"authors": [
+								{"name" : "Author1",
+								 "affiliation" : "UBB" 
+								},
+							 	{
+								 "name":"Author3",  
+								 "affiliation" : "UTCN"
+								 }
+							 ]
+							"keywords": ["tag1", "tag2", "tag3"],
+							"topics": ["topic1", "topic2", "topic3"],
+							"fullPaper": "randomurl4",
+							"fullPaperName": "filename4",]
+						}
+				 ]
+			}
+}
+
+---------------------------------------------
+
+POST /conference/{id}/submissions
+[]
+{ token }
+{
+	"title": "Title1",
+	"abstractFile": "stream", #idk yet
+	"authors": [
+				{
+					"name" : "Author1",
+					"affiliation" : "UBB" 
+				},
+				{
+					"name":"Author2",  
+					"affiliation" : "UTCN"
+				}
+			   ]
+	"keywords": ["tag1", "tag2", "tag3"],
+	"topics": ["topic1", "topic2", "topic3"]
+}
+
+########################## 
+200
+{
+    "id": "aslfkhasfhsafas",
+	"title": "Title1",
+	"abstract": "randomurl1",
+	"abstractName": "filename1",
+	"authors": [
+	    {"name" : "Author1",
+		 "affiliation" : "UBB" 
+		},
+		{
+		 "name":"Author2",  
+		 "affiliation" : "UTCN"
+		}
+	]
+	"keywords": ["tag1", "tag2", "tag3"],
+	"topics": ["topic1", "topic2", "topic3"],
+	"fullPaper": null,
+	"fullPaperName": null
+}
+
+
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+DetailsDto:
+{
+	"startDate": "2020-01-21",
+	"endDate": "2020-04-29",
+	"taxFee": 150,
+	"proposalDeadline": "2020-02-06",
+	"abstractDeadline": "2020-02-12"
+}
+ 

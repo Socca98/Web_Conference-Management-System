@@ -29,13 +29,12 @@ p {
   height: 60px;
   display: flex;
   align-items: center;
-  background-color: #1976d2;
-  color: white;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .toolbar img {
-  margin: 0 16px;
+  margin-left: 8px;
+  margin-right: 24px;
 }
 
 .content {
@@ -50,12 +49,16 @@ p {
 a,
 a:visited,
 a:hover {
-  color: #1976d2;
+  color: antiquewhite;
   text-decoration: none;
+  text-shadow: 2px 2px grey;
+  font-size: 20px;
+  text-align: center;
+  margin-right: 30px;
 }
 
 a:hover {
-  color: #125699;
+  color: black;
 }
 
 
@@ -77,5 +80,28 @@ footer a {
   display: flex;
   align-items: center;
 }
+
+
+.login {
+  position: absolute;
+  right: 0;
+}
+
+.login a {
+  cursor: pointer;
+}
+
+.logout-button {
+  position: absolute;
+  right: 10px;
+}
+
+
+
+
+
+
+
+
 
 

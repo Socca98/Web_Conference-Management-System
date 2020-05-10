@@ -1,20 +1,40 @@
 import {NgModule} from '@angular/core';
-import {RouterModule , Routes } from '@angular/router';
-import {LoginComponent} from './login/login/login.component';
-import { RegisterComponent } from './login/register/register.component';
-import {SubmissionsComponent} from './pages/submissions/submissions.component';
+import {RouterModule, Routes} from '@angular/router';
+import {HomePageComponent} from './pages/home-page/home-page.component';
+import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
+import {AuthGuard} from './login/auth.guard';
+import {Role} from './shared/models/role';
+
 
 const routes: Routes = [
+  {
+    path: '',
+    component: HomePageComponent,
+  },
 
-    { path:'' , redirectTo : '/login', pathMatch : 'full'},
-    {path:"login" , component:LoginComponent},
-    {path:"register" , component: RegisterComponent},
-    {path:'pages/submissions', component: SubmissionsComponent}
+  {
+    path: 'conference/details',
+    component: TabDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'conference/submissions',
+    component: TabDetailsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.Author, Role.PC_Member]}
+  },
+
+  {
+    path: '**',
+    redirectTo: '/'
+  },
 ];
 
 @NgModule({
-    imports : [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

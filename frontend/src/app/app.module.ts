@@ -19,7 +19,10 @@ import { AppRoutingModule } from './app-routing-module';
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginDialogComponent,
+    RegisterDialogComponent,
+    HomePageComponent,
+    ConferenceComponent,
     TabDetailsComponent,
     ConferencesListComponent,
     RegisterComponent,
@@ -36,7 +39,8 @@ import { AppRoutingModule } from './app-routing-module';
     MatCardModule,
     MatIconModule
   ],
-  providers: [],
+
+  providers: [AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

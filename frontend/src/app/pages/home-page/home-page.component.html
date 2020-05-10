@@ -1,0 +1,21 @@
+
+
+<mat-tab-group dynamicHeight [(selectedIndex)]="selectedTabIndex" >
+  <mat-tab *ngFor="let conference of conferences" label="{{conference.name}}">
+    <app-conference [conference]="conference"></app-conference>
+  </mat-tab>
+</mat-tab-group>
+
+<br/><br/><br/>
+<button mat-raised-button color="accent" (click)="goToConferenceSite()">Go to conference site</button>
+
+
+
+
+
+
+
+
+
+
+

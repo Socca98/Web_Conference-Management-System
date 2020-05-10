@@ -1,20 +1,27 @@
 package com.cms.services;
 
+import com.cms.dto.UserDto;
 import com.cms.model.User;
-import com.cms.repositories.UsersRepository;
+import com.cms.repositories.UserJpaRepository;
+import com.cms.utils.UserConverter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class UsersService {
-    private final UsersRepository usersRepository = new UsersRepository();
 
-    public List<User> get() {
-        return usersRepository.get();
+    @Autowired
+    private UserJpaRepository usersRepository;
+
+    public List<UserDto> getUsers() {
+        return UserConverter.userToUserDto(usersRepository.findAll());
     }
 
-    public void login(User user) {
-        usersRepository.login(user);
+
+    public UserDto getUser(String username) {
+        return UserConverter.userToUserDto(usersRepository.getOne(username));
     }
+
 }

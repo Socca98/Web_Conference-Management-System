@@ -32,7 +32,9 @@ public class Conference {
     public Conference() {
     }
 
-    public Conference(Date startDate, Date endDate, Date abstractDeadline, Date proposalDeadline) {
+    public Conference(Long id, String name, Date startDate, Date endDate, Date abstractDeadline, Date proposalDeadline) {
+        this.id = id;
+        this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.abstractDeadline = abstractDeadline;

@@ -1,0 +1,9 @@
+.field {
+  min-width: 400px;
+  min-height: 30px;
+}
+
+.field-container {
+  display: flex;
+  flex-direction: column;
+}
