@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class InitializationController {
 
     @Autowired
-    InitializationService initializationService;
+    private InitializationService initializationService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody RegisterUserDto registerUserDto) {
@@ -41,6 +41,13 @@ public class InitializationController {
     @GetMapping("/token-information")
     public ResponseEntity<TokenInformation> getTokenInformation() {
         return ResponseEntity.ok(initializationService.getTokenInformation());
+    }
+
+    @PostMapping("/invitation/{invitationId}")
+    public ResponseEntity<UserDto> registerUserByInvitation(@PathVariable String invitationId,
+                                                            @RequestBody RegisterUserDto registerUserDto) {
+        UserDto userDto = initializationService.completeInvitation(invitationId, registerUserDto);
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
 
 

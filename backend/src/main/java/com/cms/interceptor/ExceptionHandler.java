@@ -22,7 +22,7 @@ public class ExceptionHandler {
     public ResponseEntity<ResponseException> handleIssException(IssException ex, WebRequest webRequest) {
 
 
-        return new ResponseEntity<>(new ResponseException().message(ex.getMessage()), ex.getStatus()) ;
+        return new ResponseEntity<>(new ResponseException().message(ex.getMessage(), ex.getStatus()), ex.getStatus()) ;
 
     }
 }

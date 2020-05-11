@@ -5,9 +5,9 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   datasource:
-    url: jdbc:mysql://localhost/cms?serverTimezone=UTC
+    url: jdbc:mysql://localhost/cms
     username: root
     password: iss2020
     driverClassName: com.mysql.cj.jdbc.Driver
@@ -26,4 +26,3 @@ logging:
 predefined:
   admin:
     username: admin
-

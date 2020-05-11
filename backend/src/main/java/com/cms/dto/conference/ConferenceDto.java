@@ -1,8 +1,10 @@
 package com.cms.dto.conference;
 
+import java.util.List;
+
 public class ConferenceDto {
 
-    private int id;
+    private String id;
     private String name;
     private String website;
     private int startDate;
@@ -14,11 +16,13 @@ public class ConferenceDto {
     private boolean allowFullPaper;
     private int taxFee;
 
-    public int getId() {
+    private List<SubmissionDto> submissions;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -153,10 +157,21 @@ public class ConferenceDto {
         return this;
     }
 
-    public ConferenceDto id(int id) {
+    public ConferenceDto id(String id) {
         this.id = id;
         return this;
     }
 
 
+    public List<SubmissionDto> getSubmissions() {
+        return submissions;
+    }
+
+    public ConferenceDto submissions(List<SubmissionDto> submissions) {
+        this.submissions = submissions;
+        return this;
+    }
+    public void setSubmissions(List<SubmissionDto> submissions) {
+        this.submissions = submissions;
+    }
 }

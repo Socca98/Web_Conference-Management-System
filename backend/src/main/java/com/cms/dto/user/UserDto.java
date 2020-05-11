@@ -2,11 +2,20 @@ package com.cms.dto.user;
 
 public class UserDto {
 
+    private String id;
     private String username;
     private String fullName;
     private String affiliation;
     private String email;
     private String webpage;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -46,6 +55,11 @@ public class UserDto {
 
     public void setWebpage(String webpage) {
         this.webpage = webpage;
+    }
+
+    public UserDto id(String id) {
+        this.id = id;
+        return this;
     }
 
     public UserDto username(String username) {

@@ -1,30 +1,35 @@
 package com.cms.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
 public class User {
     @Id
-    @Column(length = 30)
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String userId;
+    @Column(length = 50,  unique = true)
     private String username;
     private String password;
     private String fullName;
+    @Column(length = 50, unique = true, nullable = false)
     private String email;
     private String affiliation;
     private String webpage;
 
-    public User() {
+    @OneToMany(mappedBy = "user")
+    private List<Role> roles;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public User(String username, String password, String fullName, String email, String affiliation, String webpage) {
-        this.username = username;
-        this.password = password;
-        this.fullName = fullName;
-        this.email = email;
-        this.affiliation = affiliation;
-        this.webpage = webpage;
+    public void setUserId(String id) {
+        this.userId = id;
     }
 
     public String getUsername() {
@@ -33,10 +38,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -71,8 +72,11 @@ public class User {
         return webpage;
     }
 
-    public void setWebpage(String webpage) {
-        this.webpage = webpage;
+    public void setWebpage(String personalWebpage) {
+        this.webpage = personalWebpage;
     }
 
+    public String getPassword() {
+        return password;
+    }
 }

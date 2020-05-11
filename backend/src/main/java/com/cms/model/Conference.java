@@ -1,96 +1,128 @@
 package com.cms.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Date;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Conference {
-
     @Id
-    @GeneratedValue
-    private int id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String conferenceId;
     private String name;
     private String website;
-    private int startDate;
-    private int endDate;
-    private int proposalDeadline;
-    private int abstractDeadline;
-    private int biddingDeadline;
-    private int evaluationDeadline;
-    private boolean allowFullPaper;
-    private int taxFee;
+    private Integer startDate;
+    private Integer endDate;
+    private Integer proposalDeadline;
+    private Integer abstractDeadline;
+    private Integer biddingDeadline;
+    private Integer evaluationDeadline;
+    private Boolean allowFullPaper;
+    private Integer taxFee;
 
-
+    @OneToMany(mappedBy="conference")
+    private List<Submission> submissions;
 
     @OneToMany(mappedBy = "conference")
-    private List<Section> items;
+    private List<Role> roles;
 
-    public Conference() {
+    public void setConferenceId(String id) {
+        this.conferenceId = id;
     }
 
-    public Conference(String name, int startDate, int endDate, int abstractDeadline, int proposalDeadline) {
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.abstractDeadline = abstractDeadline;
-        this.proposalDeadline = proposalDeadline;
-    }
-
-    public int getTaxFee() {
-        return taxFee;
-    }
-
-    public void setTaxFee(int taxFee) {
-        this.taxFee = taxFee;
-    }
-
-    public int getId() {
-        return id;
+    public String getConferenceId() {
+        return conferenceId;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getWebsite() {
         return website;
     }
 
-    public int getStartDate() {
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public Integer getStartDate() {
         return startDate;
     }
 
-    public int getEndDate() {
+    public void setStartDate(Integer startDate) {
+        this.startDate = startDate;
+    }
+
+    public Integer getEndDate() {
         return endDate;
     }
 
-    public int getProposalDeadline() {
+    public void setEndDate(Integer endDate) {
+        this.endDate = endDate;
+    }
+
+    public Integer getProposalDeadline() {
         return proposalDeadline;
     }
 
-    public int getAbstractDeadline() {
+    public void setProposalDeadline(Integer proposalDeadline) {
+        this.proposalDeadline = proposalDeadline;
+    }
+
+    public Integer getAbstractDeadline() {
         return abstractDeadline;
     }
 
-    public int getBiddingDeadline() {
+    public void setAbstractDeadline(Integer abstractDeadline) {
+        this.abstractDeadline = abstractDeadline;
+    }
+
+    public Integer getBiddingDeadline() {
         return biddingDeadline;
     }
 
-    public int getEvaluationDeadline() {
+    public void setBiddingDeadline(Integer biddingDeadline) {
+        this.biddingDeadline = biddingDeadline;
+    }
+
+    public Integer getEvaluationDeadline() {
         return evaluationDeadline;
     }
 
-    public boolean isAllowFullPaper() {
+    public void setEvaluationDeadline(Integer evaluationDeadline) {
+        this.evaluationDeadline = evaluationDeadline;
+    }
+
+    public Boolean getAllowFullPaper() {
         return allowFullPaper;
     }
 
-    public List<Section> getItems() {
-        return items;
+    public void setAllowFullPaper(Boolean allowFullPaper) {
+        this.allowFullPaper = allowFullPaper;
+    }
+
+    public Integer getTaxFee() {
+        return taxFee;
+    }
+
+    public void setTaxFee(Integer taxFee) {
+        this.taxFee = taxFee;
+    }
+
+    public List<Submission> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(List<Submission> submissions) {
+        this.submissions = submissions;
     }
 }
 
