@@ -66,7 +66,5 @@ export class HomePageComponent implements OnInit {
         alert('Error! Could not retrieve user information!');
       }
     });
-
-
   }
 }

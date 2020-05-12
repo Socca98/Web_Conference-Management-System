@@ -2,19 +2,20 @@ import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 
 import {AppComponent} from './app.component';
-import {RouterModule , Routes } from '@angular/router';
-import {LoginComponent} from './login/login/login.component';
-import {SubmissionsComponent} from './pages/submissions/submissions.component'
+import {RouterModule} from '@angular/router';
+import {LoginDialogComponent} from './login/login/login-dialog.component';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppAngularMaterialModule} from './app-angular-material.module';
 import {FormsModule} from '@angular/forms';
-import {TabDetailsComponent} from './shared/components/tab-details/tab-details.component';
-import {ConferencesListComponent} from './pages/conferences-list/conferences-list.component';
-import {MatCardModule} from '@angular/material/card';
-import {MatIconModule} from '@angular/material/icon';
-import { RegisterComponent } from './login/register/register.component';
-import { AppRoutingModule } from './app-routing-module';
+import {RegisterDialogComponent} from './login/register/register-dialog.component';
+import {AppRoutingModule} from './app-routing-module';
+import {HomePageComponent} from './pages/home-page/home-page.component';
+import {ConferenceComponent} from './shared/components/conference/conference.component';
+import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
+import {AuthGuard} from './login/auth.guard';
+import {AuthService} from './login/auth.service';
+import {SubmissionsComponent} from './pages/submissions/submissions.component';
 
 @NgModule({
   declarations: [
@@ -24,8 +25,6 @@ import { AppRoutingModule } from './app-routing-module';
     HomePageComponent,
     ConferenceComponent,
     TabDetailsComponent,
-    ConferencesListComponent,
-    RegisterComponent,
     SubmissionsComponent
   ],
   imports: [
@@ -36,8 +35,6 @@ import { AppRoutingModule } from './app-routing-module';
     AppAngularMaterialModule,
     FormsModule,
     AppRoutingModule,
-    MatCardModule,
-    MatIconModule
   ],
 
   providers: [AuthGuard, AuthService],

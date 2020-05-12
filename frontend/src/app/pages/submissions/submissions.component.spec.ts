@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SubmissionsComponent } from './conferences-list.component';
+import { SubmissionsComponent } from './submissions.component';
 
 describe('SubmissionsComponent', () => {
   let component: SubmissionsComponent;

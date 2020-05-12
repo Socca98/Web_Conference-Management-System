@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import {Proposal} from '../../shared/interfaces/proposal';
+import {Submission} from '../../shared/models/submission';
+import {SubmissionsService} from '../../shared/services/submissions.service';
+
 
 @Component({
     selector: 'app-submission',
     templateUrl: './submissions.component.html',
-    styleUrls: ['./submissions.component.css']
+    styleUrls: ['./submissions.component.css'],
+    providers: [
+        SubmissionsService,
+    ]
 })
+
 export class SubmissionsComponent implements OnInit {
-    proposal: Proposal = {
+    proposal: Submission = {
         title: null,
         abstract: null,
         name: null,
@@ -16,10 +22,16 @@ export class SubmissionsComponent implements OnInit {
         metaInformation: null,
         fullPaper: null
     };    
-    proposals: Proposal[] = [this.proposal, this.proposal, this.proposal];
+    submissions: Submission[] = [this.proposal, this.proposal, this.proposal];
 
-    constructor() { }
+    constructor(
+        private submissionsService : SubmissionsService,
+    ) { 
+    }
 
     ngOnInit(): void {
+        this.submissionsService.getSubmissions().subscribe((result: Submission[]) => {
+            this.submissions = result;
+        }) 
     }
 }
