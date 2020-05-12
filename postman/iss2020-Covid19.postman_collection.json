@@ -1,0 +1,606 @@
+{
+	"info": {
+		"_postman_id": "030fa5e2-76c6-4a02-adb4-bb665bc32e8c",
+		"name": "iss2020-Covid19",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Get all users",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d83f416e-0f04-495b-a83b-012e2ab72ef0",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"pop.andrei\",\r\n\t\"password\": \"1234\",\r\n\t\"fullName\": \"Pop Andrei Alexandru\",\r\n\t\"affiliation\": \"UBB - FMI\",\r\n\t\"email\": \"pop.andrei@gmail.com\",\r\n\t\"webpage\": \"popandrei.ro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/users",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user by username",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "99afa8fd-112f-450b-bda0-c0d004fa7e5a",
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"type": "text",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"username\": \"pop.andrei\",\r\n\t\"password\": \"1234\",\r\n\t\"fullName\": \"Pop Andrei Alexandru\",\r\n\t\"affiliation\": \"UBB - FMI\",\r\n\t\"email\": \"pop.andrei@gmail.com\",\r\n\t\"webpage\": \"popandrei.ro\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/users/{{USERNAME}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"users",
+								"{{USERNAME}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Initialization",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "b8f3c747-8e20-4d89-acc3-e8157cc53bc5",
+								"exec": [
+									"if (pm.response.code !== 200) {",
+									"    return;",
+									"}",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.environment.set(\"TOKEN\", jsonData.token);",
+									"pm.environment.set(\"REFRESH_TOKEN\", jsonData.refreshToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"user1\",\n\t\"password\": \"root\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/login",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "171e5abb-a242-45c4-83f1-897ddbaf90d4",
+								"exec": [
+									"if (pm.response.code !== 201) {",
+									"    return;",
+									"}",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.environment.set(\"USERNAME\", jsonData.username);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "username",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"user1\",\n\t\"password\": \"root\",\n\t\"fullName\": \"The admin\",\n\t\"affiliation\": \"UBB\",\n\t\"email\": \"user1@gmail.com\",\n\t\"webpage\": \"admin.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/register",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get user information",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "01d69d31-3016-41fa-b710-34ad4fc045d7",
+								"exec": [
+									"var jsonData = JSON.parse(responseBody)",
+									"pm.environment.set(\"USERNAME\", jsonData.username);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cms/api/user-information",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cms",
+								"api",
+								"user-information"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get token information",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cms/api/token-information",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cms",
+								"api",
+								"token-information"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Conference",
+			"item": [
+				{
+					"name": "Create conference",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "642f31e5-5bc7-42de-868a-d23164ecc77c",
+								"exec": [
+									"if (pm.response.code !== 201) {",
+									"    return;",
+									"}",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.environment.set(\"CONFERENCE_ID\", jsonData.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ConferenceOne\",\n    \"startDate\": 1588326245,\n    \"endDate\": 1588326245,\n    \"website\": \"domain.com\",\n    \"abstractDeadline\": 1588326245,\n    \"proposalDeadline\": 1588326246,\n    \"biddingDeadline\": 1588326247,\n    \"evaluationDeadline\": 1588326248,\n    \"allowFullPaper\": false,\n    \"taxFee\": 200,\n    \"users\": [\n    \t{\n    \t\t\"fullName\":\"Create me2\",\n    \t\t\"affiliation\":\"UTCN\",\n    \t\t\"email\":\"2.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"AUTHOR\"\n    \t},\n    \t{\n    \t\t\"email\":\"user1@gmail.com\",\n    \t\t\"role\": \"CHAIR\"\n    \t}\n    \t]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all conferences",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get one conference",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{TOKEN}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "b24014ae-3ced-4089-97bb-7deb86c9e33b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "11b2756c-07e1-4fcc-9108-19a997093870",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Submission",
+			"item": [
+				{
+					"name": "Add submission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "f811fa66-b138-48b9-8169-2963aec5883e",
+								"exec": [
+									"if (pm.response.code !== 200) {",
+									"    return;",
+									"}",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.environment.set(\"SUBMISSION_ID\", jsonData.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"The second submission\",\n\t\"abstractPaper\": \"ASDaaaaaaaaaaaasfasfhaslkfhaslfasfasfashlhserglse\",\n\t\"fullPaper\": null,\n\t\"keywords\": \"ala, bala, portocala\",\n\t\"topics\": \"n-are ba\",\n\t\"finalVerdict\": \"WTF\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Like submission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/like",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unlike submission",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/like",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"like"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{TOKEN}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "818440c6-5464-4e92-a3dd-9c52a646b0c9",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "03dca5f7-9126-49de-ba69-3856e6e7f2fb",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
