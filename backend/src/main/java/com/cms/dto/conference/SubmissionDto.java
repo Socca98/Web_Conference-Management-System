@@ -13,7 +13,7 @@ public class SubmissionDto {
     private String keywords;
     private String topics;
     private String finalVerdict;
-    private List<UserDto> authors;
+    private List<UserRoleDto> authors;
     private List<UserDto> likes;
 
     public String getId() {
@@ -72,11 +72,11 @@ public class SubmissionDto {
         this.finalVerdict = finalVerdict;
     }
 
-    public List<UserDto> getAuthors() {
+    public List<UserRoleDto> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<UserDto> authors) {
+    public void setAuthors(List<UserRoleDto> authors) {
         this.authors = authors;
     }
 
@@ -129,7 +129,7 @@ public class SubmissionDto {
     }
 
 
-    public SubmissionDto authors(List<UserDto> userDtos) {
+    public SubmissionDto authors(List<UserRoleDto> userDtos) {
         this.authors = userDtos;
         return this;
     }

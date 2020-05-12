@@ -6,6 +6,7 @@ import com.cms.dto.user.LoginUserDto;
 import com.cms.dto.user.RegisterUserDto;
 import com.cms.dto.user.UserDto;
 import com.cms.dto.user.UserInformationDto;
+import com.cms.exception.IssException;
 import com.cms.exception.LoginException;
 import com.cms.model.Invitation;
 import com.cms.model.User;
@@ -47,11 +48,13 @@ public class InitializationService {
     }
 
     public UserDto completeInvitation(String invitationId, RegisterUserDto registerUserDto) {
-        Invitation invitation = invitationJpaRepository.getOne(invitationId);
-        //TODO: add validation
+        Optional<Invitation> invitation = invitationJpaRepository.findById(invitationId);
+        if (invitation.isEmpty()) {
+            throw new IssException("Invitation doesn't exists!");
+        }
 
         User preRegisterUser = UserConverter.registerUserToUser(registerUserDto);
-        User basicUser = invitation.getUser();
+        User basicUser = invitation.get().getUser();
         preRegisterUser.setUserId(basicUser.getUserId());
         User savedUser = userRepository.save(preRegisterUser);
         return UserConverter.userToUserDto(savedUser);

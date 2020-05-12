@@ -8,6 +8,7 @@ import com.cms.repositories.InvitationJpaRepository;
 import com.cms.repositories.UserJpaRepository;
 import com.cms.utils.UserConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.mail.*;
@@ -25,6 +26,9 @@ public class UsersService {
 
     @Autowired
     private InvitationJpaRepository invitationJpaRepository;
+
+    @Value("${predefined.invitation.base}")
+    private String INVITATION_URL;
 
     public List<UserDto> getUsers() {
         return UserConverter.userToUserDto(userRepository.findAll());
@@ -45,11 +49,12 @@ public class UsersService {
                 .map(User::getEmail)
                 .collect(Collectors.toList());
         users.stream()
-                .filter(userRoleDto -> ! existingEmails.contains(userRoleDto.getEmail()))
+                .filter(userRoleDto -> !existingEmails.contains(userRoleDto.getEmail()))
                 .forEach(this::createAndInviteUser);
 
         return userRepository.getAllByEmailIn(emails);
     }
+
     public User createAndInviteUser(UserRoleDto userRoleDto) {
         User basicUser = new User();
         basicUser.setEmail(userRoleDto.getEmail());
@@ -60,12 +65,12 @@ public class UsersService {
         Invitation createInvitation = new Invitation();
         createInvitation.setUser(save);
         Invitation invitation = invitationJpaRepository.save(createInvitation);
-        sendInvitationEmail(userRoleDto.getEmail());
+        sendInvitationEmail(userRoleDto.getEmail(), invitation.getInvitationId());
         return invitation.getUser();
 
     }
 
-    public void sendInvitationEmail(String email) {
+    public void sendInvitationEmail(String email, String invitationId) {
         Properties properties = System.getProperties();
         properties.put("mail.smtp.host", "smtp.gmail.com");
         properties.put("mail.smtp.port", "465");
@@ -74,9 +79,7 @@ public class UsersService {
         Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 
             protected PasswordAuthentication getPasswordAuthentication() {
-
                 return new PasswordAuthentication("olah.istvan.dev@gmail.com", "devdevdev");
-
             }
 
         });
@@ -95,7 +98,8 @@ public class UsersService {
             message.setSubject("Invitation");
 
             // Now set the actual message
-            message.setText("You've been invited to use our application! Please click the following link to register:\n http://olahistvan.com");
+            String link = INVITATION_URL + "/" + invitationId;
+            message.setText("You've been invited to use our application! Please click the following link to register:\n" + link);
 
             System.out.println("sending...");
             // Send message

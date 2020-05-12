@@ -15,6 +15,7 @@ import com.cms.repositories.ConferenceJpaRepository;
 import com.cms.repositories.RoleJpaRepository;
 import com.cms.repositories.SubmissionJpaRepository;
 import com.cms.utils.ConferenceConverter;
+import io.jsonwebtoken.lang.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -70,7 +73,28 @@ public class ConferencesService {
         List<Conference> conferenceList = conferencesRepository.findAll();
         return conferenceList.stream()
                 .map(ConferenceConverter::conferenceToConferenceDto)
+                .map(conferenceDto -> conferenceDto.submissions(null))
                 .collect(Collectors.toList());
+    }
+
+    public ConferenceDto getConference(String conferenceId) {
+        Optional<Conference> conferenceOptional = conferencesRepository.findById(conferenceId);
+        if(conferenceOptional.isEmpty()) {
+            throw new IssException("Not found!", HttpStatus.NOT_FOUND);
+        }
+        String username = securityService.getUsernameFromContext();
+        Conference conference = conferenceOptional.get();
+        List<Role> hasRoleToConference = conference.getRoles()
+                .stream()
+                .filter(role -> Objects.equals(role.getUser().getUsername(), username))
+                .filter(role -> Objects.nonNull(role.getUser().getUsername()))
+                .collect(Collectors.toList());
+        if (Collections.isEmpty(hasRoleToConference) && ! securityService.isAdmin()) {
+            throw new IssException("Unauthorized!", HttpStatus.UNAUTHORIZED);
+        }
+        return ConferenceConverter.conferenceToConferenceDto(conference);
+
+
     }
 
     public SubmissionDto addSubmission(String conferenceId, SubmissionDto submissionDto) {
@@ -79,6 +103,7 @@ public class ConferencesService {
         conference.setConferenceId(conferenceId);
         Submission submission = ConferenceConverter.submissionDtoToSubmission(submissionDto);
         List<User> users = usersService.sendInvitationIfNeeded(submissionDto.getAuthors());
+        submission.setAuthors(users);
 
         submission.setConference(conference);
         Submission save = submissionJpaRepository.save(submission);
@@ -110,4 +135,6 @@ public class ConferencesService {
 
         return ConferenceConverter.submissionToSubmissionDto(submission);
     }
+
+
 }

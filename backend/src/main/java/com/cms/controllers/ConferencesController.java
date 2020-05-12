@@ -32,6 +32,11 @@ public class ConferencesController {
         return ResponseEntity.ok(conferencesService.getAllConferences());
     }
 
+    @GetMapping("/{conferenceId}")
+    public ResponseEntity<ConferenceDto> getConference(@PathVariable String conferenceId) {
+        return ResponseEntity.ok(conferencesService.getConference(conferenceId));
+    }
+
     @PostMapping("/{conferenceId}/submissions")
     public ResponseEntity<SubmissionDto> addSubmission(@RequestBody SubmissionDto submissionDto,
                                                        @PathVariable String conferenceId) {

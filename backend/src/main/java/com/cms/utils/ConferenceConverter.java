@@ -51,7 +51,7 @@ public class ConferenceConverter {
             submission.setSubmissionId(submissionDto.getId());
         }
         submission.setAbstractPaper(submissionDto.getAbstractPaper());
-        submission.setAuthors(UserConverter.userDtoToUser(submissionDto.getAuthors()));
+        submission.setAuthors(UserConverter.userRoleDtoToUser(submissionDto.getAuthors()));
         submission.setFinalVerdict(submissionDto.getFinalVerdict());
         submission.setFullPaper(submissionDto.getFullPaper());
         submission.setKeywords(submissionDto.getKeywords());
@@ -66,7 +66,7 @@ public class ConferenceConverter {
         return new SubmissionDto()
                 .id(submission.getSubmissionId())
                 .abstractPaper(submission.getAbstractPaper())
-                .authors(UserConverter.userToUserDto(submission.getAuthors()))
+                .authors(UserConverter.userDtoToAuthorUser(submission.getAuthors()))
                 .finalVerdict(submission.getFinalVerdict())
                 .fullPaper(submission.getFullPaper())
                 .keywords(submission.getKeywords())

@@ -124,5 +124,13 @@ public class Conference {
     public void setSubmissions(List<Submission> submissions) {
         this.submissions = submissions;
     }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }
 
