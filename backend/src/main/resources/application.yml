@@ -11,9 +11,16 @@ spring:
     username: root
     password: iss2020
     driverClassName: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      file-size-threshold: 10KB
+      max-request-size: 15MB
 server:
   servlet:
     context-path: /cms/api/
+
 
 logging:
   level:
