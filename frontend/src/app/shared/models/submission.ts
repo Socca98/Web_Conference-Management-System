@@ -1,4 +1,4 @@
-export interface Proposal {
+export interface Submission {
     title: string,
     abstract: string,
     name: string,
