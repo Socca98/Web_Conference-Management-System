@@ -13,8 +13,10 @@ public class SubmissionDto {
     private String keywords;
     private String topics;
     private String finalVerdict;
+    private SectionDto section;
     private List<UserRoleDto> authors;
     private List<UserDto> likes;
+    private List<ReviewDto> reviews;
 
     public String getId() {
         return id;
@@ -88,6 +90,14 @@ public class SubmissionDto {
         this.likes = likes;
     }
 
+    public List<ReviewDto> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ReviewDto> reviews) {
+        this.reviews = reviews;
+    }
+
     public SubmissionDto id(String id) {
         this.id = id;
         return this;
@@ -95,6 +105,10 @@ public class SubmissionDto {
 
     public SubmissionDto title(String title) {
         this.title = title;
+        return this;
+    }
+    public SubmissionDto section(SectionDto sectionDto) {
+        this.section = sectionDto;
         return this;
     }
 
@@ -140,4 +154,16 @@ public class SubmissionDto {
         return this;
     }
 
+    public SubmissionDto reviews(List<ReviewDto> reviewDtos) {
+        this.reviews = reviewDtos;
+        return this;
+    }
+
+    public SectionDto getSection() {
+        return section;
+    }
+
+    public void setSection(SectionDto section) {
+        this.section = section;
+    }
 }

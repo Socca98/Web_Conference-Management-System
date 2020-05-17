@@ -3,6 +3,7 @@ package com.cms.utils;
 import com.cms.dto.conference.UserRoleDto;
 import com.cms.dto.user.RegisterUserDto;
 import com.cms.dto.user.UserDto;
+import com.cms.model.Role;
 import com.cms.model.Roles;
 import com.cms.model.User;
 
@@ -26,7 +27,7 @@ public class UserConverter {
 
     public static UserDto userToUserDto(User user) {
         return new UserDto()
-                .id(user.getUserId().toString())
+                .id(user.getUserId())
                 .username(user.getUsername())
                 .fullName(user.getFullName())
                 .email(user.getEmail())
@@ -87,6 +88,21 @@ public class UserConverter {
         return users.stream().map(UserConverter::userDtoToAuthorUser).collect(Collectors.toList());
     }
 
+    public static UserRoleDto roleToUserRoleDto(Role role) {
+        UserRoleDto userRoleDto = new UserRoleDto();
+        userRoleDto.setRole(role.getRole());
+        userRoleDto.setAffiliation(role.getUser().getAffiliation());
+        userRoleDto.setEmail(role.getUser().getEmail());
+        userRoleDto.setFullName(role.getUser().getFullName());
+        return userRoleDto;
+    }
+    public static List<UserRoleDto> roleToUserRoleDto(List<Role> roles) {
+        if(Objects.isNull(roles))
+            return List.of();
+        return roles.stream().map(UserConverter::roleToUserRoleDto).collect(Collectors.toList());
+    }
 
 
-}
+
+
+    }

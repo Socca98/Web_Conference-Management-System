@@ -1,5 +1,7 @@
 package com.cms.dto.conference;
 
+import com.cms.dto.user.UserDto;
+
 import java.util.List;
 
 public class ConferenceDto {
@@ -17,6 +19,7 @@ public class ConferenceDto {
     private int taxFee;
 
     private List<SubmissionDto> submissions;
+    private List<UserRoleDto> users;
 
     public String getId() {
         return id;
@@ -173,5 +176,13 @@ public class ConferenceDto {
     }
     public void setSubmissions(List<SubmissionDto> submissions) {
         this.submissions = submissions;
+    }
+
+    public List<UserRoleDto> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<UserRoleDto> users) {
+        this.users = users;
     }
 }

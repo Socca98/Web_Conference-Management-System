@@ -1,8 +1,12 @@
 package com.cms.utils;
 
 import com.cms.dto.conference.ConferenceDto;
+import com.cms.dto.conference.ReviewDto;
+import com.cms.dto.conference.SectionDto;
 import com.cms.dto.conference.SubmissionDto;
 import com.cms.model.Conference;
+import com.cms.model.Review;
+import com.cms.model.Section;
 import com.cms.model.Submission;
 
 import java.util.List;
@@ -56,9 +60,9 @@ public class ConferenceConverter {
         submission.setFullPaper(submissionDto.getFullPaper());
         submission.setKeywords(submissionDto.getKeywords());
         submission.setLikes(UserConverter.userDtoToUser(submissionDto.getLikes()));
+        submission.setReviews(ConferenceConverter.reviewDtoToReview(submissionDto.getReviews()));
         submission.setTitle(submissionDto.getTitle());
         submission.setTopics(submissionDto.getTopics());
-        //TODO add section here
         return submission;
     }
 
@@ -71,7 +75,9 @@ public class ConferenceConverter {
                 .fullPaper(submission.getFullPaper())
                 .keywords(submission.getKeywords())
                 .likes(UserConverter.userToUserDto(submission.getLikes()))
+                .reviews(ConferenceConverter.reviewToReviewDto(submission.getReviews()))
                 .title(submission.getTitle())
+                .section(ConferenceConverter.sectionToSectionDto(submission.getSection()))
                 .topics(submission.getTopics());
     }
 
@@ -80,5 +86,68 @@ public class ConferenceConverter {
             return List.of();
         }
         return submission.stream().map(ConferenceConverter::submissionToSubmissionDto).collect(Collectors.toList());
+    }
+
+    public static ReviewDto reviewToReviewDto(Review review) {
+        ReviewDto reviewDto = new ReviewDto();
+        reviewDto.setRecommendation(review.getRecommendation());
+        reviewDto.setVerdict(review.getVerdict());
+        reviewDto.setUser(UserConverter.userToUserDto(review.getUser()));
+        reviewDto.setReviewId(review.getReviewId());
+        return reviewDto;
+    }
+
+    public static List<ReviewDto> reviewToReviewDto(List<Review> review) {
+        if (Objects.isNull(review)) {
+            return List.of();
+        }
+        return review.stream().map(ConferenceConverter::reviewToReviewDto).collect(Collectors.toList());
+    }
+
+    public static Review reviewDtoToReview(ReviewDto reviewDto) {
+        Review review = new Review();
+        review.setRecommendation(reviewDto.getRecommendation());
+        review.setVerdict(reviewDto.getVerdict());
+        review.setReviewId(reviewDto.getReviewId());
+        return review;
+    }
+
+    public static List<Review> reviewDtoToReview(List<ReviewDto> reviewDtos) {
+        if (Objects.isNull(reviewDtos)) {
+            return List.of();
+        }
+        return reviewDtos.stream().map(ConferenceConverter::reviewDtoToReview).collect(Collectors.toList());
+    }
+
+    public static Section sectionDtoToSection(SectionDto sectionDto) {
+        Section section = new Section();
+        section.setSectionId(sectionDto.getSectionId());
+        section.setTitle(sectionDto.getTitle());
+        section.setStartTime(sectionDto.getStartTime());
+        section.setEndTime(sectionDto.getEndTime());
+        section.setSeats(sectionDto.getSeats());
+        return section;
+    }
+
+    public static SectionDto sectionToSectionDto(Section section) {
+        if(Objects.isNull(section)) {
+            return null;
+        }
+        SectionDto sectionDto = new SectionDto();
+        sectionDto.setSectionId(section.getSectionId());
+        sectionDto.setTitle(section.getTitle());
+        sectionDto.setStartTime(section.getStartTime());
+        sectionDto.setEndTime(section.getEndTime());
+        sectionDto.setSeats(section.getSeats());
+        sectionDto.setSpeakers(UserConverter.userToUserDto(section.getSpeakers()));
+        sectionDto.setListeners(UserConverter.userToUserDto(section.getListeners()));
+        return sectionDto;
+    }
+
+    public static List<SectionDto> sectionToSectionDto(List<Section> sections) {
+        if (Objects.isNull(sections)) {
+            return List.of();
+        }
+        return sections.stream().map(ConferenceConverter::sectionToSectionDto).collect(Collectors.toList());
     }
 }

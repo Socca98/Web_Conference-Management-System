@@ -12,7 +12,7 @@ public class Section {
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     @Column(length = 50)
-    private String SectionId;
+    private String sectionId;
     private String title;
     @ManyToOne
     @JoinColumn(name ="session_chair_id")
@@ -20,6 +20,9 @@ public class Section {
     @ManyToOne
     @JoinColumn(name ="conference_id")
     private Conference conference;
+    @OneToOne
+    @JoinColumn(name = "submission_id")
+    private Submission submission;
 
     private Integer startTime;
     private Integer endTime;
@@ -31,11 +34,11 @@ public class Section {
     private int seats;
 
     public String getSectionId() {
-        return SectionId;
+        return sectionId;
     }
 
     public void setSectionId(String id) {
-        this.SectionId = id;
+        this.sectionId = id;
     }
 
     public String getTitle() {
@@ -100,5 +103,13 @@ public class Section {
 
     public void setSeats(int seats) {
         this.seats = seats;
+    }
+
+    public Submission getSubmission() {
+        return submission;
+    }
+
+    public void setSubmission(Submission submission) {
+        this.submission = submission;
     }
 }

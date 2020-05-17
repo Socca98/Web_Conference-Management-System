@@ -27,6 +27,9 @@ public class Submission {
     @OneToMany
     private List<User> likes;
 
+    @OneToMany
+    private List<Review> reviews;
+
     @OneToOne
     @JoinColumn(name ="section_id")
     private Section section;
@@ -121,5 +124,13 @@ public class Submission {
 
     public void setConference(Conference conference) {
         this.conference = conference;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }

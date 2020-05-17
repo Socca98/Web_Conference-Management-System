@@ -39,8 +39,13 @@ public class UsersService {
         return UserConverter.userToUserDto(getUser(username));
     }
 
+
     public User getUser(String username) {
         return userRepository.getUserByUsername(username);
+    }
+
+    public User getUserByEmail(String email) {
+        return userRepository.getUserByEmail(email);
     }
 
     public List<User> sendInvitationIfNeeded(List<UserRoleDto> users) {
@@ -76,15 +81,16 @@ public class UsersService {
         properties.put("mail.smtp.port", "465");
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.smtp.auth", "true");
-        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
-
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("olah.istvan.dev@gmail.com", "devdevdev");
-            }
-
-        });
-        session.setDebug(true);
         try {
+            Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
+
+                protected PasswordAuthentication getPasswordAuthentication() {
+                    return new PasswordAuthentication("olah.istvan.dev@gmail.com", "devdevdev");
+                }
+
+            });
+            session.setDebug(true);
+
             // Create a default MimeMessage object.
             MimeMessage message = new MimeMessage(session);
 
@@ -105,7 +111,7 @@ public class UsersService {
             // Send message
             Transport.send(message);
             System.out.println("Sent message successfully....");
-        } catch (MessagingException mex) {
+        } catch (Exception mex) {
             mex.printStackTrace();
         }
     }

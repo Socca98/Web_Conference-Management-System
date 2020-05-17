@@ -14,4 +14,6 @@ public interface UserJpaRepository extends JpaRepository<User, String> {
     Optional<String> login(@Param("username") String username, @Param("password") String password);
     List<User> getAllByEmailIn(List<String> emails);
     User getUserByUsername(String username);
+
+    User getUserByEmail(String email);
 }
