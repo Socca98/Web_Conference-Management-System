@@ -52,8 +52,7 @@ export class AuthService {
     return localStorage.getItem('role');
   }
 
-  getToken()
-  {
+  getToken() {
     return localStorage.getItem('token');
   }
 }
