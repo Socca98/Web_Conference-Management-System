@@ -5,14 +5,14 @@ import {SubmissionsService} from '../../shared/services/submissions.service';
 
 @Component({
   selector: 'app-submission',
-  templateUrl: './submissions.component.html',
-  styleUrls: ['./submissions.component.css'],
+  templateUrl: './tab-submissions.component.html',
+  styleUrls: ['./tab-submissions.component.css'],
   providers: [
     SubmissionsService,
   ]
 })
 
-export class SubmissionsComponent implements OnInit {
+export class TabSubmissionsComponent implements OnInit {
   proposal: Submission = {
     title: null,
     abstract: null,

@@ -17,9 +17,11 @@ export class SubmissionsService {
    */
   getSubmissions(): Observable<Submission[]> {
     const conferenceId = localStorage.getItem('conferenceId');
+
     if (conferenceId === null) {
       throw new Error('Error! Could not retrieve conference id!');
+
     }
-    return this.http.get<Submission[]>(environment.apiEndpoint + '/' + conferenceId + '/submissions');
+    return this.http.get<Submission[]>(environment.apiEndpoint + '/' + conferenceId + '/tab-submissions');
   }
 }

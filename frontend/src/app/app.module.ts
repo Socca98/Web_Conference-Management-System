@@ -15,7 +15,8 @@ import {ConferenceComponent} from './shared/components/conference/conference.com
 import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
 import {AuthGuard} from './login/auth.guard';
 import {AuthService} from './login/auth.service';
-import {SubmissionsComponent} from './pages/submissions/submissions.component';
+import {TabSubmissionsComponent} from './pages/tab-submissions/tab-submissions.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {SubmissionsComponent} from './pages/submissions/submissions.component';
     HomePageComponent,
     ConferenceComponent,
     TabDetailsComponent,
-    SubmissionsComponent
+    TabSubmissionsComponent
   ],
   imports: [
     BrowserModule,
