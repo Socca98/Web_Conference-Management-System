@@ -1,4 +1,4 @@
-package com.cms.dto;
+package com.cms.dto.token;
 
 public class TokenInformation {
     private String username;

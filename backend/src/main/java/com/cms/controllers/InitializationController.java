@@ -1,9 +1,13 @@
 package com.cms.controllers;
 
-import com.cms.dto.*;
+import com.cms.dto.token.TokenDto;
+import com.cms.dto.token.TokenInformation;
+import com.cms.dto.user.LoginUserDto;
+import com.cms.dto.user.RegisterUserDto;
+import com.cms.dto.user.UserDto;
+import com.cms.dto.user.UserInformationDto;
 import com.cms.services.InitializationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 public class InitializationController {
 
     @Autowired
-    InitializationService initializationService;
+    private InitializationService initializationService;
 
     @PostMapping("/register")
     public ResponseEntity<UserDto> register(@RequestBody RegisterUserDto registerUserDto) {
@@ -39,5 +43,14 @@ public class InitializationController {
         return ResponseEntity.ok(initializationService.getTokenInformation());
     }
 
+    @PostMapping("/invitation/{invitationId}")
+    public ResponseEntity<UserDto> registerUserByInvitation(@PathVariable String invitationId,
+                                                            @RequestBody RegisterUserDto registerUserDto) {
+        UserDto userDto = initializationService.completeInvitation(invitationId, registerUserDto);
+        return new ResponseEntity<>(userDto, HttpStatus.CREATED);
+    }
+
 
 }
+
+

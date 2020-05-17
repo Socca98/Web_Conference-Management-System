@@ -1,21 +1,46 @@
 package com.cms.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
-@IdClass(RoleKey.class)
 public class Role {
 
-    String role;
+    @EmbeddedId
+    protected RoleKey roleKey = new RoleKey();
 
     @ManyToOne
-    @Id
+    @JoinColumn(name ="conference_id", insertable = false, updatable = false)
     Conference conference;
     @ManyToOne
-    @Id
+    @JoinColumn(name ="user_id", insertable = false, updatable = false)
     User user;
+
+    Roles role;
+
+    public Conference getConference() {
+        return conference;
+    }
+
+    public void setConference(Conference conference) {
+        this.conference = conference;
+        this.roleKey.setConference(conference.getConferenceId());
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+        this.roleKey.setUser(user.getUserId());
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
+    }
 
 }
