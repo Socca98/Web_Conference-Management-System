@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {RouterModule} from '@angular/router';
 import {LoginDialogComponent} from './login/login/login-dialog.component';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppAngularMaterialModule} from './app-angular-material.module';
 import {FormsModule} from '@angular/forms';
@@ -16,7 +16,7 @@ import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
 import {AuthGuard} from './login/auth.guard';
 import {AuthService} from './login/auth.service';
 import {TabSubmissionsComponent} from './pages/tab-submissions/tab-submissions.component';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import {TokenInterceptorService} from './login/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +38,12 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AppRoutingModule,
   ],
 
-  providers: [AuthGuard, AuthService],
+  providers: [AuthGuard, AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

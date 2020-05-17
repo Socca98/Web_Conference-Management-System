@@ -7,18 +7,24 @@ import {AuthService} from './auth.service';
 })
 export class TokenInterceptorService implements HttpInterceptor {
 
-  constructor(private injector: Injector) {
+  constructor(
+    private injector: Injector,
+  ) {
   }
 
   intercept(req, next) {
     const authService = this.injector.get(AuthService);
-    const tokenizedReq = req.clone(
-      {
-        setHeaders: {
-          Authorization: 'Bearer ${authService.getToken()}'
-        }
+
+    // If not logged, do not set Authorization in Headers
+    if (!authService.isLogged()) {
+      return next.handle(req);
+    }
+
+    const tokenizedReq = req.clone({
+      setHeaders: {
+        authorization: `Bearer ${authService.getToken()}`
       }
-    );
+    });
     return next.handle(tokenizedReq);
   }
 }

@@ -30,18 +30,27 @@ export class HomePageComponent implements OnInit {
     this.conferencesService.getConferences().subscribe((result: Conference[]) => {
       this.conferences = result;
     });
+
+    // If it comes from a conference tab, we remove the id,
+    // so the conference tabs no longer show on toolbar
+    if (this.authService.isOnConferenceSite()) {
+      localStorage.removeItem('conferenceId');
+    }
   }
 
   /**
    * Retrieve user role for specific conference into LocalStorage
    */
   goToConferenceSite() {
+    //check null
+
     const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
 
     if (!this.authService.isLogged()) {
-      this.snackBar.open('Please sign in!', '', {
-        duration: 2000
+      this.snackBar.open('Please sign in!', 'OK', {
+        duration: 1000
       });
+      return;
     }
 
     this.authService.getUserInformation(selectedConferenceId).subscribe({
@@ -51,19 +60,19 @@ export class HomePageComponent implements OnInit {
           user: string;
           affiliation: string;
           role: string;
-          isChair: boolean;
+          chair: boolean;
         };
         responseData = (response as any);
 
         localStorage.setItem('user', responseData.user);
         localStorage.setItem('role', responseData.role);
-        localStorage.setItem('conference', selectedConferenceId);
+        localStorage.setItem('conferenceId', selectedConferenceId);
 
         // Open tab-details component
         this.router.navigate(['/conference/details']);
       },
       error: err => {
-        alert('Error! Could not retrieve user information!');
+        alert('Error! Could not retrieve user information!' + err);
       }
     });
   }

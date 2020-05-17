@@ -39,13 +39,15 @@ export class AuthService {
     this.router.navigate(['']);
   }
 
-  getUserInformation(conferenceId) {
-    if (conferenceId === null) {
-      throw new Error('Conference Id is null!');
+  getUserInformation(selectedConferenceId) {
+    if (selectedConferenceId === null) {
+      throw new Error('Selected conference Id is null!');
     }
 
-    const params = new HttpParams().set('conferenceId', conferenceId);
-    return this.http.get(environment.apiEndpoint + '/user-information', {params});
+    const params = new HttpParams().set('conferenceId', selectedConferenceId);
+    console.log(environment.apiEndpoint + '/user-information' + '\nparam: ' + selectedConferenceId);
+    // return this.http.get(environment.apiEndpoint + '/user-information', {params});
+    return this.http.get(environment.apiEndpoint + '/user-information');
   }
 
   getUserRole() {
@@ -54,5 +56,12 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem('token');
+  }
+
+  /**
+   *
+   */
+  isOnConferenceSite() {
+    return !!localStorage.getItem('conferenceId');
   }
 }
