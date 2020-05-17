@@ -45,13 +45,17 @@ export class AuthService {
     }
 
     const params = new HttpParams().set('conferenceId', selectedConferenceId);
-    console.log(environment.apiEndpoint + '/user-information' + '\nparam: ' + selectedConferenceId);
-    // return this.http.get(environment.apiEndpoint + '/user-information', {params});
-    return this.http.get(environment.apiEndpoint + '/user-information');
+    return this.http.get(environment.apiEndpoint + '/user-information', {params});
   }
 
   getUserRole() {
-    return localStorage.getItem('role');
+    if (localStorage.getItem('chair')) {
+      return 'Chair';
+    }
+    if (localStorage.getItem('role') !== null) {
+      return localStorage.getItem('role');
+    }
+    return null;
   }
 
   getToken() {

@@ -8,8 +8,6 @@ import {AuthService} from '../../login/auth.service';
   styleUrls: ['./tab-details.component.css'],
 })
 export class TabDetailsComponent implements OnInit {
-  @Input()
-  conference: Conference;
 
   constructor() { }
 

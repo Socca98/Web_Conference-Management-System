@@ -20,8 +20,8 @@ export class SubmissionsService {
 
     if (conferenceId === null) {
       throw new Error('Error! Could not retrieve conference id!');
-
     }
+
     return this.http.get<Submission[]>(environment.apiEndpoint + '/' + conferenceId + '/tab-submissions');
   }
 }

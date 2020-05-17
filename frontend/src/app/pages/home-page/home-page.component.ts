@@ -30,22 +30,21 @@ export class HomePageComponent implements OnInit {
     this.conferencesService.getConferences().subscribe((result: Conference[]) => {
       this.conferences = result;
     });
-
-    // If it comes from a conference tab, we remove the id,
-    // so the conference tabs no longer show on toolbar
-    if (this.authService.isOnConferenceSite()) {
-      localStorage.removeItem('conferenceId');
-    }
   }
 
   /**
    * Retrieve user role for specific conference into LocalStorage
    */
   goToConferenceSite() {
-    //check null
+    // Check if conference is selected from the list
+    if (this.selectedTabIndex === null) {
+      this.snackBar.open('No conference selected!', 'OK', {
+        duration: 1000
+      });
+      return;
+    }
 
     const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
-
     if (!this.authService.isLogged()) {
       this.snackBar.open('Please sign in!', 'OK', {
         duration: 1000
@@ -57,16 +56,16 @@ export class HomePageComponent implements OnInit {
       next: (response) => {
         // custom response json, if you dont want to make an interface again
         let responseData: {
-          user: string;
+          username: string;
           affiliation: string;
           role: string;
           chair: boolean;
         };
         responseData = (response as any);
 
-        localStorage.setItem('user', responseData.user);
-        localStorage.setItem('role', responseData.role);
+        localStorage.setItem('user', responseData.username);
         localStorage.setItem('conferenceId', selectedConferenceId);
+        responseData.chair === true ? localStorage.setItem('role', 'Chair') : localStorage.setItem('role', responseData.role);
 
         // Open tab-details component
         this.router.navigate(['/conference/details']);
