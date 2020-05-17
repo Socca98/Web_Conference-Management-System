@@ -14,6 +14,11 @@ public class IssException extends RuntimeException {
         super(message);
     }
 
+    public IssException(String message, HttpStatus httpStatus) {
+        super(message);
+        this.status = httpStatus;
+    }
+
     public IssException(String message, Throwable cause) {
         super(message, cause);
     }

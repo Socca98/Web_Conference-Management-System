@@ -1,108 +1,136 @@
 package com.cms.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.Date;
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
+
 
 @Entity
 public class Conference {
     @Id
-    private Long id;
+    @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    private String conferenceId;
     private String name;
     private String website;
-    private Date startDate;
-    private Date endDate;
-    private Date proposalDeadline;
-    private Date abstractDeadline;
-    private Date biddingDeadline;
-    private Date evaluationDeadline;
-    private boolean isProposalPeriod;
-    private boolean isAbstractPeriod;
-    private boolean isBiddingPeriod;
-    private boolean isEvaluationPeriod;
-    private boolean isConferencePeriod;
-    private boolean allowFullPaper;
+    private Integer startDate;
+    private Integer endDate;
+    private Integer proposalDeadline;
+    private Integer abstractDeadline;
+    private Integer biddingDeadline;
+    private Integer evaluationDeadline;
+    private Boolean allowFullPaper;
+    private Integer taxFee;
+
+    @OneToMany(mappedBy="conference")
+    private List<Submission> submissions;
 
     @OneToMany(mappedBy = "conference")
-    private List<Section> items;
+    private List<Role> roles;
 
-    public Conference() {
+    public void setConferenceId(String id) {
+        this.conferenceId = id;
     }
 
-    public Conference(Long id, String name, Date startDate, Date endDate, Date abstractDeadline, Date proposalDeadline) {
-        this.id = id;
-        this.name = name;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.abstractDeadline = abstractDeadline;
-        this.proposalDeadline = proposalDeadline;
-    }
-
-    public Long getId() {
-        return id;
+    public String getConferenceId() {
+        return conferenceId;
     }
 
     public String getName() {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getWebsite() {
         return website;
     }
 
-    public Date getStartDate() {
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public Integer getStartDate() {
         return startDate;
     }
 
-    public Date getEndDate() {
+    public void setStartDate(Integer startDate) {
+        this.startDate = startDate;
+    }
+
+    public Integer getEndDate() {
         return endDate;
     }
 
-    public Date getProposalDeadline() {
+    public void setEndDate(Integer endDate) {
+        this.endDate = endDate;
+    }
+
+    public Integer getProposalDeadline() {
         return proposalDeadline;
     }
 
-    public Date getAbstractDeadline() {
+    public void setProposalDeadline(Integer proposalDeadline) {
+        this.proposalDeadline = proposalDeadline;
+    }
+
+    public Integer getAbstractDeadline() {
         return abstractDeadline;
     }
 
-    public Date getBiddingDeadline() {
+    public void setAbstractDeadline(Integer abstractDeadline) {
+        this.abstractDeadline = abstractDeadline;
+    }
+
+    public Integer getBiddingDeadline() {
         return biddingDeadline;
     }
 
-    public Date getEvaluationDeadline() {
+    public void setBiddingDeadline(Integer biddingDeadline) {
+        this.biddingDeadline = biddingDeadline;
+    }
+
+    public Integer getEvaluationDeadline() {
         return evaluationDeadline;
     }
 
-    public boolean isProposalPeriod() {
-        return isProposalPeriod;
+    public void setEvaluationDeadline(Integer evaluationDeadline) {
+        this.evaluationDeadline = evaluationDeadline;
     }
 
-    public boolean isAbstractPeriod() {
-        return isAbstractPeriod;
-    }
-
-    public boolean isBiddingPeriod() {
-        return isBiddingPeriod;
-    }
-
-    public boolean isEvaluationPeriod() {
-        return isEvaluationPeriod;
-    }
-
-    public boolean isConferencePeriod() {
-        return isConferencePeriod;
-    }
-
-    public boolean isAllowFullPaper() {
+    public Boolean getAllowFullPaper() {
         return allowFullPaper;
     }
 
-    public List<Section> getItems() {
-        return items;
+    public void setAllowFullPaper(Boolean allowFullPaper) {
+        this.allowFullPaper = allowFullPaper;
+    }
+
+    public Integer getTaxFee() {
+        return taxFee;
+    }
+
+    public void setTaxFee(Integer taxFee) {
+        this.taxFee = taxFee;
+    }
+
+    public List<Submission> getSubmissions() {
+        return submissions;
+    }
+
+    public void setSubmissions(List<Submission> submissions) {
+        this.submissions = submissions;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
 

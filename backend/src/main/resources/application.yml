@@ -5,15 +5,22 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
   datasource:
     url: jdbc:mysql://localhost/cms
     username: root
     password: iss2020
     driverClassName: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      file-size-threshold: 10KB
+      max-request-size: 15MB
 server:
   servlet:
     context-path: /cms/api/
+
 
 logging:
   level:
@@ -26,4 +33,5 @@ logging:
 predefined:
   admin:
     username: admin
-
+  invitation:
+    base: http://localhost:4200/invitation/
