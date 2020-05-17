@@ -24,7 +24,8 @@ export class AuthGuard implements CanActivate {
 
     if (this.authService.isLogged()) {
       // check if route is restricted by role
-      if (route.data.roles && route.data.roles.indexOf(this.authService.getUserRole()) === -1) {
+      if ((route.data.roles && route.data.roles.indexOf(this.authService.getUserRole()) === -1) &&
+        this.authService.getUserRole() !== 'Chair') {
         // role not authorised so redirect to details page
         this.router.navigate(['/conference/details']);
         this.snackBar.open('You are not authorized!', 'Ok:(', {
@@ -36,7 +37,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
 
-    // not logged in so redirect to login page with the return url
+    // Not logged in, so redirect to login page with the return url
     // this.router.navigate([''], {queryParams: {returnUrl: state.url}});
     this.router.navigate(['/']);
     this.snackBar.open('Please sign in!', 'Ok:(', {

@@ -6,6 +6,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 const MD_COMPONENT_MODULES = [
   MatButtonModule,
@@ -15,6 +18,9 @@ const MD_COMPONENT_MODULES = [
   MatTabsModule,
   MatSnackBarModule,
   MatToolbarModule,
+  MatCardModule,
+  MatIconModule,
+  MatTooltipModule,
 ];
 
 @NgModule({

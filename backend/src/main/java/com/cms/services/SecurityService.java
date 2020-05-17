@@ -62,6 +62,14 @@ public class SecurityService {
                 .parseClaimsJws(jwt);
     }
 
+    public boolean isPrehandle() {
+        HttpServletRequest request =
+                ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes()))
+                        .getRequest();
+        String header = request.getHeader("access-control-request-headers");
+        return Objects.nonNull(header);
+    }
+
     public boolean checkToken() {
         String token = getToken();
         if (Objects.isNull(token)) {

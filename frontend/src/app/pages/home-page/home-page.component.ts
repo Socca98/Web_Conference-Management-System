@@ -36,37 +36,43 @@ export class HomePageComponent implements OnInit {
    * Retrieve user role for specific conference into LocalStorage
    */
   goToConferenceSite() {
-    const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
-
-    if (!this.authService.isLogged()) {
-      this.snackBar.open('Please sign in!', '', {
-        duration: 2000
+    // Check if conference is selected from the list
+    if (this.selectedTabIndex === null) {
+      this.snackBar.open('No conference selected!', 'OK', {
+        duration: 1000
       });
+      return;
+    }
+
+    const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
+    if (!this.authService.isLogged()) {
+      this.snackBar.open('Please sign in!', 'OK', {
+        duration: 1000
+      });
+      return;
     }
 
     this.authService.getUserInformation(selectedConferenceId).subscribe({
       next: (response) => {
         // custom response json, if you dont want to make an interface again
         let responseData: {
-          user: string;
+          username: string;
           affiliation: string;
           role: string;
-          isChair: boolean;
+          chair: boolean;
         };
         responseData = (response as any);
 
-        localStorage.setItem('user', responseData.user);
-        localStorage.setItem('role', responseData.role);
-        localStorage.setItem('conference', selectedConferenceId);
+        localStorage.setItem('user', responseData.username);
+        localStorage.setItem('conferenceId', selectedConferenceId);
+        responseData.chair === true ? localStorage.setItem('role', 'Chair') : localStorage.setItem('role', responseData.role);
 
         // Open tab-details component
         this.router.navigate(['/conference/details']);
       },
       error: err => {
-        alert('Error! Could not retrieve user information!');
+        alert('Error! Could not retrieve user information!' + err);
       }
     });
-
-
   }
 }

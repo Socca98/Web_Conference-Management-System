@@ -21,7 +21,7 @@
 
   <a class="lnk" routerLink="/" routerLinkActive="active">Home</a>
 
-  <ng-container *ngIf="this.authService.isLogged()">
+  <ng-container *ngIf="this.authService.isLogged() && !isOnHomePage()">
     <a class="lnk" routerLink="conference/details">Details</a>
     <a class="lnk" routerLink="conference/sections">Sections</a>
 

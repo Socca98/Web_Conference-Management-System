@@ -28,4 +28,7 @@ export class AppComponent {
     this.dialog.open(RegisterDialogComponent);
   }
 
+  isOnHomePage() {
+    return this.router.url === '/';
+  }
 }
