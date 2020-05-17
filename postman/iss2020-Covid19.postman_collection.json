@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "030fa5e2-76c6-4a02-adb4-bb665bc32e8c",
+		"_postman_id": "8fb9917e-ce78-4e55-8e31-743c53309058",
 		"name": "iss2020-Covid19",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -14,7 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "d83f416e-0f04-495b-a83b-012e2ab72ef0",
+								"id": "98e08127-15d3-4766-b544-18d239c21f0d",
 								"exec": [
 									""
 								],
@@ -71,7 +71,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "99afa8fd-112f-450b-bda0-c0d004fa7e5a",
+								"id": "08cd338a-e08c-4398-a247-2a51fdb4aaf7",
 								"exec": [
 									""
 								],
@@ -135,7 +135,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "b8f3c747-8e20-4d89-acc3-e8157cc53bc5",
+								"id": "8fb86ad7-6580-4889-a527-80211b822848",
 								"exec": [
 									"if (pm.response.code !== 200) {",
 									"    return;",
@@ -170,7 +170,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"user1\",\n\t\"password\": \"root\"\n}",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"root\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,7 +195,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "171e5abb-a242-45c4-83f1-897ddbaf90d4",
+								"id": "ef792c20-961a-48f4-96fa-ff6acfd2ae8d",
 								"exec": [
 									"if (pm.response.code !== 201) {",
 									"    return;",
@@ -223,7 +223,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"user1\",\n\t\"password\": \"root\",\n\t\"fullName\": \"The admin\",\n\t\"affiliation\": \"UBB\",\n\t\"email\": \"user1@gmail.com\",\n\t\"webpage\": \"admin.com\"\n}",
+							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"root\",\n\t\"fullName\": \"The admin\",\n\t\"affiliation\": \"UBB\",\n\t\"email\": \"admin@gmail.com\",\n\t\"webpage\": \"admin.com\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -248,7 +248,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "01d69d31-3016-41fa-b710-34ad4fc045d7",
+								"id": "53f0195c-555a-4009-9fbb-9bd3a3a6a0a8",
 								"exec": [
 									"var jsonData = JSON.parse(responseBody)",
 									"pm.environment.set(\"USERNAME\", jsonData.username);"
@@ -327,7 +327,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "642f31e5-5bc7-42de-868a-d23164ecc77c",
+								"id": "0c7bce31-a4a2-460b-a43c-040d1c17528a",
 								"exec": [
 									"if (pm.response.code !== 201) {",
 									"    return;",
@@ -409,6 +409,34 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Add users to conference",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n    \t\t\"fullName\":\"Create me3\",\n    \t\t\"affiliation\":\"UBB\",\n    \t\t\"email\":\"3.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"AUTHOR\"\n    },\n    {\n    \t\t\"fullName\":\"Create me4\",\n    \t\t\"affiliation\":\"UBB\",\n    \t\t\"email\":\"4.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"PC_MEMBER\"\n    },\n    {\n    \t\t\"fullName\":\"Create me5\",\n    \t\t\"affiliation\":\"UBB\",\n    \t\t\"email\":\"1.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"CO_CHAIR\"\n    }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/users",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"users"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"auth": {
@@ -425,7 +453,7 @@
 				{
 					"listen": "prerequest",
 					"script": {
-						"id": "b24014ae-3ced-4089-97bb-7deb86c9e33b",
+						"id": "ece20841-16b8-49e6-90f3-e70160cd3caf",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -435,7 +463,7 @@
 				{
 					"listen": "test",
 					"script": {
-						"id": "11b2756c-07e1-4fcc-9108-19a997093870",
+						"id": "7e658a70-c053-4f8c-9e01-15829e6b55b2",
 						"type": "text/javascript",
 						"exec": [
 							""
@@ -454,7 +482,7 @@
 						{
 							"listen": "test",
 							"script": {
-								"id": "f811fa66-b138-48b9-8169-2963aec5883e",
+								"id": "3c8ec4ce-cb08-405c-b539-0afc80ada1e1",
 								"exec": [
 									"if (pm.response.code !== 200) {",
 									"    return;",
@@ -483,7 +511,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"The second submission\",\n\t\"abstractPaper\": \"ASDaaaaaaaaaaaasfasfhaslkfhaslfasfasfashlhserglse\",\n\t\"fullPaper\": null,\n\t\"keywords\": \"ala, bala, portocala\",\n\t\"topics\": \"n-are ba\",\n\t\"finalVerdict\": \"WTF\"\n}",
+							"raw": "{\r\n                \"title\": \"The second submission\",\r\n                \"abstractPaper\": \"ASDaaaaaaaaaaaasfasfhaslkfhaslfasfasfashlhserglse\",\r\n                \"fullPaper\": null,\r\n                \"keywords\": \"ala, bala, portocala\",\r\n                \"topics\": \"n-are ba\",\r\n                \"finalVerdict\": \"WTF\",\r\n                \"authors\": [\r\n                    {\r\n                        \"fullName\": \"Create me3\",\r\n                        \"affiliation\": \"UTCN\",\r\n                        \"email\": \"1.olah.istvan.75@gmail.com\",\r\n                        \"role\": null\r\n                    }\r\n                ]\r\n            }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -568,6 +596,295 @@
 				}
 			],
 			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "File",
+			"item": [
+				{
+					"name": "Upload file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "50b66aa0-280e-4ff4-830b-f42533f73bf8",
+								"exec": [
+									"if (pm.response.code !== 200) {\r",
+									"    return;\r",
+									"}\r",
+									"var jsonData = JSON.parse(responseBody)\r",
+									"\r",
+									"pm.environment.set(\"FILE\", jsonData.url);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "file",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Istvan/Desktop/desc.html"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE}}/files/upload",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"files",
+								"upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/files/download/{{FILE}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"files",
+								"download",
+								"{{FILE}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "Create review",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "a6527b32-8922-4251-b48d-abf1ecbd88f9",
+								"exec": [
+									"if (pm.response.code !== 200) {\r",
+									"    return;\r",
+									"}\r",
+									"var jsonData = JSON.parse(responseBody)\r",
+									"\r",
+									"pm.environment.set(\"REVIEW_ID\", jsonData.reviewId);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"user\": {\n        \"id\": \"4028e4b0722060d101722062b13d0000\",\n        \"username\": \"admin\",\n        \"fullName\": \"The admin\",\n        \"affiliation\": \"UBB\",\n        \"email\": \"admin@gmail.com\",\n        \"webpage\": \"admin.com\"\n    },\n    \"verdict\": \"AGREE\",\n    \"recommendation\": \"Idk, nothin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/review",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"review"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"verdict\": \"AAA\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/review/{{REVIEW_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"review",
+								"{{REVIEW_ID}}"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sections",
+			"item": [
+				{
+					"name": "Create section",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Please work\",\n\t\"sectionChair\": {\n            \"email\": \"2.olah.istvan.75@gmail.com\"\n\t},\n\t\"startTime\": 1588326245,\n    \"endTime\": 1588326245,\n    \"speakers\":  [{\n                    \"email\": \"1.olah.istvan.75@gmail.com\"\n                }],\n\t\"seats\": 175\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"section"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete section",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section/{{SECTION_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"section",
+								"{{SECTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all sections for conference",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"sections"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"auth": {
@@ -584,7 +901,7 @@
 		{
 			"listen": "prerequest",
 			"script": {
-				"id": "818440c6-5464-4e92-a3dd-9c52a646b0c9",
+				"id": "d3caddaa-dab9-4b97-9b86-99a05eeb4f8b",
 				"type": "text/javascript",
 				"exec": [
 					""
@@ -594,7 +911,7 @@
 		{
 			"listen": "test",
 			"script": {
-				"id": "03dca5f7-9126-49de-ba69-3856e6e7f2fb",
+				"id": "106cc834-9c98-457e-b786-93e499f64e3f",
 				"type": "text/javascript",
 				"exec": [
 					""
