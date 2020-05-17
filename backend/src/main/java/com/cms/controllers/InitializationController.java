@@ -12,7 +12,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping
 public class InitializationController {
@@ -49,7 +48,6 @@ public class InitializationController {
         UserDto userDto = initializationService.completeInvitation(invitationId, registerUserDto);
         return new ResponseEntity<>(userDto, HttpStatus.CREATED);
     }
-
 
 }
 

@@ -19,7 +19,8 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (securityService.checkToken())
+
+        if (securityService.isPrehandle() || securityService.checkToken())
             return super.preHandle(request, response, handler);
         response.setStatus(401);
         response.setContentType("application/json");

@@ -17,16 +17,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**")
-                .allowCredentials(true).allowedOrigins("http://localhost:4200")
-                .allowedMethods("*")
-                .allowedHeaders("Authorization");
+        registry.addMapping("/**");
     }
+
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(loggingInterceptor);
-        registry.addInterceptor(requestInterceptor).excludePathPatterns("/login", "/register", "/conferences");
+        registry.addInterceptor(requestInterceptor).excludePathPatterns("/login", "/register", "/conferences", "/error");
         super.addInterceptors(registry);
     }
 }
