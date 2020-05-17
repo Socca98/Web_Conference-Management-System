@@ -1,8 +1,16 @@
 package com.cms.services;
 
-import com.cms.dto.*;
+import com.cms.dto.token.TokenDto;
+import com.cms.dto.token.TokenInformation;
+import com.cms.dto.user.LoginUserDto;
+import com.cms.dto.user.RegisterUserDto;
+import com.cms.dto.user.UserDto;
+import com.cms.dto.user.UserInformationDto;
+import com.cms.exception.IssException;
 import com.cms.exception.LoginException;
+import com.cms.model.Invitation;
 import com.cms.model.User;
+import com.cms.repositories.InvitationJpaRepository;
 import com.cms.repositories.UserJpaRepository;
 import com.cms.utils.UserConverter;
 import io.jsonwebtoken.*;
@@ -10,10 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import javax.crypto.spec.SecretKeySpec;
 import javax.persistence.EntityNotFoundException;
-import javax.xml.bind.DatatypeConverter;
-import java.security.Key;
 import java.util.*;
 
 import static com.cms.services.SecurityService.createJWT;
@@ -23,25 +28,43 @@ import static com.cms.services.SecurityService.decodeJWT;
 public class InitializationService {
 
     @Autowired
-    UserJpaRepository userRepository;
+    private UserJpaRepository userRepository;
 
     @Autowired
-    SecurityService securityService;
+    private SecurityService securityService;
+
+    @Autowired
+    private InvitationJpaRepository invitationJpaRepository;
 
     @Value("${predefined.admin.username}")
-    String adminUsername;
+    private String adminUsername;
+
 
 
     public UserDto register(RegisterUserDto registerUserDto) {
-        userRepository.save(UserConverter.registerUserToUser(registerUserDto));
-        User user = userRepository.getOne(registerUserDto.getUsername());
+        User save = userRepository.save(UserConverter.registerUserToUser(registerUserDto));
+        User user = userRepository.getOne(save.getUserId());
         return UserConverter.userToUserDto(user);
     }
 
+    public UserDto completeInvitation(String invitationId, RegisterUserDto registerUserDto) {
+        Optional<Invitation> invitation = invitationJpaRepository.findById(invitationId);
+        if (invitation.isEmpty()) {
+            throw new IssException("Invitation doesn't exists!");
+        }
+
+        User preRegisterUser = UserConverter.registerUserToUser(registerUserDto);
+        User basicUser = invitation.get().getUser();
+        preRegisterUser.setUserId(basicUser.getUserId());
+        User savedUser = userRepository.save(preRegisterUser);
+        return UserConverter.userToUserDto(savedUser);
+    }
+
+
     public TokenDto login(LoginUserDto loginUser) {
         try {
-            User user = userRepository.getOne(loginUser.getUsername());
-            if (user.getPassword().equals(loginUser.getPassword())) {
+            Optional<String> userId = userRepository.login(loginUser.getUsername(), loginUser.getPassword());
+            if (userId.isPresent()) {
                 return new TokenDto()
                         .token(createToken(loginUser.getUsername()))
                         .refreshToken(createRefreshToken(loginUser.getUsername()))
@@ -87,7 +110,7 @@ public class InitializationService {
 
 
     public UserInformationDto getUserInformation(String conferenceId) {
-        User user = userRepository.getOne(securityService.getUsernameFromContext());
+        User user = userRepository.getUserByUsername(securityService.getUsernameFromContext());
         UserInformationDto userInformationDto = new UserInformationDto()
                 .username(user.getUsername())
                 .affiliation(user.getAffiliation());

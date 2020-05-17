@@ -1,10 +1,9 @@
 package com.cms.repositories;
 
 import com.cms.model.Conference;
-import com.cms.model.User;
+import com.cms.model.Review;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-
-public interface ConferenceJpaRepository extends JpaRepository<Conference, String> {
+public interface ReviewJpaRepository extends JpaRepository<Review, String> {
 }
