@@ -17,16 +17,24 @@ import {AuthGuard} from './login/auth.guard';
 import {AuthService} from './login/auth.service';
 import {TabSubmissionsComponent} from './pages/tab-submissions/tab-submissions.component';
 import {TokenInterceptorService} from './login/token-interceptor.service';
+import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
+import {TabBiddingComponent} from './pages/tab-bidding/tab-bidding.component';
+import {TabAssignPapersComponent} from './pages/tab-assign-papers/tab-assign-papers.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+
     HomePageComponent,
     ConferenceComponent,
+
     TabDetailsComponent,
-    TabSubmissionsComponent
+    TabSubmissionsComponent,
+    TabBiddingComponent,
+    TabAssignPapersComponent,
+    TabReviewingComponent,
   ],
   imports: [
     BrowserModule,
