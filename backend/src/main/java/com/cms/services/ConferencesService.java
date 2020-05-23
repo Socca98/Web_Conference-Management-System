@@ -159,6 +159,10 @@ public class ConferencesService {
         return ConferenceConverter.reviewToReviewDto(review);
     }
 
+    public List<ReviewDto> addReview(String conferenceId, String submissionId, List<ReviewDto> reviewDtos) {
+        return reviewDtos.stream().map(reviewDto -> addReview(conferenceId, submissionId, reviewDto)).collect(Collectors.toList());
+    }
+
     public ReviewDto updateReview(String reviewId, ReviewDto reviewDto) {
         Review review = reviewJpaRepository.getOne(reviewId);
         if (Objects.nonNull(reviewDto.getRecommendation())) {
@@ -180,13 +184,13 @@ public class ConferencesService {
         User sectionChair = usersService.getUserByEmail(sectionDto.getSectionChair().getEmail());
         Conference conference = conferencesRepository.getOne(conferenceId);
         Submission submission = submissionJpaRepository.getOne(submissionId);
-        if(Objects.nonNull(sectionDto.getListeners())) {
+        if (Objects.nonNull(sectionDto.getListeners())) {
             List<User> listeners = sectionDto.getListeners().stream()
                     .map(userDto -> usersService.getUserByEmail(userDto.getEmail()))
                     .collect(Collectors.toList());
             section.setListeners(listeners);
         }
-        if(Objects.nonNull(sectionDto.getSpeakers())) {
+        if (Objects.nonNull(sectionDto.getSpeakers())) {
 
             List<User> speakers = sectionDto.getSpeakers().stream()
                     .map(userDto -> usersService.getUserByEmail(userDto.getEmail()))
@@ -201,10 +205,27 @@ public class ConferencesService {
         submissionJpaRepository.save(submission);
         return ConferenceConverter.sectionToSectionDto(save);
     }
+
+    public SectionDto updateSection(String sectionId, SectionDto sectionDto) {
+        Section section = sectionJpaRepository.getOne(sectionId);
+        section.setSeats(sectionDto.getSeats());
+        section.setTitle(sectionDto.getTitle());
+        section.setStartTime(sectionDto.getStartTime());
+        section.setEndTime(sectionDto.getEndTime());
+        if(Objects.nonNull(sectionDto.getSectionChair().getEmail()) &&
+                !section.getSectionChair().getEmail().equals(sectionDto.getSectionChair().getEmail())) {
+            User user = usersService.getUserByEmail(section.getSectionChair().getEmail());
+            section.setSectionChair(user);
+        }
+        Section saved = sectionJpaRepository.save(section);
+        return ConferenceConverter.sectionToSectionDto(saved);
+    }
+
     public List<SectionDto> getAllSectionsForConference(String conferenceId) {
         List<Section> allByConference = sectionJpaRepository.findAllByConference(conferencesRepository.getOne(conferenceId));
         return ConferenceConverter.sectionToSectionDto(allByConference);
     }
+
     public void removeSection(String sectionId) {
         Section one = sectionJpaRepository.getOne(sectionId);
         Submission submission = one.getSubmission();
@@ -212,6 +233,51 @@ public class ConferencesService {
         submissionJpaRepository.save(submission);
 
         sectionJpaRepository.deleteById(sectionId);
+    }
+
+    public SubmissionDto updateSubmission(String submissionId, SubmissionDto submissionDto) {
+        Submission submission = submissionJpaRepository.getOne(submissionId);
+        submission.setAbstractPaper(submissionDto.getAbstractPaper());
+        submission.setFullPaper(submissionDto.getFullPaper());
+        submission.setKeywords(submissionDto.getKeywords());
+        submission.setTopics(submissionDto.getTopics());
+        submission.setTitle(submissionDto.getTitle());
+        Submission save = submissionJpaRepository.save(submission);
+        return ConferenceConverter.submissionToSubmissionDto(save);
+    }
+
+    public List<SubmissionDto> getSubmissionsForConference(String conferenceId) {
+
+        List<Submission> submissions = conferencesRepository.getOne(conferenceId).getSubmissions();
+        return ConferenceConverter.submissionToSubmissionDto(submissions);
+    }
+
+    public ConferenceDto updateConference(String conferenceId, ConferenceDto conferenceDto) {
+        Conference conference = conferencesRepository.getOne(conferenceId);
+        conference.setProposalDeadline(conferenceDto.getProposalDeadline());
+        conference.setAbstractDeadline(conferenceDto.getAbstractDeadline());
+        Conference save = conferencesRepository.save(conference);
+        return ConferenceConverter.conferenceToConferenceDto(save);
+    }
+
+    public void attendSection(String sectionId) {
+        Section section = sectionJpaRepository.getOne(sectionId);
+        User user = usersService.getUser(securityService.getUsernameFromContext());
+        if (!section.getListeners().contains(user) && section.getListeners().size() < section.getSeats()) {
+            section.getListeners().add(user);
+            sectionJpaRepository.save(section);
+            return;
+        }
+        throw new IssException("Already attending section or it is full!", HttpStatus.BAD_REQUEST);
+    }
+
+    public void unattendSection(String sectionId) {
+        Section section = sectionJpaRepository.getOne(sectionId);
+        User user = usersService.getUser(securityService.getUsernameFromContext());
+        if (section.getListeners().contains(user)) {
+            section.getListeners().remove(user);
+            sectionJpaRepository.save(section);
+        }
     }
 
 }

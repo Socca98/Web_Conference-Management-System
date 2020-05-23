@@ -31,6 +31,7 @@ public class ConferenceConverter {
         conference.setEvaluationDeadline(conferenceDto.getEvaluationDeadline());
         conference.setAllowFullPaper(conferenceDto.isAllowFullPaper());
         conference.setTaxFee(conferenceDto.getTaxFee());
+        conference.setNrOfReviews(conferenceDto.getNrOfReviews());
         return conference;
     }
 
@@ -46,7 +47,8 @@ public class ConferenceConverter {
                 .proposalDeadline(conference.getProposalDeadline())
                 .biddingDeadline(conference.getBiddingDeadline())
                 .evaluationDeadline(conference.getEvaluationDeadline())
-                .taxFee(conference.getTaxFee());
+                .taxFee(conference.getTaxFee())
+                .nrOfReviews(conference.getNrOfReviews());
     }
 
     public static Submission submissionDtoToSubmission(SubmissionDto submissionDto) {

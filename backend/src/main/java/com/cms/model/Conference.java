@@ -22,6 +22,7 @@ public class Conference {
     private Integer evaluationDeadline;
     private Boolean allowFullPaper;
     private Integer taxFee;
+    private Integer nrOfReviews;
 
     @OneToMany(mappedBy="conference")
     private List<Submission> submissions;
@@ -131,6 +132,14 @@ public class Conference {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public Integer getNrOfReviews() {
+        return nrOfReviews;
+    }
+
+    public void setNrOfReviews(Integer nrOfReviews) {
+        this.nrOfReviews = nrOfReviews;
     }
 }
 

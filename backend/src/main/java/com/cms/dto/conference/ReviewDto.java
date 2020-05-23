@@ -1,12 +1,13 @@
 package com.cms.dto.conference;
 
 import com.cms.dto.user.UserDto;
+import com.cms.model.Verdict;
 
 public class ReviewDto {
 
     private String reviewId;
     private UserDto user;
-    private String verdict;
+    private Verdict verdict;
     private String recommendation;
 
     public String getReviewId() {
@@ -25,11 +26,11 @@ public class ReviewDto {
         this.user = user;
     }
 
-    public String getVerdict() {
+    public Verdict getVerdict() {
         return verdict;
     }
 
-    public void setVerdict(String verdict) {
+    public void setVerdict(Verdict verdict) {
         this.verdict = verdict;
     }
 
