@@ -35,6 +35,13 @@ const routes: Routes = [
   },
 
   {
+    path: 'conference/evaluations',
+    component: TabReviewingComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.Chair, Role.CoChair]}
+  },
+
+  {
     path: '**',
     redirectTo: '/'
   },

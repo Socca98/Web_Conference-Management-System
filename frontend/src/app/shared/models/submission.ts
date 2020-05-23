@@ -1,3 +1,5 @@
+import {Review} from './review';
+
 export interface Submission {
   id: string;
   title: string;
@@ -9,4 +11,5 @@ export interface Submission {
   section: any[];  // Sections it belongs to
   authors: any[];  // Authors it belongs to
   likes: any[];  // PC Members that liked it
+  reviews: Review[];
 }

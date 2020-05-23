@@ -37,7 +37,7 @@
 
 <div class="unreviewed-submissions">
   <ng-container>
-    <mat-card class="unreviewed-submissions-cards" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
+    <mat-card class="unreviewed-submission-card" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
       <mat-card-header>
         <mat-card-title>{{review.submission.title}}</mat-card-title>
       </mat-card-header>
