@@ -1,27 +1,26 @@
 <div>
-    <div class="proposals">
+  <div class="proposals">
     <ng-container>
-    <mat-card class="proposal-cards" *ngFor="let proposal of submissions">
+      <mat-card class="proposal-cards" *ngFor="let submission of submissions">
         <mat-card-header>
-            <mat-card-title>Title: {{proposal.title}}</mat-card-title>
+          <mat-card-title>Title: {{submission.title}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <mat-card-content>Abstract: {{proposal.abstract}}</mat-card-content>
-            <mat-card-content>Name: {{proposal.name}}</mat-card-content>
-            <mat-card-content>Topics: {{proposal.topics}}</mat-card-content>
-            <mat-card-content>List of Authors: {{proposal.listOfAuthors}}</mat-card-content>
-            <mat-card-content>Meta Info: {{proposal.metaInformation}}</mat-card-content>
-            <mat-card-content>Full Paper: {{proposal.fullPaper}}</mat-card-content>
+          <mat-card-content>Abstract: {{submission.abstractPaper}}</mat-card-content>
+          <mat-card-content>Authors: {{submission.authors}}</mat-card-content>
+          <mat-card-content>Topics: {{submission.topics}}</mat-card-content>
+          <mat-card-content>Keywords: {{submission.keywords}}</mat-card-content>
+          <mat-card-content>Full Paper: {{submission.fullPaper}}</mat-card-content>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-raised-button color="accent">Update</button>
-            <button mat-raised-button color="accent">Undefined</button>
+          <button mat-raised-button color="accent">Update</button>
+          <button mat-raised-button color="accent">Attach full paper</button>
         </mat-card-actions>
-    </mat-card>
+      </mat-card>
     </ng-container>
-    </div>
+  </div>
 
-    <button mat-fab color="primary" id="add-button" matTooltip="Submit abstract">
-        <mat-icon>add</mat-icon>
-    </button>
+  <button mat-fab color="primary" id="add-button" matTooltip="Submit abstract">
+    <mat-icon>add</mat-icon>
+  </button>
 </div>

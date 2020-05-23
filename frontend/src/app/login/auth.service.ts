@@ -9,8 +9,6 @@ import {Conference} from '../shared/models/conference';
 
 @Injectable()
 export class AuthService {
-  private _conference: Conference;
-  private _user: User;
 
   constructor(
     private http: HttpClient,
@@ -18,24 +16,22 @@ export class AuthService {
   ) {
   }
 
-
   get conference(): Conference {
-    return this._conference;
+    const conference = JSON.parse(localStorage.getItem('conference'));
+    return conference;
   }
 
   set conference(value: Conference) {
-    this._conference = value;
+    localStorage.setItem('conference', JSON.stringify(value));
   }
 
   get user(): User {
-    if (!this.isLogged()) {
-      throw Error('User not logged!');
-    }
-    return this._user;
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
   }
 
   set user(value: User) {
-    this._user = value;
+    localStorage.setItem('user', JSON.stringify(value));
   }
 
   loginUser(user: User): Observable<Token> {
@@ -72,23 +68,14 @@ export class AuthService {
   }
 
   getUserRole() {
-    if (localStorage.getItem('chair')) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user.isChair) {
       return 'Chair';
     }
-    if (localStorage.getItem('role') !== null) {
-      return localStorage.getItem('role');
-    }
-    return null;
+    return user.role;
   }
 
   getToken() {
     return localStorage.getItem('token');
-  }
-
-  /**
-   *
-   */
-  isOnConferenceSite() {
-    return !!localStorage.getItem('conferenceId');
   }
 }

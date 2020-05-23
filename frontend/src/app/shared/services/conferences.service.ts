@@ -21,7 +21,7 @@ export class ConferencesService {
   }
 
   /**
-   * Returns a JSON with all Conferences.
+   * Returns all Conferences.
    */
   getConferences(): Observable<Conference[]> {
     return this.http.get<Conference[]>(environment.apiEndpoint + '/conferences');

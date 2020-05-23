@@ -20,12 +20,14 @@ import {TokenInterceptorService} from './login/token-interceptor.service';
 import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
 import {TabBiddingComponent} from './pages/tab-bidding/tab-bidding.component';
 import {TabAssignPapersComponent} from './pages/tab-assign-papers/tab-assign-papers.component';
+import {ShowRecommendationsDialogComponent} from './shared/components/show-recommendations-dialog/show-recommendations-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginDialogComponent,
     RegisterDialogComponent,
+    ShowRecommendationsDialogComponent,
 
     HomePageComponent,
     ConferenceComponent,

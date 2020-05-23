@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Submission} from '../../shared/models/submission';
 import {SubmissionsService} from '../../shared/services/submissions.service';
+import {AuthService} from '../../login/auth.service';
 
 
 @Component({
@@ -13,24 +14,16 @@ import {SubmissionsService} from '../../shared/services/submissions.service';
 })
 
 export class TabSubmissionsComponent implements OnInit {
-  proposal: Submission = {
-    title: null,
-    abstract: null,
-    name: null,
-    topics: null,
-    listOfAuthors: null,
-    metaInformation: null,
-    fullPaper: null
-  };
-  submissions: Submission[] = [this.proposal, this.proposal, this.proposal];
+  submissions: Submission[];
 
   constructor(
     private submissionsService: SubmissionsService,
+    private authService: AuthService,
   ) {
   }
 
   ngOnInit(): void {
-    this.submissionsService.getSubmissions().subscribe((result: Submission[]) => {
+    this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
       this.submissions = result;
     });
   }

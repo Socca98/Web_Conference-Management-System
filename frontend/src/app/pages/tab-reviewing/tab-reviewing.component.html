@@ -1,1 +1,76 @@
-<p>tab-reviewing works!</p>
+<div class="reviewed-submissions">
+  <ng-container>
+    <mat-card class="reviewed-card" *ngFor="let review of getReviewedSubmissions(); let i = index">
+      <mat-card-header>
+        <mat-card-title>{{review.submission.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-content><span class="field">Abstract: </span>{{review.submission.abstractPaper}}</mat-card-content>
+        <mat-card-content><span class="field">Authors: </span>{{review.submission.authors}}</mat-card-content>
+        <mat-card-content><span class="field">Topics: </span>{{review.submission.topics}}</mat-card-content>
+        <mat-card-content><span class="field">Keywords: </span>{{review.submission.keywords}}</mat-card-content>
+        <mat-card-content>
+          <span class="field">Fullpaper: </span>
+          <i *ngIf="!review.submission.fullPaper">none</i>
+          {{review.submission.fullPaper}}
+        </mat-card-content>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <mat-label style="right:50%;">
+          <b>{{review.verdict}}</b>
+          <!--        ngSwitch for custom aspect?-->
+        </mat-label>
+        <button mat-raised-button color="accent"
+                (click)="showRecommendations(review.submission.id, review.recommendation)">
+          See other reviews
+        </button>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </ng-container>
+</div>
+
+
+<h1 style="margin-top:25px;">Please review the following:</h1>
+
+<div class="unreviewed-submissions">
+  <ng-container>
+    <mat-card class="unreviewed-submissions-cards" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
+      <mat-card-header>
+        <mat-card-title>{{review.submission.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-content><span class="field">Abstract: </span>{{review.submission.abstractPaper}}</mat-card-content>
+        <mat-card-content><span class="field">Authors: </span>{{review.submission.authors}}</mat-card-content>
+        <mat-card-content><span class="field">Topics: </span>{{review.submission.topics}}</mat-card-content>
+        <mat-card-content><span class="field">Keywords: </span>{{review.submission.keywords}}</mat-card-content>
+        <mat-card-content>
+          <span class="field">Fullpaper: </span>
+          <i *ngIf="!review.submission.fullPaper">none</i>
+          {{review.submission.fullPaper}}
+        </mat-card-content>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <button mat-raised-button color="accent" (click)="sendReviewButton(review.id, 1, review.verdict)">
+          Offer verdict
+        </button>
+        <mat-form-field style="margin-left: 20px">
+          <mat-label>Select an option</mat-label>
+          <mat-select>
+            <mat-option value="WEAK_ACCEPT" style="color: darkseagreen;">Weak Accept</mat-option>
+            <mat-option value="ACCEPT" style="color: green;">Accepted</mat-option>
+            <mat-option value="STRONG_ACCEPT" style="color: darkgreen;">Strong Accept</mat-option>
+            <mat-option value="WEAK_REJECT" style="color: indianred;">Weak Reject</mat-option>
+            <mat-option value="REJECT" style="color: red;">Rejected</mat-option>
+            <mat-option value="STRONG_REJECT" style="color: darkred;">Strong Reject</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card-actions>
+
+    </mat-card>
+  </ng-container>
+</div>
+
