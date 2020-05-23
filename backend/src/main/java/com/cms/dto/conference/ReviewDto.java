@@ -1,13 +1,15 @@
 package com.cms.dto.conference;
 
 import com.cms.dto.user.UserDto;
+import com.cms.model.Verdict;
 
 public class ReviewDto {
 
     private String reviewId;
     private UserDto user;
-    private String verdict;
+    private Verdict verdict;
     private String recommendation;
+    private SubmissionDto submission;
 
     public String getReviewId() {
         return reviewId;
@@ -25,11 +27,11 @@ public class ReviewDto {
         this.user = user;
     }
 
-    public String getVerdict() {
+    public Verdict getVerdict() {
         return verdict;
     }
 
-    public void setVerdict(String verdict) {
+    public void setVerdict(Verdict verdict) {
         this.verdict = verdict;
     }
 
@@ -41,4 +43,11 @@ public class ReviewDto {
         this.recommendation = recommendation;
     }
 
+    public SubmissionDto getSubmission() {
+        return submission;
+    }
+
+    public void setSubmission(SubmissionDto submission) {
+        this.submission = submission;
+    }
 }

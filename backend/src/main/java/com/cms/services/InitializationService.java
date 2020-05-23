@@ -53,10 +53,14 @@ public class InitializationService {
             throw new IssException("Invitation doesn't exists!");
         }
 
-        User preRegisterUser = UserConverter.registerUserToUser(registerUserDto);
         User basicUser = invitation.get().getUser();
-        preRegisterUser.setUserId(basicUser.getUserId());
-        User savedUser = userRepository.save(preRegisterUser);
+        basicUser.setUsername(registerUserDto.getUsername());
+        basicUser.setFullName(registerUserDto.getFullName());
+        basicUser.setEmail(registerUserDto.getEmail());
+        basicUser.setAffiliation(registerUserDto.getAffiliation());
+        basicUser.setWebpage(registerUserDto.getWebpage());
+        basicUser.setPassword(registerUserDto.getPassword());
+        User savedUser = userRepository.save(basicUser);
         return UserConverter.userToUserDto(savedUser);
     }
 

@@ -130,6 +130,24 @@
 			"name": "Initialization",
 			"item": [
 				{
+					"name": "Init database (once every database reset)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/init-database",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"init-database"
+							]
+						},
+						"description": "This sets some default entities for the database, which we can do tests on."
+					},
+					"response": []
+				},
+				{
 					"name": "Login",
 					"event": [
 						{
@@ -170,7 +188,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"username\": \"admin\",\n\t\"password\": \"root\"\n}",
+							"raw": "{\n\t\"username\": \"init_user_3\",\n\t\"password\": \"root\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -314,6 +332,33 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Accept invitation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"username\": \"thenoobbot\",\n\t\"password\": \"root\",\n\t\"fullName\": \"Olah Istvan\",\n\t\"email\": \"2.olah.istvan.75@gmail.com\",\n\t\"affiliation\": \"UBB\",\n\t\"webpage\": \"olahistvan.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/invitation/4028e4b07220765501722076b4cd0004",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"invitation",
+								"4028e4b07220765501722076b4cd0004"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -356,7 +401,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"ConferenceOne\",\n    \"startDate\": 1588326245,\n    \"endDate\": 1588326245,\n    \"website\": \"domain.com\",\n    \"abstractDeadline\": 1588326245,\n    \"proposalDeadline\": 1588326246,\n    \"biddingDeadline\": 1588326247,\n    \"evaluationDeadline\": 1588326248,\n    \"allowFullPaper\": false,\n    \"taxFee\": 200,\n    \"users\": [\n    \t{\n    \t\t\"fullName\":\"Create me2\",\n    \t\t\"affiliation\":\"UTCN\",\n    \t\t\"email\":\"2.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"AUTHOR\"\n    \t},\n    \t{\n    \t\t\"email\":\"user1@gmail.com\",\n    \t\t\"role\": \"CHAIR\"\n    \t}\n    \t]\n}",
+							"raw": "{\n    \"name\": \"ConferenceOne\",\n    \"startDate\": 1588326245,\n    \"endDate\": 1588326245,\n    \"website\": \"domain.com\",\n    \"abstractDeadline\": 1588326245,\n    \"proposalDeadline\": 1588326246,\n    \"biddingDeadline\": 1588326247,\n    \"evaluationDeadline\": 1588326248,\n    \"allowFullPaper\": false,\n    \"taxFee\": 200,\n    \"users\": [\n    \t{\n    \t\t\"fullName\":\"Create me\",\n    \t\t\"affiliation\":\"UTCN\",\n    \t\t\"email\":\"2.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"PC_MEMBER\"\n    \t},\n    \t{\n    \t\t\"email\":\"user1@gmail.com\",\n    \t\t\"role\": \"PC_MEMBER\"\n    \t}\n    \t]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -417,7 +462,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n\t{\n    \t\t\"fullName\":\"Create me3\",\n    \t\t\"affiliation\":\"UBB\",\n    \t\t\"email\":\"3.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"AUTHOR\"\n    },\n    {\n    \t\t\"fullName\":\"Create me4\",\n    \t\t\"affiliation\":\"UBB\",\n    \t\t\"email\":\"4.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"PC_MEMBER\"\n    },\n    {\n    \t\t\"fullName\":\"Create me5\",\n    \t\t\"affiliation\":\"UBB\",\n    \t\t\"email\":\"1.olah.istvan.75@gmail.com\",\n    \t\t\"role\": \"CO_CHAIR\"\n    }\n]",
+							"raw": "[\n\t{\n    \t\t\"email\":\"user3@gmail.com\",\n    \t\t\"role\": \"PC_MEMBER\"\n    }\n]",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -511,7 +556,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n                \"title\": \"The second submission\",\r\n                \"abstractPaper\": \"ASDaaaaaaaaaaaasfasfhaslkfhaslfasfasfashlhserglse\",\r\n                \"fullPaper\": null,\r\n                \"keywords\": \"ala, bala, portocala\",\r\n                \"topics\": \"n-are ba\",\r\n                \"finalVerdict\": \"WTF\",\r\n                \"authors\": [\r\n                    {\r\n                        \"fullName\": \"Create me3\",\r\n                        \"affiliation\": \"UTCN\",\r\n                        \"email\": \"1.olah.istvan.75@gmail.com\",\r\n                        \"role\": null\r\n                    }\r\n                ]\r\n            }",
+							"raw": "{\n    \"title\": \"The fourth submission\",\n    \"abstractPaper\": null,\n    \"fullPaper\": null,\n    \"keywords\": \"ccccc\",\n    \"topics\": \"----\",\n    \"finalVerdict\": \"WTF\",\n    \"authors\": [\n        {\n            \"affiliation\": \"UTCN\",\n            \"email\": \"user1@gmail.com\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -527,6 +572,111 @@
 								"conferences",
 								"{{CONFERENCE_ID}}",
 								"submissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update submission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "d11b87a0-a646-4832-9f17-e2b68f3eff3e",
+								"exec": [
+									"if (pm.response.code !== 200) {",
+									"    return;",
+									"}",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.environment.set(\"SUBMISSION_ID\", jsonData.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"The updated submission\",\n    \"abstractPaper\": \"4028e4b072338fc6017233903cff0000\",\n    \"fullPaper\": null,\n    \"keywords\": \"ala, bala, portocala\",\n    \"topics\": \"n-are ba\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get submission",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3e59a22c-621a-40b8-8026-1f232aaee9ea",
+								"exec": [
+									"if (pm.response.code !== 200) {",
+									"    return;",
+									"}",
+									"var jsonData = JSON.parse(responseBody)",
+									"",
+									"pm.environment.set(\"SUBMISSION_ID\", jsonData.id);",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}"
 							]
 						}
 					},
@@ -589,6 +739,35 @@
 								"submissions",
 								"{{SUBMISSION_ID}}",
 								"like"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get submissions for conference",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions"
 							]
 						}
 					},
@@ -732,7 +911,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"user\": {\n        \"id\": \"4028e4b0722060d101722062b13d0000\",\n        \"username\": \"admin\",\n        \"fullName\": \"The admin\",\n        \"affiliation\": \"UBB\",\n        \"email\": \"admin@gmail.com\",\n        \"webpage\": \"admin.com\"\n    },\n    \"verdict\": \"AGREE\",\n    \"recommendation\": \"Idk, nothin\"\n}",
+							"raw": "{\n\t\"user\": {\n        \"email\": \"user3@gmail.com\"\n        },\n    \"verdict\": \"ACCEPT\",\n    \"recommendation\": \"Idk, nothin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -791,6 +970,166 @@
 								"{{SUBMISSION_ID}}",
 								"review",
 								"{{REVIEW_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/review/{{REVIEW_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"review",
+								"{{REVIEW_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reviews (all/accepted/rejected)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "status",
+								"value": "accepted",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/review?status=accepted",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"review"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "accepted"
+								},
+								{
+									"key": "status",
+									"value": "rejected",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "all",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reviews for conference",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/reviews?status=accepted",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"reviews"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "rejected",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "all",
+									"disabled": true
+								},
+								{
+									"key": "status",
+									"value": "accepted"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get reviews for others",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/review/others",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"review",
+								"others"
 							]
 						}
 					},
@@ -878,6 +1217,72 @@
 								"conferences",
 								"{{CONFERENCE_ID}}",
 								"sections"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Attend section",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section/{{SECTION_ID}}/attend",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"section",
+								"{{SECTION_ID}}",
+								"attend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unattend section",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section/{{SECTION_ID}}/attend",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"section",
+								"{{SECTION_ID}}",
+								"attend"
 							]
 						}
 					},

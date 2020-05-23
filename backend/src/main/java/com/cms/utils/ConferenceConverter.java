@@ -9,6 +9,7 @@ import com.cms.model.Review;
 import com.cms.model.Section;
 import com.cms.model.Submission;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -31,6 +32,8 @@ public class ConferenceConverter {
         conference.setEvaluationDeadline(conferenceDto.getEvaluationDeadline());
         conference.setAllowFullPaper(conferenceDto.isAllowFullPaper());
         conference.setTaxFee(conferenceDto.getTaxFee());
+        conference.setNrOfReviews(conferenceDto.getNrOfReviews());
+        conference.setSubmissions(new ArrayList<>());
         return conference;
     }
 
@@ -46,7 +49,8 @@ public class ConferenceConverter {
                 .proposalDeadline(conference.getProposalDeadline())
                 .biddingDeadline(conference.getBiddingDeadline())
                 .evaluationDeadline(conference.getEvaluationDeadline())
-                .taxFee(conference.getTaxFee());
+                .taxFee(conference.getTaxFee())
+                .nrOfReviews(conference.getNrOfReviews());
     }
 
     public static Submission submissionDtoToSubmission(SubmissionDto submissionDto) {
@@ -54,16 +58,30 @@ public class ConferenceConverter {
         if (Objects.nonNull(submissionDto.getId())) {
             submission.setSubmissionId(submissionDto.getId());
         }
-        submission.setAbstractPaper(submissionDto.getAbstractPaper());
+        submission.setReviews(ConferenceConverter.reviewDtoToReview(submissionDto.getReviews()));
         submission.setAuthors(UserConverter.userRoleDtoToUser(submissionDto.getAuthors()));
+        submission.setLikes(UserConverter.userDtoToUser(submissionDto.getLikes()));
+
+        submission.setAbstractPaper(submissionDto.getAbstractPaper());
         submission.setFinalVerdict(submissionDto.getFinalVerdict());
         submission.setFullPaper(submissionDto.getFullPaper());
         submission.setKeywords(submissionDto.getKeywords());
-        submission.setLikes(UserConverter.userDtoToUser(submissionDto.getLikes()));
-        submission.setReviews(ConferenceConverter.reviewDtoToReview(submissionDto.getReviews()));
         submission.setTitle(submissionDto.getTitle());
         submission.setTopics(submissionDto.getTopics());
+
         return submission;
+    }
+
+    public static SubmissionDto submissionToSubmissionDtoSimple(Submission submission) {
+        return new SubmissionDto()
+                .id(submission.getSubmissionId())
+                .abstractPaper(submission.getAbstractPaper())
+                .authors(UserConverter.userDtoToAuthorUser(submission.getAuthors()))
+                .finalVerdict(submission.getFinalVerdict())
+                .fullPaper(submission.getFullPaper())
+                .keywords(submission.getKeywords())
+                .title(submission.getTitle())
+                .topics(submission.getTopics());
     }
 
     public static SubmissionDto submissionToSubmissionDto(Submission submission) {
@@ -83,7 +101,7 @@ public class ConferenceConverter {
 
     public static List<SubmissionDto> submissionToSubmissionDto(List<Submission> submission) {
         if (Objects.isNull(submission)) {
-            return List.of();
+            return new ArrayList<>();
         }
         return submission.stream().map(ConferenceConverter::submissionToSubmissionDto).collect(Collectors.toList());
     }
@@ -99,7 +117,7 @@ public class ConferenceConverter {
 
     public static List<ReviewDto> reviewToReviewDto(List<Review> review) {
         if (Objects.isNull(review)) {
-            return List.of();
+            return new ArrayList<>();
         }
         return review.stream().map(ConferenceConverter::reviewToReviewDto).collect(Collectors.toList());
     }
@@ -114,7 +132,7 @@ public class ConferenceConverter {
 
     public static List<Review> reviewDtoToReview(List<ReviewDto> reviewDtos) {
         if (Objects.isNull(reviewDtos)) {
-            return List.of();
+            return new ArrayList<>();
         }
         return reviewDtos.stream().map(ConferenceConverter::reviewDtoToReview).collect(Collectors.toList());
     }
@@ -146,7 +164,7 @@ public class ConferenceConverter {
 
     public static List<SectionDto> sectionToSectionDto(List<Section> sections) {
         if (Objects.isNull(sections)) {
-            return List.of();
+            return new ArrayList<>();
         }
         return sections.stream().map(ConferenceConverter::sectionToSectionDto).collect(Collectors.toList());
     }

@@ -20,7 +20,7 @@ public class Section {
     @ManyToOne
     @JoinColumn(name ="conference_id")
     private Conference conference;
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name = "submission_id")
     private Submission submission;
 

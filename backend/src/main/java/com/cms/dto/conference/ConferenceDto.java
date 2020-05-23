@@ -20,6 +20,7 @@ public class ConferenceDto {
 
     private List<SubmissionDto> submissions;
     private List<UserRoleDto> users;
+    private Integer nrOfReviews;
 
     public String getId() {
         return id;
@@ -184,5 +185,18 @@ public class ConferenceDto {
 
     public void setUsers(List<UserRoleDto> users) {
         this.users = users;
+    }
+
+    public ConferenceDto nrOfReviews(Integer nrOfReviews) {
+        this.nrOfReviews = nrOfReviews;
+        return this;
+    }
+
+    public Integer getNrOfReviews() {
+        return nrOfReviews;
+    }
+
+    public void setNrOfReviews(Integer nrOfReviews) {
+        this.nrOfReviews = nrOfReviews;
     }
 }

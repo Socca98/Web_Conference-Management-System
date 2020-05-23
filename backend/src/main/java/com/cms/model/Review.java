@@ -21,7 +21,7 @@ public class Review {
     @JoinColumn(name ="submission_id")
     private Submission submission;
 
-    private String verdict;
+    private Verdict verdict;
     private String recommendation;
 
     public void setReviewId(String id) {
@@ -40,11 +40,11 @@ public class Review {
         this.user = user;
     }
 
-    public String getVerdict() {
+    public Verdict getVerdict() {
         return verdict;
     }
 
-    public void setVerdict(String verdict) {
+    public void setVerdict(Verdict verdict) {
         this.verdict = verdict;
     }
 

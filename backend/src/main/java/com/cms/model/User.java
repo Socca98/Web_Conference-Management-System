@@ -21,8 +21,12 @@ public class User {
     private String affiliation;
     private String webpage;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
     private List<Role> roles;
+    @OneToMany(mappedBy = "user", orphanRemoval = true)
+    private List<Review> reviews;
+    @ManyToMany
+    private List<Submission> submissions;
 
     public String getUserId() {
         return userId;

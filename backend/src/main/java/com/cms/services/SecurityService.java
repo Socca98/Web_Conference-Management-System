@@ -16,7 +16,7 @@ import java.util.*;
 
 @Service
 public class SecurityService {
-
+    public static boolean INITIALIZATION = false;
     private static String SECRET_KEY = "UwanByYRQ5s17ifzeZW-gjik1EwNTaxUX72r9fX7-wVNlE1k9AexawcXRVow86xlxLqdaVlzCIDVQigftVtWxlmw8umbtf6FD5XYktYb2hruDr_Xr_gDbI5jvLXK0HOLAEnkwSxzTO0Zauw0CUNwikvNMTF1VdZogbmHLyh3Rxz4bqBsii3RTwzOwaEF_u2jTJI6sSbooDD4jGVG4zcb9beag0yQx27Y1DPlK55wdY5lw-xAtyXUpCwVmoM4XCwIGr6pawsLGpMb4sCRd3RexwvCvkXls2u3J_wMd1cnLBkGmzFuqilDxXX-GlWEVJPk9RkdUog5FoMTkKrIZb-DTA";
 
     @Value("${predefined.admin.username}")
@@ -93,6 +93,6 @@ public class SecurityService {
     }
 
     public boolean isAdmin() {
-        return getUsernameFromContext().equals(adminUsername);
+        return getUsernameFromContext().equals(adminUsername) || INITIALIZATION;
     }
 }
