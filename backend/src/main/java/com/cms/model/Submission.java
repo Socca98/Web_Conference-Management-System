@@ -21,16 +21,16 @@ public class Submission {
     private String topics;
     private String finalVerdict;
 
-    @OneToMany
+    @ManyToMany
     private List<User> authors;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     private List<User> likes;
 
-    @OneToMany
+    @OneToMany(orphanRemoval = true)
     private List<Review> reviews;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     @JoinColumn(name ="section_id")
     private Section section;
 

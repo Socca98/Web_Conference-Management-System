@@ -14,7 +14,7 @@ public class Invitation {
     @GenericGenerator(name="system-uuid", strategy = "uuid")
     private String invitationId;
 
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     private User user;
 
     private boolean used;

@@ -1,9 +1,7 @@
 package com.cms.services;
 
 
-import com.cms.controllers.UsersController;
 import com.cms.dto.conference.*;
-import com.cms.dto.user.RegisterUserDto;
 import com.cms.dto.user.UserDto;
 import com.cms.exception.IssException;
 import com.cms.model.*;
@@ -16,6 +14,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.util.*;
 
 import java.util.stream.Collectors;
@@ -44,11 +44,8 @@ public class ConferencesService {
     @Autowired
     private SecurityService securityService;
 
-    @Value("${predefined.admin.username}")
-    private String adminUsername;
-
     public ConferenceDto createConference(CreateConferenceDto conferenceDto) {
-        if (!securityService.getUsernameFromContext().equals(adminUsername)) {
+        if (! securityService.isAdmin()) {
             throw new IssException("This operation is only permitted for the Chair!", HttpStatus.BAD_REQUEST);
         }
         Conference savedConference = conferencesRepository.save(ConferenceConverter.conferenceDtoToConference(conferenceDto));
@@ -109,14 +106,14 @@ public class ConferencesService {
 
     public SubmissionDto addSubmission(String conferenceId, SubmissionDto submissionDto) {
 
-        Conference conference = new Conference();
-        conference.setConferenceId(conferenceId);
+        Conference conference = conferencesRepository.getOne(conferenceId);
         Submission submission = ConferenceConverter.submissionDtoToSubmission(submissionDto);
         List<User> users = usersService.sendInvitationIfNeeded(submissionDto.getAuthors());
         submission.setAuthors(users);
 
         submission.setConference(conference);
         Submission save = submissionJpaRepository.save(submission);
+        conference.getSubmissions().add(save);
         return ConferenceConverter.submissionToSubmissionDto(save);
     }
 
@@ -148,6 +145,31 @@ public class ConferencesService {
     }
 
     public ReviewDto addReview(String conferenceId, String submissionId, ReviewDto reviewDto) {
+        Conference conference = conferencesRepository.getOne(conferenceId);
+        List<Role> possibleExistingRole = conference.getRoles()
+                .stream()
+                .filter(role -> role.getUser().getEmail().equals(reviewDto.getUser().getEmail()))
+                .collect(Collectors.toList());
+        if(possibleExistingRole.size() == 1) {
+            Roles role = possibleExistingRole.get(0).getRole();
+            if (role != Roles.PC_MEMBER && role != Roles.CHAIR && role != Roles.CO_CHAIR) {
+                throw new IssException("Not permitted for this user!", HttpStatus.BAD_REQUEST);
+            }
+        } else {
+            UserDto reviewDtoUser = reviewDto.getUser();
+            UserRoleDto userRoleDto = new UserRoleDto();
+            userRoleDto.setFullName(reviewDtoUser.getFullName());
+            userRoleDto.setRole(Roles.PC_MEMBER);
+            userRoleDto.setEmail(reviewDtoUser.getEmail());
+            userRoleDto.setAffiliation(reviewDtoUser.getAffiliation());
+            User createdUser = usersService.sendInvitationIfNeeded(List.of(userRoleDto)).get(0);
+            Role role = new Role();
+            role.setConference(conference);
+            role.setUser(createdUser);
+            role.setRole(Roles.PC_MEMBER);
+            conference.getRoles().add(role);
+            roleJpaRepository.save(role);
+        }
         Submission submission = submissionJpaRepository.getOne(submissionId);
         User user = usersService.getUserByEmail(reviewDto.getUser().getEmail());
         Review review = ConferenceConverter.reviewDtoToReview(reviewDto);
@@ -157,10 +179,6 @@ public class ConferencesService {
         submission.getReviews().add(review);
         submissionJpaRepository.save(submission);
         return ConferenceConverter.reviewToReviewDto(review);
-    }
-
-    public List<ReviewDto> addReview(String conferenceId, String submissionId, List<ReviewDto> reviewDtos) {
-        return reviewDtos.stream().map(reviewDto -> addReview(conferenceId, submissionId, reviewDto)).collect(Collectors.toList());
     }
 
     public ReviewDto updateReview(String reviewId, ReviewDto reviewDto) {
@@ -175,6 +193,11 @@ public class ConferencesService {
     }
 
     public void removeReview(String reviewId) {
+        Review review = reviewJpaRepository.getOne(reviewId);
+        Submission submission = review.getSubmission();
+        submission.getReviews().remove(review);
+        review.setSubmission(null);
+        submissionJpaRepository.save(submission);
         reviewJpaRepository.deleteById(reviewId);
     }
 
@@ -280,4 +303,107 @@ public class ConferencesService {
         }
     }
 
+    public List<ReviewDto> getReviewsForStatus(String submissionId, String status) {
+        DirectoryStream.Filter<Verdict> filter;
+        switch (status) {
+            case "accepted": filter = Verdict::accepted; break;
+            case "rejected": filter = Verdict::rejectedOrNotReviewed; break;
+            default: filter = Verdict::all; break;
+        }
+        return submissionJpaRepository.getOne(submissionId)
+                .getReviews()
+                .stream()
+                .filter(review -> {
+                    try {
+                        return filter.accept(review.getVerdict());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        return false;
+                    }
+                })
+                .map(ConferenceConverter::reviewToReviewDto)
+                .collect(Collectors.toList());
+    }
+
+    public List<ReviewDto> getReviewsForConference(String conferenceId, String status) {
+        DirectoryStream.Filter<Verdict> filter;
+        switch (status) {
+            case "accepted": filter = Verdict::accepted; break;
+            case "rejected": filter = Verdict::rejectedOrNotReviewed; break;
+            default: filter = Verdict::all; break;
+        }
+        Conference conference = conferencesRepository.getOne(conferenceId);
+        String username = securityService.getUsernameFromContext();
+        List<Role> probablyRole = conference.getRoles().stream()
+                .filter(role -> username.equals(role.getUser().getUsername())).collect(Collectors.toList());
+        if (probablyRole.size() == 1 && probablyRole.get(0).getRole() == Roles.PC_MEMBER) {
+            List<Review> allReviews = new ArrayList<>();
+            conference.getSubmissions()
+                    .stream()
+                    .map(Submission::getReviews)
+                    .forEach(allReviews::addAll);
+            return allReviews.stream()
+                    .filter(review -> username.equals(review.getUser().getUsername()))
+                    .filter(review -> {
+                        try {
+                            return filter.accept(review.getVerdict());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                    })
+                    .map(ConferenceConverter::reviewToReviewDto)
+                    .collect(Collectors.toList());
+        }
+
+        if(securityService.isAdmin() || (probablyRole.size() == 1 && probablyRole.get(0).getRole() == Roles.CO_CHAIR)) {
+            List<Review> allReviews = new ArrayList<>();
+            conference.getSubmissions()
+                    .stream()
+                    .map(Submission::getReviews)
+                    .forEach(allReviews::addAll);
+            return allReviews.stream()
+                    .filter(review -> {
+                        try {
+                            return filter.accept(review.getVerdict());
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            return false;
+                        }
+                    })
+                    .map(ConferenceConverter::reviewToReviewDto)
+                    .collect(Collectors.toList());
+        }
+
+        throw new IssException("You have no right to get this information.", HttpStatus.BAD_REQUEST);
+    }
+
+    public List<ReviewDto> getReviewsForOthers(String conferenceId) {
+        User user = usersService.getUser(securityService.getUsernameFromContext());
+        List<Review> allReviews = new ArrayList<>();
+        conferencesRepository.getOne(conferenceId)
+                .getSubmissions()
+                .stream()
+                .map(Submission::getReviews)
+                .forEach(allReviews::addAll);
+        List<Review> others = new ArrayList<>();
+        allReviews.stream()
+                .filter(review -> review.getUser().getEmail().equals(user.getEmail()))
+                .filter(review -> Verdict.acceptedOrRejected(review.getVerdict()))
+                .map(Review::getSubmission)
+                .map(Submission::getReviews)
+                .peek(reviews -> reviews.removeIf(review -> review.getUser().getEmail().equals(user.getEmail())))
+                .forEach(others::addAll);
+        return others.stream()
+                .map(review -> {
+                    ReviewDto reviewDto = ConferenceConverter.reviewToReviewDto(review);
+                    reviewDto.setSubmission(ConferenceConverter.submissionToSubmissionDtoSimple(review.getSubmission()));
+                    return reviewDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    public SubmissionDto getSubmission(String submissionId) {
+        return ConferenceConverter.submissionToSubmissionDto(submissionJpaRepository.getOne(submissionId));
+    }
 }

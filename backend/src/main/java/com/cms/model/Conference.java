@@ -24,10 +24,10 @@ public class Conference {
     private Integer taxFee;
     private Integer nrOfReviews;
 
-    @OneToMany(mappedBy="conference")
+    @OneToMany(mappedBy="conference", orphanRemoval = true)
     private List<Submission> submissions;
 
-    @OneToMany(mappedBy = "conference")
+    @OneToMany(mappedBy = "conference", orphanRemoval = true)
     private List<Role> roles;
 
     public void setConferenceId(String id) {

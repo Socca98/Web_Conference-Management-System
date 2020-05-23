@@ -7,6 +7,7 @@ import com.cms.model.Role;
 import com.cms.model.Roles;
 import com.cms.model.User;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,6 +27,7 @@ public class UserConverter {
     }
 
     public static UserDto userToUserDto(User user) {
+
         return new UserDto()
                 .id(user.getUserId())
                 .username(user.getUsername())
@@ -37,7 +39,7 @@ public class UserConverter {
 
     public static List<UserDto> userToUserDto(List<User> users) {
         if(Objects.isNull(users))
-            return List.of();
+            return new ArrayList<>();
         return users.stream().map(UserConverter::userToUserDto).collect(Collectors.toList());
     }
 
@@ -55,7 +57,7 @@ public class UserConverter {
 
     public static List<User> userDtoToUser(List<UserDto> users) {
         if(Objects.isNull(users))
-            return List.of();
+            return new ArrayList<>();
         return users.stream().map(UserConverter::userDtoToUser).collect(Collectors.toList());
     }
 
@@ -69,7 +71,7 @@ public class UserConverter {
 
     public static List<User> userRoleDtoToUser(List<UserRoleDto> users) {
         if(Objects.isNull(users))
-            return List.of();
+            return new ArrayList<>();
         return users.stream().map(UserConverter::userRoleDtoToUser).collect(Collectors.toList());
     }
 
@@ -84,7 +86,7 @@ public class UserConverter {
 
     public static List<UserRoleDto> userDtoToAuthorUser(List<User> users) {
         if(Objects.isNull(users))
-            return List.of();
+            return new ArrayList<>();
         return users.stream().map(UserConverter::userDtoToAuthorUser).collect(Collectors.toList());
     }
 
@@ -98,7 +100,7 @@ public class UserConverter {
     }
     public static List<UserRoleDto> roleToUserRoleDto(List<Role> roles) {
         if(Objects.isNull(roles))
-            return List.of();
+            return new ArrayList<>();
         return roles.stream().map(UserConverter::roleToUserRoleDto).collect(Collectors.toList());
     }
 

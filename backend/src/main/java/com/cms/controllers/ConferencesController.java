@@ -62,6 +62,12 @@ public class ConferencesController {
         return ResponseEntity.ok(conferencesService.updateSubmission(submissionId, submissionDto));
     }
 
+    @GetMapping("/{conferenceId}/submissions/{submissionId}")
+    public ResponseEntity<SubmissionDto> updateSubmission(@PathVariable String conferenceId,
+                                                          @PathVariable String submissionId) {
+        return ResponseEntity.ok(conferencesService.getSubmission(submissionId));
+    }
+
     @GetMapping("/{conferenceId}/submissions")
     public ResponseEntity<List<SubmissionDto>> getSubmissionsForConference(@PathVariable String conferenceId) {
         return ResponseEntity.ok(conferencesService.getSubmissionsForConference(conferenceId));
@@ -86,11 +92,22 @@ public class ConferencesController {
         return ResponseEntity.ok(conferencesService.addReview(conferenceId, submissionId, reviewDto));
     }
 
-    @PostMapping("/{conferenceId}/submissions/{submissionId}/bulkreview")
-    public ResponseEntity<List<ReviewDto>> addReviewers(@PathVariable String conferenceId,
-                                                        @PathVariable String submissionId,
-                                                        @RequestBody List<ReviewDto> reviewDtos) {
-        return ResponseEntity.ok(conferencesService.addReview(conferenceId, submissionId, reviewDtos));
+    @GetMapping("/{conferenceId}/submissions/{submissionId}/review")
+    public ResponseEntity<List<ReviewDto>> getReviews(@PathVariable String conferenceId,
+                                                      @PathVariable String submissionId,
+                                                      @RequestParam(required = false, defaultValue = "all") String status) {
+        return ResponseEntity.ok(conferencesService.getReviewsForStatus(submissionId, status));
+    }
+
+    @GetMapping("/{conferenceId}/review/others")
+    public ResponseEntity<List<ReviewDto>> getOthersReviews(@PathVariable String conferenceId) {
+        return ResponseEntity.ok(conferencesService.getReviewsForOthers(conferenceId));
+    }
+
+    @GetMapping("/{conferenceId}/reviews")
+    public ResponseEntity<List<ReviewDto>> getReviewsForConference(@PathVariable String conferenceId,
+                                                                   @RequestParam(required = false, defaultValue = "all") String status) {
+        return ResponseEntity.ok(conferencesService.getReviewsForConference(conferenceId, status));
     }
 
     @PutMapping("/{conferenceId}/submissions/{submissionId}/review/{reviewId}")

@@ -9,6 +9,7 @@ public class ReviewDto {
     private UserDto user;
     private Verdict verdict;
     private String recommendation;
+    private SubmissionDto submission;
 
     public String getReviewId() {
         return reviewId;
@@ -42,4 +43,11 @@ public class ReviewDto {
         this.recommendation = recommendation;
     }
 
+    public SubmissionDto getSubmission() {
+        return submission;
+    }
+
+    public void setSubmission(SubmissionDto submission) {
+        this.submission = submission;
+    }
 }
