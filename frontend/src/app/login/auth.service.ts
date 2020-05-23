@@ -5,14 +5,37 @@ import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {Token} from '../shared/models/token';
+import {Conference} from '../shared/models/conference';
 
 @Injectable()
 export class AuthService {
+  private _conference: Conference;
+  private _user: User;
 
   constructor(
     private http: HttpClient,
     private router: Router,
   ) {
+  }
+
+
+  get conference(): Conference {
+    return this._conference;
+  }
+
+  set conference(value: Conference) {
+    this._conference = value;
+  }
+
+  get user(): User {
+    if (!this.isLogged()) {
+      throw Error('User not logged!');
+    }
+    return this._user;
+  }
+
+  set user(value: User) {
+    this._user = value;
   }
 
   loginUser(user: User): Observable<Token> {
