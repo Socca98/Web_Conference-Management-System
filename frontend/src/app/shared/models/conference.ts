@@ -4,11 +4,13 @@ export interface Conference {
   website: string;
   startDate: string;
   endDate: string;
+  proposalDeadline: string;
   abstractDeadline: string;
-  fullPaperDeadline: string;
   biddingDeadline: string;
   evaluationDeadline: string;
-  nrOfReviewers: number;
+  allowFullPaper: boolean;
   taxFee: number;
-  emails: string[];
+  submissions: [];
+  users: [];
+  nrOfReviewers: number;
 }

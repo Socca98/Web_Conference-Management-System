@@ -17,7 +17,7 @@ const routes: Routes = [
   {
     path: 'conference/details',
     component: TabDetailsComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
   },
 
   {
