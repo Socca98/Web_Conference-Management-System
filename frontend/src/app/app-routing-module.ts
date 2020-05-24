@@ -6,6 +6,7 @@ import {TabSubmissionsComponent} from './pages/tab-submissions/tab-submissions.c
 import {AuthGuard} from './login/auth.guard';
 import {Role} from './shared/models/role';
 import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
+import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
 
 
 const routes: Routes = [
@@ -36,7 +37,7 @@ const routes: Routes = [
 
   {
     path: 'conference/evaluations',
-    component: TabReviewingComponent,
+    component: TabEvaluationsComponent,
     canActivate: [AuthGuard],
     data: {roles: [Role.Chair, Role.CoChair]}
   },
