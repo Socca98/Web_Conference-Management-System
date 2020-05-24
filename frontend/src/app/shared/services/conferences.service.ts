@@ -17,6 +17,7 @@ export class ConferencesService {
    * @param conferenceId Id of the target Conference
    */
   getConference(conferenceId: string): Observable<Conference> {
+    console.log(conferenceId);
     return this.http.get<Conference>(environment.apiEndpoint + '/conferences/' + conferenceId);
   }
 

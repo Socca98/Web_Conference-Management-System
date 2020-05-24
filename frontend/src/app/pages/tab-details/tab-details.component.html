@@ -1,5 +1,5 @@
-<p>tab-details works!</p>
-{{this.conference}}
-<!--{{authService.conference | json}}-->
-<!--<br><br>-->
-<!--{{authService.user | json}}-->
+
+<app-conference [conference]="conference"></app-conference>
+
+<br><br>
+<button mat-flat-button color="accent" *ngIf="canEditDeadlines()">Edit deadlines</button>

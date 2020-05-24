@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8080/cms/api/register', user);
+    return this.http.post<User>(environment.apiEndpoint + '/register', user);
   }
 
   /**

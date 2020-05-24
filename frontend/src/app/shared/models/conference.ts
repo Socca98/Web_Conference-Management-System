@@ -1,16 +1,19 @@
+import {Submission} from './submission';
+import {User} from './user';
+
 export interface Conference {
   id: string;
   name: string;
   website: string;
-  startDate: string;
-  endDate: string;
-  proposalDeadline: string;
-  abstractDeadline: string;
-  biddingDeadline: string;
-  evaluationDeadline: string;
+  startDate: number;
+  endDate: number;
+  proposalDeadline: number;
+  abstractDeadline: number;
+  biddingDeadline: number;
+  evaluationDeadline: number;
   allowFullPaper: boolean;
   taxFee: number;
-  submissions: [];
-  users: [];
-  nrOfReviewers: number;
+  submissions: any[];
+  users: any[];
+  nrOfReviews: number;
 }

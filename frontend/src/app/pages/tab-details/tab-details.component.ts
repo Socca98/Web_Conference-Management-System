@@ -20,13 +20,17 @@ export class TabDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.conferencesService.getConference(this.authService.conference.id).subscribe({
-      next: (response) => {
-        alert(response);
+      next: (response: Conference) => {
+        this.conference = response;
       },
       error: err => {
-        alert(err + 'response');
+        alert(err + ' error!');
       }
     });
   }
 
+  canEditDeadlines(): boolean {
+    const userRole = this.authService.getUserRole();
+    return userRole === 'Chair' || userRole === 'CoChair';
+  }
 }
