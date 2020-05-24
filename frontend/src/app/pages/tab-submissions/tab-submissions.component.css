@@ -1,4 +1,4 @@
-.proposals {
+.submissions {
     position: absolute;
     left: 1%;
     display: flex;
@@ -7,7 +7,7 @@
     height: 100vh;
 }
 
-.proposal-cards {
+.submission-card {
     margin-bottom: 10px;
     margin-right: 10px;
 }

@@ -9,9 +9,12 @@ import {AuthService} from '../../login/auth.service';
 })
 export class TabDetailsComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
+
   }
 
 }

@@ -24,9 +24,9 @@ export class LoginDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
-    private loginService: AuthService,
+    private authService: AuthService,
     private snackBar: MatSnackBar,
-    ) {
+  ) {
   }
 
   ngOnInit(): void {
@@ -38,9 +38,13 @@ export class LoginDialogComponent implements OnInit {
    * In HTML, [(ngModel)] changes automatically object 'this.user' if input fields change.
    */
   onLoginClick() {
-    this.loginService.loginUser(this.user).subscribe({
+    this.authService.loginUser(this.user).subscribe({
       next: (response: Token) => {
         localStorage.setItem('token', response.token);
+        this.authService.user = {
+          username: this.user.username,
+        } as User;
+
         this.dialogRef.close();
         this.snackBar.open('Login successfully.', '', {
           duration: 1000

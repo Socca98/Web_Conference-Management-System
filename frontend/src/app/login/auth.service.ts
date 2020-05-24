@@ -5,6 +5,7 @@ import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {Token} from '../shared/models/token';
+import {Conference} from '../shared/models/conference';
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,24 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
   ) {
+  }
+
+  get conference(): Conference {
+    const conference = JSON.parse(localStorage.getItem('conference'));
+    return conference;
+  }
+
+  set conference(value: Conference) {
+    localStorage.setItem('conference', JSON.stringify(value));
+  }
+
+  get user(): User {
+    const user = JSON.parse(localStorage.getItem('user'));
+    return user;
+  }
+
+  set user(value: User) {
+    localStorage.setItem('user', JSON.stringify(value));
   }
 
   loginUser(user: User): Observable<Token> {
@@ -49,23 +68,14 @@ export class AuthService {
   }
 
   getUserRole() {
-    if (localStorage.getItem('chair')) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user.isChair) {
       return 'Chair';
     }
-    if (localStorage.getItem('role') !== null) {
-      return localStorage.getItem('role');
-    }
-    return null;
+    return user.role;
   }
 
   getToken() {
     return localStorage.getItem('token');
-  }
-
-  /**
-   *
-   */
-  isOnConferenceSite() {
-    return !!localStorage.getItem('conferenceId');
   }
 }

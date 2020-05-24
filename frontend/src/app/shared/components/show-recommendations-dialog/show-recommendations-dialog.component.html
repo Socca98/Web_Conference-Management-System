@@ -1,0 +1,14 @@
+<p mat-dialog-title>Recommendations for {{this.submission}}</p>
+
+<h1>Your recommendation:</h1>
+{{ this.yourRecommendation | json}}
+
+<hr>
+<h1>Other reviewers: </h1>
+{{ this.reviewsOthers | json}}
+
+
+
+<div mat-dialog-actions>
+  <button mat-button color="accent" (click)="onCloseClick()">CLOSE</button>
+</div>

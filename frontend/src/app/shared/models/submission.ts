@@ -1,9 +1,15 @@
+import {Review} from './review';
+
 export interface Submission {
+  id: string;
   title: string;
-  abstract: string;
-  name: string;
-  topics: string;
-  listOfAuthors: string;
-  metaInformation: string;
+  abstractPaper: string;
   fullPaper: string;
+  topics: string;
+  keywords: string;
+  finalVerdict: string;
+  section: any[];  // Sections it belongs to
+  authors: any[];  // Authors it belongs to
+  likes: any[];  // PC Members that liked it
+  reviews: Review[];
 }

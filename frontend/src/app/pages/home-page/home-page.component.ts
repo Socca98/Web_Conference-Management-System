@@ -4,6 +4,7 @@ import {ConferencesService} from '../../shared/services/conferences.service';
 import {AuthService} from '../../login/auth.service';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {User} from '../../shared/models/user';
 
 @Component({
   selector: 'app-home-page',
@@ -63,9 +64,16 @@ export class HomePageComponent implements OnInit {
         };
         responseData = (response as any);
 
-        localStorage.setItem('user', responseData.username);
-        localStorage.setItem('conferenceId', selectedConferenceId);
-        responseData.chair === true ? localStorage.setItem('role', 'Chair') : localStorage.setItem('role', responseData.role);
+        // Save shared data in Local Storage, used on multiple components (retrieved from AuthService)
+        this.authService.conference = {
+          id: selectedConferenceId,
+        } as Conference;
+        this.authService.user = {
+          username: responseData.username,
+          affiliation: responseData.affiliation,
+          role: responseData.role,
+          isChair: responseData.chair,
+        } as User;
 
         // Open tab-details component
         this.router.navigate(['/conference/details']);

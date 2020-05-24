@@ -1,0 +1,29 @@
+<div class="submissions">
+  <ng-container>
+    <mat-card class="submission-card" *ngFor="let submission of submissions">
+      <mat-card-header>
+        <mat-card-title>Title: {{submission.title}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-card-content>Abstract: {{submission.abstractPaper}}</mat-card-content>
+        <mat-card-content>Authors: {{submission.authors}}</mat-card-content>
+        <mat-card-content>Topics: {{submission.topics}}</mat-card-content>
+        <mat-card-content>Keywords: {{submission.keywords}}</mat-card-content>
+        <mat-card-content>Full Paper: {{submission.fullPaper}}</mat-card-content>
+      </mat-card-content>
+
+      <ng-container *ngFor="let review of submission.reviews">
+        {{review | json}}
+      </ng-container>
+
+      <mat-card-actions>
+        <button mat-raised-button color="accent">Send to another reviewer</button>
+        <button mat-raised-button color="accent">Request discussion</button>
+        <button mat-raised-button color="accent">Choose for them</button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>
+
+
+

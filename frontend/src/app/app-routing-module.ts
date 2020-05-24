@@ -5,6 +5,7 @@ import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
 import {TabSubmissionsComponent} from './pages/tab-submissions/tab-submissions.component';
 import {AuthGuard} from './login/auth.guard';
 import {Role} from './shared/models/role';
+import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,20 @@ const routes: Routes = [
     component: TabSubmissionsComponent,
     canActivate: [AuthGuard],
     data: {roles: [Role.Author, Role.PC_Member]}
+  },
+
+  {
+    path: 'conference/reviewing',
+    component: TabReviewingComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.PC_Member]}
+  },
+
+  {
+    path: 'conference/evaluations',
+    component: TabReviewingComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.Chair, Role.CoChair]}
   },
 
   {
