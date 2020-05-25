@@ -1,5 +1,6 @@
 package com.cms.services;
 
+import com.cms.dto.FileDto;
 import com.cms.exception.IssException;
 import com.cms.model.DBFile;
 import com.cms.repositories.FileJpaRepository;
@@ -10,8 +11,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class FileService {
@@ -32,7 +36,7 @@ public class FileService {
         String fileName = StringUtils.cleanPath(originalFilename);
 
         try {
-            if(fileName.contains("..")) {
+            if (fileName.contains("..")) {
                 throw new IssException("File name contains invalid path sequence " + fileName, HttpStatus.BAD_REQUEST);
             }
 
@@ -49,4 +53,13 @@ public class FileService {
         return dbFileRepository.findById(fileId)
                 .orElseThrow(() -> new IssException("File not found with id " + fileId, HttpStatus.NOT_FOUND));
     }
+
+    public List<FileDto> getAllFiles() {
+        return dbFileRepository.findAll().stream().map(FileDto::getFileDto).collect(Collectors.toList());
+    }
+
+    public FileDto getFileInformation(String fileId) {
+        return FileDto.getFileDto(dbFileRepository.getOne(fileId));
+    }
+
 }
