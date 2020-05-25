@@ -15,16 +15,19 @@
 
         <mat-card-content>
           <hr>
-          <b>Reviews:</b><br>
+          <b>Reviews:</b>
+          <span *ngIf="!hasReviews(submission)" style="font-style: italic;">
+            none yet
+          </span>
+          <br>
           <ng-container *ngFor="let review of submission.reviews">
             {{review.verdict}}, {{review.user.fullName}} <br>
           </ng-container>
         </mat-card-content>
-
       </mat-card-content>
 
 
-      <mat-card-actions>
+      <mat-card-actions *ngIf="hasReviews(submission)">
         <button mat-raised-button color="accent" (click)="sendToReviewer()">Send to another reviewer</button>
         <mat-form-field appearance="fill">
           <mat-label>
@@ -38,8 +41,8 @@
             </span>
           </mat-label>
 
-<!--          Disable if the request is not done and possibleReviewers is empty-->
-<!--          https://stackoverflow.com/a/57828405/9442199 -->
+          <!--          Disable if the request is not done and possibleReviewers is empty-->
+          <!--          https://stackoverflow.com/a/57828405/9442199 -->
           <mat-select [(value)]="anotherReviewer" [disabled]="!!!this.submissionPossibleReviewers[i]">
             <mat-option *ngFor="let pcMember of this.submissionPossibleReviewers[i]" [value]="pcMember.email">
               {{pcMember.email}}

@@ -45,8 +45,21 @@ export class TabEvaluationsComponent implements OnInit {
         });
       });
     });
+  }
 
-
+  /**
+   * Checks if the submission has any reviews.
+   * True if it has.
+   * @param submission Current submission for checking
+   */
+  hasReviews(submission: Submission): boolean {
+    console.log({
+      submission,
+      reviews: submission.reviews,
+      possibleReviewers: this.submissionPossibleReviewers,
+      submissions: this.submissions,
+    });
+    return submission.reviews.length !== 0;
   }
 
 
