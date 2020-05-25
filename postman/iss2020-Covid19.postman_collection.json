@@ -792,7 +792,7 @@
 									"}\r",
 									"var jsonData = JSON.parse(responseBody)\r",
 									"\r",
-									"pm.environment.set(\"FILE\", jsonData.url);"
+									"pm.environment.set(\"FILE\", jsonData.id);"
 								],
 								"type": "text/javascript"
 							}
@@ -843,6 +843,62 @@
 				},
 				{
 					"name": "Download file",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/files/download/{{FILE}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"files",
+								"download",
+								"{{FILE}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all file information",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/files",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get file information",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1076,7 +1132,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/reviews?status=accepted",
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/reviews",
 							"host": [
 								"{{BASE}}"
 							],
@@ -1098,7 +1154,8 @@
 								},
 								{
 									"key": "status",
-									"value": "accepted"
+									"value": "accepted",
+									"disabled": true
 								}
 							]
 						}
