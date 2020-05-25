@@ -352,7 +352,11 @@ public class ConferencesService {
                             return false;
                         }
                     })
-                    .map(ConferenceConverter::reviewToReviewDto)
+                    .map(review -> {
+                        ReviewDto reviewDto = ConferenceConverter.reviewToReviewDto(review);
+                        reviewDto.setSubmission(ConferenceConverter.submissionToSubmissionDtoSimple(review.getSubmission()));
+                        return reviewDto;
+                    })
                     .collect(Collectors.toList());
         }
 
@@ -371,7 +375,11 @@ public class ConferencesService {
                             return false;
                         }
                     })
-                    .map(ConferenceConverter::reviewToReviewDto)
+                    .map(review -> {
+                        ReviewDto reviewDto = ConferenceConverter.reviewToReviewDto(review);
+                        reviewDto.setSubmission(ConferenceConverter.submissionToSubmissionDtoSimple(review.getSubmission()));
+                        return reviewDto;
+                    })
                     .collect(Collectors.toList());
         }
 
