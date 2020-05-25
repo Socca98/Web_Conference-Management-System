@@ -13,46 +13,7 @@ import {ShowRecommendationsDialogComponent} from '../../shared/components/show-r
   styleUrls: ['./tab-reviewing.component.css']
 })
 export class TabReviewingComponent implements OnInit {
-  reviews: Review[] = [
-    {
-      id: '1',
-      submission: {
-        id: '11',
-        title: 'tit1',
-        abstractPaper: 'abstract1',
-        fullPaper: 'paper1',
-        topics: 'top1, top2',
-        keywords: 'key1, key2',
-        finalVerdict: null,
-        section: null,
-        authors: null,
-        likes: null,
-        reviews: null,
-      },
-      user: null,
-      verdict: Verdict.Accepted,
-      recommendation: 'recommendation one'
-    },
-    {
-      id: '2',
-      submission: {
-        id: '22',
-        title: 'tit2',
-        abstractPaper: 'abstract2',
-        fullPaper: 'paper2',
-        topics: 'top1, top2',
-        keywords: 'key1, key2',
-        finalVerdict: null,
-        section: null,
-        authors: null,
-        likes: null,
-        reviews: null,
-      },
-      user: null,
-      verdict: null,
-      recommendation: 'recommendation two'
-    }
-  ];
+  reviews: Review[] = [];
   reviewsOthers: Review[] = [];
 
   constructor(
@@ -63,13 +24,13 @@ export class TabReviewingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.submissionsService.getReviews(this.authService.conference.id).subscribe((result: Review[]) => {
-    //   this.reviews = result;
-    // });
-    //
-    // this.submissionsService.getReviewsOthers(this.authService.conference.id).subscribe((result: Review[]) => {
-    //   this.reviewsOthers = result;
-    // });
+    this.submissionsService.getReviews(this.authService.conference.id).subscribe((result: Review[]) => {
+      this.reviews = result;
+    });
+
+    this.submissionsService.getReviewsOthers(this.authService.conference.id).subscribe((result: Review[]) => {
+      this.reviewsOthers = result;
+    });
   }
 
   getReviewedSubmissions() {

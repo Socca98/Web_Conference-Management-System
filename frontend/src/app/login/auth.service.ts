@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {environment} from '../../environments/environment';
 import {Token} from '../shared/models/token';
 import {Conference} from '../shared/models/conference';
+import {Role} from '../shared/models/role';
 
 @Injectable()
 export class AuthService {
@@ -70,7 +71,7 @@ export class AuthService {
   getUserRole() {
     const user = JSON.parse(localStorage.getItem('user'));
     if (user.isChair) {
-      return 'Chair';
+      return Role.Chair;
     }
     return user.role;
   }

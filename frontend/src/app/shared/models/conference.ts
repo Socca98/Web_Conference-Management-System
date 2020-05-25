@@ -14,6 +14,6 @@ export interface Conference {
   allowFullPaper: boolean;
   taxFee: number;
   submissions: any[];
-  users: any[];
+  users: User[];
   nrOfReviews: number;
 }

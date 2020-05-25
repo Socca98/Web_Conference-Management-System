@@ -2,6 +2,7 @@
   <ng-container>
     <mat-card class="reviewed-card" *ngFor="let review of getReviewedSubmissions(); let i = index">
       <mat-card-header>
+        {{review | json}}
         <mat-card-title>{{review.submission.title}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>

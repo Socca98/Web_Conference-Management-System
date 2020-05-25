@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot,} from '@angular/router';
 import {AuthService} from './auth.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Role} from '../shared/models/role';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +26,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.isLogged()) {
       // check if route is restricted by role
       if ((route.data.roles && route.data.roles.indexOf(this.authService.getUserRole()) === -1) &&
-        this.authService.getUserRole() !== 'Chair') {
+        this.authService.getUserRole() !== Role.Chair) {
         // role not authorised so redirect to details page
         this.router.navigate(['/conference/details']);
         this.snackBar.open('You are not authorized!', 'Ok:(', {
