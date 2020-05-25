@@ -109,7 +109,7 @@ public class InitializationService {
         Map<String, Object> headers = new HashMap<>();
         headers.put("username", username);
         headers.put("scope", "auth");
-        return createJWT(UUID.randomUUID().toString(), headers, 3600);
+        return createJWT(UUID.randomUUID().toString(), headers, 18000);
     }
 
 
