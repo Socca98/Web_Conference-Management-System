@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Conference} from '../../shared/models/conference';
 import {AuthService} from '../../login/auth.service';
+import {ConferencesService} from '../../shared/services/conferences.service';
+
 
 @Component({
   selector: 'app-tab-details',
@@ -8,13 +10,27 @@ import {AuthService} from '../../login/auth.service';
   styleUrls: ['./tab-details.component.css'],
 })
 export class TabDetailsComponent implements OnInit {
+  conference: Conference;
 
   constructor(
-    public authService: AuthService,
-  ) { }
-
-  ngOnInit(): void {
-
+    public conferencesService: ConferencesService,
+    private authService: AuthService,
+  ) {
   }
 
+  ngOnInit(): void {
+    this.conferencesService.getConference(this.authService.conference.id).subscribe({
+      next: (response: Conference) => {
+        this.conference = response;
+      },
+      error: err => {
+        alert(err + ' error!');
+      }
+    });
+  }
+
+  canEditDeadlines(): boolean {
+    const userRole = this.authService.getUserRole();
+    return userRole === 'Chair' || userRole === 'CoChair';
+  }
 }

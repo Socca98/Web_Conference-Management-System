@@ -35,11 +35,11 @@ export class AuthService {
   }
 
   loginUser(user: User): Observable<Token> {
-    return this.http.post<Token>('http://localhost:8080/cms/api/login', user);
+    return this.http.post<Token>(environment.apiEndpoint + '/login', user);
   }
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>('http://localhost:8080/cms/api/register', user);
+    return this.http.post<User>(environment.apiEndpoint + '/register', user);
   }
 
   /**
