@@ -11,16 +11,7 @@ import {Token} from '../../shared/models/token';
   styleUrls: ['./login-dialog.component.css'],
 })
 export class LoginDialogComponent implements OnInit {
-  user: User = {
-    username: null,
-    password: null,
-    fullName: null,
-    affiliation: null,
-    email: null,
-    webpage: null,
-    isChair: null,
-    role: null,
-  };
+  user: User = {} as User;
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,

@@ -1,3 +1,7 @@
+<div style="font-size: 30px" *ngIf="conferences.length === 0">
+  <i>No conferences at the moment.</i>
+</div>
+<br>
 <mat-tab-group dynamicHeight [(selectedIndex)]="selectedTabIndex">
   <mat-tab *ngFor="let conference of conferences" label="{{conference.name}}">
     <app-conference [conference]="conference"></app-conference>

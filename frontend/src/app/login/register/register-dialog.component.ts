@@ -10,16 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./register-dialog.component.css'],
 })
 export class RegisterDialogComponent implements OnInit {
-  user: User = {
-    username: null,
-    password: null,
-    fullName: null,
-    affiliation: null,
-    email: null,
-    webpage: null,
-    isChair: null,
-    role: null,
-  };
+  user: User = {} as User;
 
   constructor(
     public dialogRef: MatDialogRef<RegisterDialogComponent>,
