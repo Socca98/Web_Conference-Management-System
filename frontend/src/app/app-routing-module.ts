@@ -7,6 +7,7 @@ import {AuthGuard} from './login/auth.guard';
 import {Role} from './shared/models/role';
 import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
 import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
+import {TabSectionsComponent} from './pages/tab-sections/tab-sections.component';
 
 
 const routes: Routes = [
@@ -40,6 +41,12 @@ const routes: Routes = [
     component: TabEvaluationsComponent,
     canActivate: [AuthGuard],
     data: {roles: [Role.Chair, Role.CoChair]}
+  },
+
+  {
+    path: 'conference/sections',
+    component: TabSectionsComponent,
+    // canActivate: [AuthGuard],
   },
 
   {

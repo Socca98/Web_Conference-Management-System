@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Create a section</h1>
+
+<form>
+  <div mat-dialog-content class="field-container">
+    <mat-form-field class="field">
+      <mat-label>Username</mat-label>
+      <label>
+        <input matInput [(ngModel)]="section.title" name="title" placeholder="ex. Spacial Databases" value="Spacial Databases" required>
+      </label>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <input matInput [matDatepicker]="myDatePicker" [(ngModel)]="section.startTime" name="startDate" required>
+      <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #myDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <input matInput [matDatepicker]="myDatePicker2" [(ngModel)]="section.endTime" name="endDate" required>
+      <mat-datepicker-toggle matSuffix [for]="myDatePicker2"></mat-datepicker-toggle>
+      <mat-datepicker #myDatePicker2></mat-datepicker>
+    </mat-form-field>
+
+
+
+    {{section | json}}
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-flat-button color="accent" (click)="createSection()">CREATE</button>
+    <button mat-button color="accent" (click)="onCancelClick()">CANCEL</button>
+  </div>
+</form>

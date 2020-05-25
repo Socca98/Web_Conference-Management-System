@@ -1,0 +1,10 @@
+<button mat-raised-button color="accent">
+  Attend live to the conference
+</button>
+
+<br><br>
+{{sections | json}}
+
+<button mat-fab color="warn" id="add-section-button" *ngIf="isChair() || true" (click)="openAddSection()" matTooltip="Create section">
+  <mat-icon>add</mat-icon>
+</button>
