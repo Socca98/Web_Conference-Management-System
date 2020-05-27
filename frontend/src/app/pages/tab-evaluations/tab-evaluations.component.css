@@ -12,9 +12,11 @@
   margin-right: 10px;
 }
 
-#add-button{
-  right: 20px;
-  bottom: 10px;
-  left: auto;
-  position: absolute;
+.field {
+  font-weight: bold;
+}
+
+.submission-header-image {
+  background-size: cover;
+  background-image: url("../../../assets/evaluated.png");
 }

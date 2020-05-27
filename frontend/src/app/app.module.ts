@@ -23,6 +23,8 @@ import {TabAssignPapersComponent} from './pages/tab-assign-papers/tab-assign-pap
 import {ShowRecommendationsDialogComponent} from './shared/components/show-recommendations-dialog/show-recommendations-dialog.component';
 import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
 import {AddAbstractDialogComponent} from './shared/components/add-abstract-dialog/add-abstract-dialog.component';
+import {TabSectionsComponent} from './pages/tab-sections/tab-sections.component';
+import {AddSectionDialogComponent} from './shared/components/add-section-dialog/add-section-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import {AddAbstractDialogComponent} from './shared/components/add-abstract-dialo
     RegisterDialogComponent,
     ShowRecommendationsDialogComponent,
     AddAbstractDialogComponent,
+    AddSectionDialogComponent,
 
     HomePageComponent,
     ConferenceComponent,
@@ -41,6 +44,7 @@ import {AddAbstractDialogComponent} from './shared/components/add-abstract-dialo
     TabAssignPapersComponent,
     TabReviewingComponent,
     TabEvaluationsComponent,
+    TabSectionsComponent,
   ],
   imports: [
     BrowserModule,

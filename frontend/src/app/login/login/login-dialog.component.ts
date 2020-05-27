@@ -11,16 +11,7 @@ import {Token} from '../../shared/models/token';
   styleUrls: ['./login-dialog.component.css'],
 })
 export class LoginDialogComponent implements OnInit {
-  user: User = {
-    username: null,
-    password: null,
-    fullName: null,
-    affiliation: null,
-    email: null,
-    webpage: null,
-    isChair: null,
-    role: null,
-  };
+  user: User = {} as User;
 
   constructor(
     public dialogRef: MatDialogRef<LoginDialogComponent>,
@@ -50,9 +41,11 @@ export class LoginDialogComponent implements OnInit {
           duration: 1000
         });
       },
-      error: err => {
-        console.error('Error! ' + err);
-        alert('Invalid user or password.');
+      error: _ => {
+        this.snackBar.open('Invalid credentials!.', '', {
+          duration: 2000,
+          panelClass: ['warning'],
+        });
       }
     });
   }

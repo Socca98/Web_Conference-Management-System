@@ -1,9 +1,9 @@
 export enum Role {
-  Author = 'Author',
-  PC_Member = 'PC_Member',
-  SC_Member = 'SC_Member',
-  CoChair = 'CoChair',
-  Chair = 'Chair',
+  Author = 'AUTHOR',
+  PC_Member = 'PC_MEMBER',
+  SC_Member = 'STEERING_COMMITTEE_MEMBER',
+  CoChair = 'CO_CHAIR',
+  Chair = 'CHAIR',
 }
 
 

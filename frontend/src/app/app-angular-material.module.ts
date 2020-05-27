@@ -10,6 +10,8 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 const MD_COMPONENT_MODULES = [
   MatButtonModule,
@@ -23,6 +25,8 @@ const MD_COMPONENT_MODULES = [
   MatIconModule,
   MatTooltipModule,
   MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
 ];
 
 @NgModule({

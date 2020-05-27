@@ -1,0 +1,4 @@
+::ng-deep.conference-container {
+  margin-top: 15px;
+  border: none; /*<- doesn't apply this :(*/
+}

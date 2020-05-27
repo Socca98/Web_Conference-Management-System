@@ -10,16 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./register-dialog.component.css'],
 })
 export class RegisterDialogComponent implements OnInit {
-  user: User = {
-    username: null,
-    password: null,
-    fullName: null,
-    affiliation: null,
-    email: null,
-    webpage: null,
-    isChair: null,
-    role: null,
-  };
+  user: User = {} as User;
 
   constructor(
     public dialogRef: MatDialogRef<RegisterDialogComponent>,
@@ -37,16 +28,17 @@ export class RegisterDialogComponent implements OnInit {
    */
   onRegisterClick() {
     this.authService.registerUser(this.user).subscribe({
-      next: (response: User) => {
-        alert(response);
+      next: (_: User) => {
         this.dialogRef.close();
-        this.snackBar.open('User created.', 'Ok', {
+        this.snackBar.open('User created.', '', {
           duration: 1000
         });
       },
-      error: err => {
-        console.error('Error! ' + err);
-        alert('Cannot create user!');
+      error: _ => {
+        this.snackBar.open('Cannot create user!', 'Ok', {
+          duration: 1000,
+          panelClass: ['warning'],
+        });
       }
     });
   }

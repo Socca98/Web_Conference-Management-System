@@ -3,7 +3,7 @@ import {Verdict} from './verdict';
 import {Submission} from './submission';
 
 export interface Review {
-  id: string;
+  reviewId: string;
   submission: Submission;
   user: User;
   verdict: Verdict;

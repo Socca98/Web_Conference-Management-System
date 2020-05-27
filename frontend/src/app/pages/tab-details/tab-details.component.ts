@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Conference} from '../../shared/models/conference';
 import {AuthService} from '../../login/auth.service';
 import {ConferencesService} from '../../shared/services/conferences.service';
+import {Role} from '../../shared/models/role';
 
 
 @Component({
@@ -10,7 +11,7 @@ import {ConferencesService} from '../../shared/services/conferences.service';
   styleUrls: ['./tab-details.component.css'],
 })
 export class TabDetailsComponent implements OnInit {
-  conference: Conference;
+  conference: Conference = {} as Conference;
 
   constructor(
     public conferencesService: ConferencesService,
@@ -31,6 +32,6 @@ export class TabDetailsComponent implements OnInit {
 
   canEditDeadlines(): boolean {
     const userRole = this.authService.getUserRole();
-    return userRole === 'Chair' || userRole === 'CoChair';
+    return userRole === Role.Chair || userRole === Role.CoChair;
   }
 }
