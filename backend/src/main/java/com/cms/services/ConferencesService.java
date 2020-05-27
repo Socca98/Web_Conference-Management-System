@@ -420,9 +420,9 @@ public class ConferencesService {
         return ConferenceConverter.submissionToSubmissionDto(submissionJpaRepository.getOne(submissionId));
     }
 
-    public SubmissionDto updateFinalVerdict(String submissionId, SubmissionDto submissionDto) {
+    public SubmissionDto updateFinalVerdict(String submissionId, String verdict) {
         Submission submission = submissionJpaRepository.getOne(submissionId);
-        submission.setFinalVerdict(submissionDto.getFinalVerdict());
+        submission.setFinalVerdict(verdict);
         return ConferenceConverter.submissionToSubmissionDto(submissionJpaRepository.save(submission));
 
     }

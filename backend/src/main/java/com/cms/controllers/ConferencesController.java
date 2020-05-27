@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/conferences")
 public class ConferencesController {
@@ -75,17 +75,17 @@ public class ConferencesController {
         return ResponseEntity.ok(conferencesService.getSubmissionsForConference(conferenceId));
     }
 
+    @PostMapping("/{conferenceId}/submissions/{submissionId}/final-verdict")
+    public ResponseEntity<SubmissionDto> updateFinalVerdict(@PathVariable String conferenceId,
+                                                            @PathVariable String submissionId,
+                                                            @RequestBody String verdict) {
+        return ResponseEntity.ok(conferencesService.updateFinalVerdict(submissionId, verdict));
+    }
+
     @PostMapping("/{conferenceId}/submissions/{submissionId}/like")
     public ResponseEntity<SubmissionDto> likeSubmission(@PathVariable String conferenceId,
                                                         @PathVariable String submissionId) {
         return ResponseEntity.ok(conferencesService.likeSubmission(conferenceId, submissionId));
-    }
-
-    @PostMapping("/{conferenceId}/submissions/{submissionId}/final-verdict")
-    public ResponseEntity<SubmissionDto> likeSubmission(@PathVariable String conferenceId,
-                                                        @PathVariable String submissionId,
-                                                        @RequestBody SubmissionDto submissionDto) {
-        return ResponseEntity.ok(conferencesService.updateFinalVerdict(submissionId, submissionDto));
     }
 
     @DeleteMapping("/{conferenceId}/submissions/{submissionId}/like")
