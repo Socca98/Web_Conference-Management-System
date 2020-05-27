@@ -2,6 +2,8 @@ package com.cms.controllers;
 
 import com.cms.dto.conference.*;
 import com.cms.model.Conference;
+import com.cms.model.Submission;
+import com.cms.model.Verdict;
 import com.cms.services.ConferencesService;
 import com.cms.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,6 +81,13 @@ public class ConferencesController {
         return ResponseEntity.ok(conferencesService.likeSubmission(conferenceId, submissionId));
     }
 
+    @PostMapping("/{conferenceId}/submissions/{submissionId}/final-verdict")
+    public ResponseEntity<SubmissionDto> likeSubmission(@PathVariable String conferenceId,
+                                                        @PathVariable String submissionId,
+                                                        @RequestBody SubmissionDto submissionDto) {
+        return ResponseEntity.ok(conferencesService.updateFinalVerdict(submissionId, submissionDto));
+    }
+
     @DeleteMapping("/{conferenceId}/submissions/{submissionId}/like")
     public ResponseEntity<SubmissionDto> unlikeSubmission(@PathVariable String conferenceId,
                                                           @PathVariable String submissionId) {
@@ -126,19 +135,23 @@ public class ConferencesController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{conferenceId}/submissions/{submissionId}/section")
+    @PostMapping("/{conferenceId}/sections")
     public ResponseEntity<SectionDto> createSection(@PathVariable String conferenceId,
-                                                    @PathVariable String submissionId,
                                                     @RequestBody SectionDto sectionDto) {
-        return ResponseEntity.ok(conferencesService.createSection(conferenceId, submissionId, sectionDto));
+        return ResponseEntity.ok(conferencesService.createSection(conferenceId, sectionDto));
     }
 
-    @PostMapping("/{conferenceId}/submissions/{submissionId}/section/{sectionId}")
-    public ResponseEntity<SectionDto> createSection(@PathVariable String conferenceId,
-                                                    @PathVariable String submissionId,
+    @PutMapping("/{conferenceId}/sections/{sectionId}")
+    public ResponseEntity<SectionDto> updateSection(@PathVariable String conferenceId,
                                                     @PathVariable String sectionId,
                                                     @RequestBody SectionDto sectionDto) {
         return ResponseEntity.ok(conferencesService.updateSection(sectionId, sectionDto));
+    }
+
+    @GetMapping("/{conferenceId}/sections/{sectionId}")
+    public ResponseEntity<SectionDto> getSection(@PathVariable String conferenceId,
+                                                    @PathVariable String sectionId) {
+        return ResponseEntity.ok(conferencesService.getSection(sectionId));
     }
 
     @GetMapping("/{conferenceId}/sections")
@@ -146,25 +159,22 @@ public class ConferencesController {
         return ResponseEntity.ok(conferencesService.getAllSectionsForConference(conferenceId));
     }
 
-    @DeleteMapping("/{conferenceId}/submissions/{submissionId}/section/{sectionId}")
+    @DeleteMapping("/{conferenceId}/sections/{sectionId}")
     public ResponseEntity<Void> deleteSection(@PathVariable String conferenceId,
-                                              @PathVariable String submissionId,
                                               @PathVariable String sectionId) {
         conferencesService.removeSection(sectionId);
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/{conferenceId}/submissions/{submissionId}/section/{sectionId}/attend")
+    @PostMapping("/{conferenceId}/sections/{sectionId}/attend")
     public ResponseEntity<Void> attendSection(@PathVariable String conferenceId,
-                                              @PathVariable String submissionId,
                                               @PathVariable String sectionId) {
         conferencesService.attendSection(sectionId);
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{conferenceId}/submissions/{submissionId}/section/{sectionId}/attend")
+    @DeleteMapping("/{conferenceId}/sections/{sectionId}/attend")
     public ResponseEntity<Void> unattedSection(@PathVariable String conferenceId,
-                                               @PathVariable String submissionId,
                                                @PathVariable String sectionId) {
         conferencesService.unattendSection(sectionId);
         return ResponseEntity.ok().build();

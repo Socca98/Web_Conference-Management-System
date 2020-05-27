@@ -30,8 +30,7 @@ public class Submission {
     @OneToMany(orphanRemoval = true)
     private List<Review> reviews;
 
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name ="section_id")
+    @ManyToOne
     private Section section;
 
     @ManyToOne

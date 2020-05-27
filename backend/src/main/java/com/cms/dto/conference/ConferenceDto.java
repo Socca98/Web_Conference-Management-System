@@ -9,14 +9,14 @@ public class ConferenceDto {
     private String id;
     private String name;
     private String website;
-    private int startDate;
-    private int endDate;
-    private int proposalDeadline;
-    private int abstractDeadline;
-    private int biddingDeadline;
-    private int evaluationDeadline;
+    private Integer startDate;
+    private Integer endDate;
+    private Integer proposalDeadline;
+    private Integer abstractDeadline;
+    private Integer biddingDeadline;
+    private Integer evaluationDeadline;
     private boolean allowFullPaper;
-    private int taxFee;
+    private Integer taxFee;
 
     private List<SubmissionDto> submissions;
     private List<UserRoleDto> users;
@@ -30,11 +30,11 @@ public class ConferenceDto {
         this.id = id;
     }
 
-    public int getTaxFee() {
+    public Integer getTaxFee() {
         return taxFee;
     }
 
-    public void setTaxFee(int taxFee) {
+    public void setTaxFee(Integer taxFee) {
         this.taxFee = taxFee;
     }
 
@@ -54,51 +54,51 @@ public class ConferenceDto {
         this.website = website;
     }
 
-    public int getStartDate() {
+    public Integer getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(int startDate) {
+    public void setStartDate(Integer startDate) {
         this.startDate = startDate;
     }
 
-    public int getEndDate() {
+    public Integer getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(int endDate) {
+    public void setEndDate(Integer endDate) {
         this.endDate = endDate;
     }
 
-    public int getProposalDeadline() {
+    public Integer getProposalDeadline() {
         return proposalDeadline;
     }
 
-    public void setProposalDeadline(int proposalDeadline) {
+    public void setProposalDeadline(Integer proposalDeadline) {
         this.proposalDeadline = proposalDeadline;
     }
 
-    public int getAbstractDeadline() {
+    public Integer getAbstractDeadline() {
         return abstractDeadline;
     }
 
-    public void setAbstractDeadline(int abstractDeadline) {
+    public void setAbstractDeadline(Integer abstractDeadline) {
         this.abstractDeadline = abstractDeadline;
     }
 
-    public int getBiddingDeadline() {
+    public Integer getBiddingDeadline() {
         return biddingDeadline;
     }
 
-    public void setBiddingDeadline(int biddingDeadline) {
+    public void setBiddingDeadline(Integer biddingDeadline) {
         this.biddingDeadline = biddingDeadline;
     }
 
-    public int getEvaluationDeadline() {
+    public Integer getEvaluationDeadline() {
         return evaluationDeadline;
     }
 
-    public void setEvaluationDeadline(int evaluationDeadline) {
+    public void setEvaluationDeadline(Integer evaluationDeadline) {
         this.evaluationDeadline = evaluationDeadline;
     }
 
@@ -120,32 +120,32 @@ public class ConferenceDto {
         return this;
     }
 
-    public ConferenceDto startDate(int startDate) {
+    public ConferenceDto startDate(Integer startDate) {
         this.startDate = startDate;
         return this;
     }
 
-    public ConferenceDto endDate(int endDate) {
+    public ConferenceDto endDate(Integer endDate) {
         this.endDate = endDate;
         return this;
     }
 
-    public ConferenceDto proposalDeadline(int proposalDeadline) {
+    public ConferenceDto proposalDeadline(Integer proposalDeadline) {
         this.proposalDeadline = proposalDeadline;
         return this;
     }
 
-    public ConferenceDto abstractDeadline(int abstractDeadline) {
+    public ConferenceDto abstractDeadline(Integer abstractDeadline) {
         this.abstractDeadline = abstractDeadline;
         return this;
     }
 
-    public ConferenceDto biddingDeadline(int biddingDeadline) {
+    public ConferenceDto biddingDeadline(Integer biddingDeadline) {
         this.biddingDeadline = biddingDeadline;
         return this;
     }
 
-    public ConferenceDto evaluationDeadline(int evaluationDeadline) {
+    public ConferenceDto evaluationDeadline(Integer evaluationDeadline) {
         this.evaluationDeadline = evaluationDeadline;
         return this;
     }
@@ -156,7 +156,7 @@ public class ConferenceDto {
         return this;
     }
 
-    public ConferenceDto taxFee(int taxFee) {
+    public ConferenceDto taxFee(Integer taxFee) {
         this.taxFee = taxFee;
         return this;
     }

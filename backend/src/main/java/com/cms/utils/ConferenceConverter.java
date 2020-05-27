@@ -106,6 +106,13 @@ public class ConferenceConverter {
         return submission.stream().map(ConferenceConverter::submissionToSubmissionDto).collect(Collectors.toList());
     }
 
+    public static List<SubmissionDto> submissionToSubmissionDtoSimple(List<Submission> submission) {
+        if (Objects.isNull(submission)) {
+            return new ArrayList<>();
+        }
+        return submission.stream().map(ConferenceConverter::submissionToSubmissionDtoSimple).collect(Collectors.toList());
+    }
+
     public static ReviewDto reviewToReviewDto(Review review) {
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setRecommendation(review.getRecommendation());
@@ -148,10 +155,11 @@ public class ConferenceConverter {
     }
 
     public static SectionDto sectionToSectionDto(Section section) {
-        if(Objects.isNull(section)) {
+        if (Objects.isNull(section)) {
             return null;
         }
         SectionDto sectionDto = new SectionDto();
+        sectionDto.setSectionChair(UserConverter.userToUserDto(section.getSectionChair()));
         sectionDto.setSectionId(section.getSectionId());
         sectionDto.setTitle(section.getTitle());
         sectionDto.setStartTime(section.getStartTime());
@@ -162,10 +170,25 @@ public class ConferenceConverter {
         return sectionDto;
     }
 
+    public static SectionDto sectionToSectionDtoWithSubmissions(Section section) {
+        SectionDto sectionDto = sectionToSectionDto(section);
+        if (Objects.nonNull(sectionDto)) {
+            sectionDto.setSubmissions(submissionToSubmissionDtoSimple(section.getSubmissions()));
+        }
+        return sectionDto;
+    }
+
     public static List<SectionDto> sectionToSectionDto(List<Section> sections) {
         if (Objects.isNull(sections)) {
             return new ArrayList<>();
         }
         return sections.stream().map(ConferenceConverter::sectionToSectionDto).collect(Collectors.toList());
+    }
+
+    public static List<SectionDto> sectionToSectionDtoWithSubmissions(List<Section> sections) {
+        if (Objects.isNull(sections)) {
+            return new ArrayList<>();
+        }
+        return sections.stream().map(ConferenceConverter::sectionToSectionDtoWithSubmissions).collect(Collectors.toList());
     }
 }

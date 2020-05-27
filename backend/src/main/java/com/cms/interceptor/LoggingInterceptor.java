@@ -26,12 +26,10 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
     }
 
     private void logRequest(HttpServletRequest request) throws IOException {
-        logger.debug("------------Incoming request------------\nSessionId:{}\nMethod:{}\nPath:{}\nBody:{}\n----------------------------------------",
+        logger.debug("------------Incoming request------------\nSessionId:{}\nMethod:{}\nPath:{}\n\n----------------------------------------",
                 request.getSession().getId(),
                 request.getMethod(),
-                request.getServletPath(),
-                //IOUtils.toString(request.getInputStream()));
-                "booody");
+                request.getServletPath());
     }
 
 }

@@ -262,7 +262,7 @@ public class DatabaseInitialization {
         ReviewDto reviewDto;
 
         reviewDto = new ReviewDto();
-        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
+        reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
         reviewDto.setUser(userDto2);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
         reviewDto.setVerdict(Verdict.ACCEPT);
@@ -275,12 +275,14 @@ public class DatabaseInitialization {
         reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
         reviewDto.setUser(userDto1);
         conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
-        reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
+        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
         reviewDto.setUser(userDto3);
         conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
         reviewDto.setVerdict(Verdict.ACCEPT);
         reviewDto.setUser(userDto5);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
     }
+
+
 
 }
