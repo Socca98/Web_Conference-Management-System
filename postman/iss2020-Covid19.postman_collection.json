@@ -777,6 +777,41 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Update final verdict",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "ACCEPT"
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/final-verdict",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"submissions",
+								"{{SUBMISSION_ID}}",
+								"final-verdict"
+							]
+						}
+					},
+					"response": []
 				}
 			],
 			"protocolProfileBehavior": {}
@@ -850,14 +885,7 @@
 					"name": "Download file",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{TOKEN}}",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [],
