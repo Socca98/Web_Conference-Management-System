@@ -1,0 +1,53 @@
+<h1 mat-dialog-title>Submit scientific document</h1>
+
+<form>
+  <div mat-dialog-content class="field-container">
+    <mat-form-field class="field">
+      <mat-label>Name/Title</mat-label>
+      <label>
+        <input matInput [(ngModel)]="submission.title" name="title" placeholder="ex. Red panda" value="Red Panda"
+               required>
+      </label>
+    </mat-form-field>
+
+    <ng-container *ngFor="let author of submission.authors; let i = index; trackBy: identify">
+      <mat-form-field class="field">
+        <mat-label>Email</mat-label>
+        <label>
+          <input matInput [(ngModel)]="author.email" name="email{{i}}" value="admin" required>
+        </label>
+      </mat-form-field>
+    </ng-container>
+    <button mat-mini-fab color="white" id="add-email-button" matTooltip="Add email" (click)="incrementNumberOfAuthors()">
+      <mat-icon color="primary" id="add-email-icon">add_circle</mat-icon>
+    </button>
+
+    <mat-form-field class="field">
+      <mat-label>Keywords</mat-label>
+      <label>
+        <input matInput [(ngModel)]="submission.keywords" name="keywords" placeholder="ex. panda, tropical, bamboo, etc."
+               value="panda, tropical, bamboo" required>
+      </label>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Topics</mat-label>
+      <label>
+        <input matInput [(ngModel)]="submission.topics" name="topics" placeholder="ex. nature, wildilfe, etc."
+               value="nature, wildilfe" required>
+      </label>
+    </mat-form-field>
+
+    <mat-label>Abstract paper: </mat-label>
+    <label>
+      <input type="file" id="file" (change)="onFileSelected($event)">
+    </label>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button color="accent" (click)="onSubmitClick()">SUBMIT</button>
+    <button mat-button color="accent" (click)="onCancelClick()">CANCEL</button>
+  </div>
+</form>
+
+

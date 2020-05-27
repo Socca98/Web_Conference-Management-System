@@ -22,6 +22,7 @@ import {TabBiddingComponent} from './pages/tab-bidding/tab-bidding.component';
 import {TabAssignPapersComponent} from './pages/tab-assign-papers/tab-assign-papers.component';
 import {ShowRecommendationsDialogComponent} from './shared/components/show-recommendations-dialog/show-recommendations-dialog.component';
 import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
+import {AddAbstractDialogComponent} from './shared/components/add-abstract-dialog/add-abstract-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.c
     LoginDialogComponent,
     RegisterDialogComponent,
     ShowRecommendationsDialogComponent,
+    AddAbstractDialogComponent,
 
     HomePageComponent,
     ConferenceComponent,

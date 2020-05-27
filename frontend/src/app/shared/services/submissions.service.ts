@@ -52,4 +52,12 @@ export class SubmissionsService {
       verdict
     );
   }
+
+  addAbstract(conferenceId, submission: Submission) {
+    return this.http.post<Submission>(environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/', submission);
+  }
+
+  uploadFile(formData: FormData) {
+    return this.http.post(environment.apiEndpoint + '/files/upload', formData);
+  }
 }
