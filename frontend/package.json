@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "deploy": "ng serve --open --host 192.168.0.103 --port 80 --disable-host-check",
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",

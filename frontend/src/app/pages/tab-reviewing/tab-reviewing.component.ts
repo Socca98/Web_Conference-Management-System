@@ -3,12 +3,13 @@ import {SubmissionsService} from '../../shared/services/submissions.service';
 import {AuthService} from '../../login/auth.service';
 import {Verdict} from '../../shared/models/verdict';
 import {Review} from '../../shared/models/review';
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ShowRecommendationsDialogComponent} from '../../shared/components/show-recommendations-dialog/show-recommendations-dialog.component';
 import {Submission} from '../../shared/models/submission';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Token} from '../../shared/models/token';
 import {User} from '../../shared/models/user';
+import {AddRecommendationDialogComponent} from '../../shared/components/add-recommendation-dialog/add-recommendation-dialog.component';
 
 @Component({
   selector: 'app-tab-reviewing',
@@ -16,8 +17,8 @@ import {User} from '../../shared/models/user';
   styleUrls: ['./tab-reviewing.component.css']
 })
 export class TabReviewingComponent implements OnInit {
-  reviews: Review[] = []; // All reviews of the current user
-  reviewsOthers: Review[] = []; // All reviews of conference except current user
+  reviews: Review[] = [];
+  reviewsOthers: Review[] = []; // All reviews of conference except current user (for recommendations
   localVerdicts: Verdict[] = [];
 
   constructor(
@@ -26,11 +27,13 @@ export class TabReviewingComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
   ) {
+
   }
 
   ngOnInit(): void {
     this.submissionsService.getReviews(this.authService.conference.id).subscribe((result: Review[]) => {
-      this.reviews = result;
+      // All reviews of the current user
+      this.reviews = result.filter(e => e.user.email === this.authService.user.email);
     });
 
     this.submissionsService.getReviewsOthers(this.authService.conference.id).subscribe((result: Review[]) => {
@@ -46,8 +49,7 @@ export class TabReviewingComponent implements OnInit {
     return this.reviews.filter(e => e.verdict === Verdict.Not_Reviewed);
   }
 
-  sendReviewButton(currentReview: Review, index) {
-    const conferenceId = this.authService.conference.id;
+  openAddReviewDialog(currentReview: Review, index: number) {
     if (!this.localVerdicts[index]) {
       this.snackBar.open('Please select verdict!', 'Ok', {
         duration: 2000,
@@ -56,16 +58,20 @@ export class TabReviewingComponent implements OnInit {
       return;
     }
 
-    this.submissionsService.updateReview(conferenceId, currentReview.submission.id, currentReview.reviewId, this.localVerdicts[index])
-      .subscribe({
-        next: () => {
+    const conferenceId = this.authService.conference.id;
+    const selectedVerdict = this.localVerdicts[index];  // Only now take value from select box
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      conferenceId,
+      currentReview,
+      selectedVerdict,
+    };
+
+    this.dialog.open(AddRecommendationDialogComponent, dialogConfig).afterClosed()
+      .subscribe((isSuccesful: boolean) => {
+        if (isSuccesful) {
+          // Update the local list of verdicts
           currentReview.verdict = this.localVerdicts[index];
-        },
-        error: _ => {
-          this.snackBar.open('Could not send review!', '', {
-            duration: 2000,
-            panelClass: ['warning'],
-          });
         }
       });
   }

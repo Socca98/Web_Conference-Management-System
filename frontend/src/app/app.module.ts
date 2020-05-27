@@ -25,6 +25,7 @@ import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.c
 import {AddAbstractDialogComponent} from './shared/components/add-abstract-dialog/add-abstract-dialog.component';
 import {TabSectionsComponent} from './pages/tab-sections/tab-sections.component';
 import {AddSectionDialogComponent} from './shared/components/add-section-dialog/add-section-dialog.component';
+import {AddRecommendationDialogComponent} from './shared/components/add-recommendation-dialog/add-recommendation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {AddSectionDialogComponent} from './shared/components/add-section-dialog/
     ShowRecommendationsDialogComponent,
     AddAbstractDialogComponent,
     AddSectionDialogComponent,
+    AddRecommendationDialogComponent,
 
     HomePageComponent,
     ConferenceComponent,

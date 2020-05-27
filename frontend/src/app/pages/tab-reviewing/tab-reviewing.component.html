@@ -7,7 +7,7 @@
         <mat-card-title>{{review.submission.title}}</mat-card-title>
         <mat-card-subtitle>Review no.{{i + 1}}</mat-card-subtitle>
       </mat-card-header>
-      <br>
+      <br> {{review | json}}
       <mat-card-content>
         <p>
           <span class="field">Abstract: </span>
@@ -43,16 +43,14 @@
   </ng-container>
 </div>
 
-
-<h1 style="margin-top:25px;">Please review the following:</h1>
-
-<div class="unreviewed usubmissions">
+<div class="unreviewed submissions">
+  <h1 *>Please review the following:</h1>
   <ng-container>
-    <mat-card class="unreviewed usubmission-card" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
+    <mat-card class="unreviewed submission-card" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
       <mat-card-header>
         <div mat-card-avatar class="submission-header-image"></div>
         <mat-card-title>{{review.submission.title}}</mat-card-title>
-        <mat-card-subtitle>Review no.{{i + 1}}</mat-card-subtitle>
+        <mat-card-subtitle>Unreviewed no.{{i + 1}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p>
@@ -75,7 +73,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="accent" (click)="sendReviewButton(review, i)">
+        <button mat-raised-button color="accent" (click)="openAddReviewDialog(review, i)">
           Offer verdict
         </button>
         <mat-form-field style="margin-left: 20px">

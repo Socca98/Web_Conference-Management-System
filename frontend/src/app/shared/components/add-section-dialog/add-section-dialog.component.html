@@ -3,7 +3,7 @@
 <form>
   <div mat-dialog-content class="field-container">
     <mat-form-field class="field">
-      <mat-label>Username</mat-label>
+      <mat-label>Name</mat-label>
       <label>
         <input matInput [(ngModel)]="section.title" name="title" placeholder="ex. Spacial Databases" value="Spacial Databases" required>
       </label>
@@ -21,6 +21,14 @@
       <mat-datepicker #myDatePicker2></mat-datepicker>
     </mat-form-field>
 
+    <mat-form-field appearance="fill">
+      <mat-label>Choose the section chair</mat-label>
+      <mat-select [(value)]="section.sectionChair">
+        <mat-option *ngFor="let acceptedPaper of this.acceptedSubmissions" [value]="acceptedPaper.id">
+          {{acceptedPaper}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
 
     {{section | json}}

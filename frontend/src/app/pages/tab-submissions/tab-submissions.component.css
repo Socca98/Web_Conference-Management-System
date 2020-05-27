@@ -12,9 +12,19 @@
     margin-right: 10px;
 }
 
+.field {
+  font-weight: bold;
+}
+
 #add-button{
   position: fixed;
   right: 20px;
   bottom: 20px;
   left: auto;
+}
+
+
+.submission-header-image {
+  background-size: cover;
+  background-image: url("../../../assets/in-review.svg");
 }

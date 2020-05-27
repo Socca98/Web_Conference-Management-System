@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../../environments/environment';
 import {Submission} from '../models/submission';
@@ -46,10 +46,13 @@ export class SubmissionsService {
     return this.http.get<Review[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/review/others');
   }
 
-  updateReview(conferenceId, submissionId, reviewId, verdict: Verdict): Observable<Review> {
+  updateReview(conferenceId, submissionId, review: Review): Observable<Review> {
     return this.http.put<Review>(
-      environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/review/' + reviewId,
-      verdict
+      environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/review/' + review.reviewId,
+      {
+        verdict: review.verdict,
+        recommendation: review.recommendation
+      }
     );
   }
 
@@ -59,5 +62,11 @@ export class SubmissionsService {
 
   uploadFile(formData: FormData) {
     return this.http.post(environment.apiEndpoint + '/files/upload', formData);
+  }
+
+  getAcceptedSubmissions(conferenceId) {
+    const params = new HttpParams().set('status', 'accepted');
+    const urlString = environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + 2 + '/review';
+    return this.http.get(urlString, {params});
   }
 }

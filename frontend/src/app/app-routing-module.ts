@@ -33,7 +33,7 @@ const routes: Routes = [
     path: 'conference/reviewing',
     component: TabReviewingComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.PC_Member]}
+    // data: {roles: [Role.PC_Member]}
   },
 
   {
