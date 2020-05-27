@@ -1,0 +1,19 @@
+* {
+  font-size: 20px;
+  font-family: sans-serif;
+  letter-spacing: 2px;
+}
+
+.content {
+  align-items: initial;
+}
+
+.conference-container {
+  padding: 20px 100px 20px 50px;
+  border: 3px dashed grey;
+  border-radius: 5px;
+}
+
+#conference-title {
+  font-size: 30px;
+}

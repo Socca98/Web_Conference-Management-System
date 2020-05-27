@@ -41,9 +41,11 @@ export class LoginDialogComponent implements OnInit {
           duration: 1000
         });
       },
-      error: err => {
-        console.error('Error! ' + err);
-        alert('Invalid user or password.');
+      error: _ => {
+        this.snackBar.open('Invalid credentials!.', '', {
+          duration: 2000,
+          panelClass: ['warning'],
+        });
       }
     });
   }

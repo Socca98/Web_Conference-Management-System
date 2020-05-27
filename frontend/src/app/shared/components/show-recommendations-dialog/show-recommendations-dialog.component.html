@@ -1,12 +1,26 @@
-<p mat-dialog-title>Recommendations for {{this.submission}}</p>
+<h1 mat-dialog-title>Recommendations for <i>{{this.submission.title}}</i></h1>
 
-<h1>Your recommendation:</h1>
-{{ this.yourRecommendation | json}}
+
+<h2>Your recommendation:</h2>
+<p>
+  <ng-container *ngIf="this.yourRecommendation; else noRecommendation">
+    {{ this.yourRecommendation | json}}
+  </ng-container>
+  <ng-template #noRecommendation>
+    You did not give a recommendation.
+  </ng-template>
+</p>
 
 <hr>
-<h1>Other reviewers: </h1>
-{{ this.reviewsOthers | json}}
-
+<h2>Other reviewers: </h2>
+<p>
+  <ng-container *ngIf="this.yourRecommendation; else noOthersRecommendation">
+    {{ this.reviewsOthers | json}}
+  </ng-container>
+  <ng-template #noOthersRecommendation>
+    There are no other recommendations.
+  </ng-template>
+</p>
 
 
 <div mat-dialog-actions>

@@ -97,9 +97,17 @@ footer a {
 }
 
 
+footer {
+  display: none;
+  position: absolute;
+  bottom: 0;
+  height: 100px;
+  border: 2px red solid;
+}
 
-
-
+::ng-deep .warning {
+  background: darkred;
+}
 
 
 

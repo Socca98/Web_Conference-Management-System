@@ -43,12 +43,12 @@ export class SubmissionsService {
     if (conferenceId === null) {
       throw new Error('Error! Conference id is null for request!');
     }
-    return this.http.get<Review[]>(environment.apiEndpoint + '/conferences/' + conferenceId + '/reviews/others');
+    return this.http.get<Review[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/review/others');
   }
 
-  sendReview(conferenceId, submissionId, reviewId, verdict: Verdict) {
-    return this.http.put<Submission[]>(
-      environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + submissionId + '/review/' + reviewId,
+  updateReview(conferenceId, submissionId, reviewId, verdict: Verdict): Observable<Review> {
+    return this.http.put<Review>(
+      environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/review/' + reviewId,
       verdict
     );
   }

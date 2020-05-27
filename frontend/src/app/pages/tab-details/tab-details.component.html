@@ -1,6 +1,10 @@
 <ng-container *ngIf="conference.id">
   <app-conference [conference]="conference"></app-conference>
   <br><br>
-  <button mat-flat-button color="accent" *ngIf="canEditDeadlines()">Edit deadlines</button>
+  <button mat-flat-button
+          color="warn"
+          *ngIf="canEditDeadlines()">
+    Edit deadlines
+  </button>
 </ng-container>
 

@@ -51,6 +51,6 @@ export class ConferencesService {
     if (conferenceId === null) {
       throw new Error('Error! Conference id is null for request!');
     }
-    return this.http.get<Section[]>(environment.apiEndpoint + '/conferences/' + conferenceId + '/sections/');
+    return this.http.get<Section[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/sections/');
   }
 }

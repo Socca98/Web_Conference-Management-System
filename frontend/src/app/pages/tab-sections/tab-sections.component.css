@@ -1,7 +1,7 @@
 #add-section-button{
+  position: fixed;
   right: 20px;
-  bottom: 10px;
+  bottom: 20px;
   left: auto;
-  position: absolute;
 }
 

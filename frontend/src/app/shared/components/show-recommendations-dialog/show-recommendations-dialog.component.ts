@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Review} from '../../models/review';
 import {Submission} from '../../models/submission';
@@ -10,7 +10,7 @@ import {Submission} from '../../models/submission';
 })
 export class ShowRecommendationsDialogComponent implements OnInit {
   yourRecommendation: string;
-  reviewsOthers: Review[];
+  reviewsOthers: Review[] = [];
   submission: Submission = {} as Submission;
 
   constructor(
@@ -26,7 +26,7 @@ export class ShowRecommendationsDialogComponent implements OnInit {
 
     this.reviewsOthers = this.data.reviews;
     this.yourRecommendation = this.data.recommendation;
-    // this.submission = this.reviewsOthers[0].submission; // All reviews share the same submission
+    this.submission = this.data.submission; // All reviews share the same submission
   }
 
   onCloseClick() {

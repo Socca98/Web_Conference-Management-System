@@ -16,7 +16,7 @@ import {User} from '../../shared/models/user';
 })
 export class HomePageComponent implements OnInit {
   conferences: Conference[] = [];
-  selectedTabIndex: number;
+  selectedTabIndex = 0;
 
   constructor(
     private authService: AuthService,
@@ -38,7 +38,7 @@ export class HomePageComponent implements OnInit {
    */
   goToConferenceSite() {
     // Check if conference is selected from the list
-    if (this.selectedTabIndex === null) {
+    if (this.selectedTabIndex === undefined || !this.conferences.length) {
       this.snackBar.open('No conference selected!', 'OK', {
         duration: 1000
       });
@@ -48,7 +48,8 @@ export class HomePageComponent implements OnInit {
     const selectedConferenceId = this.conferences[this.selectedTabIndex].id;
     if (!this.authService.isLogged()) {
       this.snackBar.open('Please sign in!', 'OK', {
-        duration: 1000
+        duration: 1000,
+        panelClass: ['warning'],
       });
       return;
     }
@@ -65,9 +66,7 @@ export class HomePageComponent implements OnInit {
         responseData = (response as any);
 
         // Save shared data in Local Storage, used on multiple components (retrieved from AuthService)
-        this.authService.conference = {
-          id: selectedConferenceId,
-        } as Conference;
+        this.authService.conference = this.conferences[this.selectedTabIndex];
         this.authService.user = {
           username: responseData.username,
           affiliation: responseData.affiliation,
@@ -78,8 +77,8 @@ export class HomePageComponent implements OnInit {
         // Open tab-details component
         this.router.navigate(['/conference/details']);
       },
-      error: err => {
-        alert('Error! Could not retrieve user information!' + err);
+      error: _ => {
+        alert('Error! Login token expired!');
       }
     });
   }

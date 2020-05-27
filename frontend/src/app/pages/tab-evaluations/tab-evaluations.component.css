@@ -16,4 +16,7 @@
   font-weight: bold;
 }
 
-
+.submission-header-image {
+  background-size: cover;
+  background-image: url("../../../assets/evaluated.png");
+}

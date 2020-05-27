@@ -28,16 +28,17 @@ export class RegisterDialogComponent implements OnInit {
    */
   onRegisterClick() {
     this.authService.registerUser(this.user).subscribe({
-      next: (response: User) => {
-        alert(response);
+      next: (_: User) => {
         this.dialogRef.close();
-        this.snackBar.open('User created.', 'Ok', {
+        this.snackBar.open('User created.', '', {
           duration: 1000
         });
       },
-      error: err => {
-        console.error('Error! ' + err);
-        alert('Cannot create user!');
+      error: _ => {
+        this.snackBar.open('Cannot create user!', 'Ok', {
+          duration: 1000,
+          panelClass: ['warning'],
+        });
       }
     });
   }
