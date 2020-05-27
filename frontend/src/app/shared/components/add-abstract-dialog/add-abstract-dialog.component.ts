@@ -13,6 +13,7 @@ import {AuthService} from '../../../login/auth.service';
 })
 export class AddAbstractDialogComponent implements OnInit {
   user: User = {
+    id: null,
     username: null,
     password: null,
     fullName: null,
