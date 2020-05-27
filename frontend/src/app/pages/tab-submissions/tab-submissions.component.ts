@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Submission} from '../../shared/models/submission';
 import {SubmissionsService} from '../../shared/services/submissions.service';
 import {AuthService} from '../../login/auth.service';
-import {TabAbstractDialogComponent} from '../../shared/components/tab-abstract-dialog/tab-abstract-dialog.component';
+import {AddAbstractDialogComponent} from '../../shared/components/add-abstract-dialog/add-abstract-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
 
 
@@ -32,6 +32,6 @@ export class TabSubmissionsComponent implements OnInit {
   }
 
   openAddAbstractDialog() {
-    this.dialog.open(TabAbstractDialogComponent);
+    this.dialog.open(AddAbstractDialogComponent);
   }
 }

@@ -1,20 +1,17 @@
-import {Component, HostListener, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Submission} from '../../models/submission';
 import {User} from '../../models/user';
 import {MatDialogRef} from '@angular/material/dialog';
 import {SubmissionsService} from '../../services/submissions.service';
-import {Token} from '../../models/token';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../../../login/auth.service';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-tab-abstract-dialog',
-  templateUrl: './tab-abstract-dialog.component.html',
-  styleUrls: ['./tab-abstract-dialog.component.css']
+  templateUrl: './add-abstract-dialog.component.html',
+  styleUrls: ['./add-abstract-dialog.component.css']
 })
-export class TabAbstractDialogComponent implements OnInit {
+export class AddAbstractDialogComponent implements OnInit {
   user: User = {
     username: null,
     password: null,
@@ -42,7 +39,7 @@ export class TabAbstractDialogComponent implements OnInit {
 
 
   constructor(
-    public dialogRef: MatDialogRef<TabAbstractDialogComponent>,
+    public dialogRef: MatDialogRef<AddAbstractDialogComponent>,
     private submissionsService: SubmissionsService,
     private authService: AuthService,
     private snackBar: MatSnackBar,

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TabAbstractDialogComponent } from './tab-abstract-dialog.component';
+import { AddAbstractDialogComponent } from './add-abstract-dialog.component';
 
 describe('TabAbstractDialogComponent', () => {
-  let component: TabAbstractDialogComponent;
-  let fixture: ComponentFixture<TabAbstractDialogComponent>;
+  let component: AddAbstractDialogComponent;
+  let fixture: ComponentFixture<AddAbstractDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TabAbstractDialogComponent ]
+      declarations: [ AddAbstractDialogComponent ]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TabAbstractDialogComponent);
+    fixture = TestBed.createComponent(AddAbstractDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
