@@ -196,11 +196,16 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE}}/login",
+							"raw": "http://olahistvan.com:8080/cms/api/login",
+							"protocol": "http",
 							"host": [
-								"{{BASE}}"
+								"olahistvan",
+								"com"
 							],
+							"port": "8080",
 							"path": [
+								"cms",
+								"api",
 								"login"
 							]
 						}
@@ -913,13 +918,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE}}/files/download/{{FILE}}",
+							"raw": "{{BASE}}/files/{{FILE}}",
 							"host": [
 								"{{BASE}}"
 							],
 							"path": [
 								"files",
-								"download",
 								"{{FILE}}"
 							]
 						}
@@ -1205,7 +1209,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"title\": \"Please work\",\n\t\"sectionChair\": {\n            \"email\": \"2.olah.istvan.75@gmail.com\"\n\t},\n\t\"startTime\": 1588326245,\n    \"endTime\": 1588326245,\n    \"speakers\":  [{\n                    \"email\": \"1.olah.istvan.75@gmail.com\"\n                }],\n\t\"seats\": 175\n}",
+							"raw": "{\n\t\"title\": \"Please work\",\n\t\"sectionChair\": {\n            \"email\": \"user2@gmail.com\"\n\t},\n\t\"startTime\": 1588326245,\n    \"endTime\": 1588326245,\n    \"speakers\":  [{\n                    \"email\": \"user1@gmail.com\"\n                }],\n\t\"seats\": 175,\n\t\"submissions\": [{\n\t\t\t\"id\": \"4028e4b0725744fa0172574f98dc0009\"\n\t\t}]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1213,38 +1217,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section",
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections",
 							"host": [
 								"{{BASE}}"
 							],
 							"path": [
 								"conferences",
 								"{{CONFERENCE_ID}}",
-								"submissions",
-								"{{SUBMISSION_ID}}",
-								"section"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete section",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section/{{SECTION_ID}}",
-							"host": [
-								"{{BASE}}"
-							],
-							"path": [
-								"conferences",
-								"{{CONFERENCE_ID}}",
-								"submissions",
-								"{{SUBMISSION_ID}}",
-								"section",
-								"{{SECTION_ID}}"
+								"sections"
 							]
 						}
 					},
@@ -1280,6 +1260,85 @@
 					"response": []
 				},
 				{
+					"name": "Get section",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections/{{SECTION_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"sections",
+								"{{SECTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update section",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"Please work2\",\n\t\"sectionChair\": {\n            \"email\": \"user2@gmail.com\"\n\t},\n\t\"startTime\": 1588326246,\n    \"endTime\": 1588326246,\n    \"speakers\":  [{\n                    \"email\": \"user1@gmail.com\"\n                }],\n\t\"seats\": 175\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections/{{SECTION_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"sections",
+								"{{SECTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete section",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections/{{SECTION_ID}}",
+							"host": [
+								"{{BASE}}"
+							],
+							"path": [
+								"conferences",
+								"{{CONFERENCE_ID}}",
+								"sections",
+								"{{SECTION_ID}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Attend section",
 					"request": {
 						"auth": {
@@ -1295,16 +1354,14 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section/{{SECTION_ID}}/attend",
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections/{{SECTION_ID}}/attend",
 							"host": [
 								"{{BASE}}"
 							],
 							"path": [
 								"conferences",
 								"{{CONFERENCE_ID}}",
-								"submissions",
-								"{{SUBMISSION_ID}}",
-								"section",
+								"sections",
 								"{{SECTION_ID}}",
 								"attend"
 							]
@@ -1328,16 +1385,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/submissions/{{SUBMISSION_ID}}/section/{{SECTION_ID}}/attend",
+							"raw": "{{BASE}}/conferences/{{CONFERENCE_ID}}/sections/{{SECTION_ID}}/attend",
 							"host": [
 								"{{BASE}}"
 							],
 							"path": [
 								"conferences",
 								"{{CONFERENCE_ID}}",
-								"submissions",
-								"{{SUBMISSION_ID}}",
-								"section",
+								"sections",
 								"{{SECTION_ID}}",
 								"attend"
 							]

@@ -20,9 +20,8 @@ public class Section {
     @ManyToOne
     @JoinColumn(name ="conference_id")
     private Conference conference;
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "submission_id")
-    private Submission submission;
+    @OneToMany
+    private List<Submission> submissions;
 
     private Integer startTime;
     private Integer endTime;
@@ -105,11 +104,11 @@ public class Section {
         this.seats = seats;
     }
 
-    public Submission getSubmission() {
-        return submission;
+    public List<Submission> getSubmissions() {
+        return submissions;
     }
 
-    public void setSubmission(Submission submission) {
-        this.submission = submission;
+    public void setSubmissions(List<Submission> submissions) {
+        this.submissions = submissions;
     }
 }

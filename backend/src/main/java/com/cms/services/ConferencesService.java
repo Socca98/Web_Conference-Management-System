@@ -10,7 +10,6 @@ import com.cms.utils.ConferenceConverter;
 import com.cms.utils.UserConverter;
 import io.jsonwebtoken.lang.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -201,12 +200,11 @@ public class ConferencesService {
         reviewJpaRepository.deleteById(reviewId);
     }
 
-    public SectionDto createSection(String conferenceId, String submissionId, SectionDto sectionDto) {
+    public SectionDto createSection(String conferenceId, SectionDto sectionDto) {
         Section section = ConferenceConverter.sectionDtoToSection(sectionDto);
 
         User sectionChair = usersService.getUserByEmail(sectionDto.getSectionChair().getEmail());
         Conference conference = conferencesRepository.getOne(conferenceId);
-        Submission submission = submissionJpaRepository.getOne(submissionId);
         if (Objects.nonNull(sectionDto.getListeners())) {
             List<User> listeners = sectionDto.getListeners().stream()
                     .map(userDto -> usersService.getUserByEmail(userDto.getEmail()))
@@ -222,10 +220,15 @@ public class ConferencesService {
         }
         section.setSectionChair(sectionChair);
         section.setConference(conference);
-        section.setSubmission(submission);
+        List<Submission> submissions = sectionDto.getSubmissions().stream()
+                .map(submissionDto -> submissionJpaRepository.getOne(submissionDto.getId()))
+                .collect(Collectors.toList());
+        section.setSubmissions(submissions);
         Section save = sectionJpaRepository.save(section);
-        submission.setSection(save);
-        submissionJpaRepository.save(submission);
+
+        submissions.stream()
+                .peek(submission -> submission.setSection(save))
+                .forEach(submission -> submissionJpaRepository.save(submission));
         return ConferenceConverter.sectionToSectionDto(save);
     }
 
@@ -251,9 +254,11 @@ public class ConferencesService {
 
     public void removeSection(String sectionId) {
         Section one = sectionJpaRepository.getOne(sectionId);
-        Submission submission = one.getSubmission();
-        submission.setSection(null);
-        submissionJpaRepository.save(submission);
+        one.getSubmissions()
+            .forEach(submission -> {
+                submission.setSection(null);
+                submissionJpaRepository.save(submission);
+            });
 
         sectionJpaRepository.deleteById(sectionId);
     }
@@ -413,5 +418,16 @@ public class ConferencesService {
 
     public SubmissionDto getSubmission(String submissionId) {
         return ConferenceConverter.submissionToSubmissionDto(submissionJpaRepository.getOne(submissionId));
+    }
+
+    public SubmissionDto updateFinalVerdict(String submissionId, SubmissionDto submissionDto) {
+        Submission submission = submissionJpaRepository.getOne(submissionId);
+        submission.setFinalVerdict(submissionDto.getFinalVerdict());
+        return ConferenceConverter.submissionToSubmissionDto(submissionJpaRepository.save(submission));
+
+    }
+
+    public SectionDto getSection(String sectionId) {
+        return ConferenceConverter.sectionToSectionDtoWithSubmissions(sectionJpaRepository.getOne(sectionId));
     }
 }

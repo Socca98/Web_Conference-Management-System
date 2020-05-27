@@ -9,7 +9,7 @@ public class SectionDto {
     private String title;
     private UserDto sectionChair;
     private ConferenceDto conference;
-    private SubmissionDto submission;
+    private List<SubmissionDto> submissions;
 
     private Integer startTime;
     private Integer endTime;
@@ -51,12 +51,12 @@ public class SectionDto {
         this.conference = conference;
     }
 
-    public SubmissionDto getSubmission() {
-        return submission;
+    public List<SubmissionDto> getSubmissions() {
+        return submissions;
     }
 
-    public void setSubmission(SubmissionDto submission) {
-        this.submission = submission;
+    public void setSubmissions(List<SubmissionDto> submissions) {
+        this.submissions = submissions;
     }
 
     public Integer getStartTime() {
