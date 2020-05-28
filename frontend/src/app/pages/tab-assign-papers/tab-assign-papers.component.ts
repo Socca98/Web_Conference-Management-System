@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Submission} from '../../shared/models/submission';
 import {SubmissionsService} from '../../shared/services/submissions.service';
 import {User} from '../../shared/models/user';
+import {AuthService} from '../../login/auth.service';
 
 interface Tab {
   submission: Submission;
@@ -14,23 +15,25 @@ interface Tab {
   styleUrls: ['./tab-assign-papers.component.css']
 })
 export class TabAssignPapersComponent implements OnInit {
-  submissions: Submission[];
-  users: User[];
-  tabs: Tab[];
+  submissions: Submission[] = [];
+  users: User[] = [];
+  tabs: Tab[] = [];
   selection: User;
 
   constructor(
-    private submissionsService: SubmissionsService
+    private submissionsService: SubmissionsService,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
-    this.submissionsService.getSubmissions().subscribe((result: Submission[]) => {
+    this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
       this.submissions = result;
+
+      for (const submission of this.submissions) {
+        this.tabs.push({submission, usersToAssign: []});
+      }
     });
     // TODO: add users
-    for (const submission of this.submissions) {
-      this.tabs.push({submission, usersToAssign: []});
-    }
   }
 
   addSelectionToTab(tab: Tab) {

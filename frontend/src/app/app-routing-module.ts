@@ -30,9 +30,9 @@ const routes: Routes = [
   },
 
   {
-    path: 'conference/tab-assign-papers',
+    path: 'conference/assign-papers',
     component: TabAssignPapersComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
 
   {
