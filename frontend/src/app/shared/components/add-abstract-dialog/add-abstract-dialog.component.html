@@ -10,9 +10,14 @@
       </label>
     </mat-form-field>
 
+    <mat-label>Abstract paper: </mat-label>
+    <label>
+      <input type="file" id="file" (change)="onFileSelected($event)">
+    </label>
+
     <ng-container *ngFor="let author of submission.authors; let i = index; trackBy: identify">
       <mat-form-field class="field">
-        <mat-label>Email</mat-label>
+        <mat-label>Author email</mat-label>
         <label>
           <input matInput [(ngModel)]="author.email" name="email{{i}}" value="admin" required>
         </label>
@@ -38,10 +43,7 @@
       </label>
     </mat-form-field>
 
-    <mat-label>Abstract paper: </mat-label>
-    <label>
-      <input type="file" id="file" (change)="onFileSelected($event)">
-    </label>
+
   </div>
 
   <div mat-dialog-actions>
