@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import {Submission} from '../../shared/models/submission';
+import {SubmissionsService} from '../../shared/services/submissions.service';
+import {User} from '../../shared/models/user';
+import {AuthService} from '../../login/auth.service';
+
+interface Tab {
+  submission: Submission;
+  usersToAssign: User[];
+}
 
 @Component({
   selector: 'app-tab-assign-papers',
@@ -6,10 +15,36 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tab-assign-papers.component.css']
 })
 export class TabAssignPapersComponent implements OnInit {
+  submissions: Submission[] = [];
+  users: User[] = [];
+  tabs: Tab[] = [];
+  selection: User;
 
-  constructor() { }
+  constructor(
+    private submissionsService: SubmissionsService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
+    this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
+      this.submissions = result;
+
+      for (const submission of this.submissions) {
+        this.tabs.push({submission, usersToAssign: []});
+      }
+    });
+    // TODO: add users
   }
 
+  addSelectionToTab(tab: Tab) {
+    tab.usersToAssign.push(this.selection);
+  }
+
+  assign(tab: Tab) {
+    const conferenceId = localStorage.getItem('conferenceId');
+    if (conferenceId === null) {
+      throw new Error('Error! Could not retrieve conference id!');
+    }
+    // TODO: make post request
+  }
 }

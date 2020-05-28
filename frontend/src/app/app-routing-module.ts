@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {HomePageComponent} from './pages/home-page/home-page.component';
 import {TabDetailsComponent} from './pages/tab-details/tab-details.component';
 import {TabSubmissionsComponent} from './pages/tab-submissions/tab-submissions.component';
+import {TabAssignPapersComponent} from './pages/tab-assign-papers/tab-assign-papers.component';
 import {AuthGuard} from './login/auth.guard';
 import {Role} from './shared/models/role';
 import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
@@ -25,6 +26,12 @@ const routes: Routes = [
   {
     path: 'conference/details',
     component: TabDetailsComponent,
+    canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'conference/assign-papers',
+    component: TabAssignPapersComponent,
     canActivate: [AuthGuard],
   },
 
