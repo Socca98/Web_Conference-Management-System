@@ -25,6 +25,7 @@ export class AddAbstractDialogComponent implements OnInit {
     authors: [] = [],
     likes: null,
     reviews: null,
+    abstractPaperId: null,
   };
   private selectedFile: File = null;
 
@@ -57,6 +58,8 @@ export class AddAbstractDialogComponent implements OnInit {
         next: (response: Submission) => {
           console.log(response);
           console.log('File uploaded successfully.');
+          this.submission.abstractPaperId = response.id;
+          console.log(this.submission);
         },
         error: err => {
           console.error('Error! ' + err);
@@ -106,4 +109,5 @@ export class AddAbstractDialogComponent implements OnInit {
   onCancelClick() {
     this.dialogRef.close();
   }
+
 }
