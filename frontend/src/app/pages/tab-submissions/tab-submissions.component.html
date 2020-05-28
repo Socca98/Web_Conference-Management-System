@@ -1,12 +1,12 @@
 <div>
   <div class="submissions">
-    <ng-container>
-      <mat-card class="submission-card" *ngFor="let submission of submissions">
+    <ng-container *ngFor="let submission of submissions;let i = index">
+      <mat-card class="submission-card">
         <mat-card-header>
           <div mat-card-avatar class="submission-header-image"></div>
           <mat-card-title>{{submission.title}}</mat-card-title>
+          <mat-card-subtitle>No. {{i}}</mat-card-subtitle>
         </mat-card-header>
-        <br>
         <mat-card-content>
           <p>
             <span class="field">Abstract: </span>
@@ -15,8 +15,8 @@
           </p>
           <p>
             <span class="field">Authors: </span>
-            <ng-container *ngFor="let author of submission.authors">
-              {{author.fullName}},
+            <ng-container *ngFor="let author of submission.authors;let j = index">
+              {{author.fullName}}<span *ngIf="j < submission.authors.length-1">,</span>
             </ng-container>
           </p>
           <p><span class="field">Topics: </span>{{submission.topics}}</p>
@@ -35,7 +35,7 @@
     </ng-container>
   </div>
 
-  <button mat-fab color="primary" id="add-button" matTooltip="Submit abstract" (click)="openAddAbstractDialog()">
+  <button mat-fab color="accent" id="add-button" matTooltip="Submit abstract" (click)="openAddAbstractDialog()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

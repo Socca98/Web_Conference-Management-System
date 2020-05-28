@@ -7,7 +7,7 @@ export interface Section {
   title: string;
   sectionChair: User;
   conference: Conference;
-  submission: Submission;
+  submissions: Submission[];
   startTime: string;
   endTime: string;
   speakers: User[];

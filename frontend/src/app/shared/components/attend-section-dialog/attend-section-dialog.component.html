@@ -1,0 +1,13 @@
+<div>
+  <h1 mat-dialog-title>Pay tax fee</h1>
+
+  <mat-dialog-content>
+    In order to participate in any section during the conference duration, you will have to
+    pay a price of <b>{{taxFee}} <i>Euro</i></b>. Are you willing to do this?
+  </mat-dialog-content>
+
+  <div mat-dialog-actions>
+    <button mat-button id="pay-dialog-button" color="accent" (click)="onPayClick()">PAY</button>
+    <button mat-button color="accent" (click)="onCancelClick()">CANCEL</button>
+  </div>
+</div>

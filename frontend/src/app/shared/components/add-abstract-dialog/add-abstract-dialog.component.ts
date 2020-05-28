@@ -12,17 +12,7 @@ import {AuthService} from '../../../login/auth.service';
   styleUrls: ['./add-abstract-dialog.component.css']
 })
 export class AddAbstractDialogComponent implements OnInit {
-  user: User = {
-    id: null,
-    username: null,
-    password: null,
-    fullName: null,
-    affiliation: null,
-    email: null,
-    webpage: null,
-    isChair: null,
-    role: null,
-  };
+  user: User = {} as User;
   submission: Submission = {
     id: null,
     title: null,

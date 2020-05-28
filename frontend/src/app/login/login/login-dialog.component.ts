@@ -21,6 +21,13 @@ export class LoginDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.authService.isLogged()) {
+      this.snackBar.open('You must logout first!', '', {
+        duration: 2000,
+        panelClass: ['warning'],
+      });
+      this.dialogRef.close();
+    }
   }
 
   /**
@@ -42,7 +49,7 @@ export class LoginDialogComponent implements OnInit {
         });
       },
       error: _ => {
-        this.snackBar.open('Invalid credentials!.', '', {
+        this.snackBar.open('Invalid credentials!', '', {
           duration: 2000,
           panelClass: ['warning'],
         });

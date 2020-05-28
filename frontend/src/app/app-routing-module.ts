@@ -8,11 +8,17 @@ import {Role} from './shared/models/role';
 import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
 import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
 import {TabSectionsComponent} from './pages/tab-sections/tab-sections.component';
+import {TabResultsComponent} from './pages/tab-results/tab-results.component';
 
 
 const routes: Routes = [
   {
     path: '',
+    component: HomePageComponent,
+  },
+
+  {
+    path: 'invitation/:linkId',
     component: HomePageComponent,
   },
 
@@ -26,7 +32,7 @@ const routes: Routes = [
     path: 'conference/submissions',
     component: TabSubmissionsComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.Author, Role.PC_Member]}
+    // data: {roles: [Role.Author, Role.PC_Member]}
   },
 
   {
@@ -40,13 +46,20 @@ const routes: Routes = [
     path: 'conference/evaluations',
     component: TabEvaluationsComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.Chair, Role.CoChair]}
+    // data: {roles: [Role.Chair, Role.CoChair]}
   },
 
   {
     path: 'conference/sections',
     component: TabSectionsComponent,
     // canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'conference/results',
+    component: TabResultsComponent,
+    // canActivate: [AuthGuard],
+    // data: {roles: [Role.Author, Role.PC_Member]}
   },
 
   {

@@ -1,0 +1,48 @@
+<h1>Until the evaluation deadline, you will know the results of your submissions</h1>
+
+<div class="submissions">
+  <ng-container>
+    <mat-card class="submission-card" *ngFor="let submission of submissionsReviewed;let i = index;">
+      <mat-card-header>
+        <div mat-card-avatar class="submission-header-image"></div>
+        <mat-card-title>{{submission.title}}</mat-card-title>
+      </mat-card-header>
+      <br>
+      <mat-card-content>
+        <p>
+          <span class="field">Abstract: </span>
+          <i *ngIf="!submission.abstractPaper">none</i>
+          {{submission.abstractPaper}}
+        </p>
+        <p>
+          <span class="field">Authors: </span>
+          <ng-container *ngFor="let author of submission.authors;let j = index">
+            {{author.fullName}}<span *ngIf="j < submission.authors.length-1">,</span>
+          </ng-container>
+        </p>
+        <p><span class="field">Topics: </span>{{submission.topics}}</p>
+        <p><span class="field">Keywords: </span>{{submission.keywords}}</p>
+        <p>
+          <span class="field">Fullpaper: </span>
+          <i *ngIf="!submission.fullPaper">none</i>
+          {{submission.fullPaper}}
+        </p>
+        <hr>
+        <b>Reviews:</b>
+        <ng-container *ngIf="submission.finalVerdict">
+          <i id="final-verdict">{{submission.finalVerdict}}</i>
+        </ng-container>
+        <br>
+        <ng-container *ngFor="let review of submission.reviews">
+          <i>{{review.verdict}}</i>, {{review.user.fullName}}<br>
+        </ng-container>
+      </mat-card-content>
+
+      <mat-card-actions *ngIf="!isAccepted(submission)">
+        <button mat-raised-button color="accent" [matTooltip]="'The program committee offers some improvements before you present in front of all.'">
+          Improve paper
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-container>
+</div>

@@ -1,19 +1,54 @@
 * {
-  font-size: 20px;
-  font-family: sans-serif;
+  font-family: Georgia, serif;
   letter-spacing: 2px;
+  padding: 10px;
 }
 
-.content {
-  align-items: initial;
+h2 {
+  font-size: 32px;
 }
+
+#conference-title {
+  font-size: 46px;
+  text-shadow: 1px 2px darkslategray;
+  margin-bottom: 30px;
+}
+
+p {
+  font-size: 22px;
+}
+
+.field {
+  font-weight: bold;
+}
+
 
 .conference-container {
   padding: 20px 100px 20px 50px;
   border: 3px dashed grey;
   border-radius: 5px;
+  text-align: center;
 }
 
-#conference-title {
-  font-size: 30px;
+.conference-header-image {
+  position: absolute;
+  right: 10px;
+  top: 20px;
+
+  /*background-size: cover;*/
+}
+
+img:hover {
+  /* text-shadow
+  param1 = distance from initial position
+  param2 = above or below effect, raise or not
+  param3 = intensity, blurring
+  param4 = color
+  */
+  box-shadow: 0 -2px 4px #fff,
+  0 -2px 12px #FF3,
+  0 -10px 20px #F90,
+  0 -23px 40px #C33;
+
+  border-radius: 30%;
 }
