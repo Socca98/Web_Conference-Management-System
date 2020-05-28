@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateConferenceComponent } from './create-conference.component';
+import { CreateConferenceDialogComponent } from './create-conference-dialog.component';
 
 describe('CreateConferenceComponent', () => {
-  let component: CreateConferenceComponent;
-  let fixture: ComponentFixture<CreateConferenceComponent>;
+  let component: CreateConferenceDialogComponent;
+  let fixture: ComponentFixture<CreateConferenceDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateConferenceComponent ]
+      declarations: [ CreateConferenceDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateConferenceComponent);
+    fixture = TestBed.createComponent(CreateConferenceDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

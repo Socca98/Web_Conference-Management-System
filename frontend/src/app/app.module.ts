@@ -28,7 +28,7 @@ import {AddSectionDialogComponent} from './shared/components/add-section-dialog/
 import {AddRecommendationDialogComponent} from './shared/components/add-recommendation-dialog/add-recommendation-dialog.component';
 import {AttendSectionDialogComponent} from './shared/components/attend-section-dialog/attend-section-dialog.component';
 import {TabResultsComponent} from './pages/tab-results/tab-results.component';
-import {CreateConferenceComponent} from './create-conference/create-conference.component';
+import {CreateConferenceDialogComponent} from './shared/components/create-conference-dialog/create-conference-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
@@ -41,6 +41,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     AddSectionDialogComponent,
     AddRecommendationDialogComponent,
     AttendSectionDialogComponent,
+    CreateConferenceDialogComponent,
 
     HomePageComponent,
     ConferenceComponent,
@@ -53,7 +54,6 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     TabEvaluationsComponent,
     TabSectionsComponent,
     TabResultsComponent,
-    CreateConferenceComponent,
   ],
   imports: [
     BrowserModule,

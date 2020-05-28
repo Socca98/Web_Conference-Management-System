@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {Conference} from '../shared/models/conference';
+import {Conference} from '../../models/conference';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {ConferencesService} from '../shared/services/conferences.service';
+import {ConferencesService} from '../../services/conferences.service';
 import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-create-conference',
-  templateUrl: './create-conference.component.html',
-  styleUrls: ['./create-conference.component.css']
+  templateUrl: './create-conference-dialog.component.html',
+  styleUrls: ['./create-conference-dialog.component.css']
 })
-export class CreateConferenceComponent implements OnInit {
+export class CreateConferenceDialogComponent implements OnInit {
   allowTwoDeadlines = false;
   committeeMembers: any[] = [{
     email: '',
@@ -20,7 +20,7 @@ export class CreateConferenceComponent implements OnInit {
   conference: Conference = {} as Conference;
 
   constructor(
-    public dialogRef: MatDialogRef<CreateConferenceComponent>,
+    public dialogRef: MatDialogRef<CreateConferenceDialogComponent>,
     private conferencesService: ConferencesService,
     private snackBar: MatSnackBar) {
   }

@@ -4,7 +4,7 @@ import {LoginDialogComponent} from './login/login/login-dialog.component';
 import {Router} from '@angular/router';
 import {RegisterDialogComponent} from './login/register/register-dialog.component';
 import {AuthService} from './login/auth.service';
-import {CreateConferenceComponent} from './create-conference/create-conference.component';
+import {CreateConferenceDialogComponent} from './shared/components/create-conference-dialog/create-conference-dialog.component';
 
 @Component({
   selector: 'app-root',
@@ -34,6 +34,6 @@ export class AppComponent {
   }
 
   openCreateConferenceDialog() {
-    this.dialog.open(CreateConferenceComponent);
+    this.dialog.open(CreateConferenceDialogComponent);
   }
 }
