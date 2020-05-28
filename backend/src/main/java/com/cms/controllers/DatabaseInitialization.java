@@ -98,17 +98,49 @@ public class DatabaseInitialization {
         registerUserDto.setEmail("user5@gmail.com");
         registerUserDto.setWebpage("user5.com");
         initializationService.register(registerUserDto);
+
+        registerUserDto.setFullName("Init User 6");
+        registerUserDto.setUsername("init_user_6");
+        registerUserDto.setPassword("root");
+        registerUserDto.setAffiliation("UBB");
+        registerUserDto.setEmail("user6@gmail.com");
+        registerUserDto.setWebpage("user6.com");
+        initializationService.register(registerUserDto);
+
+        registerUserDto.setFullName("Init User 7");
+        registerUserDto.setUsername("init_user_7");
+        registerUserDto.setPassword("root");
+        registerUserDto.setAffiliation("UBB");
+        registerUserDto.setEmail("user7@gmail.com");
+        registerUserDto.setWebpage("user7.com");
+        initializationService.register(registerUserDto);
+
+        registerUserDto.setFullName("Init User 8");
+        registerUserDto.setUsername("init_user_8");
+        registerUserDto.setPassword("root");
+        registerUserDto.setAffiliation("UBB");
+        registerUserDto.setEmail("user8@gmail.com");
+        registerUserDto.setWebpage("user8.com");
+        initializationService.register(registerUserDto);
+
+        registerUserDto.setFullName("Init User 9");
+        registerUserDto.setUsername("init_user_9");
+        registerUserDto.setPassword("root");
+        registerUserDto.setAffiliation("UBB");
+        registerUserDto.setEmail("user9@gmail.com");
+        registerUserDto.setWebpage("user9.com");
+        initializationService.register(registerUserDto);
     }
 
     private void createConferences() {
         CreateConferenceDto conferenceDto = new CreateConferenceDto();
         conferenceDto.setName("Conference 0");
-        conferenceDto.setStartDate(1588326245);
-        conferenceDto.setEndDate(1588327000);
-        conferenceDto.setAbstractDeadline(1588326500);
-        conferenceDto.setProposalDeadline(1588326400);
-        conferenceDto.setBiddingDeadline(1588326300);
-        conferenceDto.setEvaluationDeadline(1588326800);
+        conferenceDto.setStartDate(1590692433);
+        conferenceDto.setEndDate(1603911633);
+        conferenceDto.setAbstractDeadline(1595962833);
+        conferenceDto.setProposalDeadline(1593370833);
+        conferenceDto.setBiddingDeadline(1598641233);
+        conferenceDto.setEvaluationDeadline(1601319633);
         conferenceDto.setAllowFullPaper(false);
         conferenceDto.setTaxFee(200);
         conferenceDto.setNrOfReviews(2);
@@ -123,7 +155,7 @@ public class DatabaseInitialization {
 
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user1@gmail.com");
-        userRoleDto.setRole(Roles.AUTHOR);
+        userRoleDto.setRole(Roles.CO_CHAIR);
         userRoleDtos.add(userRoleDto);
 
         userRoleDto = new UserRoleDto();
@@ -138,7 +170,32 @@ public class DatabaseInitialization {
 
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user4@gmail.com");
+        userRoleDto.setRole(Roles.PC_MEMBER);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user5@gmail.com");
         userRoleDto.setRole(Roles.AUTHOR);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user6@gmail.com");
+        userRoleDto.setRole(Roles.AUTHOR);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user7@gmail.com");
+        userRoleDto.setRole(Roles.AUTHOR);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user8@gmail.com");
+        userRoleDto.setRole(Roles.STEERING_COMMITTEE_MEMBER);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user9@gmail.com");
+        userRoleDto.setRole(Roles.STEERING_COMMITTEE_MEMBER);
         userRoleDtos.add(userRoleDto);
 
         conferenceDto.setUsers(userRoleDtos);
@@ -159,22 +216,22 @@ public class DatabaseInitialization {
         userRoleDtos = new ArrayList<>();
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user0@gmail.com");
-        userRoleDto.setRole(Roles.AUTHOR);
+        userRoleDto.setRole(Roles.STEERING_COMMITTEE_MEMBER);
         userRoleDtos.add(userRoleDto);
 
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user1@gmail.com");
-        userRoleDto.setRole(Roles.PC_MEMBER);
+        userRoleDto.setRole(Roles.STEERING_COMMITTEE_MEMBER);
         userRoleDtos.add(userRoleDto);
 
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user2@gmail.com");
-        userRoleDto.setRole(Roles.CO_CHAIR);
+        userRoleDto.setRole(Roles.AUTHOR);
         userRoleDtos.add(userRoleDto);
 
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user3@gmail.com");
-        userRoleDto.setRole(Roles.PC_MEMBER);
+        userRoleDto.setRole(Roles.AUTHOR);
         userRoleDtos.add(userRoleDto);
 
         userRoleDto = new UserRoleDto();
@@ -185,6 +242,26 @@ public class DatabaseInitialization {
         userRoleDto = new UserRoleDto();
         userRoleDto.setEmail("user5@gmail.com");
         userRoleDto.setRole(Roles.PC_MEMBER);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user6@gmail.com");
+        userRoleDto.setRole(Roles.PC_MEMBER);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user7@gmail.com");
+        userRoleDto.setRole(Roles.PC_MEMBER);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user8@gmail.com");
+        userRoleDto.setRole(Roles.CO_CHAIR);
+        userRoleDtos.add(userRoleDto);
+
+        userRoleDto = new UserRoleDto();
+        userRoleDto.setEmail("user9@gmail.com");
+        userRoleDto.setRole(Roles.CO_CHAIR);
         userRoleDtos.add(userRoleDto);
 
         conferenceDto.setUsers(userRoleDtos);
@@ -200,45 +277,103 @@ public class DatabaseInitialization {
 
         UserRoleDto userRole0 = new UserRoleDto();
         userRole0.setEmail("user0@gmail.com");
-
         UserRoleDto userRole1 = new UserRoleDto();
         userRole1.setEmail("user1@gmail.com");
-
+        UserRoleDto userRole2 = new UserRoleDto();
+        userRole2.setEmail("user2@gmail.com");
+        UserRoleDto userRole3 = new UserRoleDto();
+        userRole3.setEmail("user3@gmail.com");
         UserRoleDto userRole4 = new UserRoleDto();
         userRole4.setEmail("user4@gmail.com");
+        UserRoleDto userRole5 = new UserRoleDto();
+        userRole5.setEmail("user5@gmail.com");
+        UserRoleDto userRole6 = new UserRoleDto();
+        userRole6.setEmail("user6@gmail.com");
+        UserRoleDto userRole7 = new UserRoleDto();
+        userRole7.setEmail("user7@gmail.com");
+        UserRoleDto userRole8 = new UserRoleDto();
+        userRole8.setEmail("user8@gmail.com");
+        UserRoleDto userRole9 = new UserRoleDto();
+        userRole9.setEmail("user9@gmail.com");
 
         SubmissionDto submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 0 of conference 0");
         submissionDto.setKeywords("first, number one, boss");
         submissionDto.setTopics("nothing really");
-
         List<UserRoleDto> authors = new ArrayList<>();
-        authors.add(userRole1);
-        authors.add(userRole4);
+        authors.add(userRole2);
+        authors.add(userRole3);
+        authors.add(userRole5);
+        authors.add(userRole6);
         submissionDto.setAuthors(authors);
-
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 1 of conference 0");
         submissionDto.setKeywords("second, number two, slave");
         submissionDto.setTopics("nothing really but with more sour");
-
         authors = new ArrayList<>();
-        authors.add(userRole4);
+        authors.add(userRole2);
+        authors.add(userRole6);
+        authors.add(userRole7);
         submissionDto.setAuthors(authors);
-
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 2 of conference 0");
+        submissionDto.setKeywords("aa, aaa, aa, a");
+        submissionDto.setTopics("AA, AAA, AAAA");
+        authors = new ArrayList<>();
+        authors.add(userRole7);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 3 of conference 0");
+        submissionDto.setKeywords("bb, bbb, bbbb, b, bb");
+        submissionDto.setTopics("BB, BB, bb, BBB");
+        authors = new ArrayList<>();
+        authors.add(userRole6);
+        authors.add(userRole7);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 4 of conference 0");
+        submissionDto.setKeywords("cc, c, c, ccc, cc");
+        submissionDto.setTopics("CC, CCC, C, C");
+        authors = new ArrayList<>();
+        authors.add(userRole5);
+        authors.add(userRole7);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 5 of conference 0");
+        submissionDto.setKeywords("dd, ddd, dd, d");
+        submissionDto.setTopics("DDD, DDD, D, DD");
+        authors = new ArrayList<>();
+        authors.add(userRole7);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 6 of conference 0");
+        submissionDto.setKeywords("third, number two, slave");
+        submissionDto.setTopics("more topics");
+        authors = new ArrayList<>();
+        authors.add(userRole5);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        // Second conference
         submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 0 of conference 1");
         submissionDto.setKeywords("first of second, barosan");
         submissionDto.setTopics("nothing again");
-
         authors = new ArrayList<>();
         authors.add(userRole0);
         submissionDto.setAuthors(authors);
-
         conferencesService.addSubmission(secondConferenceId, submissionDto);
     }
 
@@ -249,22 +384,35 @@ public class DatabaseInitialization {
         userDto2.setEmail("user2@gmail.com");
         UserDto userDto3 = new UserDto();
         userDto3.setEmail("user3@gmail.com");
+        UserDto userDto4 = new UserDto();
+        userDto4.setEmail("user4@gmail.com");
         UserDto userDto5 = new UserDto();
         userDto5.setEmail("user5@gmail.com");
+        UserDto userDto6 = new UserDto();
+        userDto6.setEmail("user6@gmail.com");
+        UserDto userDto7 = new UserDto();
+        userDto7.setEmail("user7@gmail.com");
+        UserDto userDto8 = new UserDto();
+        userDto8.setEmail("user8@gmail.com");
+        UserDto userDto9 = new UserDto();
+        userDto9.setEmail("user9@gmail.com");
 
         List<ConferenceDto> allConferences = conferencesService.getAllConferences();
 
+        // Get all conferences
         String firstConferenceId = allConferences.get(0).getId();
         String secondConferenceId = allConferences.get(1).getId();
 
+        // Get all submissions for each conference
         List<SubmissionDto> submissionsForFirstConference = conferencesService.getSubmissionsForConference(firstConferenceId);
         List<SubmissionDto> submissionsForSecondConference = conferencesService.getSubmissionsForConference(secondConferenceId);
         ReviewDto reviewDto;
-
         reviewDto = new ReviewDto();
+
         reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
         reviewDto.setUser(userDto2);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
+
         reviewDto.setVerdict(Verdict.ACCEPT);
         reviewDto.setUser(userDto3);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
@@ -272,17 +420,41 @@ public class DatabaseInitialization {
         reviewDto.setVerdict(Verdict.NOT_REVIEWED);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(1).getId(), reviewDto);
 
-        reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
-        reviewDto.setUser(userDto1);
-        conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
-        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
-        reviewDto.setUser(userDto3);
-        conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
-        reviewDto.setVerdict(Verdict.ACCEPT);
-        reviewDto.setUser(userDto5);
-        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
+//        reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
+//        reviewDto.setUser(userDto1);
+//        conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
+//
+//        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
+//        reviewDto.setUser(userDto3);
+//        conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
+//
+//        reviewDto.setVerdict(Verdict.ACCEPT);
+//        reviewDto.setUser(userDto5);
+//        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
     }
 
+    private void createSection() {
+        List<ConferenceDto> allConferences = conferencesService.getAllConferences();
+        UserDto userDto1 = new UserDto();
+        userDto1.setEmail("user1@gmail.com");
+        UserDto userDto5 = new UserDto();
+        userDto5.setEmail("user5@gmail.com");
+        String firstConferenceId = allConferences.get(0).getId();
+        SubmissionDto submissionDto = conferencesService.getSubmissionsForConference(firstConferenceId).get(0);
 
+        submissionDto.setFinalVerdict(Verdict.ACCEPT.toString());
+        conferencesService.updateSubmission(submissionDto.getId(), submissionDto);
+
+        SectionDto sectionDto = new SectionDto();
+        sectionDto.setSeats(3);
+        sectionDto.setTitle("The one and only section");
+        sectionDto.setSubmissions(List.of(submissionDto));
+        sectionDto.setSectionChair(userDto5);
+        sectionDto.setStartTime(1588386245);
+        sectionDto.setEndTime(1588406245);
+        sectionDto.setSpeakers(List.of(userDto1));
+
+        conferencesService.createSection(firstConferenceId, sectionDto);
+    }
 
 }
