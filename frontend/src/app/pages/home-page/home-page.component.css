@@ -1,4 +1,22 @@
 ::ng-deep.conference-container {
-  margin-top: 15px;
+  margin-top: 20px;
   border: none; /*<- doesn't apply this :(*/
+}
+
+.mat-tab-group {
+  margin-top: -20px;
+}
+
+#goto-button {
+  position: absolute;
+  left: 69%;
+  top: 96%;
+  /*background-color: black;*/
+  z-index: 10;
+}
+
+#goto-button:hover {
+  -webkit-box-shadow: 2px 2px 9px 1px rgba(28,26,28,1);
+  -moz-box-shadow: 2px 2px 9px 1px rgba(28,26,28,1);
+  box-shadow: 2px 2px 9px 1px rgba(28,26,28,1);
 }

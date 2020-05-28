@@ -2,7 +2,6 @@
   <i>No conferences at the moment. Come back soon!</i>
 </div>
 
-<br>
 
 <ng-template #conferencesExist>
   <mat-tab-group dynamicHeight [(selectedIndex)]="selectedTabIndex">
@@ -11,8 +10,9 @@
     </mat-tab>
   </mat-tab-group>
 
-  <br/><br/><br/>
+  <br/>
   <button mat-raised-button
+          id="goto-button"
           color="accent"
           *ngIf="selectedTabIndex !== null"
           (click)="goToConferenceSite()">

@@ -8,6 +8,7 @@ export interface User {
   webpage: string;
   isChair: boolean;
   role: string;
+  payedAttend: boolean;
 }
 
 

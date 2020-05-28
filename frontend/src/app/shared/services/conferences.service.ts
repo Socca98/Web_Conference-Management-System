@@ -53,4 +53,16 @@ export class ConferencesService {
     }
     return this.http.get<Section[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/sections/');
   }
+
+  /**
+   * Increase the number of occupied seats for a section.
+   * @param conferenceId Id of conference
+   * @param sectionId Id of section
+   */
+  attendSection(conferenceId, sectionId) {
+    if (conferenceId === null) {
+      throw new Error('Error! Conference id is null for request!');
+    }
+    return this.http.post<Section>(environment.apiEndpoint + '/conferences/' + conferenceId + '/sections/' + sectionId + '/attend', {});
+  }
 }

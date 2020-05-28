@@ -16,8 +16,8 @@
         </p>
         <p>
           <span class="field">Authors: </span>
-          <ng-container *ngFor="let author of submission.authors">
-            {{author.fullName}},
+          <ng-container *ngFor="let author of submission.authors;let j = index">
+            {{author.fullName}}<span *ngIf="j < submission.authors.length-1">,</span>
           </ng-container>
         </p>
         <p><span class="field">Topics: </span>{{submission.topics}}</p>
@@ -29,12 +29,15 @@
         </p>
         <hr>
         <b>Reviews:</b>
+        <ng-container *ngIf="submission.finalVerdict">
+          <i id="final-verdict">{{submission.finalVerdict}}</i>
+        </ng-container>
         <span *ngIf="!hasReviews(submission)" style="font-style: italic;">
             none yet
-          </span>
+        </span>
         <br>
         <ng-container *ngFor="let review of submission.reviews">
-          {{review.verdict}}, {{review.user.fullName}} <br>
+          <i>{{review.verdict}}</i>, {{review.user.fullName}}<br>
         </ng-container>
       </mat-card-content>
 
@@ -62,14 +65,12 @@
         </mat-form-field>
         {{anotherReviewer | json}}
 
-        <br><br>
-        <button mat-raised-button color="accent" (click)="requestDiscussion()">Request discussion</button>
         <br>
-
-        <button mat-raised-button color="accent" (click)="chooseForThem()">Choose for them</button>
+        <button mat-raised-button color="accent" (click)="requestDiscussion(submission)">Request discussion</button>
+        <button mat-raised-button color="accent" (click)="chooseForThem(submission.id, i)">Choose for them</button>
         <mat-form-field>
           <mat-label>Select an option</mat-label>
-          <mat-select>
+          <mat-select [(value)]="localVerdicts[i]">
             <mat-option value="WEAK_ACCEPT" style="color: darkseagreen;">Weak Accept</mat-option>
             <mat-option value="ACCEPT" style="color: green;">Accepted</mat-option>
             <mat-option value="STRONG_ACCEPT" style="color: darkgreen;">Strong Accept</mat-option>
