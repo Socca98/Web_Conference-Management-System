@@ -71,7 +71,7 @@ export class AuthService {
     }
 
     const params = new HttpParams().set('conferenceId', selectedConferenceId);
-    return this.http.get(environment.apiEndpoint + '/user-information', {params});
+    return this.http.get(environment.apiEndpoint + 'user-information', {params});
   }
 
   getUserRole() {

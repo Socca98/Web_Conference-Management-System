@@ -132,8 +132,8 @@ public class InitializationService {
                     .filter(role -> role.getConference().getConferenceId().equals(conferenceId))
                     .findFirst();
             if (usersRole.isPresent()) {
-                userInformationDto.setRole(user.getRoles().toString());
-            } else {
+                userInformationDto.setRole(usersRole.get().getRole().toString());
+            } else if (!user.getUsername().equals(adminUsername)) {
                 throw new IssException("The user has no role for conference.", HttpStatus.BAD_REQUEST);
             }
         }
