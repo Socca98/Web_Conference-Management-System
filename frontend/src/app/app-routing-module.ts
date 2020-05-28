@@ -8,6 +8,7 @@ import {Role} from './shared/models/role';
 import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.component';
 import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
 import {TabSectionsComponent} from './pages/tab-sections/tab-sections.component';
+import {TabResultsComponent} from './pages/tab-results/tab-results.component';
 
 
 const routes: Routes = [
@@ -52,6 +53,13 @@ const routes: Routes = [
     path: 'conference/sections',
     component: TabSectionsComponent,
     // canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'conference/results',
+    component: TabResultsComponent,
+    // canActivate: [AuthGuard],
+    // data: {roles: [Role.Author, Role.PC_Member]}
   },
 
   {

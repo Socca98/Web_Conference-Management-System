@@ -94,6 +94,7 @@ footer a {
 .top-corner {
   position: absolute;
   right: 10px;
+  max-height: 36px;
 }
 
 #welcome-user {
@@ -101,6 +102,19 @@ footer a {
   font-size: 14px;
   font-family: "Malgun Gothic", sans-serif;
   color: antiquewhite;
+}
+
+#label-role {
+  position: absolute;
+  right: 0;
+  top: 50px;
+  color: black;
+  text-shadow: 1px 1px grey;
+  font-size: 21px;
+  font-family: Georgia, serif;
+  letter-spacing: 2px;
+  padding: 10px;
+
 }
 
 footer {
