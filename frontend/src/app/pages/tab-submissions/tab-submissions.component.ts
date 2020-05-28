@@ -36,8 +36,8 @@ export class TabSubmissionsComponent implements OnInit {
     this.dialog.open(AddAbstractDialogComponent);
   }
 
-  downloadAbstractPaper() {
-    this.submissionsService.downloadAbstractPaper(this.submissions[2].abstractPaperId).subscribe({
+  downloadAbstractPaper(i) {
+    this.submissionsService.downloadAbstractPaper(this.submissions[i].abstractPaperId).subscribe({
       next: (response: File) => {
         console.log(response);
         console.log('File downloaded successfully.');

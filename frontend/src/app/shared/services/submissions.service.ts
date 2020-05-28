@@ -73,8 +73,8 @@ export class SubmissionsService {
     return this.http.post(environment.apiEndpoint + '/files/upload', formData);
   }
 
-  downloadAbstractPaper(fileId) {
-    return this.http.get(environment.apiEndpoint + 'file/download', fileId);
+  downloadAbstractPaper(fileId: string) {
+    return this.http.get(environment.apiEndpoint + 'file/download' + fileId);
   }
 
   getAcceptedSubmissions(conferenceId) {
