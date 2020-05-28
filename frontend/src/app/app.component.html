@@ -14,11 +14,12 @@
        onclick="this.blur()">Register</a>
   </div>
 
-  <div class="top-corner">
+  <div class="top-corner" *ngIf="this.authService.isLogged()">
     <span id="welcome-user">
-      Welcome, {{this.authService.user.username}}!
+      Welcome, <b>{{this.authService.user.username}}</b>!
+      <span id="label-role" *ngIf="this.authService.getUserRole()">Role: {{this.authService.getUserRole()}}</span>
     </span>
-    <button class="logout-button" *ngIf="this.authService.isLogged()" color="accent"
+    <button class="logout-button" color="accent"
             (click)="this.authService.logout()"
             mat-raised-button>
       Logout
