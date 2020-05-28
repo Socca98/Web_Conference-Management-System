@@ -17,7 +17,7 @@
   <div class="top-corner" *ngIf="this.authService.isLogged()">
     <span id="welcome-user">
       Welcome, <b>{{this.authService.user.username}}</b>!
-      <span id="label-role" *ngIf="this.authService.getUserRole()">Role: {{this.authService.getUserRole()}}</span>
+      <span id="label-role" *ngIf="this.authService.getUserRole() && !isOnHomePage()">Role: {{this.authService.getUserRole()}}</span>
     </span>
     <button class="logout-button" color="accent"
             (click)="this.authService.logout()"
