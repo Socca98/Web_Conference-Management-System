@@ -14,10 +14,17 @@
        onclick="this.blur()">Register</a>
   </div>
 
-  <button class="logout-button" *ngIf="this.authService.isLogged()" color="accent"
-          (click)="this.authService.logout()"
-          mat-raised-button>Logout
-  </button>
+  <div class="top-corner">
+    <span id="welcome-user">
+      Welcome, {{this.authService.user.username}}!
+    </span>
+    <button class="logout-button" *ngIf="this.authService.isLogged()" color="accent"
+            (click)="this.authService.logout()"
+            mat-raised-button>
+      Logout
+    </button>
+  </div>
+
 
   <a class="lnk" routerLink="/" routerLinkActive="active">Home</a>
 
@@ -45,7 +52,6 @@
 <footer>
 
 </footer>
-
 
 
 <!--  Angular Logo in case we

@@ -36,11 +36,15 @@ export class AuthService {
   }
 
   loginUser(user: User): Observable<Token> {
-    return this.http.post<Token>(environment.apiEndpoint + '/login', user);
+    return this.http.post<Token>(environment.apiEndpoint + 'login', user);
   }
 
   registerUser(user: User): Observable<User> {
-    return this.http.post<User>(environment.apiEndpoint + '/register', user);
+    return this.http.post<User>(environment.apiEndpoint + 'register', user);
+  }
+
+  registerUserInvitationLink(user: User, linkId: string): Observable<User> {
+    return this.http.post<User>(environment.apiEndpoint + 'invitation/' + linkId, user);
   }
 
   /**
@@ -56,6 +60,8 @@ export class AuthService {
    */
   logout() {
     localStorage.removeItem('token');
+    // localStorage.removeItem('user');
+    // localStorage.removeItem('conference');
     this.router.navigate(['']);
   }
 

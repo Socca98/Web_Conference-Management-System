@@ -6,7 +6,8 @@ import {User} from '../../shared/models/user';
 import {ConferencesService} from '../../shared/services/conferences.service';
 import {Conference} from '../../shared/models/conference';
 import {Role} from '../../shared/models/role';
-import {Review} from '../../shared/models/review';
+import {Verdict} from '../../shared/models/verdict';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-tab-evaluations',
@@ -20,20 +21,21 @@ export class TabEvaluationsComponent implements OnInit {
   submissions: Submission[] = [];
   submissionPossibleReviewers: Array<User[]> = [];   // Reviewers that did not review submission[i]
   anotherReviewer: string;
+  localVerdicts: Verdict[] = [];
+
 
   constructor(
     private submissionsService: SubmissionsService,
     private authService: AuthService,
     private conferencesService: ConferencesService,
+    private snackBar: MatSnackBar,
   ) {
   }
 
   ngOnInit(): void {
     this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
       this.submissions = result;
-
       // Populate reviewers only after we get the submissions
-      // Should check if conference.id is null before using it?
       this.conferencesService.getConference(this.authService.conference.id).subscribe((resultConference: Conference) => {
         // Get users only with PC Member role
         const pcMembers = resultConference.users.filter(e => e.role === Role.PC_Member);
@@ -53,12 +55,6 @@ export class TabEvaluationsComponent implements OnInit {
    * @param submission Current submission for checking
    */
   hasReviews(submission: Submission): boolean {
-    console.log({
-      submission,
-      reviews: submission.reviews,
-      possibleReviewers: this.submissionPossibleReviewers,
-      submissions: this.submissions,
-    });
     return submission.reviews.length !== 0;
   }
 
@@ -67,12 +63,51 @@ export class TabEvaluationsComponent implements OnInit {
 
   }
 
-  requestDiscussion() {
-
+  requestDiscussion(submission: Submission) {
+    const conferenceId = this.authService.conference.id;
+    for (const review of submission.reviews) {
+      review.verdict = Verdict.Not_Reviewed;
+      review.recommendation = '';
+      this.submissionsService.updateReview(conferenceId, submission.id, review).subscribe({
+        next: _ => {
+          // this.snackBar.open('Review resent.', 'Ok', {
+          //   duration: 1000,
+          // });
+        },
+        error: _ => {
+          // this.snackBar.open('Could not send review!', '', {
+          //   duration: 2000,
+          //   panelClass: ['warning'],
+          // });
+        }
+      });
+    }
   }
 
-  chooseForThem() {
+  chooseForThem(submissionId: string, index: number) {
+    if (!this.localVerdicts[index]) {
+      this.snackBar.open('Please select final verdict!', 'Ok', {
+        duration: 2000,
+        panelClass: ['warning']
+      });
+      return;
+    }
 
+    const conferenceId = this.authService.conference.id;
+    const selectedVerdict = this.localVerdicts[index];
+    this.submissionsService.sendFinalVerdict(conferenceId, submissionId, selectedVerdict).subscribe({
+      next: () => {
+        this.snackBar.open('Final verdict sent.', 'Ok', {
+          duration: 1000,
+        });
+      },
+      error: _ => {
+        this.snackBar.open('Could not send final verdict!', '', {
+          duration: 2000,
+          panelClass: ['warning'],
+        });
+      }
+    });
   }
 
 }

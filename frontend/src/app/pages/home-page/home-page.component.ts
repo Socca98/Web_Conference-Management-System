@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Conference} from '../../shared/models/conference';
 import {ConferencesService} from '../../shared/services/conferences.service';
 import {AuthService} from '../../login/auth.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '../../shared/models/user';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {RegisterDialogComponent} from '../../login/register/register-dialog.component';
 
 @Component({
   selector: 'app-home-page',
@@ -22,9 +24,29 @@ export class HomePageComponent implements OnInit {
     private authService: AuthService,
     private conferencesService: ConferencesService,
     private router: Router,
+    private route: ActivatedRoute,
     private snackBar: MatSnackBar,
+    private matDialog: MatDialog,
   ) {
-
+    this.route.params.subscribe(params => {
+      // We got here by invitation link, so we open register dialog and pass data
+      if (params.linkId) {
+        if (!this.authService.isLogged()) {
+          const dialogConfig = new MatDialogConfig();
+          dialogConfig.data = {
+            linkId: params.linkId,
+          };
+          this.matDialog.open(RegisterDialogComponent, dialogConfig);
+        } else {
+          // If already logged in then abort
+          this.snackBar.open('You must logout first!', '', {
+            duration: 2000,
+            panelClass: ['warning'],
+          });
+          return;
+        }
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -72,6 +94,7 @@ export class HomePageComponent implements OnInit {
           affiliation: responseData.affiliation,
           role: responseData.role,
           isChair: responseData.chair,
+          payedAttend: false,
         } as User;
 
         // Open tab-details component
@@ -83,3 +106,5 @@ export class HomePageComponent implements OnInit {
     });
   }
 }
+
+

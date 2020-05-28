@@ -91,11 +91,17 @@ footer a {
   cursor: pointer;
 }
 
-.logout-button {
+.top-corner {
   position: absolute;
   right: 10px;
 }
 
+#welcome-user {
+  margin-right: 15px;
+  font-size: 14px;
+  font-family: "Malgun Gothic", sans-serif;
+  color: antiquewhite;
+}
 
 footer {
   display: none;

@@ -1,14 +1,17 @@
 <div class="conference-container">
+  <img src="../../../../assets/icon3-svg.svg" id="conference-header-image" width="200" height="100" alt="Conference Image">
   <h1 id="conference-title">{{conference.name}}</h1>
-  <p>Start date: {{conference.startDate}}</p>
-  <p>End date: {{conference.endDate}}</p>
-  <p>Website: {{conference.website}}</p>
-
+  <p><span class="field">Period: </span>{{conference.startDate * 1000| date}} - {{conference.endDate * 1000 | date}}</p>
+  <p><span class="field">Website: </span>{{conference.website}}</p>
   <br>
   <h2><u>Call for papers</u></h2>
-  <p>Submissions deadline: {{conference.abstractDeadline}}</p>
-  <p *ngIf="conference.proposalDeadline">Proposal deadline: {{conference.proposalDeadline}}</p>
-  <p>{{conference.biddingDeadline}}</p>
-  <p>{{conference.evaluationDeadline}}</p>
-  <p>Tax fee: {{conference.taxFee}} Euro</p>
+  <p *ngIf="conference.proposalDeadline">
+    <span class="field">
+      Proposal deadline:
+    </span>{{conference.proposalDeadline * 1000| date}}
+  </p>
+  <p><span class="field">Bidding deadline: </span>{{conference.biddingDeadline * 1000| date}}</p>
+  <p><span class="field">Evaluation deadline: </span>{{conference.evaluationDeadline * 1000| date}}</p>
+  <p><span class="field">Tax fee: </span>{{conference.taxFee}} <i>Euro</i></p>
+
 </div>

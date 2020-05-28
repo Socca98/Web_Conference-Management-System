@@ -1,0 +1,9 @@
+div {
+  max-width: 400px;
+  text-align: justify;
+  font-size: 17px;
+}
+
+#pay-dialog-button:hover {
+  color: red;
+}

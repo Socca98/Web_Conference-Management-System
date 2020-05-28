@@ -17,6 +17,11 @@ const routes: Routes = [
   },
 
   {
+    path: 'invitation/:linkId',
+    component: HomePageComponent,
+  },
+
+  {
     path: 'conference/details',
     component: TabDetailsComponent,
     canActivate: [AuthGuard],
@@ -26,7 +31,7 @@ const routes: Routes = [
     path: 'conference/submissions',
     component: TabSubmissionsComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.Author, Role.PC_Member]}
+    // data: {roles: [Role.Author, Role.PC_Member]}
   },
 
   {
@@ -40,7 +45,7 @@ const routes: Routes = [
     path: 'conference/evaluations',
     component: TabEvaluationsComponent,
     canActivate: [AuthGuard],
-    data: {roles: [Role.Chair, Role.CoChair]}
+    // data: {roles: [Role.Chair, Role.CoChair]}
   },
 
   {

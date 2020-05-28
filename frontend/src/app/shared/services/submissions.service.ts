@@ -56,6 +56,15 @@ export class SubmissionsService {
     );
   }
 
+  sendFinalVerdict(conferenceId, submissionId, verdict: Verdict) {
+    return this.http.post<Review>(
+      environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/final-verdict',
+      {
+        verdict,
+      }
+    );
+  }
+
   addAbstract(conferenceId, submission: Submission) {
     return this.http.post<Submission>(environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/', submission);
   }

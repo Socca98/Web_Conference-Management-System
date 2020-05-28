@@ -3,7 +3,7 @@
 <form>
   <div mat-dialog-content class="field-container">
     <mat-form-field class="field">
-      <mat-label>Name</mat-label>
+      <mat-label>Title</mat-label>
       <label>
         <input matInput [(ngModel)]="section.title" name="title" placeholder="ex. Spacial Databases" value="Spacial Databases" required>
       </label>
@@ -29,6 +29,32 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>No. of seats</mat-label>
+      <label>
+        <input matInput [(ngModel)]="section.seats" name="nrSeats" type="number" value="300" required>
+      </label>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Choose paper</mat-label>
+      <mat-select [(value)]="section.speakers">
+        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">
+          {{possibleSpeaker}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Choose speaker</mat-label>
+      <mat-select [(value)]="section.speakers">
+        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">
+          {{possibleSpeaker}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
 
 
     {{section | json}}
