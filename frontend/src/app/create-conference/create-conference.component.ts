@@ -11,27 +11,13 @@ import {MatSelectModule} from '@angular/material/select';
   styleUrls: ['./create-conference.component.css']
 })
 export class CreateConferenceComponent implements OnInit {
-
   allowTwoDeadlines = false;
   committeeMembers: any[] = [{
     email: '',
     memberRole: ''
   }];
-
-  conference: Conference = {
-    abstractDeadline: null,
-    biddingDeadline: null,
-    emails: [],
-    evaluationDeadline: null,
-    fullPaperDeadline: null,
-    id: null,
-    nrOfReviewers: 0,
-    taxFee: 0,
-    website: null,
-    name: null,
-    startDate: null,
-    endDate: null
-  };
+  emails: [] = [];
+  conference: Conference = {} as Conference;
 
   constructor(
     public dialogRef: MatDialogRef<CreateConferenceComponent>,
