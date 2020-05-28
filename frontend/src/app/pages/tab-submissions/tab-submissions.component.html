@@ -1,4 +1,4 @@
-<div>
+<div id="submissions-wrapper">
   <div class="submissions">
     <ng-container *ngFor="let submission of submissions;let i = index">
       <mat-card class="submission-card">
@@ -35,8 +35,7 @@
       </mat-card>
     </ng-container>
   </div>
-
-  <button mat-fab color="accent" id="add-button" matTooltip="Submit abstract" (click)="openAddAbstractDialog()">
-    <mat-icon>add</mat-icon>
-  </button>
 </div>
+<button mat-fab color="accent" id="add-button" matTooltip="Submit abstract" (click)="openAddAbstractDialog()">
+  <mat-icon>add</mat-icon>
+</button>
