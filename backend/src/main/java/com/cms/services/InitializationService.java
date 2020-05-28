@@ -9,6 +9,7 @@ import com.cms.dto.user.UserInformationDto;
 import com.cms.exception.IssException;
 import com.cms.exception.LoginException;
 import com.cms.model.Invitation;
+import com.cms.model.Role;
 import com.cms.model.User;
 import com.cms.repositories.InvitationJpaRepository;
 import com.cms.repositories.UserJpaRepository;
@@ -16,6 +17,7 @@ import com.cms.utils.UserConverter;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
@@ -40,8 +42,14 @@ public class InitializationService {
     private String adminUsername;
 
 
-
     public UserDto register(RegisterUserDto registerUserDto) {
+
+        if (Objects.nonNull(userRepository.getUserByUsername(registerUserDto.getUsername()))) {
+            throw new IssException("Username already in use!", HttpStatus.BAD_REQUEST);
+        }
+        if (Objects.nonNull(userRepository.getUserByEmail(registerUserDto.getEmail()))) {
+            throw new IssException("Email already in use!", HttpStatus.BAD_REQUEST);
+        }
         User save = userRepository.save(UserConverter.registerUserToUser(registerUserDto));
         User user = userRepository.getOne(save.getUserId());
         return UserConverter.userToUserDto(user);
@@ -50,7 +58,7 @@ public class InitializationService {
     public UserDto completeInvitation(String invitationId, RegisterUserDto registerUserDto) {
         Optional<Invitation> invitation = invitationJpaRepository.findById(invitationId);
         if (invitation.isEmpty()) {
-            throw new IssException("Invitation doesn't exists!");
+            throw new IssException("Invitation doesn't exists!", HttpStatus.NOT_FOUND);
         }
 
         User basicUser = invitation.get().getUser();
@@ -119,9 +127,17 @@ public class InitializationService {
                 .username(user.getUsername())
                 .affiliation(user.getAffiliation());
         if (Objects.nonNull(conferenceId)) {
-            //TODO: populate role if conference not null
+            Optional<Role> usersRole = user.getRoles()
+                    .stream()
+                    .filter(role -> role.getConference().getConferenceId().equals(conferenceId))
+                    .findFirst();
+            if (usersRole.isPresent()) {
+                userInformationDto.setRole(user.getRoles().toString());
+            } else {
+                throw new IssException("The user has no role for conference.", HttpStatus.BAD_REQUEST);
+            }
         }
-        if(user.getUsername().equals(adminUsername)) {
+        if (user.getUsername().equals(adminUsername)) {
             userInformationDto.setChair(true);
         } else {
             userInformationDto.setChair(false);

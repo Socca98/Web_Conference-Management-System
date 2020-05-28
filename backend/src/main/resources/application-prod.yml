@@ -36,4 +36,4 @@ predefined:
   admin:
     username: admin
   invitation:
-    base: http://localhost:4200/invitation/
+    base: http://localhost:4200/invitation
