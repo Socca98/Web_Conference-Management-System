@@ -73,6 +73,10 @@ export class SubmissionsService {
     return this.http.post(environment.apiEndpoint + '/files/upload', formData);
   }
 
+  downloadAbstractPaper(fileId: string) {
+    return this.http.get(environment.apiEndpoint + 'file/download' + fileId);
+  }
+
   getAcceptedSubmissions(conferenceId) {
     const params = new HttpParams().set('status', 'accepted');
     const urlString = environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + 2 + '/review';

@@ -32,6 +32,20 @@ export class TabSubmissionsComponent implements OnInit {
   }
 
   openAddAbstractDialog() {
+    console.log(this.submissions[2]);
     this.dialog.open(AddAbstractDialogComponent);
+  }
+
+  downloadAbstractPaper(i) {
+    this.submissionsService.downloadAbstractPaper(this.submissions[i].abstractPaperId).subscribe({
+      next: (response: File) => {
+        console.log(response);
+        console.log('File downloaded successfully.');
+      },
+      error: err => {
+        console.error('Error! ' + err);
+        alert('Error occurred while downloading file.');
+      }
+    });
   }
 }

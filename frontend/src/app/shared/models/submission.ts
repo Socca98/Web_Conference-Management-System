@@ -14,5 +14,6 @@ export interface Submission {
   authors: User[];  // Authors it belongs to
   likes: any[];  // PC Members that liked it
   reviews: Review[];
+  abstractPaperId: string;
 }
 
