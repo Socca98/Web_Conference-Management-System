@@ -28,6 +28,8 @@ import {AddSectionDialogComponent} from './shared/components/add-section-dialog/
 import {AddRecommendationDialogComponent} from './shared/components/add-recommendation-dialog/add-recommendation-dialog.component';
 import {AttendSectionDialogComponent} from './shared/components/attend-section-dialog/attend-section-dialog.component';
 import {TabResultsComponent} from './pages/tab-results/tab-results.component';
+import {CreateConferenceComponent} from './create-conference/create-conference.component';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import {TabResultsComponent} from './pages/tab-results/tab-results.component';
     TabEvaluationsComponent,
     TabSectionsComponent,
     TabResultsComponent,
+    CreateConferenceComponent,
   ],
   imports: [
     BrowserModule,
@@ -60,6 +63,7 @@ import {TabResultsComponent} from './pages/tab-results/tab-results.component';
     AppAngularMaterialModule,
     FormsModule,
     AppRoutingModule,
+    MatCheckboxModule,
   ],
 
   providers: [AuthGuard, AuthService,

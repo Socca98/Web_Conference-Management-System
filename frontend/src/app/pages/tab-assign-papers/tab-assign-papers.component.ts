@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Submission} from '../../shared/models/submission';
 import {SubmissionsService} from '../../shared/services/submissions.service';
 import {User} from '../../shared/models/user';
@@ -23,7 +23,8 @@ export class TabAssignPapersComponent implements OnInit {
   constructor(
     private submissionsService: SubmissionsService,
     private authService: AuthService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {

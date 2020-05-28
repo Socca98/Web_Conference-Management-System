@@ -4,6 +4,7 @@ import {LoginDialogComponent} from './login/login/login-dialog.component';
 import {Router} from '@angular/router';
 import {RegisterDialogComponent} from './login/register/register-dialog.component';
 import {AuthService} from './login/auth.service';
+import {CreateConferenceComponent} from './create-conference/create-conference.component';
 
 @Component({
   selector: 'app-root',
@@ -30,5 +31,9 @@ export class AppComponent {
 
   isOnHomePage() {
     return this.router.url === '/';
+  }
+
+  openCreateConferenceDialog() {
+    this.dialog.open(CreateConferenceComponent);
   }
 }

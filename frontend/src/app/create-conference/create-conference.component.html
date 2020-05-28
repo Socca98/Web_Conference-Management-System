@@ -1,0 +1,101 @@
+<h1 mat-dialog-title>Create a new conference</h1>
+
+<form>
+  <div class="column">
+    <div mat-dialog-title>Conference info</div>
+    <div mat-dialog-content class="field-container">
+      <mat-form-field class="field">
+        <mat-label>Name</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.name" name="name" placeholder="ex. How great is Javascript" required>
+        </label>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>Start date</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.startDate" name="startDate" type="date" required>
+        </label>
+      </mat-form-field>
+
+      <mat-form-field class="field">
+        <mat-label>End date</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.endDate" name="endDate" type="date" required>
+        </label>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Conference website</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.website" name="website" type="url" required>
+        </label>
+      </mat-form-field>
+      <mat-checkbox labelPosition="before" [(ngModel)]="allowTwoDeadlines" name="hasTwoDeadlines">Propose two deadlines?</mat-checkbox>
+      <mat-form-field class="field">
+        <mat-label>Proposals deadline</mat-label>
+        <labeL>
+          <input matInput [(ngModel)]="conference.proposalDeadline" name="paperDeadline" type="date" required>
+        </labeL>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Abstracts deadline</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.abstractDeadline" name="abstractDeadline" type="date" [disabled]="!allowTwoDeadlines">
+        </label>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Bidding deadline</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.biddingDeadline" name="biddingDeadline" type="date" required>
+        </label>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Evaluations deadline</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.evaluationDeadline" name="evaluationDeadline" type="date" required>
+        </label>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Maximum reviewers per paper</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.nrOfReviews" name="reviewersNumber" type="number" required>
+        </label>
+      </mat-form-field>
+      <mat-form-field class="field">
+        <mat-label>Tax fee</mat-label>
+        <label>
+          <input matInput [(ngModel)]="conference.taxFee" name="taxFee" type="number" required>
+        </label>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="column">
+    {{ conference | json }}
+    <div mat-dialog-title>Invite program committee to the conference</div>
+    <button mat-button (click)="addCommitteeMember()">Add committee member</button>
+    <div mat-dialog-content class="field-container">
+      <section *ngFor="let member of committeeMembers;let i = index;">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <label>
+            <input matInput [(ngModel)]="member.email" name="email_{{i}}" required>
+          </label>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Role</mat-label>
+          <select matNativeControl [(ngModel)]="member.memberRole" name="memberRole_{{i}}" required>
+            <option value="" disabled>Choose member role</option>
+            <option>SC Member</option>
+            <option>Co-chair</option>
+          </select>
+        </mat-form-field>
+      </section>
+    </div>
+    <div mat-dialog-actions>
+      <button mat-button color="accent" (click)="onCreateClick()">CREATE</button>
+      <button mat-button color="accent" (click)="onCancelClick()">CANCEL</button>
+    </div>
+  </div>
+
+
+</form>
