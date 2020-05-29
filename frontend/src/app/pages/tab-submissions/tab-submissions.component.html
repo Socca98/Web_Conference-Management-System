@@ -11,7 +11,7 @@
           <p>
             <span class="field">Abstract: </span>
             <i *ngIf="submission.abstractPaper; then thenBlock else elseBlock"></i>
-            <ng-template #thenBlock> <span id="downloadSpan" (click)="downloadAbstractPaper(i)">
+            <ng-template #thenBlock> <span class="downloadSpan" (click)="downloadAbstractPaper(i)">
               Click here to download </span> </ng-template>
             <ng-template #elseBlock>none</ng-template>
           </p>
@@ -25,13 +25,16 @@
           <p><span class="field">Keywords: </span>{{submission.keywords}}</p>
           <p>
             <span class="field">Fullpaper: </span>
-            <i *ngIf="!submission.fullPaper">none</i>
-            {{submission.fullPaper}}
+            <i *ngIf="submission.fullPaper; then thenBlock else elseBlock">none</i>
+            <ng-template #thenBlock> <span class="downloadSpan" (click)="downloadFullPaper(i)">
+              Click here to download </span> </ng-template>
+            <ng-template #elseBlock>none</ng-template>
           </p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button color="accent">Update</button>
-          <button mat-raised-button color="accent">Attach full paper</button>
+          <button mat-raised-button color="accent" (click)="openInput(i)"> Attach full paper</button>
+          <input id="fileInput" hidden type="file" (change)="onFileSelected($event)" >
         </mat-card-actions>
       </mat-card>
     </ng-container>

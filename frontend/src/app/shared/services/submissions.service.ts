@@ -94,7 +94,7 @@ export class SubmissionsService {
     return this.http.post(environment.apiEndpoint + 'files/upload', formData);
   }
 
-  downloadAbstractPaper(fileId: string) {
+  downloadFile(fileId: string) {
     window.open(environment.apiEndpoint + 'files/download/' + fileId, '_blank');
   }
 
@@ -102,5 +102,10 @@ export class SubmissionsService {
     const params = new HttpParams().set('status', 'accepted');
     const urlString = environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + 2 + '/review';
     return this.http.get(urlString, {params});
+  }
+
+  addFullPaper(conferenceId, submission: Submission) {
+    const urlString = environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + submission.id;
+    return this.http.put(urlString, submission);
   }
 }
