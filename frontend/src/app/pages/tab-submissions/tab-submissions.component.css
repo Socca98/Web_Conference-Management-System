@@ -33,6 +33,6 @@
   background-image: url("../../../assets/submission-icon.svg");
 }
 
-#downloadSpan:hover{
+.downloadSpan:hover{
   color:dodgerblue;
 }
