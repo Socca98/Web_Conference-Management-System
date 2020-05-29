@@ -7,7 +7,7 @@
     Feel free to participate in any of the available conference sessions:
   </h1>
   <br>
-  <ng-container class="submissions" *ngFor="let section of sections">
+  <ng-container class="submissions" *ngFor="let section of sections; let i = index;">
     <mat-card class="submission-card">
       <mat-card-header>
         <!--        <div mat-card-avatar class="submission-header-image"></div>-->
@@ -20,13 +20,13 @@
         <p><span class="field">Seats: </span>{{section.seats}}</p>
         <hr>
         <p><span class="field">Speakers: </span></p>
-        <ng-container *ngFor="let speaker of section.speakers">{{speaker.fullName}}</ng-container>
+        <ng-container *ngFor="let speaker of section.speakers">{{speaker.fullName}}, </ng-container>
         <hr>
         <p><span class="field">Presented papers: </span></p>
         <ng-container *ngFor="let submission of section.submissions">{{submission.title}}</ng-container>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="accent" (click)="attendButton(section.id)">
+        <button mat-raised-button color="accent" [hidden]="isParticipant[i]" (click)="attendButton(section.sectionId, i)">
           Participate
         </button>
       </mat-card-actions>

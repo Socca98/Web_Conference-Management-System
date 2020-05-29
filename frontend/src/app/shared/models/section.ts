@@ -3,13 +3,13 @@ import {Conference} from './conference';
 import {Submission} from './submission';
 
 export interface Section {
-  id: number;
+  sectionId: string;
   title: string;
   sectionChair: User;
   conference: Conference;
   submissions: Submission[];
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   speakers: User[];
   listeners: User[];
   seats: number;

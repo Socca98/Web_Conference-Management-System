@@ -26,8 +26,8 @@ export class AddSectionDialogComponent implements OnInit {
     const conferenceId = this.authService.conference.id;
     this.submissionsService.getAcceptedSubmissions(conferenceId);
 
-    this.section.startTime = new Date().toLocaleDateString();
-    this.section.endTime = new Date().toLocaleDateString();
+    // this.section.startTime = new Date().toLocaleDateString();
+    // this.section.endTime = new Date().toLocaleDateString();
   }
 
   onCancelClick() {
