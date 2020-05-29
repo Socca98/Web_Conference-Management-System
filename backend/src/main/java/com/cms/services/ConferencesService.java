@@ -253,7 +253,7 @@ public class ConferencesService {
 
     public List<SectionDto> getAllSectionsForConference(String conferenceId) {
         List<Section> allByConference = sectionJpaRepository.findAllByConference(conferencesRepository.getOne(conferenceId));
-        return ConferenceConverter.sectionToSectionDto(allByConference);
+        return ConferenceConverter.sectionToSectionDtoWithSubmissions(allByConference);
     }
 
     public void removeSection(String sectionId) {
