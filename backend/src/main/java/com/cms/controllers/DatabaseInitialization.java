@@ -36,6 +36,7 @@ public class DatabaseInitialization {
         createConferences();
         createSubmission();
         createReviews();
+        createSections();
         SecurityService.INITIALIZATION = false;
         return ResponseEntity.ok().build();
     }
@@ -296,28 +297,6 @@ public class DatabaseInitialization {
         UserRoleDto userRole9 = new UserRoleDto();
         userRole9.setEmail("user9@gmail.com");
 
-        UserDto userDto0 = new UserDto();
-        userDto0.setEmail("user0@gmail.com");
-        UserDto userDto1 = new UserDto();
-        userDto1.setEmail("user1@gmail.com");
-        UserDto userDto2 = new UserDto();
-        userDto2.setEmail("user2@gmail.com");
-        UserDto userDto3 = new UserDto();
-        userDto3.setEmail("user3@gmail.com");
-        UserDto userDto4 = new UserDto();
-        userDto4.setEmail("user4@gmail.com");
-        UserDto userDto5 = new UserDto();
-        userDto5.setEmail("user5@gmail.com");
-        UserDto userDto6 = new UserDto();
-        userDto6.setEmail("user6@gmail.com");
-        UserDto userDto7 = new UserDto();
-        userDto7.setEmail("user7@gmail.com");
-        UserDto userDto8 = new UserDto();
-        userDto8.setEmail("user8@gmail.com");
-        UserDto userDto9 = new UserDto();
-        userDto9.setEmail("user9@gmail.com");
-
-
         SubmissionDto submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 0 of conference 0");
         submissionDto.setKeywords("first, number one, boss");
@@ -328,11 +307,6 @@ public class DatabaseInitialization {
         authors.add(userRole5);
         authors.add(userRole6);
         submissionDto.setAuthors(authors);
-//        List<UserDto> likes = new ArrayList<>();
-//        likes.add(userDto2);
-//        likes.add(userDto3);
-//        likes.add(userDto4);
-//        submissionDto.setLikes(likes);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
@@ -344,9 +318,6 @@ public class DatabaseInitialization {
         authors.add(userRole6);
         authors.add(userRole7);
         submissionDto.setAuthors(authors);
-//        likes = new ArrayList<>();
-//        likes.add(userDto2);
-//        submissionDto.setLikes(likes);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
@@ -356,10 +327,6 @@ public class DatabaseInitialization {
         authors = new ArrayList<>();
         authors.add(userRole7);
         submissionDto.setAuthors(authors);
-//        likes = new ArrayList<>();
-//        likes.add(userDto2);
-//        likes.add(userDto4);
-//        submissionDto.setLikes(likes);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
@@ -477,22 +444,27 @@ public class DatabaseInitialization {
 
         reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
         reviewDto.setUser(userDto2);
+        reviewDto.setRecommendation("recommendation user2 ~ submission 1");
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(1).getId(), reviewDto);
 
         reviewDto.setVerdict(Verdict.ACCEPT);
         reviewDto.setUser(userDto3);
+        reviewDto.setRecommendation("recommendation user3 ~ submission 1");
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(1).getId(), reviewDto);
 
         reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
         reviewDto.setUser(userDto4);
+        reviewDto.setRecommendation("recommendation user4 ~ submission 2");
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(2).getId(), reviewDto);
 
         reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
         reviewDto.setUser(userDto3);
+        reviewDto.setRecommendation("recommendation user3 ~ submission 2");
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(2).getId(), reviewDto);
 
         reviewDto.setVerdict(Verdict.REJECT);
         reviewDto.setUser(userDto2);
+        reviewDto.setRecommendation("recommendation user2 ~ submission 2");
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(2).getId(), reviewDto);
 
         reviewDto.setVerdict(Verdict.STRONG_REJECT);
@@ -506,43 +478,65 @@ public class DatabaseInitialization {
         reviewDto.setVerdict(Verdict.NOT_REVIEWED);
         reviewDto.setUser(userDto3);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(4).getId(), reviewDto);
-
-
-//        reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
-//        reviewDto.setUser(userDto1);
-//        conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
-//
-//        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
-//        reviewDto.setUser(userDto3);
-//        conferencesService.addReview(secondConferenceId, submissionsForSecondConference.get(0).getId(), reviewDto);
-//
-//        reviewDto.setVerdict(Verdict.ACCEPT);
-//        reviewDto.setUser(userDto5);
-//        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
     }
 
-    private void createSection() {
+    private void createSections() {
         List<ConferenceDto> allConferences = conferencesService.getAllConferences();
+
+        // Get all conferences
+        String firstConferenceId = allConferences.get(0).getId();
+        String secondConferenceId = allConferences.get(1).getId();
+
+        // Get all submissions for each conference
+        List<SubmissionDto> submissionsForFirstConference = conferencesService.getSubmissionsForConference(firstConferenceId);
+        List<SubmissionDto> submissionsForSecondConference = conferencesService.getSubmissionsForConference(secondConferenceId);
+
+        UserDto userDto0 = new UserDto();
+        userDto0.setEmail("user0@gmail.com");
         UserDto userDto1 = new UserDto();
         userDto1.setEmail("user1@gmail.com");
+        UserDto userDto2 = new UserDto();
+        userDto2.setEmail("user2@gmail.com");
+        UserDto userDto3 = new UserDto();
+        userDto3.setEmail("user3@gmail.com");
+        UserDto userDto4 = new UserDto();
+        userDto4.setEmail("user4@gmail.com");
         UserDto userDto5 = new UserDto();
         userDto5.setEmail("user5@gmail.com");
-        String firstConferenceId = allConferences.get(0).getId();
-        SubmissionDto submissionDto = conferencesService.getSubmissionsForConference(firstConferenceId).get(0);
+        UserDto userDto6 = new UserDto();
+        userDto6.setEmail("user6@gmail.com");
+        UserDto userDto7 = new UserDto();
+        userDto7.setEmail("user7@gmail.com");
+        UserDto userDto8 = new UserDto();
+        userDto8.setEmail("user8@gmail.com");
+        UserDto userDto9 = new UserDto();
+        userDto9.setEmail("user9@gmail.com");
 
-        submissionDto.setFinalVerdict(Verdict.ACCEPT.toString());
-        conferencesService.updateSubmission(submissionDto.getId(), submissionDto);
+        SubmissionDto submissionDto0 = submissionsForFirstConference.get(0);
+        SubmissionDto submissionDto7 = submissionsForFirstConference.get(7);
+
+        conferencesService.updateFinalVerdict(submissionDto0.getId(), Verdict.ACCEPT.toString());
+        conferencesService.updateFinalVerdict(submissionDto7.getId(), Verdict.ACCEPT.toString());
 
         SectionDto sectionDto = new SectionDto();
         sectionDto.setSeats(3);
         sectionDto.setTitle("The one and only section");
-        sectionDto.setSubmissions(List.of(submissionDto));
-        sectionDto.setSectionChair(userDto5);
+        sectionDto.setSubmissions(List.of(submissionDto0, submissionDto7));  // only accepted papers
+        sectionDto.setSectionChair(userDto8);
         sectionDto.setStartTime(1588386245);
         sectionDto.setEndTime(1588406245);
-        sectionDto.setSpeakers(List.of(userDto1));
-
+        sectionDto.setSpeakers(List.of(userDto1, userDto6));
         conferencesService.createSection(firstConferenceId, sectionDto);
+
+
+//        sectionDto.setSeats(3);
+//        sectionDto.setTitle("The second and only section");
+//        sectionDto.setSubmissions(List.of(submissionDto7));  // only accepted papers
+//        sectionDto.setSectionChair(userDto8);
+//        sectionDto.setStartTime(1588386245);
+//        sectionDto.setEndTime(1588406245);
+//        sectionDto.setSpeakers(List.of(userDto1, userDto6));
+//        conferencesService.createSection(firstConferenceId, sectionDto);
     }
 
 }

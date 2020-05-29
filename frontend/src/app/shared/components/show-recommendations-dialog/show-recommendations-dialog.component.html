@@ -4,7 +4,7 @@
 <h2>Your recommendation:</h2>
 <p>
   <ng-container *ngIf="this.yourRecommendation; else noRecommendation">
-    {{ this.yourRecommendation | json}}
+    {{ this.yourRecommendation}}
   </ng-container>
   <ng-template #noRecommendation>
     You did not give a recommendation.
@@ -15,7 +15,9 @@
 <h2>Other reviewers: </h2>
 <p>
   <ng-container *ngIf="this.yourRecommendation; else noOthersRecommendation">
-    {{ this.reviewsOthers | json}}
+    <ng-container *ngFor="let otherReview of this.reviewsOthers">
+      <span><i>{{otherReview.recommendation}}</i></span><br />
+    </ng-container>
   </ng-container>
   <ng-template #noOthersRecommendation>
     There are no other recommendations.

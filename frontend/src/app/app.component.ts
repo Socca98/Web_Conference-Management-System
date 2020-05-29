@@ -42,6 +42,9 @@ export class AppComponent {
 
   labelDeadline() {
     this.router.events.subscribe(_ => {
+      if (!this.authService.conference) {
+        return;
+      }
       switch (this.router.url) {
         case '/conference/results': {
           this.helperDeadline = this.authService.conference.evaluationDeadline * 1000;

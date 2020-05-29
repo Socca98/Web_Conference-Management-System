@@ -33,7 +33,7 @@ export class TabReviewingComponent implements OnInit {
   ngOnInit(): void {
     this.submissionsService.getReviews(this.authService.conference.id).subscribe((result: Review[]) => {
       // All reviews of the current user
-      this.reviews = result.filter(e => e.user.email === this.authService.user.email);
+      this.reviews = result;
     });
 
     this.submissionsService.getReviewsOthers(this.authService.conference.id).subscribe((result: Review[]) => {
@@ -78,7 +78,6 @@ export class TabReviewingComponent implements OnInit {
 
   showRecommendations(currentSubmission: Submission, yourRecommendation: string) {
     const reviewsByUserBySubmission: Review[] = this.reviewsOthers.filter(e => e.submission.id === currentSubmission.id);
-    console.log(reviewsByUserBySubmission);
     this.dialog.open(ShowRecommendationsDialogComponent, {
       data: {
         recommendation: yourRecommendation,

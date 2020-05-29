@@ -16,23 +16,10 @@ import {MatSnackBar} from '@angular/material/snack-bar';
   styleUrls: ['./tab-sections.component.css']
 })
 export class TabSectionsComponent implements OnInit {
-  sectionOne = {
-    id: 1,
-    title: 'Section One',
-    sectionChair: {fullName: 'Ion Baciu'} as User,
-    conference: {} as Conference,
-    submissions: [] = [],
-    startTime: '1588326800',
-    endTime: '1590632553',
-    speakers: [] as User[],
-    listeners: [] as User[],
-    seats: 3,
-  };
-  sections: Section[] = [
-    this.sectionOne, this.sectionOne, this.sectionOne
-  ];
+  sections: Section[] = [];
   isPayed = false;
   isBlurredClass = 'blurred';
+  isParticipant: boolean[] = [];
 
   constructor(
     private authService: AuthService,
@@ -40,7 +27,7 @@ export class TabSectionsComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
   ) {
-    // If role is Chair or Co-Chair, all the content must be shown
+    // If role is Chair or Co-Chair, all the content must be shown without blur
     const userRole = this.authService.getUserRole();
     if (this.authService.user.payedAttend || userRole === Role.Chair || userRole === Role.CoChair) {
       this.activatePage();
@@ -49,8 +36,9 @@ export class TabSectionsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.conferenceService.getSections(this.authService.conference.id).subscribe((result: Section[]) => {
-      // this.sections = result;
+    this.conferenceService.getSections(this.authService.conference.id).subscribe((result) => {
+      this.sections = result;
+      // console.log(result.id);
     });
   }
 
@@ -93,13 +81,14 @@ export class TabSectionsComponent implements OnInit {
       });
   }
 
-  attendButton(sectionId) {
+  attendButton(sectionId, index) {
     const conferenceId = this.authService.conference.id;
     this.conferenceService.attendSection(conferenceId, sectionId).subscribe({
       next: () => {
         this.snackBar.open('Thank you for participating!', ':D', {
           duration: 1000,
         });
+        this.isParticipant[index] = true;
       },
       error: () => {
         this.snackBar.open('Error attending section!', 'Ok', {

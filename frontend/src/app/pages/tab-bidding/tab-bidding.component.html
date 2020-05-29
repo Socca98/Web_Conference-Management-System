@@ -1,1 +1,40 @@
-<p>tab-bidding works!</p>
+<div class="submissions">
+  <div *ngFor="let submission of submissions;let i = index">
+    <mat-card class="submission-card">
+      <mat-card-header>
+        <div mat-card-avatar class="submission-header-image"></div>
+        <mat-card-title>{{submission.title}}</mat-card-title>
+        <mat-card-subtitle>No. {{i}}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          <span class="field">Abstract: </span>
+          <i *ngIf="!submission.abstractPaper">none</i>
+          {{submission.abstractPaper}}
+        </p>
+        <p>
+          <span class="field">Authors: </span>
+          <ng-container *ngFor="let author of submission.authors;let j = index">
+            {{author.fullName}}<span *ngIf="j < submission.authors.length-1">,</span>
+          </ng-container>
+        </p>
+        <p><span class="field">Topics: </span>{{submission.topics}}</p>
+        <p><span class="field">Keywords: </span>{{submission.keywords}}</p>
+        <p>
+          <span class="field">Fullpaper: </span>
+          <i *ngIf="!submission.fullPaper">none</i>
+          {{submission.fullPaper}}
+        </p>
+      </mat-card-content>
+
+      <mat-card-actions>
+        <hr>
+        Would you like to review this submission?
+        <mat-checkbox class="bidding-checkbox" name="Checkbox-{{i}}" [(ngModel)]="likes[i]"
+                      (change)="onToggle($event, submission, i)">
+        </mat-checkbox>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+

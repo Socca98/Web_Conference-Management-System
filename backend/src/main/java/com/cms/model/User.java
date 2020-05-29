@@ -27,6 +27,8 @@ public class User {
     private List<Review> reviews;
     @ManyToMany
     private List<Submission> submissions;
+    @ManyToMany
+    private List<Submission> likes;
 
     public String getUserId() {
         return userId;
