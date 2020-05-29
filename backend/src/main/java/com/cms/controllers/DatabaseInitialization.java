@@ -296,6 +296,28 @@ public class DatabaseInitialization {
         UserRoleDto userRole9 = new UserRoleDto();
         userRole9.setEmail("user9@gmail.com");
 
+        UserDto userDto0 = new UserDto();
+        userDto0.setEmail("user0@gmail.com");
+        UserDto userDto1 = new UserDto();
+        userDto1.setEmail("user1@gmail.com");
+        UserDto userDto2 = new UserDto();
+        userDto2.setEmail("user2@gmail.com");
+        UserDto userDto3 = new UserDto();
+        userDto3.setEmail("user3@gmail.com");
+        UserDto userDto4 = new UserDto();
+        userDto4.setEmail("user4@gmail.com");
+        UserDto userDto5 = new UserDto();
+        userDto5.setEmail("user5@gmail.com");
+        UserDto userDto6 = new UserDto();
+        userDto6.setEmail("user6@gmail.com");
+        UserDto userDto7 = new UserDto();
+        userDto7.setEmail("user7@gmail.com");
+        UserDto userDto8 = new UserDto();
+        userDto8.setEmail("user8@gmail.com");
+        UserDto userDto9 = new UserDto();
+        userDto9.setEmail("user9@gmail.com");
+
+
         SubmissionDto submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 0 of conference 0");
         submissionDto.setKeywords("first, number one, boss");
@@ -306,6 +328,11 @@ public class DatabaseInitialization {
         authors.add(userRole5);
         authors.add(userRole6);
         submissionDto.setAuthors(authors);
+//        List<UserDto> likes = new ArrayList<>();
+//        likes.add(userDto2);
+//        likes.add(userDto3);
+//        likes.add(userDto4);
+//        submissionDto.setLikes(likes);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
@@ -317,6 +344,9 @@ public class DatabaseInitialization {
         authors.add(userRole6);
         authors.add(userRole7);
         submissionDto.setAuthors(authors);
+//        likes = new ArrayList<>();
+//        likes.add(userDto2);
+//        submissionDto.setLikes(likes);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
@@ -326,6 +356,10 @@ public class DatabaseInitialization {
         authors = new ArrayList<>();
         authors.add(userRole7);
         submissionDto.setAuthors(authors);
+//        likes = new ArrayList<>();
+//        likes.add(userDto2);
+//        likes.add(userDto4);
+//        submissionDto.setLikes(likes);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
         submissionDto = new SubmissionDto();
@@ -363,6 +397,26 @@ public class DatabaseInitialization {
         submissionDto.setTopics("more topics");
         authors = new ArrayList<>();
         authors.add(userRole5);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 7 of conference 0");
+        submissionDto.setFinalVerdict("WEAK_ACCEPT");
+        submissionDto.setKeywords("ff, f, f, ff");
+        submissionDto.setTopics("FFF, FF, F");
+        authors = new ArrayList<>();
+        authors.add(userRole6);
+        submissionDto.setAuthors(authors);
+        conferencesService.addSubmission(firstConferenceId, submissionDto);
+
+        submissionDto = new SubmissionDto();
+        submissionDto.setTitle("Submission 8 of conference 0");
+        submissionDto.setFinalVerdict("STRONG_REJECT");
+        submissionDto.setKeywords("gg, g, ggg, gggg");
+        submissionDto.setTopics("GG, G, GGG");
+        authors = new ArrayList<>();
+        authors.add(userRole6);
         submissionDto.setAuthors(authors);
         conferencesService.addSubmission(firstConferenceId, submissionDto);
 
@@ -409,16 +463,50 @@ public class DatabaseInitialization {
         ReviewDto reviewDto;
         reviewDto = new ReviewDto();
 
-        reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
+        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
         reviewDto.setUser(userDto2);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
 
-        reviewDto.setVerdict(Verdict.ACCEPT);
+        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
         reviewDto.setUser(userDto3);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
 
         reviewDto.setVerdict(Verdict.NOT_REVIEWED);
+        reviewDto.setUser(userDto4);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(0).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
+        reviewDto.setUser(userDto2);
         conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(1).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.ACCEPT);
+        reviewDto.setUser(userDto3);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(1).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
+        reviewDto.setUser(userDto4);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(2).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.WEAK_ACCEPT);
+        reviewDto.setUser(userDto3);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(2).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.REJECT);
+        reviewDto.setUser(userDto2);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(2).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.STRONG_REJECT);
+        reviewDto.setUser(userDto4);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(3).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
+        reviewDto.setUser(userDto2);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(4).getId(), reviewDto);
+
+        reviewDto.setVerdict(Verdict.NOT_REVIEWED);
+        reviewDto.setUser(userDto3);
+        conferencesService.addReview(firstConferenceId, submissionsForFirstConference.get(4).getId(), reviewDto);
+
 
 //        reviewDto.setVerdict(Verdict.STRONG_ACCEPT);
 //        reviewDto.setUser(userDto1);

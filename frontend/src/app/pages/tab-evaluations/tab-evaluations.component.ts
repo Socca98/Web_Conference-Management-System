@@ -8,6 +8,7 @@ import {Conference} from '../../shared/models/conference';
 import {Role} from '../../shared/models/role';
 import {Verdict} from '../../shared/models/verdict';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {Review} from '../../shared/models/review';
 
 @Component({
   selector: 'app-tab-evaluations',
@@ -20,7 +21,7 @@ export class TabEvaluationsComponent implements OnInit {
    */
   submissions: Submission[] = [];
   submissionPossibleReviewers: Array<User[]> = [];   // Reviewers that did not review submission[i]
-  anotherReviewer: string;
+  anotherReviewersEmail: string[] = []; // emails of selected user for each submission card
   localVerdicts: Verdict[] = [];
 
 
@@ -58,9 +59,37 @@ export class TabEvaluationsComponent implements OnInit {
     return submission.reviews.length !== 0;
   }
 
+  sendToReviewer(currentSubmission: Submission, index) {
+    if (!(this.anotherReviewersEmail)[index]) {
+      this.snackBar.open('Please select reviewer!', 'Ok', {
+        duration: 1000,
+        panelClass: ['warning']
+      });
+      return;
+    }
 
-  sendToReviewer() {
+    const review: Review = {
+      submission: currentSubmission,
+      user: {
+        email: (this.anotherReviewersEmail)[index]
+      } as User,
+    } as Review;
 
+    this.submissionsService.createReview(this.authService.conference.id, review).subscribe({
+      next: (response: Review) => {
+        this.snackBar.open('Users assigned to review.', 'Ok', {
+          duration: 1000,
+        });
+        currentSubmission.reviews.push(response);
+        (this.anotherReviewersEmail)[index] = null;
+      },
+      error: _ => {
+        this.snackBar.open('Cannot assign users!', '', {
+          duration: 1000,
+          panelClass: ['warning'],
+        });
+      }
+    });
   }
 
   requestDiscussion(submission: Submission) {
@@ -100,6 +129,8 @@ export class TabEvaluationsComponent implements OnInit {
         this.snackBar.open('Final verdict sent.', 'Ok', {
           duration: 1000,
         });
+
+        // If success, also create the Review so Chair/Co-Chair can see it in reviews tab.
       },
       error: _ => {
         this.snackBar.open('Could not send final verdict!', '', {

@@ -42,7 +42,9 @@
       </mat-card-content>
 
       <mat-card-actions *ngIf="hasReviews(submission)">
-        <button mat-raised-button color="accent" (click)="sendToReviewer()">Send to another reviewer</button>
+        <button mat-raised-button color="accent" (click)="sendToReviewer(submission, i)">
+          Send to another reviewer
+        </button>
         <mat-form-field appearance="fill">
           <mat-label>
             <span
@@ -57,13 +59,12 @@
 
           <!--          Disable if the request is not done and possibleReviewers is empty-->
           <!--          https://stackoverflow.com/a/57828405/9442199 -->
-          <mat-select [(value)]="anotherReviewer" [disabled]="!!!this.submissionPossibleReviewers[i]">
+          <mat-select [(value)]="anotherReviewersEmail[i]" [disabled]="!!!this.submissionPossibleReviewers[i]">
             <mat-option *ngFor="let pcMember of this.submissionPossibleReviewers[i]" [value]="pcMember.email">
               {{pcMember.email}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        {{anotherReviewer | json}}
 
         <br>
         <button mat-raised-button color="accent" (click)="requestDiscussion(submission)">Request discussion</button>

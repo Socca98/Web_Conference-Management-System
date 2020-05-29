@@ -104,17 +104,20 @@ footer a {
   color: antiquewhite;
 }
 
-#label-role {
+.label-role {
   position: absolute;
   right: 0;
   top: 50px;
   color: black;
   text-shadow: 1px 1px grey;
-  font-size: 21px;
+  font-size: 18px;
   font-family: Georgia, serif;
   letter-spacing: 2px;
   padding: 10px;
-
+  z-index: 10;
+  background-color: #78909C;
+  border-radius: 4px;
+  border: 1px solid black
 }
 
 footer {

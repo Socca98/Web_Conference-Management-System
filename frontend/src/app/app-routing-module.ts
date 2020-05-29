@@ -10,6 +10,7 @@ import {TabReviewingComponent} from './pages/tab-reviewing/tab-reviewing.compone
 import {TabEvaluationsComponent} from './pages/tab-evaluations/tab-evaluations.component';
 import {TabSectionsComponent} from './pages/tab-sections/tab-sections.component';
 import {TabResultsComponent} from './pages/tab-results/tab-results.component';
+import {TabBiddingComponent} from './pages/tab-bidding/tab-bidding.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,13 @@ const routes: Routes = [
     path: 'conference/details',
     component: TabDetailsComponent,
     canActivate: [AuthGuard],
+  },
+
+  {
+    path: 'conference/bidding',
+    component: TabBiddingComponent,
+    canActivate: [AuthGuard],
+    // data: {roles: [Role.PC_Member]}
   },
 
   {

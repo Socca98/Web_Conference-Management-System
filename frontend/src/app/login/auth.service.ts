@@ -85,4 +85,14 @@ export class AuthService {
   getToken() {
     return localStorage.getItem('token');
   }
+
+  isPassedAbstractDeadline(): boolean {
+    const nowTime = new Date().getTime();
+    return nowTime <= this.conference.abstractDeadline  * 1000;
+  }
+
+  isPassedEvaluationDeadline(): boolean {
+    const nowTime = new Date().getTime();
+    return nowTime <= this.conference.evaluationDeadline * 1000;
+  }
 }

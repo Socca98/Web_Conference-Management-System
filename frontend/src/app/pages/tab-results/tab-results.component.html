@@ -1,8 +1,8 @@
 <h1>Until the evaluation deadline, you will know the results of your submissions</h1>
 
 <div class="submissions">
-  <ng-container>
-    <mat-card class="submission-card" *ngFor="let submission of submissionsReviewed;let i = index;">
+  <ng-container *ngFor="let submission of submissionsReviewed;let i = index;">
+    <mat-card [ngClass]="chooseColorClass(submission)" [matTooltip]="chooseMessageTooltip(submission)">
       <mat-card-header>
         <div mat-card-avatar class="submission-header-image"></div>
         <mat-card-title>{{submission.title}}</mat-card-title>
@@ -28,7 +28,8 @@
           {{submission.fullPaper}}
         </p>
         <hr>
-        <b>Reviews:</b>
+        <b>Reviews: </b>
+        <i *ngIf="!submission.reviews.length">none</i>
         <ng-container *ngIf="submission.finalVerdict">
           <i id="final-verdict">{{submission.finalVerdict}}</i>
         </ng-container>
@@ -38,8 +39,8 @@
         </ng-container>
       </mat-card-content>
 
-      <mat-card-actions *ngIf="!isAccepted(submission)">
-        <button mat-raised-button color="accent" [matTooltip]="'The program committee offers some improvements before you present in front of all.'">
+      <mat-card-actions *ngIf="isAccepted(submission)">
+        <button mat-raised-button color="accent" (click)="openRecommendations(submission)" [matTooltip]="'The program committee offers some improvements before you present in front of all.'">
           Improve paper
         </button>
       </mat-card-actions>

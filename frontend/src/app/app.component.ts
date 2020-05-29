@@ -13,12 +13,15 @@ import {CreateConferenceDialogComponent} from './shared/components/create-confer
   providers: [AuthService]
 })
 export class AppComponent {
+  helperDeadline: number;
+  deadlineTypeLabel = '';
 
   constructor(
     private router: Router,
     private dialog: MatDialog,
     public authService: AuthService,
   ) {
+    this.labelDeadline();
   }
 
   openLoginDialog() {
@@ -35,5 +38,43 @@ export class AppComponent {
 
   openCreateConferenceDialog() {
     this.dialog.open(CreateConferenceDialogComponent);
+  }
+
+  labelDeadline() {
+    this.router.events.subscribe(_ => {
+      switch (this.router.url) {
+        case '/conference/results': {
+          this.helperDeadline = this.authService.conference.evaluationDeadline * 1000;
+          this.deadlineTypeLabel = 'Evaluations: ';
+          break;
+        }
+        case '/conference/reviewing': {
+          this.helperDeadline = this.authService.conference.evaluationDeadline * 1000;
+          this.deadlineTypeLabel = 'Evaluations: ';
+          break;
+        }
+        case '/conference/evaluations': {
+          this.helperDeadline = this.authService.conference.evaluationDeadline * 1000;
+          this.deadlineTypeLabel = 'Evaluations: ';
+          break;
+        }
+        case '/conference/bidding': {
+          this.helperDeadline = this.authService.conference.biddingDeadline * 1000;
+          this.deadlineTypeLabel = 'Bidding: ';
+          break;
+        }
+        case '/conference/submissions': {
+          this.helperDeadline = this.authService.conference.abstractDeadline * 1000;
+          this.deadlineTypeLabel = 'Abstracts: ';
+          break;
+        }
+        default: {
+          this.helperDeadline = null;
+          this.deadlineTypeLabel = '';
+
+          break;
+        }
+      }
+    });
   }
 }

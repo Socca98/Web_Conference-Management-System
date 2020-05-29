@@ -5,6 +5,7 @@ import {environment} from '../../../environments/environment';
 import {Submission} from '../models/submission';
 import {Verdict} from '../models/verdict';
 import {Review} from '../models/review';
+import {User} from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class SubmissionsService {
     if (conferenceId === null) {
       throw new Error('Error! Could not retrieve conference id!');
     }
-    return this.http.get<Submission[]>(environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions');
+    return this.http.get<Submission[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions');
   }
 
   /**
@@ -32,7 +33,7 @@ export class SubmissionsService {
     if (conferenceId === null) {
       throw new Error('Error! Conference id is null for request!');
     }
-    return this.http.get<Review[]>(environment.apiEndpoint + '/conferences/' + conferenceId + '/reviews');
+    return this.http.get<Review[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/reviews');
   }
 
   /**
@@ -44,6 +45,20 @@ export class SubmissionsService {
       throw new Error('Error! Conference id is null for request!');
     }
     return this.http.get<Review[]>(environment.apiEndpoint + 'conferences/' + conferenceId + '/review/others');
+  }
+
+  createReview(conferenceId, paramsReview: Review) {
+    const verdictBody = {
+      user: {
+        email: paramsReview.user.email,
+      } as User,
+      verdict: Verdict.Not_Reviewed,
+      recommendation: null,
+    };
+    return this.http.post(
+      environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + paramsReview.submission.id + '/review',
+      verdictBody
+    );
   }
 
   updateReview(conferenceId, submissionId, review: Review): Observable<Review> {
@@ -59,18 +74,16 @@ export class SubmissionsService {
   sendFinalVerdict(conferenceId, submissionId, verdict: Verdict) {
     return this.http.post<Review>(
       environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/final-verdict',
-      {
-        verdict,
-      }
+      verdict
     );
   }
 
   addAbstract(conferenceId, submission: Submission) {
-    return this.http.post<Submission>(environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/', submission);
+    return this.http.post<Submission>(environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/', submission);
   }
 
   uploadFile(formData: FormData) {
-    return this.http.post(environment.apiEndpoint + '/files/upload', formData);
+    return this.http.post(environment.apiEndpoint + 'files/upload', formData);
   }
 
   downloadAbstractPaper(fileId: string) {
@@ -79,7 +92,7 @@ export class SubmissionsService {
 
   getAcceptedSubmissions(conferenceId) {
     const params = new HttpParams().set('status', 'accepted');
-    const urlString = environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + 2 + '/review';
+    const urlString = environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + 2 + '/review';
     return this.http.get(urlString, {params});
   }
 }
