@@ -25,7 +25,6 @@ export class AddAbstractDialogComponent implements OnInit {
     authors: [] = [],
     likes: null,
     reviews: null,
-    abstractPaperId: null,
   };
   private selectedFile: File = null;
 
@@ -45,7 +44,6 @@ export class AddAbstractDialogComponent implements OnInit {
 
   onFileSelected(event) {
     this.selectedFile = event.target.files[0] as File;
-    this.submission.abstractPaper = this.selectedFile.name;
   }
 
   onUpload() {
@@ -53,19 +51,7 @@ export class AddAbstractDialogComponent implements OnInit {
     console.log(fd);
     fd.append('file', this.selectedFile, this.selectedFile.name);
 
-    this.submissionsService.uploadFile(fd)
-      .subscribe({
-        next: (response: Submission) => {
-          console.log(response);
-          console.log('File uploaded successfully.');
-          this.submission.abstractPaperId = response.id;
-          console.log(this.submission);
-        },
-        error: err => {
-          console.error('Error! ' + err);
-          alert('Error occurred while uploading file.');
-        }
-      });
+    return this.submissionsService.uploadFile(fd);
   }
 
   incrementNumberOfAuthors() {
@@ -86,19 +72,28 @@ export class AddAbstractDialogComponent implements OnInit {
     const conferenceId = this.authService.conference.id;
 
     // upload file
-    this.onUpload();
-
-    this.submissionsService.addAbstract(conferenceId, this.submission).subscribe({
+    this.onUpload().subscribe({
       next: (response: Submission) => {
-        alert(response);
-        this.dialogRef.close();
-        this.snackBar.open('Abstract paper submitted.', 'Ok', {
-          duration: 1000
+        console.log('File uploaded successfully.');
+        this.submission.abstractPaper = response.id;
+
+        this.submissionsService.addAbstract(conferenceId, this.submission).subscribe({
+          next: (responseSub: Submission) => {
+            alert(responseSub);
+            this.dialogRef.close();
+            this.snackBar.open('Abstract paper submitted.', 'Ok', {
+              duration: 1000
+            });
+          },
+          error: err => {
+            console.error('Error! ' + err);
+            alert('Error occurred while submitting.');
+          }
         });
       },
       error: err => {
         console.error('Error! ' + err);
-        alert('Error occurred while submitting.');
+        alert('Error occurred while uploading file.');
       }
     });
   }

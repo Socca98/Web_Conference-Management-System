@@ -10,8 +10,10 @@
         <mat-card-content>
           <p>
             <span class="field">Abstract: </span>
-            <i *ngIf="!submission.abstractPaper">none</i>
-            {{submission.abstractPaper}}
+            <i *ngIf="submission.abstractPaper; then thenBlock else elseBlock"></i>
+            <ng-template #thenBlock> <span id="downloadSpan" (click)="downloadAbstractPaper(i)">
+              Click here to download </span> </ng-template>
+            <ng-template #elseBlock>none</ng-template>
           </p>
           <p>
             <span class="field">Authors: </span>
@@ -30,7 +32,6 @@
         <mat-card-actions>
           <button mat-raised-button color="accent">Update</button>
           <button mat-raised-button color="accent">Attach full paper</button>
-          <button mat-raised-button color="accent" (click)="downloadAbstractPaper(i)">Download abstract paper</button>
         </mat-card-actions>
       </mat-card>
     </ng-container>
