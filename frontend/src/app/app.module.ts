@@ -7,7 +7,7 @@ import {LoginDialogComponent} from './login/login/login-dialog.component';
 import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppAngularMaterialModule} from './app-angular-material.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RegisterDialogComponent} from './login/register/register-dialog.component';
 import {AppRoutingModule} from './app-routing-module';
 import {HomePageComponent} from './pages/home-page/home-page.component';
@@ -55,16 +55,17 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     TabSectionsComponent,
     TabResultsComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    RouterModule,
-    HttpClientModule,
-    AppAngularMaterialModule,
-    FormsModule,
-    AppRoutingModule,
-    MatCheckboxModule,
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        RouterModule,
+        HttpClientModule,
+        AppAngularMaterialModule,
+        FormsModule,
+        AppRoutingModule,
+        MatCheckboxModule,
+        ReactiveFormsModule,
+    ],
 
   providers: [AuthGuard, AuthService,
     {
