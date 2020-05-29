@@ -9,7 +9,14 @@
 }
 
 .column {
-  width: 48%;
   float: left;
-  margin-left: 1%;
+  width: 48%;
+  margin-left: 2%;
+}
+
+.row {
+  background: #f6f6f6;
+  border: 1px solid #ccc;
+  overflow: hidden;
+  padding: 10px;
 }

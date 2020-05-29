@@ -37,7 +37,10 @@ export class AppComponent {
   }
 
   openCreateConferenceDialog() {
-    this.dialog.open(CreateConferenceDialogComponent);
+    this.dialog.open(CreateConferenceDialogComponent, {
+      height: '90vh',
+      width: '80vw'
+    });
   }
 
   labelDeadline() {

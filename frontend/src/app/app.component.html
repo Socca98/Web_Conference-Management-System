@@ -6,17 +6,11 @@
        routerLink="/"
        routerLinkActive="active"
   />
-  <!--
-    add this here to test conference, cant login/register atm
-    remove create conference after
-   -->
   <div class="login" *ngIf="!this.authService.isLogged()">
     <a (click)="openLoginDialog()"
        onclick="this.blur()">Login</a>
     <a (click)="openRegisterDialog()"
        onclick="this.blur()">Register</a>
-    <a (click)="openCreateConferenceDialog()"
-       onclick="this.blur()">Create conference</a>
   </div>
 
   <div class="top-corner" *ngIf="this.authService.isLogged()">
@@ -32,6 +26,8 @@
         </ng-container>
       </div>
     </span>
+    <button class="mat-button" (click)="openCreateConferenceDialog()"
+       onclick="this.blur()">Create conference</button>
     <button class="logout-button" color="accent"
             (click)="this.authService.logout()"
             mat-raised-button>
