@@ -28,9 +28,11 @@
   left: auto;
 }
 
-
 .submission-header-image {
   background-size: cover;
   background-image: url("../../../assets/submission-icon.svg");
 }
 
+#downloadSpan:hover{
+  color:dodgerblue;
+}

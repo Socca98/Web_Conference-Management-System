@@ -87,7 +87,7 @@ export class SubmissionsService {
   }
 
   downloadAbstractPaper(fileId: string) {
-    return this.http.get(environment.apiEndpoint + 'file/download' + fileId);
+    window.open(environment.apiEndpoint + 'files/download/' + fileId, '_blank');
   }
 
   getAcceptedSubmissions(conferenceId) {
