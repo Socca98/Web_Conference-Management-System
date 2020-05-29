@@ -78,6 +78,14 @@ export class SubmissionsService {
     );
   }
 
+  likeSubmission(conferenceId, submissionId) {
+    return this.http.post(environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/like', null);
+  }
+
+  unlikeSubmission(conferenceId, submissionId) {
+    return this.http.delete(environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submissionId + '/like');
+  }
+
   addAbstract(conferenceId, submission: Submission) {
     return this.http.post<Submission>(environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/', submission);
   }

@@ -1,94 +1,96 @@
-<div class="reviewed submissions">
-  <h1>Your reviews: </h1>
-  <ng-container>
-    <mat-card class="reviewed submission-card" *ngFor="let review of getReviewedSubmissions(); let i = index">
-      <mat-card-header>
-        <div mat-card-avatar class="submission-header-image"></div>
-        <mat-card-title>{{review.submission.title}}</mat-card-title>
-        <mat-card-subtitle>Review no.{{i + 1}}</mat-card-subtitle>
-      </mat-card-header>
-      <br> {{review | json}}
-      <mat-card-content>
-        <p>
-          <span class="field">Abstract: </span>
-          <i *ngIf="!review.submission.abstractPaper">none</i>
-          {{review.submission.abstractPaper}}
-        </p>
-        <p>
-          <span class="field">Authors: </span>
-          <ng-container *ngFor="let author of review.submission.authors">
-            {{author.fullName}},
-          </ng-container>
-        </p>
-        <p><span class="field">Topics: </span>{{review.submission.topics}}</p>
-        <p><span class="field">Keywords: </span>{{review.submission.keywords}}</p>
-        <p>
-          <span class="field">Fullpaper: </span>
-          <i *ngIf="!review.submission.fullPaper">none</i>
-          {{review.submission.fullPaper}}
-        </p>
-      </mat-card-content>
+<div class="columns-container">
+  <div class="reviewed submissions">
+    <h1>Your reviews: </h1>
+    <ng-container>
+      <mat-card class="reviewed submission-card" *ngFor="let review of getReviewedSubmissions(); let i = index">
+        <mat-card-header>
+          <div mat-card-avatar class="submission-header-image"></div>
+          <mat-card-title>{{review.submission.title}}</mat-card-title>
+          <mat-card-subtitle>Review no.{{i + 1}}</mat-card-subtitle>
+        </mat-card-header>
+        <br>
+        <mat-card-content>
+          <p>
+            <span class="field">Abstract: </span>
+            <i *ngIf="!review.submission.abstractPaper">none</i>
+            {{review.submission.abstractPaper}}
+          </p>
+          <p>
+            <span class="field">Authors: </span>
+            <ng-container *ngFor="let author of review.submission.authors">
+              {{author.fullName}},
+            </ng-container>
+          </p>
+          <p><span class="field">Topics: </span>{{review.submission.topics}}</p>
+          <p><span class="field">Keywords: </span>{{review.submission.keywords}}</p>
+          <p>
+            <span class="field">Fullpaper: </span>
+            <i *ngIf="!review.submission.fullPaper">none</i>
+            {{review.submission.fullPaper}}
+          </p>
+        </mat-card-content>
 
-      <mat-card-actions>
-        <mat-label style="right:50%;">
-          <b style="margin:0 15px;">{{review.verdict}}</b>
-          <!--        ngSwitch for custom aspect?-->
-        </mat-label>
-        <button mat-raised-button color="accent"
-                (click)="showRecommendations(review.submission, review.recommendation)">
-          See other reviews
-        </button>
-      </mat-card-actions>
-    </mat-card>
-  </ng-container>
+        <mat-card-actions>
+          <mat-label style="right:50%;">
+            <b style="margin:0 15px;">{{review.verdict}}</b>
+            <!--        ngSwitch for custom aspect?-->
+          </mat-label>
+          <button mat-raised-button color="accent"
+                  (click)="showRecommendations(review.submission, review.recommendation)">
+            See other reviews
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
+
+  <div class="unreviewed submissions">
+    <h1 class="flex-headers">Please review the following:</h1>
+    <ng-container>
+      <mat-card class="unreviewed submission-card" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
+        <mat-card-header>
+          <div mat-card-avatar class="submission-header-image"></div>
+          <mat-card-title>{{review.submission.title}}</mat-card-title>
+          <mat-card-subtitle>Unreviewed no.{{i + 1}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <p>
+            <span class="field">Abstract: </span>
+            <i *ngIf="!review.submission.abstractPaper">none</i>
+            {{review.submission.abstractPaper}}
+          </p>
+          <p>
+            <span class="field">Authors: </span>
+            <ng-container *ngFor="let author of review.submission.authors">
+              {{author.fullName}},
+            </ng-container>
+          </p>
+          <p><span class="field">Topics: </span>{{review.submission.topics}}</p>
+          <p><span class="field">Keywords: </span>{{review.submission.keywords}}</p>
+          <p>
+            <span class="field">Fullpaper: </span>
+            <i *ngIf="!review.submission.fullPaper">none</i>
+            {{review.submission.fullPaper}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-raised-button color="accent" (click)="openAddReviewDialog(review, i)">
+            Offer verdict
+          </button>
+          <mat-form-field style="margin-left: 20px">
+            <mat-label>Select an option</mat-label>
+            <mat-select [(value)]="localVerdicts[i]">
+              <mat-option value="WEAK_ACCEPT" style="color: darkseagreen;">Weak Accept</mat-option>
+              <mat-option value="ACCEPT" style="color: green;">Accepted</mat-option>
+              <mat-option value="STRONG_ACCEPT" style="color: darkgreen;">Strong Accept</mat-option>
+              <mat-option value="WEAK_REJECT" style="color: indianred;">Weak Reject</mat-option>
+              <mat-option value="REJECT" style="color: red;">Rejected</mat-option>
+              <mat-option value="STRONG_REJECT" style="color: darkred;">Strong Reject</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-card-actions>
+      </mat-card>
+    </ng-container>
+  </div>
+
 </div>
-
-<div class="unreviewed submissions">
-  <h1 *>Please review the following:</h1>
-  <ng-container>
-    <mat-card class="unreviewed submission-card" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
-      <mat-card-header>
-        <div mat-card-avatar class="submission-header-image"></div>
-        <mat-card-title>{{review.submission.title}}</mat-card-title>
-        <mat-card-subtitle>Unreviewed no.{{i + 1}}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          <span class="field">Abstract: </span>
-          <i *ngIf="!review.submission.abstractPaper">none</i>
-          {{review.submission.abstractPaper}}
-        </p>
-        <p>
-          <span class="field">Authors: </span>
-          <ng-container *ngFor="let author of review.submission.authors">
-            {{author.fullName}},
-          </ng-container>
-        </p>
-        <p><span class="field">Topics: </span>{{review.submission.topics}}</p>
-        <p><span class="field">Keywords: </span>{{review.submission.keywords}}</p>
-        <p>
-          <span class="field">Fullpaper: </span>
-          <i *ngIf="!review.submission.fullPaper">none</i>
-          {{review.submission.fullPaper}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="accent" (click)="openAddReviewDialog(review, i)">
-          Offer verdict
-        </button>
-        <mat-form-field style="margin-left: 20px">
-          <mat-label>Select an option</mat-label>
-          <mat-select [(value)]="localVerdicts[i]">
-            <mat-option value="WEAK_ACCEPT" style="color: darkseagreen;">Weak Accept</mat-option>
-            <mat-option value="ACCEPT" style="color: green;">Accepted</mat-option>
-            <mat-option value="STRONG_ACCEPT" style="color: darkgreen;">Strong Accept</mat-option>
-            <mat-option value="WEAK_REJECT" style="color: indianred;">Weak Reject</mat-option>
-            <mat-option value="REJECT" style="color: red;">Rejected</mat-option>
-            <mat-option value="STRONG_REJECT" style="color: darkred;">Strong Reject</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </mat-card-actions>
-    </mat-card>
-  </ng-container>
-</div>
-

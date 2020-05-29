@@ -24,7 +24,7 @@ public class Submission {
     @ManyToMany
     private List<User> authors;
 
-    @OneToMany(orphanRemoval = true)
+    @ManyToMany
     private List<User> likes;
 
     @OneToMany(orphanRemoval = true)

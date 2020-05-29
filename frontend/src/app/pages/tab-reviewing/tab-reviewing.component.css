@@ -1,7 +1,8 @@
 .submissions {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .submission-card:hover {
@@ -14,12 +15,10 @@
   margin-right: 10px;
 }
 
-.unreviewed {
-  float: right;
-}
-
-.reviewed {
-  float: left;
+.columns-container {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
 }
 
 h1 {

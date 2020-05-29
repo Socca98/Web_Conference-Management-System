@@ -1,0 +1,32 @@
+.content {
+  text-align: center;
+}
+
+.submissions {
+  /*position: absolute;*/
+  /*left: 1%;*/
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+.submission-card:hover {
+  z-index: 11;
+  animation-duration: 2s;
+}
+
+.submission-card {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.field {
+  font-weight: bold;
+}
+
+.submission-header-image {
+  background-size: cover;
+  background-image: url("../../../assets/submission-icon.svg");
+}
+

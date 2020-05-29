@@ -42,9 +42,25 @@ export class TabAssignPapersComponent implements OnInit {
 
   addSelectionToTab(tab: Tab) {
     const levelConference = this.authService.conference.nrOfReviews;
-    if (tab.usersToAssign.length > levelConference) {
-      alert('The conference allows the maximum number of reviews to be: ' + levelConference);
+
+    // Check level of conference
+    if (tab.usersToAssign.length >= levelConference) {
+      this.snackBar.open('The conference allows the maximum number of reviews to be: ' + levelConference, '', {
+        duration: 1000,
+        panelClass: ['warning'],
+      });
+      return;
     }
+
+    // Check if already in list
+    if (tab.usersToAssign.some(e => e.username === this.selection.username)) {
+      this.snackBar.open('User already added for this!', '', {
+        duration: 1000,
+        panelClass: ['warning'],
+      });
+      return;
+    }
+
     tab.usersToAssign.push(this.selection);
   }
 
