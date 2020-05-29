@@ -3,6 +3,8 @@ import {Submission} from '../../shared/models/submission';
 import {AuthService} from '../../login/auth.service';
 import {SubmissionsService} from '../../shared/services/submissions.service';
 import {Verdict} from '../../shared/models/verdict';
+import {MatDialog} from '@angular/material/dialog';
+import {ShowRecommendationsDialogComponent} from '../../shared/components/show-recommendations-dialog/show-recommendations-dialog.component';
 
 @Component({
   selector: 'app-tab-results',
@@ -11,10 +13,13 @@ import {Verdict} from '../../shared/models/verdict';
 })
 export class TabResultsComponent implements OnInit {
   submissionsReviewed: Submission[] = []; // Submissions of this user that have finalVerdict
+  acceptedClass = 'accepted submission-card';
+  rejectedClass = 'rejected submission-card';
 
   constructor(
     private authService: AuthService,
     private submissionsService: SubmissionsService,
+    private dialog: MatDialog,
   ) {
   }
 
@@ -35,4 +40,27 @@ export class TabResultsComponent implements OnInit {
       submission.finalVerdict === Verdict.Strong_Accept;
   }
 
+  chooseColorClass(submission) {
+    if (this.isAccepted(submission)) {
+      return this.acceptedClass;
+    }
+    return this.rejectedClass;
+  }
+
+  chooseMessageTooltip(submission) {
+    if (this.isAccepted(submission)) {
+      return '';
+    }
+    return 'We are sorry, but this submission did not pass our reviews. Good luck with other ones!';
+  }
+
+  openRecommendations(currentSubmission: Submission) {
+    this.dialog.open(ShowRecommendationsDialogComponent, {
+      data: {
+        recommendation: null,
+        reviews: currentSubmission.reviews,
+        submission: currentSubmission,
+      }
+    });
+  }
 }

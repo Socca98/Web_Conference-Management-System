@@ -4,6 +4,12 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  width: 100%;
+}
+
+.submission-card:hover {
+  z-index: 11;
+  animation-duration: 2s;
 }
 
 .submission-card {
@@ -30,7 +36,12 @@
   border-radius: 10px;
 }
 
+.accepted {
+  background-color: darkseagreen;
+}
 
-
+.rejected {
+  background-color: indianred;
+}
 
 
