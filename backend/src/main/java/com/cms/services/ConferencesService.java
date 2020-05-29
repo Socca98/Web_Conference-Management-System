@@ -9,18 +9,22 @@ import com.cms.repositories.*;
 import com.cms.utils.ConferenceConverter;
 import com.cms.utils.UserConverter;
 import io.jsonwebtoken.lang.Collections;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.util.*;
-
 import java.util.stream.Collectors;
 
 @Service
 public class ConferencesService {
+    private Logger logger = LoggerFactory.getLogger(ConferencesService.class);
 
     @Autowired
     private ConferenceJpaRepository conferencesRepository;
@@ -429,5 +433,34 @@ public class ConferencesService {
 
     public SectionDto getSection(String sectionId) {
         return ConferenceConverter.sectionToSectionDtoWithSubmissions(sectionJpaRepository.getOne(sectionId));
+    }
+
+    @Scheduled(initialDelay = 10000, fixedDelay = 30000)
+    @Transactional
+    public void updateFinalVerdict() {
+        logger.info("Updating final verdicts");
+        long time = Calendar.getInstance().getTime().getTime() / 1000;
+        submissionJpaRepository.findAll()
+                .stream()
+                .filter(submission -> Objects.isNull(submission.getFinalVerdict()))
+                .filter(submission -> submission.getConference().getEvaluationDeadline() < time)
+                .filter(submission -> submission.getReviews().stream().map(review -> Verdict.rejectedOrNotReviewed(review.getVerdict())).count() > 0)
+                .forEach(submission -> {
+                    logger.info("Rejecting submission=[{}]", submission.getSubmissionId());
+
+                    submission.setFinalVerdict(Verdict.REJECT.toString());
+                    submissionJpaRepository.save(submission);
+                });
+        submissionJpaRepository.findAll()
+                .stream()
+                .filter(submission -> Objects.isNull(submission.getFinalVerdict()))
+                .filter(submission -> submission.getConference().getNrOfReviews() >= submission.getReviews().size())
+                .filter(submission -> submission.getConference().getEvaluationDeadline() < time)
+                .filter(submission -> submission.getReviews().stream().map(review -> Verdict.rejectedOrNotReviewed(review.getVerdict())).count() == 0)
+                .forEach(submission -> {
+                    logger.info("Accepting submission=[{}]", submission.getSubmissionId());
+                    submission.setFinalVerdict(Verdict.ACCEPT.toString());
+                    submissionJpaRepository.save(submission);
+                });
     }
 }
