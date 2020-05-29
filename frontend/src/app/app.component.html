@@ -6,10 +6,6 @@
        routerLink="/"
        routerLinkActive="active"
   />
-  <!--
-    add this here to test conference, cant login/register atm
-    remove create conference after
-   -->
   <div class="login" *ngIf="!this.authService.isLogged()">
     <a (click)="openLoginDialog()"
        onclick="this.blur()">Login</a>

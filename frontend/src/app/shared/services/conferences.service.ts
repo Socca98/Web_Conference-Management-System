@@ -14,18 +14,13 @@ export class ConferencesService {
   constructor(private http: HttpClient) {
   }
 
-  addConference(newConference: HttpParams) {
-    return this.http.post<HttpParams>(environment.apiEndpoint + '/conferences',
-      newConference);
-  }
-
   /**
    * Add a new conference
    */
-  // addConference(newConference: Conference): Observable<Conference> {
-  //   return this.http.post<Conference>(environment.apiEndpoint + '/conferences',
-  //     newConference);
-  // }
+  addConference(newConference: Conference): Observable<Conference> {
+    return this.http.post<Conference>(environment.apiEndpoint + '/conferences',
+      newConference);
+  }
 
   /**
    * Returns the JSON of one Conference.

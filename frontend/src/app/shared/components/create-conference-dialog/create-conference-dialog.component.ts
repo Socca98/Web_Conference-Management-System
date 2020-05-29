@@ -5,7 +5,9 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {ConferencesService} from '../../services/conferences.service';
 import {MatSelectModule} from '@angular/material/select';
 import {AbstractControl, Form, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpParams} from "@angular/common/http";
+import {HttpParams} from '@angular/common/http';
+import {Token} from '../../models/token';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-create-conference',
@@ -41,21 +43,33 @@ export class CreateConferenceDialogComponent implements OnInit {
 
   formConference: FormGroup;
 
-  onCreateClick(value: any) {
-    this.snackBar.open('Yay!');
-    const body = new HttpParams()
-      .set('name', value.conferenceName)
-      .set('startDate', String(Date.parse(value.startDate)))
-      .set('startDate', String(Date.parse(value.endDate)))
-      .set('abstractDeadline', String(Date.parse(value.abstractDeadline)))
-      .set('proposalDeadline', String(Date.parse(value.proposalDeadline)))
-      .set('website', value.website)
-      .set('allowFullPaper', value.allowUpload)
-      .set('taxFee', value.taxFee)
-      .set('nrOfReviews', value.nrOfReviews)
-      .set('users', value.members);
-    console.log(body.toString());
-    this.conferencesService.addConference(body);
+  onCreateClick() {
+    const value = this.formConference.value;
+    this.conference.name = value.conferenceName;
+    this.conference.proposalDeadline = value.proposalDeadline.getTime;
+    this.conference.abstractDeadline = value.abstractDeadline.getTime;
+    this.conference.allowFullPaper = value.allowUpload;
+    this.conference.taxFee = value.taxFee;
+    this.conference.id = '';
+    this.conference.evaluationDeadline = value.evaluationDeadline.getTime;
+    this.conference.biddingDeadline = value.biddingDeadline.getTime;
+    this.conference.website = value.website;
+    this.conference.nrOfReviews = value.nrOfReviews;
+    this.conference.users = value.members;
+    console.log(this.conference);
+    this.conferencesService.addConference(this.conference).subscribe({
+      next: (response: Conference) => {
+        this.dialogRef.close();
+        this.snackBar.open('Conference created successfully!', '', {
+        duration: 1000
+        });
+        }, error: _ => {
+        this.snackBar.open('Couldn\' create conference :(', '', {
+          duration: 2000,
+          panelClass: ['warning'],
+        });
+      }
+    });
   }
 
   onCancelClick() {
