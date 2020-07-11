@@ -77,8 +77,8 @@ export class TabAssignPapersComponent implements OnInit {
             duration: 1000,
           });
         },
-        error: _ => {
-          this.snackBar.open('Cannot assign users!', '', {
+        error: err => {
+          this.snackBar.open('Failed! ' + err, '', {
             duration: 1000,
             panelClass: ['warning'],
           });

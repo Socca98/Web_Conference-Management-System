@@ -1,0 +1,115 @@
+Conference 0: 
+
+admin
+CHAIR
+
+--------------
+user0
+CO_CHAIR
+
+user1
+CO_CHAIR
+
+--------------
+user2
+PC_Member
+Submission 0: 
+Submission 1: 
+
+user3
+PC_Member
+Submission 0:
+
+user4
+PC_Member
+
+--------------
+user5
+AUTHOR
+Submission 0:
+Submission 4:
+Submission 6:
+
+user6
+AUTHOR
+Submission 0:
+Submission 1: 
+Submission 3:
+Submission 7: fN(accept)
+Submission 8: fN(reject)
+
+user7
+AUTHOR
+Submission 1: 
+Submission 2:
+Submission 3:
+Submission 4:
+Submission 5:
+
+--------------
+best8
+STEERING_COMMITTEE_MEMBER
+
+best9
+STEERING_COMMITTEE_MEMBER
+
+
+==================== Submissions =======================
+Submission 0
+likes:
+    user2:
+    user3:
+    user4:
+reviews:
+    none-user2
+    none-user3
+    none-user4
+    
+Submission 1
+likes:
+    user2:
+reviews:
+    accept-user2
+    accept-user3
+
+    
+Submission 2
+likes:
+    user2:
+    user4:
+reviews:
+    reject-user2
+    accept-user3
+    accept-user4
+
+
+Submission 3
+reviews:
+    reject-user4
+
+    
+Submission 4
+reviews:
+    none-user2
+    none-user3
+
+
+
+================================
+Section 1
+submissions:
+    Submission 0
+    Submission 7
+
+
+Section 2
+
+
+Section 3
+
+
+
+
+
+
+

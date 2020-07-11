@@ -31,7 +31,11 @@ export class TabSubmissionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
-      this.submissions = result;
+
+      const currentUser = this.authService.user;
+      this.submissions = result.filter(
+        s => s.authors.some(user => user.email === currentUser.email)
+      );
     });
   }
 

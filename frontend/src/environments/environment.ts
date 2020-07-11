@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://issbe.olahistvan.com:8081/cms/api/',
-  // apiEndpoint: 'http://localhost:8080/cms/api/',
+  // apiEndpoint: 'http://issbe.olahistvan.com:8081/cms/api/',
+  apiEndpoint: 'http://localhost:8080/cms/api/',
   // apiEndpoint: 'http://olahistvan.com:8081/cms/api/',
 };
 
