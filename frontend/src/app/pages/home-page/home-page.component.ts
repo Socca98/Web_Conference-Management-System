@@ -81,6 +81,7 @@ export class HomePageComponent implements OnInit {
         // custom response json, if you dont want to make an interface again
         let responseData: {
           username: string;
+          email: string;
           affiliation: string;
           role: string;
           chair: boolean;
@@ -91,6 +92,7 @@ export class HomePageComponent implements OnInit {
         this.authService.conference = this.conferences[this.selectedTabIndex];
         this.authService.user = {
           username: responseData.username,
+          email: responseData.email,
           affiliation: responseData.affiliation,
           role: responseData.role,
           isChair: responseData.chair,

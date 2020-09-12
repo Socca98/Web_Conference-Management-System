@@ -15,7 +15,6 @@ import {User} from '../../models/user';
   styleUrls: ['./create-conference-dialog.component.css']
 })
 export class CreateConferenceDialogComponent implements OnInit {
-
   conference: Conference = {} as Conference;
 
   constructor(
@@ -64,7 +63,7 @@ export class CreateConferenceDialogComponent implements OnInit {
         duration: 1000
         });
         }, error: _ => {
-        this.snackBar.open('Couldn\' create conference :(', '', {
+        this.snackBar.open('Couldn\'t create conference :(', '', {
           duration: 2000,
           panelClass: ['warning'],
         });
@@ -76,6 +75,9 @@ export class CreateConferenceDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  /**
+   * Enables an input field if user wants two deadlines.
+   */
   disableSecondDeadline() {
     if (this.formConference.controls.allowTwoDeadlines.value) {
       this.formConference.controls.abstractDeadline.enable();

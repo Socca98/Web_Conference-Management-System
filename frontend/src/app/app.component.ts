@@ -5,6 +5,8 @@ import {Router} from '@angular/router';
 import {RegisterDialogComponent} from './login/register/register-dialog.component';
 import {AuthService} from './login/auth.service';
 import {CreateConferenceDialogComponent} from './shared/components/create-conference-dialog/create-conference-dialog.component';
+import {ColorSchemeService} from './shared/services/color-scheme.service';
+import {Theme} from './shared/models/theme';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +22,13 @@ export class AppComponent {
     private router: Router,
     private dialog: MatDialog,
     public authService: AuthService,
+    public colorSchemeService: ColorSchemeService,
   ) {
     this.labelDeadline();
+
+    // Load Color Scheme (Theme)
+    this.colorSchemeService._setColorScheme('alien');
+    this.colorSchemeService.load();
   }
 
   openLoginDialog() {
@@ -82,5 +89,18 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  /**
+   * Clicking the 7left up corner icon changes the theme of the application.
+   */
+  switchTheme() {
+    if (this.colorSchemeService.currentActive() === Theme.Alien) {
+      this.colorSchemeService.update(Theme.Light);
+      this.colorSchemeService.mainImageUrl = '../assets/icon1.png';
+    } else {
+      this.colorSchemeService.update(Theme.Alien);
+      this.colorSchemeService.mainImageUrl = '../assets/alien.svg';
+    }
   }
 }

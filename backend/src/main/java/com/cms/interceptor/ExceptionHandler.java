@@ -17,12 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 @Order(Ordered.LOWEST_PRECEDENCE - 5500)
 public class ExceptionHandler {
 
-
     @org.springframework.web.bind.annotation.ExceptionHandler(IssException.class)
     public ResponseEntity<ResponseException> handleIssException(IssException ex, WebRequest webRequest) {
-
-
         return new ResponseEntity<>(new ResponseException().message(ex.getMessage(), ex.getStatus()), ex.getStatus()) ;
-
     }
 }

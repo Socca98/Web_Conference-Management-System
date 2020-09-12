@@ -1,0 +1,24 @@
+@font-face
+{
+    font-family: 'zetareticuli';
+  src: url('zetareticuli.eot');
+  src: url('zetareticuli.eot?#') format('embedded-opentype'),
+      url('zetareticuli.woff') format('woff'),
+      url('zetareticuli.ttf') format('truetype');
+}
+@font-face
+{
+    font-family: 'zetareticuli3d';
+  src: url('zetareticuli3d.eot');
+  src: url('zetareticuli3d.eot?#') format('embedded-opentype'),
+      url('zetareticuli3d.woff') format('woff'),
+      url('zetareticuli3d.ttf') format('truetype');
+}
+@font-face
+{
+    font-family: 'zetareticuliital';
+  src: url('zetareticuliital.eot');
+  src: url('zetareticuliital.eot?#') format('embedded-opentype'),
+      url('zetareticuliital.woff') format('woff'),
+      url('zetareticuliital.ttf') format('truetype');
+}

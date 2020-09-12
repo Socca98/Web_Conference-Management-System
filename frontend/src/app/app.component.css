@@ -7,6 +7,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 h1,
 h2,
 h3,
@@ -20,7 +21,6 @@ p {
   margin: 0;
 }
 
-
 .toolbar {
   position: absolute;
   top: 0;
@@ -33,8 +33,15 @@ p {
 }
 
 .toolbar img {
-  margin-left: 8px;
-  margin-right: 24px;
+  padding: 3px;
+  margin-left: 1px;
+  margin-right: 15px;
+}
+
+#main-image:hover {
+  background-color: #cccccc;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 .content {

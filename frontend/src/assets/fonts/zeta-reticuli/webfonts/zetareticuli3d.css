@@ -1,0 +1,8 @@
+@font-face
+{
+    font-family: 'zetareticuli3d';
+  src: url('zetareticuli3d.eot');
+  src: url('zetareticuli3d.eot?#') format('embedded-opentype'),
+      url('zetareticuli3d.woff') format('woff'),
+      url('zetareticuli3d.ttf') format('truetype');
+}

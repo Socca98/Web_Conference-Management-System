@@ -1,11 +1,12 @@
 <!-- Toolbar -->
 <mat-toolbar class="toolbar" role="banner" color="primary">
-  <img width="45"
-       src="../assets/icon1.png"
+  <img id="main-image" width="45"
+       src="{{this.colorSchemeService.mainImageUrl}}"
        alt="Angular Logo"
-       routerLink="/"
-       routerLinkActive="active"
-  />
+       (click)="switchTheme()"/>
+  <!--       routerLink="/"-->
+  <!--       routerLinkActive="active"-->
+  <!--  />-->
   <div class="login" *ngIf="!this.authService.isLogged()">
     <a (click)="openLoginDialog()"
        onclick="this.blur()">Login</a>
@@ -26,8 +27,11 @@
         </ng-container>
       </div>
     </span>
-    <button class="mat-button" (click)="openCreateConferenceDialog()"
-       onclick="this.blur()">Create conference</button>
+    <button class="mat-button"
+            (click)="openCreateConferenceDialog()"
+            onclick="this.blur()">
+      Create conference
+    </button>
     <button class="logout-button" color="accent"
             (click)="this.authService.logout()"
             mat-raised-button>

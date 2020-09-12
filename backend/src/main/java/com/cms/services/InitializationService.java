@@ -125,7 +125,9 @@ public class InitializationService {
         User user = userRepository.getUserByUsername(securityService.getUsernameFromContext());
         UserInformationDto userInformationDto = new UserInformationDto()
                 .username(user.getUsername())
+                .email(user.getEmail())
                 .affiliation(user.getAffiliation());
+
         if (Objects.nonNull(conferenceId)) {
             Optional<Role> usersRole = user.getRoles()
                     .stream()

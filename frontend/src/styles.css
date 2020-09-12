@@ -1,11 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
 /*@import 'node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';*/
 
+@font-face {
+  font-family: Zilap Alien;
+  src: url(assets/fonts/Zilap-Alien/Zilap_Alien_DEMO.ttf) format("truetype");
+}
+@font-face {
+  font-family: Zeta Reticuli;
+  src: url(assets/fonts/zeta-reticuli/fonts/ZetaReticuli.otf) format("opentype");
+}
+@font-face {
+  font-family: Zeta Reticuli3D;
+  src: url(assets/fonts/zeta-reticuli/fonts/ZetaReticuli3D.otf) format("opentype");
+}
+@font-face {
+  font-family: Zeta Reticuli Italic;
+  src: url(assets/fonts/zeta-reticuli/fonts/ZetaReticuliItalic.otf) format("opentype");
+}
+@font-face {
+  font-family: We-are-alien;
+  src: url(assets/fonts/we-are-alien/wearealien.ttf) format("truetype");
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }*/
 
-
-
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/** {*/
+/*  font-family: "We-are-alien", serif !important;*/
+/*}*/

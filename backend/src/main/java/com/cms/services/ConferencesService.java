@@ -48,7 +48,7 @@ public class ConferencesService {
     private SecurityService securityService;
 
     public ConferenceDto createConference(CreateConferenceDto conferenceDto) {
-        if (! securityService.isAdmin()) {
+        if (!securityService.isAdmin()) {
             throw new IssException("This operation is only permitted for the Chair!", HttpStatus.BAD_REQUEST);
         }
         Conference savedConference = conferencesRepository.save(ConferenceConverter.conferenceDtoToConference(conferenceDto));
@@ -153,7 +153,7 @@ public class ConferencesService {
                 .stream()
                 .filter(role -> role.getUser().getEmail().equals(reviewDto.getUser().getEmail()))
                 .collect(Collectors.toList());
-        if(possibleExistingRole.size() == 1) {
+        if (possibleExistingRole.size() == 1) {
             Roles role = possibleExistingRole.get(0).getRole();
             if (role != Roles.PC_MEMBER && role != Roles.CHAIR && role != Roles.CO_CHAIR) {
                 throw new IssException("Not permitted for this user!", HttpStatus.BAD_REQUEST);
@@ -242,7 +242,7 @@ public class ConferencesService {
         section.setTitle(sectionDto.getTitle());
         section.setStartTime(sectionDto.getStartTime());
         section.setEndTime(sectionDto.getEndTime());
-        if(Objects.nonNull(sectionDto.getSectionChair().getEmail()) &&
+        if (Objects.nonNull(sectionDto.getSectionChair().getEmail()) &&
                 !section.getSectionChair().getEmail().equals(sectionDto.getSectionChair().getEmail())) {
             User user = usersService.getUserByEmail(section.getSectionChair().getEmail());
             section.setSectionChair(user);
@@ -259,10 +259,10 @@ public class ConferencesService {
     public void removeSection(String sectionId) {
         Section one = sectionJpaRepository.getOne(sectionId);
         one.getSubmissions()
-            .forEach(submission -> {
-                submission.setSection(null);
-                submissionJpaRepository.save(submission);
-            });
+                .forEach(submission -> {
+                    submission.setSection(null);
+                    submissionJpaRepository.save(submission);
+                });
 
         sectionJpaRepository.deleteById(sectionId);
     }
@@ -315,9 +315,15 @@ public class ConferencesService {
     public List<ReviewDto> getReviewsForStatus(String submissionId, String status) {
         DirectoryStream.Filter<Verdict> filter;
         switch (status) {
-            case "accepted": filter = Verdict::accepted; break;
-            case "rejected": filter = Verdict::rejectedOrNotReviewed; break;
-            default: filter = Verdict::all; break;
+            case "accepted":
+                filter = Verdict::accepted;
+                break;
+            case "rejected":
+                filter = Verdict::rejectedOrNotReviewed;
+                break;
+            default:
+                filter = Verdict::all;
+                break;
         }
         return submissionJpaRepository.getOne(submissionId)
                 .getReviews()
@@ -337,9 +343,15 @@ public class ConferencesService {
     public List<ReviewDto> getReviewsForConference(String conferenceId, String status) {
         DirectoryStream.Filter<Verdict> filter;
         switch (status) {
-            case "accepted": filter = Verdict::accepted; break;
-            case "rejected": filter = Verdict::rejectedOrNotReviewed; break;
-            default: filter = Verdict::all; break;
+            case "accepted":
+                filter = Verdict::accepted;
+                break;
+            case "rejected":
+                filter = Verdict::rejectedOrNotReviewed;
+                break;
+            default:
+                filter = Verdict::all;
+                break;
         }
         Conference conference = conferencesRepository.getOne(conferenceId);
         String username = securityService.getUsernameFromContext();
@@ -369,7 +381,7 @@ public class ConferencesService {
                     .collect(Collectors.toList());
         }
 
-        if(securityService.isAdmin() || (probablyRole.size() == 1 && probablyRole.get(0).getRole() == Roles.CO_CHAIR)) {
+        if (securityService.isAdmin() || (probablyRole.size() == 1 && probablyRole.get(0).getRole() == Roles.CO_CHAIR)) {
             List<Review> allReviews = new ArrayList<>();
             conference.getSubmissions()
                     .stream()
@@ -435,32 +447,32 @@ public class ConferencesService {
         return ConferenceConverter.sectionToSectionDtoWithSubmissions(sectionJpaRepository.getOne(sectionId));
     }
 
-    @Scheduled(initialDelay = 10000, fixedDelay = 30000)
-    @Transactional
-    public void updateFinalVerdict() {
-        logger.info("Updating final verdicts");
-        long time = Calendar.getInstance().getTime().getTime() / 1000;
-        submissionJpaRepository.findAll()
-                .stream()
-                .filter(submission -> Objects.isNull(submission.getFinalVerdict()))
-                .filter(submission -> submission.getConference().getEvaluationDeadline() < time)
-                .filter(submission -> submission.getReviews().stream().map(review -> Verdict.rejectedOrNotReviewed(review.getVerdict())).count() > 0)
-                .forEach(submission -> {
-                    logger.info("Rejecting submission=[{}]", submission.getSubmissionId());
-
-                    submission.setFinalVerdict(Verdict.REJECT.toString());
-                    submissionJpaRepository.save(submission);
-                });
-        submissionJpaRepository.findAll()
-                .stream()
-                .filter(submission -> Objects.isNull(submission.getFinalVerdict()))
-                .filter(submission -> submission.getConference().getNrOfReviews() >= submission.getReviews().size())
-                .filter(submission -> submission.getConference().getEvaluationDeadline() < time)
-                .filter(submission -> submission.getReviews().stream().map(review -> Verdict.rejectedOrNotReviewed(review.getVerdict())).count() == 0)
-                .forEach(submission -> {
-                    logger.info("Accepting submission=[{}]", submission.getSubmissionId());
-                    submission.setFinalVerdict(Verdict.ACCEPT.toString());
-                    submissionJpaRepository.save(submission);
-                });
-    }
+//    @Scheduled(initialDelay = 10000, fixedDelay = 30000)
+//    @Transactional
+//    public void updateFinalVerdict() {
+//        logger.info("Updating final verdicts");
+//        long time = Calendar.getInstance().getTime().getTime() / 1000;
+//        submissionJpaRepository.findAll()
+//                .stream()
+//                .filter(submission -> Objects.isNull(submission.getFinalVerdict()))
+//                .filter(submission -> submission.getConference().getEvaluationDeadline() < time)
+//                .filter(submission -> submission.getReviews().stream().map(review -> Verdict.rejectedOrNotReviewed(review.getVerdict())).count() > 0)
+//                .forEach(submission -> {
+//                    logger.info("Rejecting submission=[{}]", submission.getSubmissionId());
+//
+//                    submission.setFinalVerdict(Verdict.REJECT.toString());
+//                    submissionJpaRepository.save(submission);
+//                });
+//        submissionJpaRepository.findAll()
+//                .stream()
+//                .filter(submission -> Objects.isNull(submission.getFinalVerdict()))
+//                .filter(submission -> submission.getConference().getNrOfReviews() >= submission.getReviews().size())
+//                .filter(submission -> submission.getConference().getEvaluationDeadline() < time)
+//                .filter(submission -> submission.getReviews().stream().map(review -> Verdict.rejectedOrNotReviewed(review.getVerdict())).count() == 0)
+//                .forEach(submission -> {
+//                    logger.info("Accepting submission=[{}]", submission.getSubmissionId());
+//                    submission.setFinalVerdict(Verdict.ACCEPT.toString());
+//                    submissionJpaRepository.save(submission);
+//                });
+//    }
 }
