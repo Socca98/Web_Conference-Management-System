@@ -61,9 +61,21 @@ export class TabEvaluationsComponent implements OnInit {
   }
 
   sendToReviewer(currentSubmission: Submission, index) {
-    if (!(this.anotherReviewersEmail)[index]) {
+    const newReviewerToAdd = (this.anotherReviewersEmail)[index];
+
+    // Check if a reviewer was selected in the mat-select
+    if (!newReviewerToAdd) {
       this.snackBar.open('Please select reviewer!', 'Ok', {
         duration: 1000,
+        panelClass: ['warning']
+      });
+      return;
+    }
+
+    // Check if this submission already has created a review for the newReviewerToAdd
+    if (this.submissions[index].reviews.some(r => r.user.email === newReviewerToAdd)) {
+      this.snackBar.open('Reviewer already exists!', 'Ok', {
+        duration: 2000,
         panelClass: ['warning']
       });
       return;
@@ -72,7 +84,7 @@ export class TabEvaluationsComponent implements OnInit {
     const review: Review = {
       submission: currentSubmission,
       user: {
-        email: (this.anotherReviewersEmail)[index]
+        email: newReviewerToAdd
       } as User,
     } as Review;
 
@@ -142,7 +154,11 @@ export class TabEvaluationsComponent implements OnInit {
     });
   }
 
-  checkSelectionChange($event: MatSelectChange) {
+  downloadAbstractPaper(i) {
+    this.submissionsService.downloadFile(this.submissions[i].abstractPaper);
+  }
 
+  downloadFullPaper(i: number) {
+    this.submissionsService.downloadFile(this.submissions[i].fullPaper);
   }
 }

@@ -113,4 +113,8 @@ export class SubmissionsService {
     const urlString = environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + submission.id;
     return this.http.put(urlString, submission);
   }
+
+  editAbstract(conferenceId, submission: Submission) {
+    return this.http.put<Submission>(environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + submission.id, submission);
+  }
 }

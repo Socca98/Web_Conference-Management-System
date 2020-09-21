@@ -35,7 +35,7 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button color="accent">Update</button>
+          <button mat-raised-button color="accent" (click)="openEditAbstractDialog(submission, i)">Update</button>
           <button mat-raised-button color="accent" (click)="openInput(i)"> Attach full paper</button>
           <input id="fileInput" hidden type="file" (change)="onFileSelected($event)">
         </mat-card-actions>

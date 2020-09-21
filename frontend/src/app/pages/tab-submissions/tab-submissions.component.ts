@@ -3,8 +3,9 @@ import {Submission} from '../../shared/models/submission';
 import {SubmissionsService} from '../../shared/services/submissions.service';
 import {AuthService} from '../../login/auth.service';
 import {AddAbstractDialogComponent} from '../../shared/components/add-abstract-dialog/add-abstract-dialog.component';
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {EditAbstractDialogComponent} from '../../shared/components/edit-abstract-dialog/edit-abstract-dialog.component';
 
 
 @Component({
@@ -38,13 +39,30 @@ export class TabSubmissionsComponent implements OnInit {
       this.submissions = result.filter(
         s => s.authors.some(user => user.email === currentUser.email)
       );
-      console.log(this.submissions);
-
     });
   }
 
   openAddAbstractDialog() {
-    this.dialog.open(AddAbstractDialogComponent);
+    this.dialog.open(AddAbstractDialogComponent).afterClosed().subscribe((result: Submission) => {
+      if (result) {
+        this.submissions.push(result);
+      }
+    });
+  }
+
+  openEditAbstractDialog(submission: Submission, index) {
+    // Send data to auto-populate edit dialog
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      submission
+    };
+
+    this.dialog.open(EditAbstractDialogComponent, dialogConfig).afterClosed()
+      .subscribe((result: Submission) => {
+        if (result) {
+          this.submissions[index] = result;
+        }
+      });
   }
 
   downloadAbstractPaper(i) {
@@ -71,11 +89,7 @@ export class TabSubmissionsComponent implements OnInit {
    */
   onUpload() {
     const fd = new FormData();
-    console.log(this.selectedFile);
-    console.log(this.selectedFile.name);
-
     fd.append('file', this.selectedFile, this.selectedFile.name);
-
     return this.submissionsService.uploadFile(fd);
   }
 
@@ -89,8 +103,6 @@ export class TabSubmissionsComponent implements OnInit {
     // Upload file
     this.onUpload().subscribe({
       next: (response: Submission) => {
-        console.log('File uploaded successfully.');
-        console.log(response);
         this.submissions[i].fullPaper = response.id;
 
         this.submissionsService.addFullPaper(conferenceId, this.submissions[i]).subscribe({
@@ -111,4 +123,5 @@ export class TabSubmissionsComponent implements OnInit {
       }
     });
   }
+
 }

@@ -7,6 +7,7 @@ import {AuthService} from './login/auth.service';
 import {CreateConferenceDialogComponent} from './shared/components/create-conference-dialog/create-conference-dialog.component';
 import {ColorSchemeService} from './shared/services/color-scheme.service';
 import {Theme} from './shared/models/theme';
+import {Role} from './shared/models/role';
 
 @Component({
   selector: 'app-root',
@@ -106,4 +107,60 @@ export class AppComponent {
     });
   }
 
+  /**
+   * Check if we display a specific navbar tab depending on the role.
+   * I really wish there is an easier way instead of 1 mil ifs
+   * @param tabName Name of the tab as a string.
+   */
+  isRoleOk(tabName: string): boolean {
+    const currentUserRole = this.authService.getUserRole();
+
+    if (currentUserRole === null) {
+      return false;
+    }
+
+    switch (currentUserRole) {
+      case Role.Chair:
+        return true;
+
+      case Role.CoChair:
+        if (tabName === 'Submissions' || tabName === 'Results') {
+          return false;
+        }
+        break;
+
+      case Role.Author:
+        if (tabName === 'Bidding' ||
+          tabName === 'Assign papers' ||
+          tabName === 'Reviewing' ||
+          tabName === 'Evaluations') {
+          return false;
+        }
+        break;
+
+      case Role.PC_Member:
+        if (tabName === 'Assign papers' || tabName === 'Evaluations') {
+          return false;
+        }
+        break;
+
+      case Role.SC_Member:
+        if (tabName === 'Submissions' ||
+          tabName === 'Results' ||
+          tabName === 'Bidding' ||
+          tabName === 'Assign papers' ||
+          tabName === 'Reviewing' ||
+          tabName === 'Evaluations') {
+          return false;
+        }
+        break;
+
+      default:
+        return false;
+    }
+    if (tabName === 'Create conference') {
+      return false;
+    }
+    return true;
+  }
 }

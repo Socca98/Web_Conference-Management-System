@@ -1,18 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {Submission} from '../../models/submission';
+import {Component, Inject, OnInit} from '@angular/core';
 import {User} from '../../models/user';
-import {MatDialogRef} from '@angular/material/dialog';
+import {Submission} from '../../models/submission';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {SubmissionsService} from '../../services/submissions.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {AuthService} from '../../../login/auth.service';
-import {isEmpty} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-tab-abstract-dialog',
-  templateUrl: './add-abstract-dialog.component.html',
-  styleUrls: ['./add-abstract-dialog.component.css']
+  selector: 'app-edit-abstract-dialog',
+  templateUrl: './edit-abstract-dialog.component.html',
+  styleUrls: ['./edit-abstract-dialog.component.css']
 })
-export class AddAbstractDialogComponent implements OnInit {
+export class EditAbstractDialogComponent implements OnInit {
   user: User = {} as User;
   submission: Submission = {
     id: null,
@@ -30,15 +29,15 @@ export class AddAbstractDialogComponent implements OnInit {
   private selectedFile: File = null;
   showSpinner = false;
 
+
   constructor(
-    public dialogRef: MatDialogRef<AddAbstractDialogComponent>,
+    public dialogRef: MatDialogRef<EditAbstractDialogComponent>,
     private submissionsService: SubmissionsService,
     private authService: AuthService,
     private snackBar: MatSnackBar,
+    @Inject(MAT_DIALOG_DATA) data,
   ) {
-    // Populate first email with current user
-    const user = this.authService.user;
-    this.submission.authors.push(user);
+    this.submission = {...data.submission}; // spread operator, like deep copy
   }
 
   ngOnInit(): void {
@@ -55,37 +54,18 @@ export class AddAbstractDialogComponent implements OnInit {
     return this.submissionsService.uploadFile(fd);
   }
 
-  incrementNumberOfAuthors() {
-    const user = {} as User;
-    this.submission.authors.push(user);
-  }
-
-  identify(index, item) {
-    return item.id;
+  onCancelClick() {
+    this.dialogRef.close();
   }
 
   private validateInputAbstract() {
     return !(this.selectedFile === null ||
       this.submission.title === null ||
-      this.submission.authors === null ||
-      this.submission.authors.some(author => Object.keys(author).length === 0) ||
       this.submission.keywords === null ||
       this.submission.topics === null);
   }
 
-  /**
-   * Close submit abstract dialog.
-   */
-  onCancelClick() {
-    this.dialogRef.close();
-  }
-
-  /**
-   * Sends 'this.submission to SubmissionsService for submit.
-   * Submit button's click calls this function.
-   * In HTML, [(ngModel)] changes automatically object 'this.submission' if input fields change.
-   */
-  onSubmitClick() {
+  onEditClick() {
     if (!this.validateInputAbstract()) {
       this.snackBar.open('Fill all required fields!', '', {
         duration: 2000,
@@ -96,22 +76,20 @@ export class AddAbstractDialogComponent implements OnInit {
     const conferenceId = this.authService.conference.id;
     this.showSpinner = true;
 
-    // upload file
     this.onUpload().subscribe({
       next: (response: Submission) => {
         this.submission.abstractPaper = response.id;
-        this.submissionsService.addAbstract(conferenceId, this.submission).subscribe({
+        this.submissionsService.editAbstract(conferenceId, this.submission).subscribe({
           next: (responseSub: Submission) => {
-            this.snackBar.open('Abstract paper submitted.', 'Ok', {
+            this.snackBar.open('Abstract paper edited.', 'Ok', {
               duration: 1000
             });
-            // I have to copy this line everywhere because I'm not pipe-ing RxJS
             this.showSpinner = false;
             this.dialogRef.close(responseSub);
           },
           error: err => {
             console.error('Error! ' + err);
-            alert('Error occurred while submitting.');
+            alert('Error occurred while editing.');
             this.showSpinner = false;
           }
         });
@@ -123,6 +101,4 @@ export class AddAbstractDialogComponent implements OnInit {
       }
     });
   }
-
-
 }

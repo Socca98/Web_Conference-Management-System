@@ -28,7 +28,7 @@
         </ng-container>
       </div>
     </span>
-    <button id="btn-create-conference" color="warn" *ngIf="authService.getUserRole()"
+    <button id="btn-create-conference" color="warn" *ngIf="isRoleOk('Create conference')"
             (click)="openCreateConferenceDialog()"
             onclick="this.blur()"
             mat-raised-button>
@@ -42,19 +42,27 @@
   </div>
 
   <div id="navbar-links" style="max-width: 100%;">
-    <a class="lnk" routerLink="/" >Home</a>
+    <a class="lnk" routerLink="/">Home</a>
     <ng-container *ngIf="this.authService.isLogged() && !isOnHomePage()">
-      <a class="lnk" routerLink="conference/details" routerLinkActive="active">Details</a>
-      <a class="lnk" routerLink="conference/sections" routerLinkActive="active">Sections</a>
+      <a class="lnk" routerLink="conference/details" routerLinkActive="active"
+         *ngIf="isRoleOk('Details')">Details</a>
+      <a class="lnk" routerLink="conference/sections" routerLinkActive="active"
+         *ngIf="isRoleOk('Sections')">Sections</a>
 
-      <a class="lnk" routerLink="conference/submissions" routerLinkActive="active">Submissions</a>
-      <a class="lnk" routerLink="conference/results" routerLinkActive="active">Results</a>
+      <a class="lnk" routerLink="conference/submissions" routerLinkActive="active"
+         *ngIf="isRoleOk('Submissions')">Submissions</a>
+      <a class="lnk" routerLink="conference/results" routerLinkActive="active"
+         *ngIf="isRoleOk('Results')">Results</a>
 
-      <a class="lnk" routerLink="conference/bidding" routerLinkActive="active">Bidding</a>
-      <a class="lnk" routerLink="conference/assign-papers" routerLinkActive="active">Assign papers</a>
+      <a class="lnk" routerLink="conference/bidding" routerLinkActive="active"
+         *ngIf="isRoleOk('Bidding')">Bidding</a>
+      <a class="lnk" routerLink="conference/assign-papers" routerLinkActive="active"
+         *ngIf="isRoleOk('Assign papers')">Assign papers</a>
 
-      <a class="lnk" routerLink="conference/reviewing" routerLinkActive="active">Reviewing</a>
-      <a class="lnk" routerLink="conference/evaluations" routerLinkActive="active">Evaluations</a>
+      <a class="lnk" routerLink="conference/reviewing" routerLinkActive="active"
+         *ngIf="isRoleOk('Reviewing')">Reviewing</a>
+      <a class="lnk" routerLink="conference/evaluations" routerLinkActive="active"
+         *ngIf="isRoleOk('Evaluations')">Evaluations</a>
     </ng-container>
   </div>
 </mat-toolbar>

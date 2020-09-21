@@ -15,9 +15,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class TabSectionsComponent implements OnInit {
   sections: Section[] = [];
-  isPayed = false;
+  isPayed = false;  // This should have been a field in the database. Otherwise, upon Logout you must pay again.
   isBlurredClass = 'blurred';
-  isParticipant: boolean[] = [];
 
   constructor(
     private authService: AuthService,
@@ -30,14 +29,15 @@ export class TabSectionsComponent implements OnInit {
     if (this.authService.user.payedAttend || userRole === Role.Chair || userRole === Role.CoChair) {
       this.activatePage();
     }
-    // this.activatePage();
   }
 
   ngOnInit(): void {
     this.conferenceService.getSections(this.authService.conference.id).subscribe((result) => {
       this.sections = result;
-      // console.log(result.id);
+      console.log(this.sections);
     });
+    this.dialog.open(AddSectionDialogComponent);
+
   }
 
   /**
@@ -79,6 +79,20 @@ export class TabSectionsComponent implements OnInit {
       });
   }
 
+  /**
+   * Checks if you clicked Participate at the corresponding index section.
+   * @param index Corresponding index section.
+   */
+  isCurrentUserListener(index) {
+    const currentUser = this.authService.user;
+    return !!this.sections[index].listeners.some(user => user.email === currentUser.email);
+  }
+
+  /**
+   * By participating we decrement the number of seats in the database for a specific section.
+   * @param sectionId Corresponds to a section tab.
+   * @param index Identifies the section tab.
+   */
   attendButton(sectionId, index) {
     const conferenceId = this.authService.conference.id;
     this.conferenceService.attendSection(conferenceId, sectionId).subscribe({
@@ -86,11 +100,11 @@ export class TabSectionsComponent implements OnInit {
         this.snackBar.open('Thank you for participating!', ':D', {
           duration: 1000,
         });
-        this.isParticipant[index] = true;
+        this.sections[index].seats--; // We do not return the section, so we fake an update
       },
       error: () => {
-        this.snackBar.open('Error attending section!', 'Ok', {
-          duration: 1000,
+        this.snackBar.open('Error attending section! Maybe you attended already.', 'Ok', {
+          duration: 2000,
           panelClass: ['warning']
         });
       }

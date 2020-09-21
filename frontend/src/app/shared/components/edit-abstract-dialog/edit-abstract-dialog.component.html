@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Edit scientific document</h1>
+
+<form>
+  <div mat-dialog-content class="field-container">
+    <mat-form-field class="field">
+      <mat-label>Name/Title</mat-label>
+      <label>
+        <input matInput [(ngModel)]="submission.title" name="title" placeholder="ex. Red panda" value="Red Panda"
+               required>
+      </label>
+    </mat-form-field>
+
+    <mat-label>Abstract paper:</mat-label>
+    <label style="margin-bottom: 17px;">
+      <input type="file" id="file" (change)="onFileSelected($event)">
+    </label>
+
+    <mat-form-field class="field">
+      <mat-label>Keywords</mat-label>
+      <label>
+        <input matInput [(ngModel)]="submission.keywords" name="keywords"
+               placeholder="ex. panda, tropical, bamboo, etc."
+               value="panda, tropical, bamboo" required>
+      </label>
+    </mat-form-field>
+
+    <mat-form-field class="field">
+      <mat-label>Topics</mat-label>
+      <label>
+        <input matInput [(ngModel)]="submission.topics" name="topics" placeholder="ex. nature, wildlife, etc."
+               value="nature, wildlife" required>
+      </label>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button color="accent" (click)="onEditClick()">EDIT</button>
+    <button mat-button color="accent" (click)="onCancelClick()">CANCEL</button>
+    <mat-progress-spinner id="spinner-submit-abstract" [diameter]="30" color="warn" mode="indeterminate"
+                          *ngIf="showSpinner"></mat-progress-spinner>
+  </div>
+</form>
+
+

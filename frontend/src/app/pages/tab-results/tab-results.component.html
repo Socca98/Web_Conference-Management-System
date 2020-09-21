@@ -11,8 +11,10 @@
       <mat-card-content>
         <p>
           <span class="field">Abstract: </span>
-          <i *ngIf="!submission.abstractPaper">none</i>
-          {{submission.abstractPaper}}
+          <i *ngIf="submission.abstractPaper; then thenAbstractBlock else elseAbstractBlock"></i>
+          <ng-template #thenAbstractBlock> <span class="downloadSpan" (click)="downloadAbstractPaper(i)">
+              Click to download</span></ng-template>
+          <ng-template #elseAbstractBlock>none</ng-template>
         </p>
         <p>
           <span class="field">Authors: </span>
@@ -24,8 +26,10 @@
         <p><span class="field">Keywords: </span>{{submission.keywords}}</p>
         <p>
           <span class="field">Fullpaper: </span>
-          <i *ngIf="!submission.fullPaper">none</i>
-          {{submission.fullPaper}}
+          <i *ngIf="submission.fullPaper; then thenFullpaperBlock else elseFullpaperBlock">none</i>
+          <ng-template #thenFullpaperBlock> <span class="downloadSpan" (click)="downloadFullPaper(i)">
+              Click here to download</span></ng-template>
+          <ng-template #elseFullpaperBlock>none</ng-template>
         </p>
         <hr>
         <b>Reviews: </b>

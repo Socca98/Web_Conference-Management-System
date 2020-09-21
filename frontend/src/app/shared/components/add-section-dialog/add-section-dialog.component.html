@@ -9,11 +9,27 @@
       </label>
     </mat-form-field>
 
-    <mat-form-field class="field">
-      <input matInput [matDatepicker]="myDatePicker" [(ngModel)]="section.startTime" name="startDate" required>
-      <mat-datepicker-toggle matSuffix [for]="myDatePicker"></mat-datepicker-toggle>
-      <mat-datepicker #myDatePicker></mat-datepicker>
+    <mat-form-field class="field" >
+      <mat-label>Choose a start date</mat-label>
+      <label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="section.startTime" name="startDate" required>
+      </label>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
+<!--    <mat-form-field appearance="fill">-->
+<!--      <mat-label>Enter a date range</mat-label>-->
+<!--      <mat-date-range-input [rangePicker]="picker">-->
+<!--        <input matStartDate placeholder="Start date">-->
+<!--        <input matEndDate placeholder="End date">-->
+<!--      </mat-date-range-input>-->
+<!--      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>-->
+<!--      <mat-date-range-picker #picker></mat-date-range-picker>-->
+<!--    </mat-form-field>-->
+
+
+
 
     <mat-form-field class="field">
       <input matInput [matDatepicker]="myDatePicker2" [(ngModel)]="section.endTime" name="endDate" required>
@@ -21,39 +37,39 @@
       <mat-datepicker #myDatePicker2></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Choose the section chair</mat-label>
-      <mat-select [(value)]="section.sectionChair">
-        <mat-option *ngFor="let acceptedPaper of this.acceptedSubmissions" [value]="acceptedPaper.id">
-          {{acceptedPaper}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<!--    <mat-form-field appearance="fill">-->
+<!--      <mat-label>Choose the section chair</mat-label>-->
+<!--      <mat-select [(value)]="section.sectionChair">-->
+<!--        <mat-option *ngFor="let acceptedPaper of this.acceptedSubmissions" [value]="acceptedPaper.id">-->
+<!--          {{acceptedPaper}}-->
+<!--        </mat-option>-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
 
-    <mat-form-field class="field">
-      <mat-label>No. of seats</mat-label>
-      <label>
-        <input matInput [(ngModel)]="section.seats" name="nrSeats" type="number" value="300" required>
-      </label>
-    </mat-form-field>
+<!--    <mat-form-field class="field">-->
+<!--      <mat-label>No. of seats</mat-label>-->
+<!--      <label>-->
+<!--        <input matInput [(ngModel)]="section.seats" name="nrSeats" type="number" value="300" required>-->
+<!--      </label>-->
+<!--    </mat-form-field>-->
 
-    <mat-form-field>
-      <mat-label>Choose paper</mat-label>
-      <mat-select [(value)]="section.speakers">
-        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">
-          {{possibleSpeaker}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<!--    <mat-form-field>-->
+<!--      <mat-label>Choose paper</mat-label>-->
+<!--      <mat-select [(value)]="section.speakers">-->
+<!--        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">-->
+<!--          {{possibleSpeaker}}-->
+<!--        </mat-option>-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
 
-    <mat-form-field>
-      <mat-label>Choose speaker</mat-label>
-      <mat-select [(value)]="section.speakers">
-        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">
-          {{possibleSpeaker}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<!--    <mat-form-field>-->
+<!--      <mat-label>Choose speaker</mat-label>-->
+<!--      <mat-select [(value)]="section.speakers">-->
+<!--        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">-->
+<!--          {{possibleSpeaker}}-->
+<!--        </mat-option>-->
+<!--      </mat-select>-->
+<!--    </mat-form-field>-->
 
 
 

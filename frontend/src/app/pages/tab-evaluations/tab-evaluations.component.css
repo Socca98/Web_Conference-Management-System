@@ -44,6 +44,16 @@
   border-radius: 10px;
 }
 
+.downloadSpan {
+  cursor: pointer;
 
+  font-style: italic;
+  font-weight: bolder;
+  color: dodgerblue;
+}
+
+.downloadSpan:hover {
+  color: darkblue;
+}
 
 

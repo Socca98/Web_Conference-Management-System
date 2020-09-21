@@ -14,19 +14,26 @@
         <mat-card-title>{{section.title}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p><span class="field">Start time: </span>{{section.startTime * 1000 | date}}</p>
-        <p><span class="field">End time: </span>{{section.endTime * 1000 | date}}</p>
+        <p><span class="field">Start time: </span>{{section.startTime * 1000 | date:'medium'}}</p>
+        <p><span class="field">End time: </span>{{section.endTime * 1000 | date:'medium'}}</p>
         <p><span class="field">Section Chair: </span>{{section.sectionChair.fullName}}</p>
-        <p><span class="field">Seats: </span>{{section.seats}}</p>
+        <p><span class="field">Seats left: </span>{{section.seats}}</p>
         <hr>
         <p><span class="field">Speakers: </span></p>
-        <ng-container *ngFor="let speaker of section.speakers">{{speaker.fullName}}, </ng-container>
+        <ng-container *ngFor="let speaker of section.speakers; let j = index;">
+          {{speaker.fullName}}<span *ngIf="j < section.speakers.length-1">,</span>
+        </ng-container>
         <hr>
         <p><span class="field">Presented papers: </span></p>
-        <ng-container *ngFor="let submission of section.submissions">{{submission.title}}</ng-container>
+        <ng-container *ngFor="let submission of section.submissions; let j = index;">
+          {{submission.title}}<br>
+        </ng-container>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="accent" [hidden]="isParticipant[i]" (click)="attendButton(section.sectionId, i)">
+        <button mat-raised-button color="accent"
+                (click)="attendButton(section.sectionId, i)"
+                [disabled]="isCurrentUserListener(i)"
+        >
           Participate
         </button>
       </mat-card-actions>

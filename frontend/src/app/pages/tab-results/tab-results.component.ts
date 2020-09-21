@@ -63,4 +63,12 @@ export class TabResultsComponent implements OnInit {
       }
     });
   }
+
+  downloadAbstractPaper(i) {
+    this.submissionsService.downloadFile(this.submissionsReviewed[i].abstractPaper);
+  }
+
+  downloadFullPaper(i: number) {
+    this.submissionsService.downloadFile(this.submissionsReviewed[i].fullPaper);
+  }
 }

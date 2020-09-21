@@ -31,15 +31,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'conference/bidding',
-    component: TabBiddingComponent,
-    canActivate: [AuthGuard],
-    // data: {roles: [Role.PC_Member]}
-  },
-
-  {
-    path: 'conference/assign-papers',
-    component: TabAssignPapersComponent,
+    path: 'conference/sections',
+    component: TabSectionsComponent,
     canActivate: [AuthGuard],
   },
 
@@ -47,34 +40,42 @@ const routes: Routes = [
     path: 'conference/submissions',
     component: TabSubmissionsComponent,
     canActivate: [AuthGuard],
-    // data: {roles: [Role.Author, Role.PC_Member]}
+    data: {roles: [Role.Author, Role.PC_Member]}
+  },
+
+  {
+    path: 'conference/results',
+    component: TabResultsComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.Author, Role.PC_Member]}
+  },
+
+  {
+    path: 'conference/bidding',
+    component: TabBiddingComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.PC_Member, Role.CoChair]}
+  },
+
+  {
+    path: 'conference/assign-papers',
+    component: TabAssignPapersComponent,
+    canActivate: [AuthGuard],
+    data: {roles: [Role.CoChair]}
   },
 
   {
     path: 'conference/reviewing',
     component: TabReviewingComponent,
     canActivate: [AuthGuard],
-    // data: {roles: [Role.PC_Member]}
+    data: {roles: [Role.PC_Member, Role.CoChair]}
   },
 
   {
     path: 'conference/evaluations',
     component: TabEvaluationsComponent,
     canActivate: [AuthGuard],
-    // data: {roles: [Role.Chair, Role.CoChair]}
-  },
-
-  {
-    path: 'conference/sections',
-    component: TabSectionsComponent,
-    // canActivate: [AuthGuard],
-  },
-
-  {
-    path: 'conference/results',
-    component: TabResultsComponent,
-    // canActivate: [AuthGuard],
-    // data: {roles: [Role.Author, Role.PC_Member]}
+    data: {roles: [Role.Chair, Role.CoChair]}
   },
 
   {

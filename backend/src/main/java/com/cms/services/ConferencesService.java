@@ -332,6 +332,7 @@ public class ConferencesService {
         User user = usersService.getUser(securityService.getUsernameFromContext());
         if (!section.getListeners().contains(user) && section.getListeners().size() < section.getSeats()) {
             section.getListeners().add(user);
+            section.setSeats(section.getSeats() - 1);
             sectionJpaRepository.save(section);
             return;
         }

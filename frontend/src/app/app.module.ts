@@ -30,6 +30,7 @@ import {AttendSectionDialogComponent} from './shared/components/attend-section-d
 import {TabResultsComponent} from './pages/tab-results/tab-results.component';
 import {CreateConferenceDialogComponent} from './shared/components/create-conference-dialog/create-conference-dialog.component';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {EditAbstractDialogComponent} from './shared/components/edit-abstract-dialog/edit-abstract-dialog.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     RegisterDialogComponent,
     ShowRecommendationsDialogComponent,
     AddAbstractDialogComponent,
+    EditAbstractDialogComponent,
     AddSectionDialogComponent,
     AddRecommendationDialogComponent,
     AttendSectionDialogComponent,
