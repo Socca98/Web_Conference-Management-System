@@ -6,8 +6,6 @@ import {AddSectionDialogComponent} from '../../shared/components/add-section-dia
 import {Section} from '../../shared/models/section';
 import {ConferencesService} from '../../shared/services/conferences.service';
 import {AttendSectionDialogComponent} from '../../shared/components/attend-section-dialog/attend-section-dialog.component';
-import {User} from '../../shared/models/user';
-import {Conference} from '../../shared/models/conference';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

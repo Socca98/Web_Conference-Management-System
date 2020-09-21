@@ -17,7 +17,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 
 export class TabSubmissionsComponent implements OnInit {
-  submissions: Submission[];
+  submissions: Submission[] = [];
   private selectedFile: File = null;
   private index: number;
 
@@ -27,15 +27,19 @@ export class TabSubmissionsComponent implements OnInit {
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
   ) {
+
   }
 
   ngOnInit(): void {
     this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
       const currentUser = this.authService.user;
       // Filter only submissions that belong to the current user
+      // this.submissions = result;
       this.submissions = result.filter(
         s => s.authors.some(user => user.email === currentUser.email)
       );
+      console.log(this.submissions);
+
     });
   }
 
@@ -52,7 +56,7 @@ export class TabSubmissionsComponent implements OnInit {
   }
 
   openInput(i) {
-    // your can use ElementRef for this later
+    // you can use ElementRef for this later
     document.getElementById('fileInput').click();
     this.index = i;
   }
@@ -62,18 +66,27 @@ export class TabSubmissionsComponent implements OnInit {
     this.mainUploadFullPaper(this.index);
   }
 
+  /**
+   * Attach full paper sending request.
+   */
   onUpload() {
     const fd = new FormData();
-    console.log(fd);
+    console.log(this.selectedFile);
+    console.log(this.selectedFile.name);
+
     fd.append('file', this.selectedFile, this.selectedFile.name);
 
     return this.submissionsService.uploadFile(fd);
   }
 
+  /**
+   * Attach full paper
+   * @param i index of the submission
+   */
   mainUploadFullPaper(i) {
     const conferenceId = this.authService.conference.id;
 
-    // upload file
+    // Upload file
     this.onUpload().subscribe({
       next: (response: Submission) => {
         console.log('File uploaded successfully.');
@@ -82,7 +95,6 @@ export class TabSubmissionsComponent implements OnInit {
 
         this.submissionsService.addFullPaper(conferenceId, this.submissions[i]).subscribe({
           next: (responseSub: Submission) => {
-            alert(responseSub);
             this.snackBar.open('Full paper submitted.', 'Ok', {
               duration: 1000
             });
@@ -95,7 +107,7 @@ export class TabSubmissionsComponent implements OnInit {
       },
       error: err => {
         console.error('Error! ' + err);
-        alert('Error occurred while uploading file.');
+        alert('Error occurred while uploading file on server.');
       }
     });
   }

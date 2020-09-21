@@ -13,6 +13,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatOptionModule} from '@angular/material/core';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 const MD_COMPONENT_MODULES = [
   MatButtonModule,
@@ -29,6 +30,7 @@ const MD_COMPONENT_MODULES = [
   MatDatepickerModule,
   MatNativeDateModule,
   MatOptionModule,
+  MatProgressSpinnerModule,
 ];
 
 @NgModule({

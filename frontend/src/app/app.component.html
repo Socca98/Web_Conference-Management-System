@@ -2,15 +2,16 @@
 <mat-toolbar class="toolbar" role="banner" color="primary">
   <img id="main-image" width="45"
        src="{{this.colorSchemeService.mainImageUrl}}"
-       alt="Angular Logo"
+       alt="Conference Man"
+       title="Icon Nr.1 (alien icon only)"
        (click)="switchTheme()"/>
   <!--       routerLink="/"-->
   <!--       routerLinkActive="active"-->
   <!--  />-->
   <div class="login" *ngIf="!this.authService.isLogged()">
-    <a (click)="openLoginDialog()"
+    <a class="lnk" (click)="openLoginDialog()"
        onclick="this.blur()">Login</a>
-    <a (click)="openRegisterDialog()"
+    <a class="lnk" (click)="openRegisterDialog()"
        onclick="this.blur()">Register</a>
   </div>
 
@@ -27,9 +28,10 @@
         </ng-container>
       </div>
     </span>
-    <button class="mat-button"
+    <button id="btn-create-conference" color="warn" *ngIf="authService.getUserRole()"
             (click)="openCreateConferenceDialog()"
-            onclick="this.blur()">
+            onclick="this.blur()"
+            mat-raised-button>
       Create conference
     </button>
     <button class="logout-button" color="accent"
@@ -39,33 +41,28 @@
     </button>
   </div>
 
+  <div id="navbar-links" style="max-width: 100%;">
+    <a class="lnk" routerLink="/" >Home</a>
+    <ng-container *ngIf="this.authService.isLogged() && !isOnHomePage()">
+      <a class="lnk" routerLink="conference/details" routerLinkActive="active">Details</a>
+      <a class="lnk" routerLink="conference/sections" routerLinkActive="active">Sections</a>
 
-  <a class="lnk" routerLink="/" routerLinkActive="active">Home</a>
+      <a class="lnk" routerLink="conference/submissions" routerLinkActive="active">Submissions</a>
+      <a class="lnk" routerLink="conference/results" routerLinkActive="active">Results</a>
 
-  <ng-container *ngIf="this.authService.isLogged() && !isOnHomePage()">
-    <a class="lnk" routerLink="conference/details">Details</a>
-    <a class="lnk" routerLink="conference/sections">Sections</a>
+      <a class="lnk" routerLink="conference/bidding" routerLinkActive="active">Bidding</a>
+      <a class="lnk" routerLink="conference/assign-papers" routerLinkActive="active">Assign papers</a>
 
-    <a class="lnk" routerLink="conference/submissions">Submissions</a>
-    <a class="lnk" routerLink="conference/results">Results</a>
-
-    <a class="lnk" routerLink="conference/bidding">Bidding</a>
-    <a class="lnk" routerLink="conference/reviewing">Reviewing</a>
-
-    <a class="lnk" routerLink="conference/assign-papers">Assign papers</a>
-    <a class="lnk" routerLink="conference/evaluations">Evaluations</a>
-  </ng-container>
+      <a class="lnk" routerLink="conference/reviewing" routerLinkActive="active">Reviewing</a>
+      <a class="lnk" routerLink="conference/evaluations" routerLinkActive="active">Evaluations</a>
+    </ng-container>
+  </div>
 </mat-toolbar>
 
 
 <div class="content" role="main">
   <router-outlet></router-outlet>
 </div>
-
-
-<footer>
-
-</footer>
 
 
 <!--  Angular Logo in case we

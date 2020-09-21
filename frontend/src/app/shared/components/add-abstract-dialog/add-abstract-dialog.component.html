@@ -10,8 +10,8 @@
       </label>
     </mat-form-field>
 
-    <mat-label>Abstract paper: </mat-label>
-    <label>
+    <mat-label>Abstract paper:</mat-label>
+    <label style="margin-bottom: 17px;">
       <input type="file" id="file" (change)="onFileSelected($event)">
     </label>
 
@@ -23,14 +23,16 @@
         </label>
       </mat-form-field>
     </ng-container>
-    <button mat-mini-fab color="white" id="add-email-button" matTooltip="Add email" (click)="incrementNumberOfAuthors()">
+    <button mat-mini-fab color="white" id="add-email-button" matTooltip="Add email"
+            (click)="incrementNumberOfAuthors()">
       <mat-icon color="primary" id="add-email-icon">add_circle</mat-icon>
     </button>
 
     <mat-form-field class="field">
       <mat-label>Keywords</mat-label>
       <label>
-        <input matInput [(ngModel)]="submission.keywords" name="keywords" placeholder="ex. panda, tropical, bamboo, etc."
+        <input matInput [(ngModel)]="submission.keywords" name="keywords"
+               placeholder="ex. panda, tropical, bamboo, etc."
                value="panda, tropical, bamboo" required>
       </label>
     </mat-form-field>
@@ -42,13 +44,13 @@
                value="nature, wildlife" required>
       </label>
     </mat-form-field>
-
-
   </div>
 
   <div mat-dialog-actions>
     <button mat-button color="accent" (click)="onSubmitClick()">SUBMIT</button>
     <button mat-button color="accent" (click)="onCancelClick()">CANCEL</button>
+    <mat-progress-spinner id="spinner-submit-abstract" [diameter]="30" color="warn" mode="indeterminate"
+                          *ngIf="showSpinner"></mat-progress-spinner>
   </div>
 </form>
 

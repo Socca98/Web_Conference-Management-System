@@ -7,8 +7,6 @@ import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {ShowRecommendationsDialogComponent} from '../../shared/components/show-recommendations-dialog/show-recommendations-dialog.component';
 import {Submission} from '../../shared/models/submission';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {Token} from '../../shared/models/token';
-import {User} from '../../shared/models/user';
 import {AddRecommendationDialogComponent} from '../../shared/components/add-recommendation-dialog/add-recommendation-dialog.component';
 
 @Component({
@@ -18,7 +16,7 @@ import {AddRecommendationDialogComponent} from '../../shared/components/add-reco
 })
 export class TabReviewingComponent implements OnInit {
   reviews: Review[] = [];
-  reviewsOthers: Review[] = []; // All reviews of conference except current user (for recommendations
+  reviewsOthers: Review[] = []; // All reviews of conference except current user (for recommendations)
   localVerdicts: Verdict[] = [];
 
   constructor(
@@ -86,4 +84,24 @@ export class TabReviewingComponent implements OnInit {
       }
     });
   }
+
+  downloadAbstractPaper(review) {
+    this.submissionsService.downloadFile(review.submission.abstractPaper);
+  }
+
+  downloadFullPaper(review) {
+    this.submissionsService.downloadFile(review.submission.fullPaper);
+  }
 }
+
+
+
+
+
+
+
+
+
+
+
+

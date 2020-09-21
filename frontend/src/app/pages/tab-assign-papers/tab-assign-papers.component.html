@@ -1,6 +1,10 @@
+<div class="tab-main-message">
+  Choose users to review the following papers:
+</div>
+<hr><br><br>
 <div class="submissions">
   <ng-container>
-    <mat-card class="submission-card" *ngFor="let tab of tabs">
+    <mat-card class="submission-card" *ngFor="let tab of tabs; let i = index">
       <mat-card-header>
         <mat-card-title>{{tab.submission.title}}</mat-card-title>
       </mat-card-header>
@@ -13,13 +17,13 @@
         <mat-form-field appearance="fill">
           <mat-label>Add user</mat-label>
           <mat-select [(ngModel)]="selection" name="add" (selectionChange)="addSelectionToTab(tab)">
-            <mat-option *ngFor="let user of tab.submission.likes" [value]="user">
+            <mat-option *ngFor="let user of tab.possibleAssignees" [value]="user">
               {{user.username}}
             </mat-option>
           </mat-select>
         </mat-form-field>
 
-        <button mat-raised-button color="accent" (click)="clickAssign(tab)">Assign</button>
+        <button mat-raised-button color="accent" [disabled]="disableButtons[i]" (click)="clickAssign(tab, i)">Assign</button>
       </mat-card-actions>
     </mat-card>
   </ng-container>

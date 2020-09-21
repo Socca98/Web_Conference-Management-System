@@ -9,7 +9,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 interface Tab {
   submission: Submission;
   usersToAssign: User[];
-  // possibleAssignees: User[];
+  possibleAssignees: User[];  // Users that liked but do not have review.
 }
 
 @Component({
@@ -22,6 +22,7 @@ export class TabAssignPapersComponent implements OnInit {
   possibleOptionUsers: User[] = []; // Users shown in select that can be assigned
   tabs: Tab[] = [];
   selection: User;
+  disableButtons = [];
 
   constructor(
     private submissionsService: SubmissionsService,
@@ -34,8 +35,18 @@ export class TabAssignPapersComponent implements OnInit {
     this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
       this.submissions = result;
 
+      // We cannot assign to users that already have a Review in progress.
+      // We filter users that are both in 'likes' and 'reviews' list of a submission
+
       for (const submission of this.submissions) {
-        this.tabs.push({submission, usersToAssign: []});
+        const possibleUsers = submission.likes.filter(userFromLikes =>
+          !submission.reviews.some(review => userFromLikes.email === review.user.email)
+        );
+        this.tabs.push({submission, usersToAssign: [], possibleAssignees: possibleUsers});
+
+        // Initialize array of booleans for buttons
+
+        this.disableButtons.push(false);
       }
     });
   }
@@ -45,8 +56,8 @@ export class TabAssignPapersComponent implements OnInit {
 
     // Check level of conference
     if (tab.usersToAssign.length >= levelConference) {
-      this.snackBar.open('The conference allows the maximum number of reviews to be: ' + levelConference, '', {
-        duration: 1000,
+      this.snackBar.open('The conference allows the maximum number of reviewers to be: ' + levelConference, '', {
+        duration: 2000,
         panelClass: ['warning'],
       });
       return;
@@ -64,7 +75,7 @@ export class TabAssignPapersComponent implements OnInit {
     tab.usersToAssign.push(this.selection);
   }
 
-  clickAssign(tab: Tab) {
+  clickAssign(tab: Tab, indexOfTab) {
     for (const optionUser of tab.usersToAssign) {
       const review: Review = {
         submission: tab.submission,
@@ -73,9 +84,12 @@ export class TabAssignPapersComponent implements OnInit {
 
       this.submissionsService.createReview(this.authService.conference.id, review).subscribe({
         next: _ => {
+          this.disableButtons[indexOfTab] = true;
+          window.location.reload();
           this.snackBar.open('Users assigned to review.', 'Ok', {
             duration: 1000,
           });
+
         },
         error: err => {
           this.snackBar.open('Failed! ' + err, '', {

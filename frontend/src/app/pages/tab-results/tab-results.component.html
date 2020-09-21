@@ -30,7 +30,7 @@
         <hr>
         <b>Reviews: </b>
         <i *ngIf="!submission.reviews.length">none</i>
-        <ng-container *ngIf="submission.finalVerdict">
+        <ng-container *ngIf="submission.finalVerdict"> <!-- Aista ii ala cu galben-->
           <i id="final-verdict">{{submission.finalVerdict}}</i>
         </ng-container>
         <br>

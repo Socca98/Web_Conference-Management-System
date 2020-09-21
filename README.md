@@ -1,17 +1,45 @@
-## COVID-19
-ISS 2020, group 925
+## Conference-Management-System
+This web app manages conferences, different user roles, abstracts submissions, 
+and reviews. Made with Angular and Spring.
 
-# Steps to setup Frontend
-* Install nodejs https://nodejs.org/en/, LTS
-* Hope that WebStorm recognizes 'npm install' command
-* Open project in IDE (WebStorm, VS Code)
-* Go inside folder 'frontend' with the terminal (the IDE may have 'open folder in terminal' on right click).
-* Run the command npm install_ to install folder 'node_modules'.
-* Start app with WebStorm, VS Code or with command 'ng serve' in terminal.
-* The app will run on the address http://localhost:4200/  -> the default port (4200) for angular projects 
+## INDEX
+ * [Objective](#objective)
+ * [App photos](#app-photos)
+ * [Requirements](#requirements)
+ * [Steps to setup Frontend](#steps-to-setup-frontend)
+ * [Steps to setup Backend](#steps-to-setup-backend)
+ * [Description](#frontend)
+ * [Diagrams](#frontend)
+ 
+
+## App photos
+Light theme             |  Alien Theme
+:-------------------------:|:-------------------------:
+<img src="https://i.imgur.com/FN1i8Fq.png" width="100%" /> |  <img src="https://i.imgur.com/LV6kTKL.png" width="100%" />
+ 
+ <img src="https://i.imgur.com/FN1i8Fq.png" width="100%" />
+ <hr><img src="https://i.imgur.com/LV6kTKL.png" width="100%" />
+ 
+## Requirements
+  * Angular + Angular Material
+  * MySql server
+
+  
+## Steps to setup Frontend
+
+  * Install nodejs https://nodejs.org/en/, LTS
+  * Hope that WebStorm recognizes 'npm install' command
+  * Open project in IDE (WebStorm, VS Code)
+  * Go inside folder 'frontend' with the terminal (the IDE may have 'open folder in terminal' on right click).
+  * Run the command npm install_ to install folder 'node_modules'.
+  * Start app with WebStorm, VS Code or with command 'ng serve' in terminal.
+  * The app will run on the address http://localhost:4200/  -> the default port (4200) for angular projects 
+
+
 
 # Steps to setup Backend 
 ### MySQL Database setup
+`In brief, you need: MySQL Server (username: root, password: iss2020) and an empty database 'cms'`
 
 * Download MySQL Server from google. Windows (x86, 32-bit), MSI Installer.
 https://dev.mysql.com/downloads/windows/installer/8.0.html
@@ -37,22 +65,29 @@ https://dev.mysql.com/downloads/windows/installer/8.0.html
 * Paste the bellow code in 'resources/application.properties'. It connects the project with MySQL.
 Configures it to know the connection string, DB name, port of the DB and others.
 
-```spring:
-     jpa:
-       show-sql: true
-       hibernate:
-         ddl-auto: update
-       properties:
-         hibernate:
-           dialect: org.hibernate.dialect.MySQL5Dialect
-     datasource:
-       url: jdbc:mysql://localhost:3306/cms
-       username: root
-       password: iss2020
-       driverClassName: com.mysql.cj.jdbc.Driver
-   server:
-     servlet:
-       context-path: /cms/api/
+```
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    url: jdbc:mysql://localhost/cms?serverTimezone=UTC
+    username: root
+    password: iss2020
+    driverClassName: com.mysql.cj.jdbc.Driver
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      file-size-threshold: 10KB
+      max-request-size: 15MB
+server:
+  servlet:
+    context-path: /cms/api/
 ```
 
 * Change 'application.properties' to 'application.yml'. Its just a simpler form of

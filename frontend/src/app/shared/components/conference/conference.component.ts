@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Conference} from '../../models/conference';
+import {ColorSchemeService} from '../../services/color-scheme.service';
 
 @Component({
   selector: 'app-conference',
@@ -10,7 +11,9 @@ export class ConferenceComponent implements OnInit {
   @Input()
   conference: Conference;
 
-  constructor() { }
+  constructor(
+    public colorSchemeService: ColorSchemeService,
+  ) { }
 
   ngOnInit(): void {
   }

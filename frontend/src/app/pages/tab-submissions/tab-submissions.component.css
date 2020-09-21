@@ -33,6 +33,27 @@
   background-image: url("../../../assets/submission-icon.svg");
 }
 
-.downloadSpan:hover{
-  color:dodgerblue;
+.downloadSpan {
+  cursor: pointer;
+
+  font-style: italic;
+  font-weight: bolder;
+  color: dodgerblue;
 }
+
+.downloadSpan:hover {
+  color: darkblue;
+}
+
+.empty-list-message {
+  font-size: 32px;
+  font-style: italic;
+  font-weight: lighter;
+}
+
+
+
+
+
+
+

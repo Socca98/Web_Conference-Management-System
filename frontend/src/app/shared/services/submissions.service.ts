@@ -104,6 +104,11 @@ export class SubmissionsService {
     return this.http.get(urlString, {params});
   }
 
+  /**
+   * Attach full paper by updating the corresponding field in the Submission object.
+   * @param conferenceId Current conference.
+   * @param submission Update fullpaper for this submission.
+   */
   addFullPaper(conferenceId, submission: Submission) {
     const urlString = environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/' + submission.id;
     return this.http.put(urlString, submission);

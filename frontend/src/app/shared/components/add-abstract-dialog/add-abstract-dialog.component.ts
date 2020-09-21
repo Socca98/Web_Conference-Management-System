@@ -27,7 +27,7 @@ export class AddAbstractDialogComponent implements OnInit {
     reviews: null,
   };
   private selectedFile: File = null;
-
+  showSpinner = false;
 
   constructor(
     public dialogRef: MatDialogRef<AddAbstractDialogComponent>,
@@ -35,7 +35,7 @@ export class AddAbstractDialogComponent implements OnInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
   ) {
-    const user = {} as User;
+    const user = this.authService.user;
     this.submission.authors.push(user);
   }
 
@@ -69,33 +69,50 @@ export class AddAbstractDialogComponent implements OnInit {
    * In HTML, [(ngModel)] changes automatically object 'this.submission' if input fields change.
    */
   onSubmitClick() {
+    if (!this.validateInputAbstract()) {
+      this.snackBar.open('Fill all required fields!', '', {
+        duration: 2000,
+        panelClass: ['warning'],
+      });
+      return;
+    }
     const conferenceId = this.authService.conference.id;
+    this.showSpinner = true;
 
     // upload file
     this.onUpload().subscribe({
       next: (response: Submission) => {
-        console.log('File uploaded successfully.');
         this.submission.abstractPaper = response.id;
-
         this.submissionsService.addAbstract(conferenceId, this.submission).subscribe({
           next: (responseSub: Submission) => {
-            alert(responseSub);
             this.dialogRef.close();
             this.snackBar.open('Abstract paper submitted.', 'Ok', {
               duration: 1000
             });
+            // I have to copy this line everywhere since finally or onComplete don't work
+            this.showSpinner = false;
           },
           error: err => {
             console.error('Error! ' + err);
             alert('Error occurred while submitting.');
+            this.showSpinner = false;
           }
         });
       },
       error: err => {
         console.error('Error! ' + err);
         alert('Error occurred while uploading file.');
+        this.showSpinner = false;
       }
     });
+  }
+
+  private validateInputAbstract() {
+    return !(this.selectedFile === null ||
+      this.submission.title === null ||
+      this.submission.authors === null ||
+      this.submission.keywords === null ||
+      this.submission.topics === null);
   }
 
   /**

@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class UsersService {
-
     @Autowired
     private UserJpaRepository userRepository;
 
@@ -34,11 +33,9 @@ public class UsersService {
         return UserConverter.userToUserDto(userRepository.findAll());
     }
 
-
     public UserDto getUserDto(String username) {
         return UserConverter.userToUserDto(getUser(username));
     }
-
 
     public User getUser(String username) {
         return userRepository.getUserByUsername(username);

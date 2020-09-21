@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Submission} from '../../shared/models/submission';
 import {SubmissionsService} from '../../shared/services/submissions.service';
 import {AuthService} from '../../login/auth.service';
-import {MatDialog} from '@angular/material/dialog';
-import {MatCheckboxChange} from '@angular/material/checkbox';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '../../shared/models/user';
 
@@ -45,24 +43,26 @@ export class TabBiddingComponent implements OnInit {
       this.submissionsService.likeSubmission(conferenceId, submission.id).subscribe({
         next: _ => {
         },
-        error: _ => {
+        error: err => {
           this.snackbar.open('Could not send like!', '', {
             duration: 1000,
             panelClass: ['warning'],
           });
           this.likes[index] = !this.likes[index];  // update local
+          console.log(err.error.message);
         }
       });
     } else {
       this.submissionsService.unlikeSubmission(conferenceId, submission.id).subscribe({
         next: _ => {
         },
-        error: _ => {
+        error: err => {
           this.snackbar.open('Could not send unlike!', '', {
             duration: 1000,
             panelClass: ['warning'],
           });
           this.likes[index] = !this.likes[index];  // update local
+          console.log(err.error.message);
         }
       });
     }
@@ -71,5 +71,13 @@ export class TabBiddingComponent implements OnInit {
   showI(i: number) {
     const sd = i;
     console.log(i);
+  }
+
+  downloadAbstractPaper(i) {
+    this.submissionsService.downloadFile(this.submissions[i].abstractPaper);
+  }
+
+  downloadFullPaper(i: number) {
+    this.submissionsService.downloadFile(this.submissions[i].fullPaper);
   }
 }

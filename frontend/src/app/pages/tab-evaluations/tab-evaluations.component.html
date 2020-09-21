@@ -59,7 +59,7 @@
 
           <!--          Disable if the request is not done and possibleReviewers is empty-->
           <!--          https://stackoverflow.com/a/57828405/9442199 -->
-          <mat-select [(value)]="anotherReviewersEmail[i]" [disabled]="!!!this.submissionPossibleReviewers[i]">
+          <mat-select [(value)]="anotherReviewersEmail[i]" [disabled]="!!!this.submissionPossibleReviewers[i]" (selectionChange)="checkSelectionChange($event)">
             <mat-option *ngFor="let pcMember of this.submissionPossibleReviewers[i]" [value]="pcMember.email">
               {{pcMember.email}}
             </mat-option>

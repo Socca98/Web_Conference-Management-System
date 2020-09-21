@@ -9,6 +9,7 @@ import {Role} from '../../shared/models/role';
 import {Verdict} from '../../shared/models/verdict';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Review} from '../../shared/models/review';
+import {MatSelectChange} from '@angular/material/select';
 
 @Component({
   selector: 'app-tab-evaluations',
@@ -21,7 +22,7 @@ export class TabEvaluationsComponent implements OnInit {
    */
   submissions: Submission[] = [];
   submissionPossibleReviewers: Array<User[]> = [];   // Reviewers that did not review submission[i]
-  anotherReviewersEmail: string[] = []; // emails of selected user for each submission card
+  anotherReviewersEmail: string[] = []; // 'Another reviewer' for each submission tab
   localVerdicts: Verdict[] = [];
 
 
@@ -99,9 +100,9 @@ export class TabEvaluationsComponent implements OnInit {
       review.recommendation = '';
       this.submissionsService.updateReview(conferenceId, submission.id, review).subscribe({
         next: _ => {
-          // this.snackBar.open('Review resent.', 'Ok', {
-          //   duration: 1000,
-          // });
+          this.snackBar.open('All reviews reset.', 'Ok', {
+            duration: 1000,
+          });
         },
         error: _ => {
           // this.snackBar.open('Could not send review!', '', {
@@ -141,4 +142,7 @@ export class TabEvaluationsComponent implements OnInit {
     });
   }
 
+  checkSelectionChange($event: MatSelectChange) {
+
+  }
 }

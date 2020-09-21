@@ -1,5 +1,6 @@
 <div class="conference-container">
-  <img src="../../../../assets/icon3-svg.svg" id="conference-header-image" width="200" height="100" alt="Conference Image">
+  <img src="{{this.colorSchemeService.conferenceComponentImageUrl}}"
+       id="conference-header-image" width="200" height="100" title="Icon Nr.2" alt="Conference Image">
   <h1 id="conference-title">{{conference.name}}</h1>
   <p><span class="field">Period: </span>{{conference.startDate * 1000| date}} - {{conference.endDate * 1000 | date}}</p>
   <p><span class="field">Website: </span>{{conference.website}}</p>
@@ -15,3 +16,4 @@
   <p><span class="field">Tax fee: </span>{{conference.taxFee}} <i>Euro</i></p>
 
 </div>
+

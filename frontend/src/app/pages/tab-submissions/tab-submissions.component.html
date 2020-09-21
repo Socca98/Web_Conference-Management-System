@@ -1,5 +1,8 @@
 <div id="submissions-wrapper">
   <div class="submissions">
+    <div class="empty-list-message" *ngIf="this.submissions.length === 0">
+      You have not submitted any abstracts.</div>
+
     <ng-container *ngFor="let submission of submissions;let i = index">
       <mat-card class="submission-card">
         <mat-card-header>
@@ -10,10 +13,10 @@
         <mat-card-content>
           <p>
             <span class="field">Abstract: </span>
-            <i *ngIf="submission.abstractPaper; then thenBlock else elseBlock"></i>
-            <ng-template #thenBlock> <span class="downloadSpan" (click)="downloadAbstractPaper(i)">
-              Click here to download </span> </ng-template>
-            <ng-template #elseBlock>none</ng-template>
+            <i *ngIf="submission.abstractPaper; then thenAbstractBlock else elseAbstractBlock"></i>
+            <ng-template #thenAbstractBlock> <span class="downloadSpan" (click)="downloadAbstractPaper(i)">
+              Click to download</span></ng-template>
+            <ng-template #elseAbstractBlock>none</ng-template>
           </p>
           <p>
             <span class="field">Authors: </span>
@@ -25,16 +28,16 @@
           <p><span class="field">Keywords: </span>{{submission.keywords}}</p>
           <p>
             <span class="field">Fullpaper: </span>
-            <i *ngIf="submission.fullPaper; then thenBlock else elseBlock">none</i>
-            <ng-template #thenBlock> <span class="downloadSpan" (click)="downloadFullPaper(i)">
-              Click here to download </span> </ng-template>
-            <ng-template #elseBlock>none</ng-template>
+            <i *ngIf="submission.fullPaper; then thenFullpaperBlock else elseFullpaperBlock">none</i>
+            <ng-template #thenFullpaperBlock> <span class="downloadSpan" (click)="downloadFullPaper(i)">
+              Click here to download</span></ng-template>
+            <ng-template #elseFullpaperBlock>none</ng-template>
           </p>
         </mat-card-content>
         <mat-card-actions>
           <button mat-raised-button color="accent">Update</button>
           <button mat-raised-button color="accent" (click)="openInput(i)"> Attach full paper</button>
-          <input id="fileInput" hidden type="file" (change)="onFileSelected($event)" >
+          <input id="fileInput" hidden type="file" (change)="onFileSelected($event)">
         </mat-card-actions>
       </mat-card>
     </ng-container>

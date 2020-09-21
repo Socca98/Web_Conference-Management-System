@@ -30,7 +30,7 @@
 #final-verdict {
   position: absolute;
   right: 10px;
-  top: 14px;
+  bottom: 14px;
   background-color: #FFD700;
   border: 2px solid #DAA520;
   border-radius: 10px;

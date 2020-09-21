@@ -43,7 +43,6 @@ public class InitializationService {
 
 
     public UserDto register(RegisterUserDto registerUserDto) {
-
         if (Objects.nonNull(userRepository.getUserByUsername(registerUserDto.getUsername()))) {
             throw new IssException("Username already in use!", HttpStatus.BAD_REQUEST);
         }

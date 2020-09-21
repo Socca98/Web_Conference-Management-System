@@ -27,8 +27,23 @@ export class AppComponent {
     this.labelDeadline();
 
     // Load Color Scheme (Theme)
-    this.colorSchemeService._setColorScheme('alien');
     this.colorSchemeService.load();
+  }
+
+
+  /**
+   * Clicking the left up corner icon changes the theme of the application.
+   */
+  switchTheme() {
+    if (this.colorSchemeService.currentActive() === Theme.Alien) {
+      this.colorSchemeService.update(Theme.Light);
+      this.colorSchemeService.mainImageUrl = '../assets/icon1.png';
+      this.colorSchemeService.conferenceComponentImageUrl = '../../../../assets/icon3-svg.svg';
+    } else {
+      this.colorSchemeService.update(Theme.Alien);
+      this.colorSchemeService.mainImageUrl = '../assets/alien.svg';
+      this.colorSchemeService.conferenceComponentImageUrl = '../../../../assets/icon3-alien.svg';
+    }
   }
 
   openLoginDialog() {
@@ -91,16 +106,4 @@ export class AppComponent {
     });
   }
 
-  /**
-   * Clicking the 7left up corner icon changes the theme of the application.
-   */
-  switchTheme() {
-    if (this.colorSchemeService.currentActive() === Theme.Alien) {
-      this.colorSchemeService.update(Theme.Light);
-      this.colorSchemeService.mainImageUrl = '../assets/icon1.png';
-    } else {
-      this.colorSchemeService.update(Theme.Alien);
-      this.colorSchemeService.mainImageUrl = '../assets/alien.svg';
-    }
-  }
 }

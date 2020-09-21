@@ -8,3 +8,14 @@ setup = when you want to run for the first time
 -The app will run on the address http://localhost:4200/  -> the default port (4200) for angular projects
 
 
+*    mat-typography
+
+
+
+
+
+
+
+
+
+

@@ -1,5 +1,5 @@
 * {
-  font-family: Georgia, serif;
+  /*font-family: Georgia, serif;*/
   letter-spacing: 2px;
   padding: 10px;
 }
@@ -28,6 +28,7 @@ p {
   border: 3px dashed grey;
   border-radius: 5px;
   text-align: center;
+  /*max-height: 85%;*/
 }
 
 .conference-header-image {

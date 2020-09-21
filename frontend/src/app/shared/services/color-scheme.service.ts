@@ -10,7 +10,7 @@ export class ColorSchemeService {
   // Define prefix for clearer and more readable class names in scss files
   private colorSchemePrefix = 'color-scheme-';
   mainImageUrl = '../assets/alien.svg';
-
+  conferenceComponentImageUrl = '../../../../assets/icon3-alien.svg';
 
   constructor(rendererFactory: RendererFactory2) {
     // Create new renderer from renderFactory, to make it possible to use renderer2 in a service
@@ -48,6 +48,10 @@ export class ColorSchemeService {
   load() {
     this._getColorScheme();
     this.renderer.addClass(document.body, this.colorSchemePrefix + this.colorScheme);
+
+    // Set correct icon images
+    this.mainImageUrl = this.currentActive() === 'alien' ? '../assets/alien.svg' : '../assets/icon1.png';
+    this.conferenceComponentImageUrl = this.currentActive() === 'alien' ? '../assets/icon3-alien.svg' : '../assets/icon3-svg.svg';
   }
 
   update(scheme) {

@@ -6,7 +6,7 @@
   /*position: absolute;*/
   /*left: 1%;*/
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: wrap;
   align-items: flex-start;
 }
@@ -30,3 +30,14 @@
   background-image: url("../../../assets/submission-icon.svg");
 }
 
+.downloadSpan {
+  cursor: pointer;
+
+  font-style: italic;
+  font-weight: bolder;
+  color: dodgerblue;
+}
+
+.downloadSpan:hover {
+  color: darkblue;
+}

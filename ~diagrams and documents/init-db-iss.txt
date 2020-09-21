@@ -57,6 +57,7 @@ STEERING_COMMITTEE_MEMBER
 ==================== Submissions =======================
 Submission 0
 likes:
+    user1:
     user2:
     user3:
     user4:
@@ -67,6 +68,8 @@ reviews:
     
 Submission 1
 likes:
+    user0:
+    user1:
     user2:
 reviews:
     accept-user2
@@ -75,6 +78,7 @@ reviews:
     
 Submission 2
 likes:
+    user0:
     user2:
     user4:
 reviews:

@@ -1,6 +1,9 @@
 <div class="columns-container">
   <div class="reviewed submissions">
     <h1>Your reviews: </h1>
+    <div class="empty-list-message" *ngIf="this.reviews.length === 0 && this.reviewsOthers.length === 0">
+      There are no reviews. Wait for Chair/Co-Chair to assign you papers.
+    </div>
     <ng-container>
       <mat-card class="reviewed submission-card" *ngFor="let review of getReviewedSubmissions(); let i = index">
         <mat-card-header>
@@ -12,28 +15,32 @@
         <mat-card-content>
           <p>
             <span class="field">Abstract: </span>
-            <i *ngIf="!review.submission.abstractPaper">none</i>
-            {{review.submission.abstractPaper}}
+            <i *ngIf="review.submission.abstractPaper; then thenAbstractBlock else elseAbstractBlock"></i>
+            <ng-template #thenAbstractBlock> <span class="downloadSpan" (click)="downloadAbstractPaper(i)">
+              Click to download</span></ng-template>
+            <ng-template #elseAbstractBlock>none</ng-template>
           </p>
           <p>
             <span class="field">Authors: </span>
-            <ng-container *ngFor="let author of review.submission.authors">
-              {{author.fullName}},
+            <ng-container *ngFor="let author of review.submission.authors;let j = index">
+              {{author.fullName}}<span *ngIf="j < review.submission.authors.length-1">,</span>
             </ng-container>
           </p>
           <p><span class="field">Topics: </span>{{review.submission.topics}}</p>
           <p><span class="field">Keywords: </span>{{review.submission.keywords}}</p>
           <p>
             <span class="field">Fullpaper: </span>
-            <i *ngIf="!review.submission.fullPaper">none</i>
-            {{review.submission.fullPaper}}
+            <i *ngIf="this.review.submission.fullPaper; then thenFullpaperBlock else elseFullpaperBlock">none</i>
+            <ng-template #thenFullpaperBlock> <span class="downloadSpan" (click)="downloadFullPaper(i)">
+              Click here to download</span></ng-template>
+            <ng-template #elseFullpaperBlock>none</ng-template>
           </p>
         </mat-card-content>
 
         <mat-card-actions>
           <mat-label style="right:50%;">
             <b style="margin:0 15px;">{{review.verdict}}</b>
-            <!--        ngSwitch for custom aspect?-->
+            <!--        ngSwitch for custom color aspect?-->
           </mat-label>
           <button mat-raised-button color="accent"
                   (click)="showRecommendations(review.submission, review.recommendation)">
@@ -49,28 +56,32 @@
     <ng-container>
       <mat-card class="unreviewed submission-card" *ngFor="let review of getUnreviewedSubmissions(); let i = index">
         <mat-card-header>
-          <div mat-card-avatar class="submission-header-image"></div>
+          <div mat-card-avatar class="submission-header-image" matTooltip="Icon Nr.1"></div>
           <mat-card-title>{{review.submission.title}}</mat-card-title>
           <mat-card-subtitle>Unreviewed no.{{i + 1}}</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
           <p>
             <span class="field">Abstract: </span>
-            <i *ngIf="!review.submission.abstractPaper">none</i>
-            {{review.submission.abstractPaper}}
+            <i *ngIf="review.submission.abstractPaper; then thenAbstractBlock else elseAbstractBlock"></i>
+            <ng-template #thenAbstractBlock> <span class="downloadSpan" (click)="downloadAbstractPaper(review)">
+              Click to download</span></ng-template>
+            <ng-template #elseAbstractBlock>none</ng-template>
           </p>
           <p>
             <span class="field">Authors: </span>
-            <ng-container *ngFor="let author of review.submission.authors">
-              {{author.fullName}},
+            <ng-container *ngFor="let author of review.submission.authors;let j = index">
+              {{author.fullName}}<span *ngIf="j < review.submission.authors.length-1">,</span>
             </ng-container>
           </p>
           <p><span class="field">Topics: </span>{{review.submission.topics}}</p>
           <p><span class="field">Keywords: </span>{{review.submission.keywords}}</p>
           <p>
             <span class="field">Fullpaper: </span>
-            <i *ngIf="!review.submission.fullPaper">none</i>
-            {{review.submission.fullPaper}}
+            <i *ngIf="this.review.submission.fullPaper; then thenFullpaperBlock else elseFullpaperBlock">none</i>
+            <ng-template #thenFullpaperBlock> <span class="downloadSpan" (click)="downloadFullPaper(review)">
+              Click here to download</span></ng-template>
+            <ng-template #elseFullpaperBlock>none</ng-template>
           </p>
         </mat-card-content>
         <mat-card-actions>

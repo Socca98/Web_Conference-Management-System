@@ -1,12 +1,11 @@
 :host {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  /*font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";*/
   font-size: 14px;
   color: #333;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 h1,
 h2,
@@ -30,12 +29,20 @@ p {
   display: flex;
   align-items: center;
   font-weight: 500;
+  font-size: 0.9vw !important;
+}
+
+.lnk {
+  /*font-size: 89% !important;*/
 }
 
 .toolbar img {
-  padding: 3px;
-  margin-left: 1px;
-  margin-right: 15px;
+  padding: 4px;
+  margin-right: 8px;
+  -webkit-transition: background-image 2s ease-out;
+  -moz-transition: background-image 2s ease-out;
+  -o-transition: background-image 2s ease-out;
+  transition: background-image 2s ease-out;
 }
 
 #main-image:hover {
@@ -59,18 +66,25 @@ a:hover {
   color: antiquewhite;
   text-decoration: none;
   text-shadow: 2px 2px grey;
-  font-size: 20px;
   text-align: center;
-  margin-right: 30px;
 }
 
-a:hover {
-  color: black;
+.lnk {
+  margin-right: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid grey;
 }
+
+.lnk:hover {
+  color: white;
+  background: #333333;
+}
+
 
 
 .terminal pre {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  /*font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;*/
   color: white;
   padding: 0 1rem 1rem;
   margin: 0;
@@ -102,12 +116,12 @@ footer a {
   position: absolute;
   right: 10px;
   max-height: 36px;
+  font-size: 80% !important;
 }
 
 #welcome-user {
   margin-right: 15px;
-  font-size: 14px;
-  font-family: "Malgun Gothic", sans-serif;
+  /*font-family: "Malgun Gothic", sans-serif;*/
   color: antiquewhite;
 }
 
@@ -118,7 +132,7 @@ footer a {
   color: black;
   text-shadow: 1px 1px grey;
   font-size: 18px;
-  font-family: Georgia, serif;
+  /*font-family: Georgia, serif;*/
   letter-spacing: 2px;
   padding: 10px;
   z-index: 10;
@@ -138,6 +152,27 @@ footer {
 ::ng-deep .warning {
   background: darkred;
 }
+
+/*Highlight current clicked navbar.*/
+.active {
+  background: #333333;
+}
+
+#btn-create-conference {
+  margin-right: 5px;
+}
+
+#btn-create-conference:hover {
+  background-color: darkred;
+  /*border-radius: 10px;*/
+  transition: background-color 0.5s ease-out;
+}
+
+
+
+
+
+
 
 
 

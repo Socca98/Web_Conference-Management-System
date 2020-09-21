@@ -108,13 +108,19 @@ public class ConferencesService {
     }
 
     public SubmissionDto addSubmission(String conferenceId, SubmissionDto submissionDto) {
-
         Conference conference = conferencesRepository.getOne(conferenceId);
         Submission submission = ConferenceConverter.submissionDtoToSubmission(submissionDto);
         List<User> users = usersService.sendInvitationIfNeeded(submissionDto.getAuthors());
         submission.setAuthors(users);
-
         submission.setConference(conference);
+
+        // Populate users from field 'likes' with their complete attributes (id, fullName, etc.)
+        List<User> usersFullDetailed = new ArrayList<>();
+        for(User userEmail : submission.getLikes()) {
+            usersFullDetailed.add(usersService.getUserByEmail(userEmail.getEmail()));
+        }
+        submission.setLikes(usersFullDetailed);
+
         Submission save = submissionJpaRepository.save(submission);
         conference.getSubmissions().add(save);
         return ConferenceConverter.submissionToSubmissionDto(save);
@@ -124,6 +130,20 @@ public class ConferencesService {
     public SubmissionDto likeSubmission(String conferenceId, String submissionId) {
         String usernameFromContext = securityService.getUsernameFromContext();
         User user = usersService.getUser(usernameFromContext);
+
+        // Verify role authorization
+        Conference conference = conferencesRepository.getOne(conferenceId);
+        List<Role> possibleExistingRole = conference.getRoles()
+                .stream()
+                .filter(role -> role.getUser().getEmail().equals(user.getEmail()))
+                .collect(Collectors.toList());
+        if (possibleExistingRole.size() == 1) {
+            Roles role = possibleExistingRole.get(0).getRole();
+            if (role != Roles.PC_MEMBER && role != Roles.CHAIR && role != Roles.CO_CHAIR) {
+                throw new IssException("Not permitted for this user!", HttpStatus.BAD_REQUEST);
+            }
+        }
+
         Submission submission = submissionJpaRepository.getOne(submissionId);
         if (!submission.getLikes().contains(user)) {
             submission.getLikes().add(user);
@@ -137,6 +157,21 @@ public class ConferencesService {
     public SubmissionDto unlikeSubmission(String conferenceId, String submissionId) {
         String usernameFromContext = securityService.getUsernameFromContext();
         User user = usersService.getUser(usernameFromContext);
+
+        // Verify role authorization
+        Conference conference = conferencesRepository.getOne(conferenceId);
+        List<Role> possibleExistingRole = conference.getRoles()
+                .stream()
+                .filter(role -> role.getUser().getEmail().equals(user.getEmail()))
+                .collect(Collectors.toList());
+        if (possibleExistingRole.size() == 1) {
+            Roles role = possibleExistingRole.get(0).getRole();
+            if (role != Roles.PC_MEMBER && role != Roles.CHAIR && role != Roles.CO_CHAIR) {
+                throw new IssException("Not permitted for this user!", HttpStatus.BAD_REQUEST);
+            }
+        }
+
+        // Remove like
         Submission submission = submissionJpaRepository.getOne(submissionId);
         if (submission.getLikes().contains(user)) {
             submission.getLikes().remove(user);
@@ -357,7 +392,7 @@ public class ConferencesService {
         String username = securityService.getUsernameFromContext();
         List<Role> probablyRole = conference.getRoles().stream()
                 .filter(role -> username.equals(role.getUser().getUsername())).collect(Collectors.toList());
-        if (probablyRole.size() == 1 && probablyRole.get(0).getRole() == Roles.PC_MEMBER) {
+        if (probablyRole.size() == 1 ) {
             List<Review> allReviews = new ArrayList<>();
             conference.getSubmissions()
                     .stream()
