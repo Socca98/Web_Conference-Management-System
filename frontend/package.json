@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~10.1.2",
     "@angular/router": "~10.1.2",
     "mat-timepicker": "^5.0.1",
+    "ng-pick-datetime": "^7.0.0",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

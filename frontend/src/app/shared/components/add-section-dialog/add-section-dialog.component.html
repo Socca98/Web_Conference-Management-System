@@ -5,68 +5,51 @@
     <mat-form-field class="field">
       <mat-label>Title</mat-label>
       <label>
-        <input matInput [(ngModel)]="section.title" name="title" placeholder="ex. Spacial Databases" value="Spacial Databases" required>
+        <input matInput [(ngModel)]="section.title" name="title" placeholder="ex. Spacial Databases"
+               required>
       </label>
     </mat-form-field>
 
-
-
     <mat-form-field class="field" appearance="fill">
-      <mat-label>Enter a date range</mat-label>
-      <mat-date-range-input [rangePicker]="picker">
-        <input matStartDate placeholder="Start date">
-        <input matEndDate placeholder="End date">
-      </mat-date-range-input>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-date-range-picker #picker></mat-date-range-picker>
+      <mat-label>Enter start time and end time</mat-label>
+      <input matInput [owlDateTime]="dt1" name="date-range" [readonly]="true" [(ngModel)]="defaultDateRange"
+             [selectMode]="'range'" [owlDateTimeTrigger]="dt1" [min]="minStartTime" required>
+      <owl-date-time #dt1></owl-date-time>
     </mat-form-field>
 
-
-
+    <mat-form-field appearance="fill">
+      <mat-label>Choose the section chair</mat-label>
+      <mat-select [(value)]="section.sectionChair.email">
+        <mat-option *ngFor="let sectionChair of this.possibleSectionChair" [value]="sectionChair.email">
+          {{sectionChair.fullName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-form-field class="field">
-      <input matInput [matDatepicker]="myDatePicker2" [(ngModel)]="section.endTime" name="endDate" required>
-      <mat-datepicker-toggle matSuffix [for]="myDatePicker2"></mat-datepicker-toggle>
-      <mat-datepicker #myDatePicker2></mat-datepicker>
+      <mat-label>No. of seats</mat-label>
+      <label>
+        <input matInput [(ngModel)]="section.seats" min="0" name="nrSeats" type="number" value="3" required>
+      </label>
     </mat-form-field>
 
-<!--    <mat-form-field appearance="fill">-->
-<!--      <mat-label>Choose the section chair</mat-label>-->
-<!--      <mat-select [(value)]="section.sectionChair">-->
-<!--        <mat-option *ngFor="let acceptedPaper of this.acceptedSubmissions" [value]="acceptedPaper.id">-->
-<!--          {{acceptedPaper}}-->
-<!--        </mat-option>-->
-<!--      </mat-select>-->
-<!--    </mat-form-field>-->
-
-<!--    <mat-form-field class="field">-->
-<!--      <mat-label>No. of seats</mat-label>-->
-<!--      <label>-->
-<!--        <input matInput [(ngModel)]="section.seats" name="nrSeats" type="number" value="300" required>-->
-<!--      </label>-->
-<!--    </mat-form-field>-->
-
-<!--    <mat-form-field>-->
-<!--      <mat-label>Choose paper</mat-label>-->
-<!--      <mat-select [(value)]="section.speakers">-->
-<!--        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">-->
-<!--          {{possibleSpeaker}}-->
-<!--        </mat-option>-->
-<!--      </mat-select>-->
-<!--    </mat-form-field>-->
-
-<!--    <mat-form-field>-->
-<!--      <mat-label>Choose speaker</mat-label>-->
-<!--      <mat-select [(value)]="section.speakers">-->
-<!--        <mat-option *ngFor="let possibleSpeaker of [1,2,3]" [value]="possibleSpeaker">-->
-<!--          {{possibleSpeaker}}-->
-<!--        </mat-option>-->
-<!--      </mat-select>-->
-<!--    </mat-form-field>-->
-
-
-
-    {{section | json}}
+    <ng-container *ngFor="let speaker of section.speakers; let i = index; trackBy: identify">
+      <mat-form-field class="field">
+        <mat-label>Choose paper</mat-label>
+        <mat-select (selectionChange)="updateSpeakerSubmission($event, i)">
+          <mat-option [value]="['None', -1]">None</mat-option>
+          <mat-option *ngFor="let possibleSubmission of this.acceptedSubmissions; let j = index;"
+                      [value]="[possibleSubmission, j]"
+                      [disabled]="this.alreadySelected[j]">
+            {{possibleSubmission.title}}, {{possibleSubmission.authors[0].fullName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </ng-container>
+    <button mat-mini-fab color="white" id="add-email-button" matTooltip="Add speaker"
+            (click)="incrementNumberOfSpeakers()">
+      <mat-icon color="primary" id="add-email-icon">add_circle</mat-icon>
+    </button>
   </div>
 
   <div mat-dialog-actions>

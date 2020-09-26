@@ -29,6 +29,11 @@ export class AppComponent {
 
     // Load Color Scheme (Theme)
     this.colorSchemeService.load();
+
+    this.dialog.open(CreateConferenceDialogComponent, {
+      height: '90vh',
+      width: '80vw'
+    });
   }
 
 

@@ -98,12 +98,6 @@ export class SubmissionsService {
     window.open(environment.apiEndpoint + 'files/download/' + fileId, '_blank');
   }
 
-  getAcceptedSubmissions(conferenceId) {
-    const params = new HttpParams().set('status', 'accepted');
-    const urlString = environment.apiEndpoint + 'conferences/' + conferenceId + '/submissions/' + 2 + '/review';
-    return this.http.get(urlString, {params});
-  }
-
   /**
    * Attach full paper by updating the corresponding field in the Submission object.
    * @param conferenceId Current conference.

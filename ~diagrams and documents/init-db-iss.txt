@@ -28,7 +28,7 @@ user5
 AUTHOR
 Submission 0:
 Submission 4:
-Submission 6:
+Submission 6: fn(accept)
 
 user6
 AUTHOR
@@ -44,7 +44,7 @@ Submission 1:
 Submission 2:
 Submission 3:
 Submission 4:
-Submission 5:
+Submission 5: fn(accept)
 
 --------------
 best8

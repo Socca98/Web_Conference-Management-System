@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Conference} from '../../models/conference';
 import {MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {ConferencesService} from '../../services/conferences.service';
-import {MatSelectModule} from '@angular/material/select';
-import {AbstractControl, Form, FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpParams} from '@angular/common/http';
-import {Token} from '../../models/token';
-import {User} from '../../models/user';
+import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-create-conference',
@@ -16,6 +12,7 @@ import {User} from '../../models/user';
 })
 export class CreateConferenceDialogComponent implements OnInit {
   conference: Conference = {} as Conference;
+  formConference: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<CreateConferenceDialogComponent>,
@@ -24,23 +21,22 @@ export class CreateConferenceDialogComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.formConference = this.formBuilder.group({
-      conferenceName: ['', Validators.required],
-      startDate: ['', Validators.required],
+      conferenceName: ['Conference 3 Man-Made', Validators.required],
+      startDate: [Date.now(), Validators.required],
       endDate: ['', Validators.required],
-      taxFee: ['', Validators.compose([Validators.required, Validators.min(0)])],
+      taxFee: ['200', Validators.compose([Validators.required, Validators.min(0)])],
       allowTwoDeadlines: [false],
       abstractDeadline: {value: '', disabled: true},
       proposalDeadline: ['', Validators.required],
-      website: ['', Validators.compose([Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])],
+      website: ['https://www.newConference.com', Validators.compose([Validators.required, Validators.pattern('(https?://)?([\\da-z.-]+)\\.([a-z.]{2,6})[/\\w .-]*/?')])],
       biddingDeadline: ['', Validators.required],
       evaluationDeadline: ['', Validators.required],
-      nrOfReviews: ['', Validators.compose([Validators.required, Validators.min(1)])],
-      allowUpload: false,
+      nrOfReviews: ['2', Validators.compose([Validators.required, Validators.min(1)])],
+      allowUpload: true,
       members: this.formBuilder.array([])
     });
   }
 
-  formConference: FormGroup;
 
   onCreateClick() {
     const value = this.formConference.value;
@@ -82,6 +78,7 @@ export class CreateConferenceDialogComponent implements OnInit {
     if (this.formConference.controls.allowTwoDeadlines.value) {
       this.formConference.controls.abstractDeadline.enable();
     } else {
+      this.formConference.controls.abstractDeadline.reset();
       this.formConference.controls.abstractDeadline.disable();
     }
   }

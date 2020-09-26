@@ -330,7 +330,7 @@ public class ConferencesService {
     public void attendSection(String sectionId) {
         Section section = sectionJpaRepository.getOne(sectionId);
         User user = usersService.getUser(securityService.getUsernameFromContext());
-        if (!section.getListeners().contains(user) && section.getListeners().size() < section.getSeats()) {
+        if (!section.getListeners().contains(user) && section.getSeats() > 0) {
             section.getListeners().add(user);
             section.setSeats(section.getSeats() - 1);
             sectionJpaRepository.save(section);

@@ -321,7 +321,7 @@ public class DatabaseInitialization {
 
         SubmissionDto submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 0 of conference 0");
-        submissionDto.setKeywords("first, number one, boss");
+        submissionDto.setKeywords("first, number one, love");
         submissionDto.setTopics("nothing really");
         List<UserRoleDto> authors = new ArrayList<>();  // authors list
         authors.add(userRole2);
@@ -339,7 +339,7 @@ public class DatabaseInitialization {
 
         submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 1 of conference 0");
-        submissionDto.setKeywords("second, number two, slave");
+        submissionDto.setKeywords("second, number two, passion");
         submissionDto.setTopics("nothing really but with more sour");
         authors = new ArrayList<>();
         authors.add(userRole2);
@@ -389,6 +389,7 @@ public class DatabaseInitialization {
 
         submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 5 of conference 0");
+        submissionDto.setFinalVerdict("STRONG_ACCEPT");
         submissionDto.setKeywords("dd, ddd, dd, d");
         submissionDto.setTopics("DDD, DDD, D, DD");
         authors = new ArrayList<>();
@@ -398,7 +399,8 @@ public class DatabaseInitialization {
 
         submissionDto = new SubmissionDto();
         submissionDto.setTitle("Submission 6 of conference 0");
-        submissionDto.setKeywords("third, number two, slave");
+        submissionDto.setFinalVerdict("ACCEPT");
+        submissionDto.setKeywords("third, number two, compassion");
         submissionDto.setTopics("more topics");
         authors = new ArrayList<>();
         authors.add(userRole5);

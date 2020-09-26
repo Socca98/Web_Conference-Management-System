@@ -55,9 +55,9 @@
     <div class="column">
       <div mat-dialog-title>Invite committee members</div>
       <div mat-dialog-content>
-        <button mat-button type="button" (click)="addMember()">Add new member +</button>
+        <button mat-stroked-button type="button" (click)="addMember()">Add new member +</button>
         <span [formArrayName]="formConference.controls.members"
-              *ngFor="let member of formConference.controls.members['controls']; index as i">
+              *ngFor="let member of formConference.controls.members['controls']; let i = index;">
           <br/>
           <span [formGroupName]="i">
             <mat-form-field>
@@ -68,8 +68,9 @@
             <mat-label>Role</mat-label>
             <select matNativeControl [formControl]="member.controls.role">
                 <option value="" disabled>Choose member role</option>
+                <option value="PC_MEMBER">PC Member</option>
                 <option value="STEERING_COMMITTEE_MEMBER">SC Member</option>
-                <option value="CO_CHAIR">Co-chair</option>
+                <option value="CO_CHAIR">Co-Chair</option>
               </select>
             </mat-form-field>
             <button mat-button (click)="removeEntry(i)">X Remove member</button>
@@ -79,7 +80,7 @@
     </div>
   </div>
   <div mat-dialog-actions>
-    <button mat-button color="accent" type="submit">Create conference</button>
+    <button mat-raised-button color="accent" type="submit">Create conference</button>
     <button mat-button color="accent" type="button" (click)="onCancelClick()">Cancel</button>
   </div>
 </form>

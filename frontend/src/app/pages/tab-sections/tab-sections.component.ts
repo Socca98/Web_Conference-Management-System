@@ -34,10 +34,7 @@ export class TabSectionsComponent implements OnInit {
   ngOnInit(): void {
     this.conferenceService.getSections(this.authService.conference.id).subscribe((result) => {
       this.sections = result;
-      console.log(this.sections);
     });
-    this.dialog.open(AddSectionDialogComponent);
-
   }
 
   /**
@@ -63,7 +60,11 @@ export class TabSectionsComponent implements OnInit {
    * Open add dialog to add a new section.
    */
   openAddSection() {
-    this.dialog.open(AddSectionDialogComponent);
+    this.dialog.open(AddSectionDialogComponent).afterClosed().subscribe((result: Section) => {
+      if (result) {
+        this.sections.push(result);
+      }
+    });
   }
 
   /**
@@ -94,6 +95,22 @@ export class TabSectionsComponent implements OnInit {
    * @param index Identifies the section tab.
    */
   attendButton(sectionId, index) {
+    // Check if minimum seats is 0
+    if (this.sections[index].seats < 1) {
+      this.snackBar.open('No more seats left.', '', {
+        duration: 2000,
+      });
+      return;
+    }
+
+    // Check if already pressed the button
+    if (this.isCurrentUserListener(index)) {
+      this.snackBar.open('You already clicked the button!', 'No, I didn\'t', {
+        duration: 2000,
+      });
+      return;
+    }
+
     const conferenceId = this.authService.conference.id;
     this.conferenceService.attendSection(conferenceId, sectionId).subscribe({
       next: () => {
@@ -101,9 +118,10 @@ export class TabSectionsComponent implements OnInit {
           duration: 1000,
         });
         this.sections[index].seats--; // We do not return the section, so we fake an update
+        this.sections[index].listeners.push(this.authService.user);
       },
       error: () => {
-        this.snackBar.open('Error attending section! Maybe you attended already.', 'Ok', {
+        this.snackBar.open('Error attending section!', 'Ok', {
           duration: 2000,
           panelClass: ['warning']
         });

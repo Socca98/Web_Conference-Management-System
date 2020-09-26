@@ -1,11 +1,7 @@
 package com.cms.controllers;
 
 import com.cms.dto.conference.*;
-import com.cms.model.Conference;
-import com.cms.model.Submission;
-import com.cms.model.Verdict;
 import com.cms.services.ConferencesService;
-import com.cms.services.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +13,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/conferences")
 public class ConferencesController {
-
     @Autowired
     private ConferencesService conferencesService;
 
     @PostMapping
     public ResponseEntity<ConferenceDto> createConference(@RequestBody CreateConferenceDto conferenceDto) {
-
         ConferenceDto createdConferenceDto = conferencesService.createConference(conferenceDto);
         return new ResponseEntity<>(createdConferenceDto, HttpStatus.CREATED);
     }

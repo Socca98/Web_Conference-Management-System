@@ -8,7 +8,6 @@ import java.util.List;
 
 @Entity
 public class Submission {
-
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy = "uuid")

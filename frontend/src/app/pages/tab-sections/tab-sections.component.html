@@ -30,7 +30,7 @@
         </ng-container>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-raised-button color="accent"
+        <button mat-raised-button color="accent" id="participateButton"
                 (click)="attendButton(section.sectionId, i)"
                 [disabled]="isCurrentUserListener(i)"
         >
@@ -41,7 +41,7 @@
   </ng-container>
 </div>
 
-<button mat-fab color="warn" id="add-section-button" *ngIf="isChair() || true" (click)="openAddSection()"
+<button mat-fab color="warn" id="add-section-button" *ngIf="isChair()" (click)="openAddSection()"
         matTooltip="Create section">
   <mat-icon>add</mat-icon>
 </button>

@@ -47,7 +47,7 @@ export class ConferencesService {
       throw new Error('Error! Conference id is null for request!');
     }
     return this.http.post<Section>(
-      environment.apiEndpoint + '/conferences/' + conferenceId + '/submissions/section',
+      environment.apiEndpoint + '/conferences/' + conferenceId + '/sections',
       section);
   }
 

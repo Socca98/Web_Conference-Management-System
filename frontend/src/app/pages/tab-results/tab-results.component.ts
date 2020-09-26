@@ -25,8 +25,12 @@ export class TabResultsComponent implements OnInit {
 
   ngOnInit(): void {
     this.submissionsService.getSubmissions(this.authService.conference.id).subscribe((result: Submission[]) => {
-      // Filter and keep those with final verdict.
-      this.submissionsReviewed = result.filter(e => e.finalVerdict != null && e.finalVerdict !== Verdict.Not_Reviewed);
+      const currentUserEmail = this.authService.user.email;
+      // Filter and keep those with final verdict which belong to current user
+      this.submissionsReviewed = result.filter(e => e.finalVerdict != null &&
+        e.finalVerdict !== Verdict.Not_Reviewed &&
+        e.authors.some(author => author.email === currentUserEmail)
+      );
     });
   }
 
