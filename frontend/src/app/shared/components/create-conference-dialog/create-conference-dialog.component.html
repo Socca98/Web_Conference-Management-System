@@ -1,6 +1,8 @@
 <h1 mat-dialog-title>Create a new conference</h1>
 
 <form [formGroup]="formConference" (ngSubmit)="onCreateClick()">
+  Value: {{formConference.value | json}}
+  <hr>
   <div class="row">
     <div class="column">
       <div mat-dialog-title>Conference info</div>
@@ -49,38 +51,39 @@
           <mat-label>Number of allowed reviews per paper</mat-label>
           <input matInput type="number" formControlName="nrOfReviews"/>
         </mat-form-field>
-
       </div>
     </div>
+
     <div class="column">
       <div mat-dialog-title>Invite committee members</div>
-      <div mat-dialog-content>
-        <button mat-stroked-button type="button" (click)="addMember()">Add new member +</button>
-        <span [formArrayName]="formConference.controls.members"
-              *ngFor="let member of formConference.controls.members['controls']; let i = index;">
+      <div mat-dialog-content formArrayName="members">
+        <button mat-fab color="accent" type="button" (click)="addMember()" aria-label="Example ith a group add icon">
+          <mat-icon>group_add</mat-icon>
+        </button>
+        <br/><br/>
+        <span *ngFor="let member of conferenceMembers.controls; let i = index;" [formGroupName]="i">
           <br/>
-          <span [formGroupName]="i">
-            <mat-form-field>
-              <mat-label>Member email</mat-label>
-              <input matInput type="text" [formControl]="member.controls.email">
-            </mat-form-field>
-            <mat-form-field>
+          <mat-form-field class="member-field">
+            <mat-label>Member email</mat-label>
+            <input matInput type="text" formControlName="email">
+          </mat-form-field>
+          <mat-form-field class="member-field">
             <mat-label>Role</mat-label>
-            <select matNativeControl [formControl]="member.controls.role">
+            <select matNativeControl formControlName="role">
                 <option value="" disabled>Choose member role</option>
                 <option value="PC_MEMBER">PC Member</option>
                 <option value="STEERING_COMMITTEE_MEMBER">SC Member</option>
                 <option value="CO_CHAIR">Co-Chair</option>
-              </select>
-            </mat-form-field>
-            <button mat-button (click)="removeEntry(i)">X Remove member</button>
-          </span>
+            </select>
+          </mat-form-field>
+          <button mat-raised-button color="warn" (click)="removeMember(i)">X</button>
         </span>
       </div>
     </div>
   </div>
+
   <div mat-dialog-actions>
-    <button mat-raised-button color="accent" type="submit">Create conference</button>
+    <button mat-raised-button color="accent" type="submit" [disabled]="formConference.invalid">Create conference</button>
     <button mat-button color="accent" type="button" (click)="onCancelClick()">Cancel</button>
   </div>
 </form>

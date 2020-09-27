@@ -7,6 +7,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {User} from '../../shared/models/user';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {RegisterDialogComponent} from '../../login/register/register-dialog.component';
+import {DataService} from '../../shared/services/data.service';
 
 @Component({
   selector: 'app-home-page',
@@ -14,6 +15,7 @@ import {RegisterDialogComponent} from '../../login/register/register-dialog.comp
   styleUrls: ['./home-page.component.css'],
   providers: [
     ConferencesService,
+    DataService,
   ],
 })
 export class HomePageComponent implements OnInit {
@@ -22,6 +24,7 @@ export class HomePageComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
+    private dataService: DataService,
     private conferencesService: ConferencesService,
     private router: Router,
     private route: ActivatedRoute,
@@ -98,6 +101,10 @@ export class HomePageComponent implements OnInit {
           isChair: responseData.chair,
           payedAttend: false,
         } as User;
+
+        // Best method for shared data between components is a SharedDataService
+        this.dataService.setConference(this.conferences[this.selectedTabIndex]);
+
 
         // Open tab-details component
         this.router.navigate(['/conference/details']);

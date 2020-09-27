@@ -22,10 +22,27 @@ $theme-alien-warn: mat-palette($mat-light-green);
 $theme-light: mat-light-theme($theme-light-primary, $theme-light-accent, $theme-light-warn);
 $theme-alien: mat-light-theme($theme-alien-primary, $theme-light-accent, $theme-light-warn);
 
-//@keyframes example {
-//  from {font-family: "We-are-alien", sans-serif !important;}
-//  to {font-family: "We-are-alien", sans-serif !important;}
-//}
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes appear {
+  from {
+    visibility: hidden;
+  }
+  to {
+    visibility: visible;
+  }
+}
+
 
 // Include theme styles for core and each component used in your app.
 // ColorSchemeService does the job.

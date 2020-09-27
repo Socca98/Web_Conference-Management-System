@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import {LoginDialogComponent} from './login/login/login-dialog.component';
 import {Router} from '@angular/router';
@@ -8,6 +8,7 @@ import {CreateConferenceDialogComponent} from './shared/components/create-confer
 import {ColorSchemeService} from './shared/services/color-scheme.service';
 import {Theme} from './shared/models/theme';
 import {Role} from './shared/models/role';
+import {Conference} from './shared/models/conference';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,8 @@ import {Role} from './shared/models/role';
 export class AppComponent {
   helperDeadline: number;
   deadlineTypeLabel = '';
+  @Output() handleNewConference = new EventEmitter<Conference>();  // Send the new conference to HomePage list
+
 
   constructor(
     private router: Router,
@@ -29,11 +32,6 @@ export class AppComponent {
 
     // Load Color Scheme (Theme)
     this.colorSchemeService.load();
-
-    this.dialog.open(CreateConferenceDialogComponent, {
-      height: '90vh',
-      width: '80vw'
-    });
   }
 
 
@@ -68,7 +66,14 @@ export class AppComponent {
     this.dialog.open(CreateConferenceDialogComponent, {
       height: '90vh',
       width: '80vw'
-    });
+    }).afterClosed()
+      .subscribe((newConference: Conference) => {
+        if (newConference) {
+          // EventEmitter<any>(), any helps at sending more parameters as json
+          // this.handleNewConference.emit(newConference);
+          // ! We can reach Home Component with the new Conference sending route param
+        }
+      });
   }
 
   labelDeadline() {

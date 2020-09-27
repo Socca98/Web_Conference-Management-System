@@ -20,3 +20,21 @@
   overflow: hidden;
   padding: 10px;
 }
+
+.member-field {
+  padding-right: 17px;
+}
+
+
+@keyframes example {
+  from {margin-left:-100%;}
+  to {margin-left:0;}
+}
+
+.member-field {
+  animation: example 0.5s ease-out;
+}
+
+
+
+

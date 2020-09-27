@@ -38,39 +38,6 @@ export class CreateConferenceDialogComponent implements OnInit {
   }
 
 
-  onCreateClick() {
-    const value = this.formConference.value;
-    this.conference.name = value.conferenceName;
-    this.conference.proposalDeadline = value.proposalDeadline.getTime;
-    this.conference.abstractDeadline = value.abstractDeadline.getTime;
-    this.conference.allowFullPaper = value.allowUpload;
-    this.conference.taxFee = value.taxFee;
-    this.conference.id = '';
-    this.conference.evaluationDeadline = value.evaluationDeadline.getTime;
-    this.conference.biddingDeadline = value.biddingDeadline.getTime;
-    this.conference.website = value.website;
-    this.conference.nrOfReviews = value.nrOfReviews;
-    this.conference.users = value.members;
-    console.log(this.conference);
-    this.conferencesService.addConference(this.conference).subscribe({
-      next: (response: Conference) => {
-        this.dialogRef.close();
-        this.snackBar.open('Conference created successfully!', '', {
-        duration: 1000
-        });
-        }, error: _ => {
-        this.snackBar.open('Couldn\'t create conference :(', '', {
-          duration: 2000,
-          panelClass: ['warning'],
-        });
-      }
-    });
-  }
-
-  onCancelClick() {
-    this.dialogRef.close();
-  }
-
   /**
    * Enables an input field if user wants two deadlines.
    */
@@ -83,11 +50,18 @@ export class CreateConferenceDialogComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  /**
+   * Easier access to the form control array of invited members.
+   */
+  get conferenceMembers() {
+    return this.formConference.get('members') as FormArray;
   }
 
+  /**
+   * Adds a new form control input for an invited member.
+   */
   addMember() {
-    (this.formConference.controls.members as FormArray).push(this.createMemberInput());
+    this.conferenceMembers.push(this.createMemberInput());
   }
 
   private createMemberInput() {
@@ -97,7 +71,48 @@ export class CreateConferenceDialogComponent implements OnInit {
     });
   }
 
-  removeEntry(index) {
-    (this.formConference.controls.members as FormArray).removeAt(index);
+  removeMember(index) {
+    this.conferenceMembers.removeAt(index);
   }
+
+  onCreateClick() {
+    const value = this.formConference.value;
+    this.conference.name = value.conferenceName;
+    this.conference.startDate = Date.parse(value.startDate) / 1000;
+    this.conference.endDate = Date.parse(value.endDate) / 1000;
+    this.conference.proposalDeadline = Date.parse(value.proposalDeadline) / 1000;
+    this.conference.abstractDeadline = value.abstractDeadline ? Date.parse(value.abstractDeadline) / 1000 : null;
+    this.conference.allowFullPaper = value.allowUpload;
+    this.conference.taxFee = value.taxFee;
+    this.conference.id = '';
+    this.conference.evaluationDeadline = Date.parse(value.evaluationDeadline) / 1000;
+    this.conference.biddingDeadline = Date.parse(value.biddingDeadline) / 1000;
+    this.conference.website = value.website;
+    this.conference.nrOfReviews = value.nrOfReviews;
+    this.conference.users = value.members;
+    console.log(this.conference);
+
+    this.conferencesService.addConference(this.conference).subscribe({
+      next: (response: Conference) => {
+        this.dialogRef.close();
+        this.snackBar.open('Conference created successfully!', '', {
+          duration: 1000
+        });
+        this.dialogRef.close(response);
+      }, error: _ => {
+        this.snackBar.open('Couldn\'t create conference!', ':(', {
+          duration: 2000,
+          panelClass: ['warning'],
+        });
+      }
+    });
+  }
+
+  onCancelClick() {
+    this.dialogRef.close();
+  }
+
+  ngOnInit(): void {
+  }
+
 }

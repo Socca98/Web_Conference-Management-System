@@ -57,7 +57,7 @@ export class ColorSchemeService {
   update(scheme) {
     this._setColorScheme(scheme);
     // Remove the old color-scheme class
-    this.renderer.removeClass( document.body, this.colorSchemePrefix + (this.colorScheme === Theme.Alien ? Theme.Light : Theme.Alien) );
+    this.renderer.removeClass(document.body, this.colorSchemePrefix + (this.colorScheme === Theme.Alien ? Theme.Light : Theme.Alien));
     // Add the new / current color-scheme class
     this.renderer.addClass(document.body, this.colorSchemePrefix + scheme);
   }
