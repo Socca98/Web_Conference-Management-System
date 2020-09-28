@@ -2,6 +2,8 @@
 This web app manages conferences, different user roles, abstracts submissions, 
 and reviews. Made with Angular and Spring.
 
+Icons are attributed in the footer of the Home page.
+
 ## INDEX
  * [Objective](#objective)
  * [App photos](#app-photos)
