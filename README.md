@@ -1,27 +1,76 @@
 ## Conference-Management-System
 This web app manages conferences, different user roles, abstracts submissions, 
-and reviews. Made with Angular and Spring.
+and reviews. Made with **Angular** and **Spring**.
 
 Icons are attributed in the footer of the Home page.
+Left-up icon changes theme.
 
 ## INDEX
- * [Objective](#objective)
- * [App photos](#app-photos)
+ * [Role-based authorization](#role-based-authorization)
+ * [App Photos](#app-photos)
  * [Requirements](#requirements)
  * [Steps to setup Frontend](#steps-to-setup-frontend)
  * [Steps to setup Backend](#steps-to-setup-backend)
- * [Description](#frontend)
  * [Diagrams](#frontend)
- 
 
+## Role-based authorization
+ Roles: Chair, Author, PC Member, Co-Chair, SC Member.
+ 
+ Each user may have role X in conference 1 and role Y in another conference.
+ 
+ Except the 'admin', which is always Chair. 
+ 
+ With default register, you are Author. 
+ Other roles get email invitation links when Chair creates a conference.
+ 
+ **Author**
+ * submit scientific paper
+ * see results
+ * participate in sections where papers are presented
+ 
+ **PC Member**
+ * submit scientific paper
+ * see results
+ * participate in sections where papers are presented
+ * bid papers (show which you would like to review)
+ * review papers
+ 
+ **Co-Chair**
+ * participate in sections where papers are presented
+ * bid papers (show which you would like to review)
+ * review papers
+ * assign a paper to a bidder
+ * see all reviews:
+    * choose the final verdict of a paper
+    * send to another reviewer
+    * request discussion (reset reviews to _NOT_REVIEWED_)
+
+ **Chair**
+ * same as Co-Chair
+ * create section
+ * create conference
+ 
+ **SC-Member**
+ * participate in sections where papers are presented
+ 
 ## App photos
 Light theme             |  Alien Theme
 :-------------------------:|:-------------------------:
 <img src="https://i.imgur.com/FN1i8Fq.png" width="100%" /> |  <img src="https://i.imgur.com/LV6kTKL.png" width="100%" />
+<img src="https://i.imgur.com/n5zW4J9.png" width="100%" /> | <img src="https://i.imgur.com/RJvfPXm.png" width="100%" />
+
+ <img src="https://i.imgur.com/FN1i8Fq.png" width="90%" />
+ <hr><img src="https://i.imgur.com/HP6kqr7.png" width="90%" />
+ <hr><img src="https://i.imgur.com/tueLwwE.png" width="90%" />
+ <hr><img src="https://i.imgur.com/ZpwBVOk.png" width="90%" />
+ <hr><img src="https://i.imgur.com/an4PNMl.png" width="90%" />
+ <hr><img src="https://i.imgur.com/lJhNJbY.png" width="80%" />
+ <hr><img src="https://i.imgur.com/LBwvnYZ.png" width="80%" />
+ <hr><img src="https://i.imgur.com/n5zW4J9.png" width="80%" />
+ <hr><img src="https://i.imgur.com/VThtGrV.png" width="80%" />
+ <hr><img src="https://i.imgur.com/cfctZPf.png" width="80%" />
  
- <img src="https://i.imgur.com/FN1i8Fq.png" width="100%" />
- <hr><img src="https://i.imgur.com/LV6kTKL.png" width="100%" />
- 
+
 ## Requirements
   * Angular + Angular Material
   * MySql server
@@ -101,3 +150,5 @@ implementation 'mysql:mysql-connector-java'
 ```
 * Run
 
+## Diagrams
+Found in '~diagrams and documents'.
