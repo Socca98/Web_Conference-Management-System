@@ -6,12 +6,30 @@ Icons are attributed in the footer of the Home page.
 Left-up icon changes theme.
 
 ## INDEX
- * [Role-based authorization](#role-based-authorization)
  * [App Photos](#app-photos)
+ * [Role-based authorization](#role-based-authorization)
  * [Requirements](#requirements)
  * [Steps to setup Frontend](#steps-to-setup-frontend)
  * [Steps to setup Backend](#steps-to-setup-backend)
  * [Diagrams](#frontend)
+
+## App photos
+Light theme             |  Alien Theme
+:-------------------------:|:-------------------------:
+<img src="https://i.imgur.com/FN1i8Fq.png" width="100%" /> |  <img src="https://i.imgur.com/LV6kTKL.png" width="100%" />
+<img src="https://i.imgur.com/n5zW4J9.png" width="100%" /> | <img src="https://i.imgur.com/RJvfPXm.png" width="100%" />
+
+ <img src="https://i.imgur.com/FN1i8Fq.png" width="90%" />
+ <hr><img src="https://i.imgur.com/HP6kqr7.png" width="90%" />
+ <hr><img src="https://i.imgur.com/tueLwwE.png" width="90%" />
+ <hr><img src="https://i.imgur.com/ZpwBVOk.png" width="90%" />
+ <hr><img src="https://i.imgur.com/an4PNMl.png" width="90%" />
+ <hr><img src="https://i.imgur.com/lJhNJbY.png" width="80%" />
+ <hr><img src="https://i.imgur.com/LBwvnYZ.png" width="80%" />
+ <hr><img src="https://i.imgur.com/n5zW4J9.png" width="80%" />
+ <hr><img src="https://i.imgur.com/VThtGrV.png" width="80%" />
+ <hr><img src="https://i.imgur.com/cfctZPf.png" width="80%" />
+
 
 ## Role-based authorization
  Roles: Chair, Author, PC Member, Co-Chair, SC Member.
@@ -53,28 +71,11 @@ Left-up icon changes theme.
  **SC-Member**
  * participate in sections where papers are presented
  
-## App photos
-Light theme             |  Alien Theme
-:-------------------------:|:-------------------------:
-<img src="https://i.imgur.com/FN1i8Fq.png" width="100%" /> |  <img src="https://i.imgur.com/LV6kTKL.png" width="100%" />
-<img src="https://i.imgur.com/n5zW4J9.png" width="100%" /> | <img src="https://i.imgur.com/RJvfPXm.png" width="100%" />
-
- <img src="https://i.imgur.com/FN1i8Fq.png" width="90%" />
- <hr><img src="https://i.imgur.com/HP6kqr7.png" width="90%" />
- <hr><img src="https://i.imgur.com/tueLwwE.png" width="90%" />
- <hr><img src="https://i.imgur.com/ZpwBVOk.png" width="90%" />
- <hr><img src="https://i.imgur.com/an4PNMl.png" width="90%" />
- <hr><img src="https://i.imgur.com/lJhNJbY.png" width="80%" />
- <hr><img src="https://i.imgur.com/LBwvnYZ.png" width="80%" />
- <hr><img src="https://i.imgur.com/n5zW4J9.png" width="80%" />
- <hr><img src="https://i.imgur.com/VThtGrV.png" width="80%" />
- <hr><img src="https://i.imgur.com/cfctZPf.png" width="80%" />
- 
 
 ## Requirements
   * Angular + Angular Material
   * MySql server
-
+  * Java
   
 ## Steps to setup Frontend
 
